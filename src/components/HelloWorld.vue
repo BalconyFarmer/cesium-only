@@ -41,6 +41,7 @@
       this.$nextTick(() => {
         this.cApp = new CesiumApp()
         this.cApp.initMap()
+        this.cApp.getPosition()
       })
     }
 

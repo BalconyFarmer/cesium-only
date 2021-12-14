@@ -1,5 +1,5 @@
 import * as Cesium from 'cesium/Cesium'
-import * as widget from "cesium/Widgets/widgets.css";
+import * as widget from 'cesium/Widgets/widgets.css'
 
 export default class CesiumApp {
   constructor () {
@@ -11,7 +11,6 @@ export default class CesiumApp {
    * 初始化3D基础场景
    */
   initMap () {
-
     // 加载图层数据 (google图层数据效果最好)
     const gee = new this.Cesium.UrlTemplateImageryProvider({
       url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali'
@@ -108,7 +107,7 @@ export default class CesiumApp {
 
   addIcon () {
     this.viewer.entities.add({
-      position: this.Cesium.Cartesian3.fromDegrees(102.68089, 24.901188, 50),
+      position: this.Cesium.Cartesian3.fromDegrees(102.63749265495848, 24.899929322885566, 2020.096625999652),
       // 点
       point: {
         color: this.Cesium.Color.RED, // 点位颜色
@@ -146,5 +145,25 @@ export default class CesiumApp {
         show: true
       }
     })
+  }
+
+  getPosition () {
+    const self = this
+    let handler = new this.Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas)
+    handler.setInputAction(function (event) {
+      // // 屏幕坐标转世界坐标——关键点
+      let ray = self.viewer.camera.getPickRay(event.position)
+      let cartesian = self.viewer.scene.globe.pick(ray, self.viewer.scene)
+
+      // //将笛卡尔坐标转换为地理坐标
+      let cartographic = self.Cesium.Cartographic.fromCartesian(cartesian)
+      // //将弧度转为度的十进制度表示
+      let lon = self.Cesium.Math.toDegrees(cartographic.longitude)
+      let lat = self.Cesium.Math.toDegrees(cartographic.latitude)
+      // // 获取海拔高度
+      let height1 = self.viewer.scene.globe.getHeight(cartographic)
+      let height2 = cartographic.height
+      console.log(lon, lat, height1, '+++++++++++++++++')
+    }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
   }
 }
