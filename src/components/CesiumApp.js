@@ -12,9 +12,13 @@ export default class CesiumApp {
    */
   initMap () {
     // 加载图层数据 (google图层数据效果最好)
-    const gee = new this.Cesium.UrlTemplateImageryProvider({
+    const gee = new Cesium.UrlTemplateImageryProvider({
       url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali'
     })
+
+    // let gee = this.Cesium.createOpenStreetMapImageryProvider({
+    //   url: 'https://a.tile.openstreetmap.org/'
+    // })
 
     // 加载地形数据
     let terrainProvider = this.Cesium.createWorldTerrain()
@@ -38,6 +42,19 @@ export default class CesiumApp {
 
     window.viewer = this.viewer
     console.log('viewer: ', this.viewer)
+
+    // 首次加载完成回调
+    const helper = new this.Cesium.EventHelper()
+    helper.add(this.viewer.scene.globe.tileLoadProgressEvent, (number) => {
+      if (number > 0) {
+        return
+      }
+      if (this.firstIndex) {
+      } else {
+        this.toKunming()
+      }
+      this.firstIndex = true
+    })
   }
 
   toKunming () {
@@ -58,7 +75,7 @@ export default class CesiumApp {
   toYunnan () {
     const self = this
     // 还在geoJson数据 ()
-    this.Cesium.GeoJsonDataSource.load(require('./geoJson/云南省.json')).then(function (dataSource) {
+    this.Cesium.GeoJsonDataSource.load(require('./loadData/geoJson/云南省.json')).then(function (dataSource) {
       self.viewer.dataSources.add(dataSource).then(res => {
         const test = res
         test.name = '测试'
@@ -165,5 +182,60 @@ export default class CesiumApp {
       let height2 = cartographic.height
       console.log(lon, lat, height1, '+++++++++++++++++')
     }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
+  }
+
+  addModel () {
+    // 加载gltf格式数据到cesium
+    // let scene = this.viewer.scene
+    // let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(Cesium.Cartesian3.fromDegrees(102.6613573229187, 24.90316381612601, 1855.8062492981144))// gltf数据加载位置
+    // let model = scene.primitives.add(Cesium.Model.fromGltf({
+    //   url: 'CesiumAir/Cesium_Air.glb', // 如果为bgltf则为.bgltf
+    //   modelMatrix: modelMatrix,
+    //   scale: 30000.0 // 放大倍数
+    // }))
+    // this.viewer.camera.flyTo({
+    //   destination: Cesium.Cartesian3.fromDegrees(102.6613573229187, 24.90316381612601, 1955.8062492981144) // 相机飞入点
+    // })
+
+    // 飞机
+    this.viewer.entities.add({
+      name: "飞机",
+      position: Cesium.Cartesian3.fromDegrees(102.65356008078092 ,24.90209255823289 ,1856.9119590623684),
+      orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),//和飞行姿态相关
+      model: {
+        uri: "http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.glb",
+        minimumPixelSize: 128,
+        maximumScale: 20000
+      }
+    })
+    this.viewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(102.6613573229187, 24.90316381612601, 100000) // 相机飞入点
+    })
+
+    // 行走的人
+    this.viewer.entities.add({
+      name: "行走的人",
+      position: Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526 ,1857.062789496248),
+      orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526 ,1857.062789496248), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
+      model: {
+        uri: "http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.glb",
+        minimumPixelSize: 100,
+        maximumScale: 100000
+      }
+    });
+
+    // .glb  二进制GLTF格式 车车车
+    let modelMatrix = this.Cesium.Transforms.eastNorthUpToFixedFrame(
+      this.Cesium.Cartesian3.fromDegrees(102.65354807476618 ,24.902574158112795 ,1856.782176272045))
+
+    this.viewer.scene.primitives.add(this.Cesium.Model.fromGltf({
+      url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
+      modelMatrix: modelMatrix,
+      scale: 10.0
+    }))
+    this.viewer.camera.flyTo({// 设置视角
+      destination: this.Cesium.Cartesian3.fromDegrees(102.65354807476618 ,24.902574158112795 ,2856.782176272045)
+    })
+
   }
 }

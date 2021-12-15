@@ -5,6 +5,7 @@
       <el-menu-item index="2">云南</el-menu-item>
       <el-menu-item index="3">纽约</el-menu-item>
       <el-menu-item index="4">add图标</el-menu-item>
+      <el-menu-item index="5">add3d</el-menu-item>
     </el-menu>
     <div id="cesiumContainer"></div>
 
@@ -33,6 +34,8 @@
           this.cApp.toYN()
         } else if (key == 4) {
           this.cApp.addIcon()
+        } else if (key == 5) {
+          this.cApp.addModel()
         }
       }
 
