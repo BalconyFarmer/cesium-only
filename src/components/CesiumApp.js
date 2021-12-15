@@ -180,62 +180,47 @@ export default class CesiumApp {
       // // 获取海拔高度
       let height1 = self.viewer.scene.globe.getHeight(cartographic)
       let height2 = cartographic.height
-      console.log(lon, lat, height1, '+++++++++++++++++')
+      console.log(lon, lat, height1, '当前选取: 经度 纬度 高度...')
     }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
   }
 
   addModel () {
-    // 加载gltf格式数据到cesium
-    // let scene = this.viewer.scene
-    // let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(Cesium.Cartesian3.fromDegrees(102.6613573229187, 24.90316381612601, 1855.8062492981144))// gltf数据加载位置
-    // let model = scene.primitives.add(Cesium.Model.fromGltf({
-    //   url: 'CesiumAir/Cesium_Air.glb', // 如果为bgltf则为.bgltf
-    //   modelMatrix: modelMatrix,
-    //   scale: 30000.0 // 放大倍数
-    // }))
-    // this.viewer.camera.flyTo({
-    //   destination: Cesium.Cartesian3.fromDegrees(102.6613573229187, 24.90316381612601, 1955.8062492981144) // 相机飞入点
-    // })
-
     // 飞机
     this.viewer.entities.add({
-      name: "飞机",
-      position: Cesium.Cartesian3.fromDegrees(102.65356008078092 ,24.90209255823289 ,1856.9119590623684),
-      orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),//和飞行姿态相关
+      name: '飞机',
+      position: Cesium.Cartesian3.fromDegrees(102.65356008078092, 24.90209255823289, 1856.9119590623684),
+      orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
       model: {
-        uri: "http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.glb",
+        uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.glb',
         minimumPixelSize: 128,
         maximumScale: 20000
       }
     })
-    this.viewer.camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(102.6613573229187, 24.90316381612601, 100000) // 相机飞入点
-    })
 
     // 行走的人
     this.viewer.entities.add({
-      name: "行走的人",
-      position: Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526 ,1857.062789496248),
-      orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526 ,1857.062789496248), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
+      name: '行走的人',
+      position: Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248),
+      orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
       model: {
-        uri: "http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.glb",
+        uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.glb',
         minimumPixelSize: 100,
         maximumScale: 100000
       }
-    });
+    })
 
     // .glb  二进制GLTF格式 车车车
     let modelMatrix = this.Cesium.Transforms.eastNorthUpToFixedFrame(
-      this.Cesium.Cartesian3.fromDegrees(102.65354807476618 ,24.902574158112795 ,1856.782176272045))
+      this.Cesium.Cartesian3.fromDegrees(102.65354807476618, 24.902574158112795, 1856.782176272045))
 
     this.viewer.scene.primitives.add(this.Cesium.Model.fromGltf({
       url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
       modelMatrix: modelMatrix,
       scale: 10.0
     }))
-    this.viewer.camera.flyTo({// 设置视角
-      destination: this.Cesium.Cartesian3.fromDegrees(102.65354807476618 ,24.902574158112795 ,2856.782176272045)
-    })
 
+    this.viewer.camera.flyTo({// 设置视角
+      destination: this.Cesium.Cartesian3.fromDegrees(102.65354807476618, 24.902574158112795, 2856.782176272045)
+    })
   }
 }
