@@ -12,13 +12,52 @@ export default class CesiumApp {
      */
     initMap () {
         // 加载图层数据 (google图层数据效果最好)
-        const gee = new Cesium.UrlTemplateImageryProvider({
-            url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali'
-        })
 
-        // let gee = this.Cesium.createOpenStreetMapImageryProvider({
-        //   url: 'https://a.tile.openstreetmap.org/'
-        // })
+
+
+        // Access the CartoDB Positron basemap, which uses an OpenStreetMap-like tiling scheme.
+        var Imagery = new Cesium.UrlTemplateImageryProvider({
+            url : 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            credit : 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
+        });
+
+        // nasa夜景
+        // var Imagery = new Cesium.UrlTemplateImageryProvider({
+        //     url : 'https://cesiumjs.org/tilesets/imagery/blackmarble',
+        //     maximumLevel : 8,
+        //     flipXY : true,
+        //     credit : 'Black Marble imagery courtesy NASA Earth Observatory'
+        // });
+
+        // Access Natural Earth II imagery, which uses a TMS tiling scheme and Geographic (EPSG:4326) project
+        // var Imagery = new Cesium.UrlTemplateImageryProvider({
+        //     url : 'https://cesiumjs.org/tilesets/imagery/naturalearthii/{z}/{x}/{reverseY}.jpg',
+        //     credit : '© Analytical Graphics, Inc.',
+        //     tilingScheme : new Cesium.GeographicTilingScheme(),
+        //     maximumLevel : 5
+        // });
+
+        // Access a Web Map Service (WMS) server.
+        // var Imagery = new Cesium.UrlTemplateImageryProvider({
+        //     url : 'https://programs.communications.gov.au/geoserver/ows?tiled=true&' +
+        //         'transparent=true&format=image%2Fpng&exceptions=application%2Fvnd.ogc.se_xml&' +
+        //         'styles=&service=WMS&version=1.1.1&request=GetMap&' +
+        //         'layers=public%3AMyBroadband_Availability&srs=EPSG%3A3857&' +
+        //         'bbox={westProjected}%2C{southProjected}%2C{eastProjected}%2C{northProjected}&' +
+        //         'width=256&height=256',
+        //     rectangle : Cesium.Rectangle.fromDegrees(96.799393, -43.598214999057824, 153.63925700000001, -9.2159219997013)
+        // });
+
+        // Using custom tags in your template url.
+        // var Imagery = new Cesium.UrlTemplateImageryProvider({
+        //     url : 'https://yoururl/{Time}/{z}/{y}/{x}.png',
+        //     customTags : {
+        //         Time: function(imageryProvider, x, y, level) {
+        //             return '20171231'
+        //         }
+        //     }
+        // });
+
 
         // 加载地形数据
         let terrainProvider = this.Cesium.createWorldTerrain()
@@ -40,13 +79,14 @@ export default class CesiumApp {
             selectionIndicator: false, //
             timeline: false, //
             navigationHelpButton: false, //
-            imageryProvider: gee,
-            terrainProvider: terrainProvider
+            imageryProvider: Imagery, //  影像图层
+            terrainProvider: terrainProvider // 地形图层
         }
         this.viewer = new this.Cesium.Viewer('cesiumContainer', option)
 
         window.viewer = this.viewer
-        console.log('viewer: ', this.viewer)
+        console.log('viewer: ', this.viewer.imageryLayers.layerRemoved)
+        // this.viewer.imageryLayers.removeall()
 
         // 首次加载完成回调
         const helper = new this.Cesium.EventHelper()
@@ -60,6 +100,17 @@ export default class CesiumApp {
             }
             this.firstIndex = true
         })
+    }
+
+    /**
+     * 添加google实景影像图层
+     */
+    addImageryProviderLayer() {
+        // google实景
+        const Imagery1 = new Cesium.UrlTemplateImageryProvider({
+            url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali'
+        })
+        this.viewer.imageryLayers.addImageryProvider(Imagery1);
     }
 
     toKunming () {

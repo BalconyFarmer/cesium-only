@@ -7,6 +7,7 @@
             <el-menu-item index="4">add图标</el-menu-item>
             <el-menu-item index="5">add3d</el-menu-item>
             <el-menu-item index="6">addFlowWall</el-menu-item>
+            <el-menu-item index="7">addImageryLayer</el-menu-item>
         </el-menu>
         <div id="cesiumContainer"></div>
 
@@ -39,6 +40,8 @@
                     this.cApp.addModel()
                 } else if (key == 6) {
                     this.cApp.addFlowWall()
+                } else if (key == 7) {
+                    this.cApp.addImageryProviderLayer()
                 }
             }
 
