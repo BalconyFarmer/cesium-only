@@ -11,11 +11,7 @@ export default class CesiumApp {
      * 初始化3D基础场景
      */
     initMap () {
-        // Access the CartoDB Positron basemap, which uses an OpenStreetMap-like tiling scheme.
-        var Imagery = new Cesium.UrlTemplateImageryProvider({
-            url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-            credit: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
-        })
+        this.addImageryProviderLayerNormal()
 
         // 加载地形数据
         let terrainProvider = this.Cesium.createWorldTerrain(
@@ -26,15 +22,15 @@ export default class CesiumApp {
         )
 
         const option = {
-            animation: false, // 如果设置为false，则不会创建'动画'小部件。
+            animation: false, // 如果设置为false,则不会创建'动画'小部件。
             contextOptions: {
                 webgl: {
                     alpha: true
                 }
             },
-            baseLayerPicker: false, // 如果设置为false，则不会创建BaseLayerPicker小部件。
-            fullscreenButton: false, // 如果设置为false，将不会创建FullscreenButton小部件。
-            vrButton: false, // 如果设置为true，将创建VRButton小部件。
+            baseLayerPicker: false, // 如果设置为false,则不会创建BaseLayerPicker小部件。
+            fullscreenButton: false, // 如果设置为false,将不会创建FullscreenButton小部件。
+            vrButton: false, // 如果设置为true,将创建VRButton小部件。
             // geocoder: false, // 搜索
             homeButton: false, //
             infoBox: false, //
@@ -42,13 +38,18 @@ export default class CesiumApp {
             selectionIndicator: false, //
             timeline: false, //
             navigationHelpButton: false, //
-            imageryProvider: Imagery, //  影像图层
-            terrainProvider: terrainProvider // 地形图层
+            imageryProvider: this.Imagery, //  影像图层
+            // terrainProvider: terrainProvider // 地形图层,
+            shouldAnimate : true //动画播放
+
         }
         this.viewer = new this.Cesium.Viewer('cesiumContainer', option)
 
+
         window.viewer = this.viewer
-        console.log('viewer: ', this.viewer.imageryLayers.layerRemoved)
+        console.log('viewer: ', this.viewer.scene.globe.enableLighting)
+
+        this.viewer.scene.globe.enableLighting = true; // 初始化光照
 
         // 首次加载完成回调
         const helper = new this.Cesium.EventHelper()
@@ -64,10 +65,18 @@ export default class CesiumApp {
         })
     }
 
+    switchLight() {
+        if (this.viewer.scene.globe.enableLighting) {
+            this.viewer.scene.globe.enableLighting = false; // 初始化光照
+        } else {
+            this.viewer.scene.globe.enableLighting = true; // 初始化光照
+        }
+    }
+
     /**
      * 添加google实景影像图层
      */
-    addImageryProviderLayer () {
+    addImageryProviderLayerReal () {
         // t3fbd4010a8d2c73901a21c42efe3d2c0 天地图key
 
         this.viewer.imageryLayers.removeAll() // 清除所有图层
@@ -91,6 +100,25 @@ export default class CesiumApp {
         // })
 
         this.viewer.imageryLayers.addImageryProvider(Imagery)
+    }
+
+    /**
+     * 添加sampl实景影像图层
+     */
+    addImageryProviderLayerNormal () {
+        if (this.viewer) {
+            this.viewer.imageryLayers.removeAll() // 清除所有图层
+        }
+
+        // Access the CartoDB Positron basemap, which uses an OpenStreetMap-like tiling scheme.
+        this.Imagery = new Cesium.UrlTemplateImageryProvider({
+            url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            credit: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
+        })
+
+        if (this.viewer) {
+            this.viewer.imageryLayers.addImageryProvider(this.Imagery)
+        }
     }
 
     toKunming () {
@@ -170,7 +198,7 @@ export default class CesiumApp {
             label: {
                 // 文本。支持显式换行符“ \ n”
                 text: '测试名称',
-                // 字体样式，以CSS语法指定字体
+                // 字体样式,以CSS语法指定字体
                 font: '14pt Source Han Sans CN',
                 // 字体颜色
                 fillColor: this.Cesium.Color.BLACK,
@@ -184,9 +212,9 @@ export default class CesiumApp {
                 outlineColor: this.Cesium.Color.WHITE,
                 // 字体边框尺寸
                 outlineWidth: 10,
-                // 应用于图像的统一比例。比例大于会1.0放大标签，而比例小于会1.0缩小标签。
+                // 应用于图像的统一比例。比例大于会1.0放大标签,而比例小于会1.0缩小标签。
                 scale: 1.0,
-                // 设置样式：FILL：填写标签的文本，但不要勾勒轮廓；OUTLINE：概述标签的文本，但不要填写；FILL_AND_OUTLINE：填写并概述标签文本。
+                // 设置样式：FILL：填写标签的文本,但不要勾勒轮廓；OUTLINE：概述标签的文本,但不要填写；FILL_AND_OUTLINE：填写并概述标签文本。
                 style: this.Cesium.LabelStyle.FILL_AND_OUTLINE,
                 // 相对于坐标的水平位置
                 verticalOrigin: this.Cesium.VerticalOrigin.CENTER,
@@ -222,53 +250,61 @@ export default class CesiumApp {
 
     addModel () {
         //  工厂
-        this.viewer.entities.add({
-            name: '工厂',
-            position: Cesium.Cartesian3.fromDegrees(102.65356008078092, 24.90209255823289, 1856.9119590623684),
-            orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
-            model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/factory_3d_model/scene.gltf',
-                minimumPixelSize: 128,
-                maximumScale: 20000
-            }
-        })
+        // this.viewer.entities.add({
+        //     name: '工厂',
+        //     position: Cesium.Cartesian3.fromDegrees(102.6541668144539, 24.902819641220166, 1856.2860960758176),
+        //     orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
+        //     model: {
+        //         uri: 'http://localhost:1111/3Dstatic/loadData/tt/11.gltf',
+        //         minimumPixelSize: 100, // 最小大小
+        //         heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+        //     }
+        //
+        // })
+
 
         // 飞机
         this.viewer.entities.add({
             name: '飞机',
-            position: Cesium.Cartesian3.fromDegrees(102.65356008078092, 24.90209255823289, 1856.9119590623684),
+            position: Cesium.Cartesian3.fromDegrees(102.6545936749172, 24.903139350774303, 1000),
             orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
             model: {
                 uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.gltf',
-                minimumPixelSize: 128,
-                maximumScale: 20000
+                maximumScale: 20000,
+                minimumPixelSize: 100, // 最小大小
+                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND // Cesium.HeightReference.CLAMP_TO_GROUND 贴地 Cesium.HeightReference.RELATIVE_TO_GROUND//相对上方高度 Cesium.HeightReference.NONE//位置绝对
             }
         })
 
         // 行走的人
-        this.viewer.entities.add({
-            name: '行走的人',
-            position: Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248),
-            orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
-            model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',
-                minimumPixelSize: 100,
-                maximumScale: 100000
-            }
-        })
+        // this.viewer.entities.add({
+        //     name: '行走的人',
+        //     position: Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248),
+        //     orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
+        //     model: {
+        //         uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',
+        //         minimumPixelSize: 100,
+        //         maximumScale: 100000
+        //     }
+        // })
 
         // .glb  二进制GLTF格式 车车车
-        let modelMatrix = this.Cesium.Transforms.eastNorthUpToFixedFrame(
-            this.Cesium.Cartesian3.fromDegrees(102.65354807476618, 24.902574158112795, 1856.782176272045))
-
-        this.viewer.scene.primitives.add(this.Cesium.Model.fromGltf({
-            url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
-            modelMatrix: modelMatrix,
-            scale: 10.0
-        }))
+        // let modelMatrix = this.Cesium.Transforms.eastNorthUpToFixedFrame(
+        //     this.Cesium.Cartesian3.fromDegrees(102.65354807476618, 24.902574158112795, 1856.782176272045))
+        //
+        // this.viewer.scene.primitives.add(this.Cesium.Model.fromGltf({
+        //     url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
+        //     modelMatrix: modelMatrix,
+        //     scale: 10.0
+        // }))
 
         this.viewer.camera.flyTo({// 设置视角
-            destination: this.Cesium.Cartesian3.fromDegrees(102.65354807476618, 24.902574158112795, 2856.782176272045)
+            destination: this.Cesium.Cartesian3.fromDegrees(102.65354807476618, 24.902574158112795, 2856.782176272045),
+            orientation: {
+                heading: this.Cesium.Math.toRadians(0), // east, default value is 0.0 (north) 左右摆头
+                pitch: this.Cesium.Math.toRadians(-45), // default value (looking down) 上下摆头 -90俯视 0 平视
+                roll: 0.0 // default value
+            }
         })
     }
 

@@ -8,6 +8,8 @@
             <el-menu-item index="5">add3d</el-menu-item>
             <el-menu-item index="6">addFlowWall</el-menu-item>
             <el-menu-item index="7">addImageryLayer</el-menu-item>
+            <el-menu-item index="8">addImageryProviderLayerNormal</el-menu-item>
+            <el-menu-item index="9">switchLight</el-menu-item>
         </el-menu>
         <div id="cesiumContainer"></div>
 
@@ -41,7 +43,11 @@
                 } else if (key == 6) {
                     this.cApp.addFlowWall()
                 } else if (key == 7) {
-                    this.cApp.addImageryProviderLayer()
+                    this.cApp.addImageryProviderLayerReal()
+                } else if (key == 8) {
+                    this.cApp.addImageryProviderLayerNormal()
+                } else if (key == 9) {
+                    this.cApp.switchLight()
                 }
             }
 
