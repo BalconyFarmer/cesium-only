@@ -13,12 +13,17 @@ export default class CesiumApp {
     initMap () {
         // Access the CartoDB Positron basemap, which uses an OpenStreetMap-like tiling scheme.
         var Imagery = new Cesium.UrlTemplateImageryProvider({
-            url : 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-            credit : 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
-        });
+            url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            credit: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
+        })
 
         // 加载地形数据
-        let terrainProvider = this.Cesium.createWorldTerrain()
+        let terrainProvider = this.Cesium.createWorldTerrain(
+            {
+                requestWaterMask: true,
+                requestVertexNormals: true
+            }
+        )
 
         const option = {
             animation: false, // 如果设置为false，则不会创建'动画'小部件。
@@ -62,7 +67,7 @@ export default class CesiumApp {
     /**
      * 添加google实景影像图层
      */
-    addImageryProviderLayer() {
+    addImageryProviderLayer () {
         // t3fbd4010a8d2c73901a21c42efe3d2c0 天地图key
 
         this.viewer.imageryLayers.removeAll() // 清除所有图层
@@ -85,7 +90,7 @@ export default class CesiumApp {
         //     accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhMTg2Mzk0My02NWJmLTQ1ODgtOWRiMy0wODM1ZTkwNGM1NTYiLCJpZCI6MjM0NzYsInNjb3BlcyI6WyJhc2wiLCJhc3IiLCJhc3ciLCJnYyJdLCJpYXQiOjE1ODM0NjEyMDN9.qXnJKCaIHS7JkIPRySJmmbdHvyj1ihQ2CI3itKy9MvY'
         // })
 
-        this.viewer.imageryLayers.addImageryProvider(Imagery);
+        this.viewer.imageryLayers.addImageryProvider(Imagery)
     }
 
     toKunming () {
@@ -216,13 +221,25 @@ export default class CesiumApp {
     }
 
     addModel () {
+        //  工厂
+        this.viewer.entities.add({
+            name: '工厂',
+            position: Cesium.Cartesian3.fromDegrees(102.65356008078092, 24.90209255823289, 1856.9119590623684),
+            orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
+            model: {
+                uri: 'http://localhost:1111/3Dstatic/loadData/factory_3d_model/scene.gltf',
+                minimumPixelSize: 128,
+                maximumScale: 20000
+            }
+        })
+
         // 飞机
         this.viewer.entities.add({
             name: '飞机',
             position: Cesium.Cartesian3.fromDegrees(102.65356008078092, 24.90209255823289, 1856.9119590623684),
             orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
             model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.glb',
+                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.gltf',
                 minimumPixelSize: 128,
                 maximumScale: 20000
             }
@@ -234,7 +251,7 @@ export default class CesiumApp {
             position: Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248),
             orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
             model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.glb',
+                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',
                 minimumPixelSize: 100,
                 maximumScale: 100000
             }
