@@ -1,6 +1,7 @@
 <template>
     <div class="all">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <el-menu-item index="1">flowLine</el-menu-item>
             <el-menu-item index="2">云南</el-menu-item>
             <el-menu-item index="3">纽约</el-menu-item>
             <el-menu-item index="4">add图标</el-menu-item>
@@ -31,6 +32,7 @@
         methods: {
             handleSelect (key, keyPath) {
                 if (key == 1) {
+                    this.cApp.part.addFlowLine()
                 } else if (key == 2) {
                     this.cApp.part.loadJsonData()
                 } else if (key == 3) {

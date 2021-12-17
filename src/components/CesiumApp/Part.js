@@ -9,7 +9,7 @@ export default class Part {
     /**
      * 原生geometry
      */
-    addGeometry() {
+    addGeometry () {
         //圆柱体
         this.app.viewer.entities.add({
             name: '圆柱体',
@@ -22,7 +22,7 @@ export default class Part {
                 outline: true,//轮廓
                 outlineColor: Cesium.Color.DARK_GREEN//轮廓颜色深绿色
             }
-        });
+        })
         this.app.cameraFlyTo(102.65555596144124, 24.898108323944797, 1862.4957134009137)
     }
 
@@ -42,7 +42,6 @@ export default class Part {
         //     }
         //
         // })
-
 
         // 飞机
         this.app.viewer.entities.add({
@@ -101,14 +100,6 @@ export default class Part {
                 this.duration = duration
                 this._time = (new Date()).getTime()
                 this.color = Cesium.createPropertyDescriptor('color')
-            }
-
-            get isConstant () {
-                return false
-            }
-
-            get definitionChanged () {
-                return this._definitionChanged
             }
 
             get isConstant () {
@@ -283,5 +274,110 @@ export default class Part {
         //   show: `${Height} > 0`
         // })
         city.style = cityStyle
+    }
+
+    /**
+     * 添加流动线条
+     */
+    addFlowLine () {
+        class FlowLineMaterialProperty {
+            constructor (color, duration) {
+                this._definitionChanged = new Cesium.Event()
+                this._color = undefined
+                this._colorSubscription = undefined
+                this.color = color
+                this.duration = duration
+                this._time = (new Date()).getTime()
+            }
+
+            get isConstant () {
+                return false
+            }
+
+            get definitionChanged () {
+                return this._definitionChanged
+            }
+
+            color () {
+                return Cesium.createPropertyDescriptor('color')
+            }
+
+            getType () {
+                return 'FlowLine'
+            }
+
+            getValue (time, result) {
+                if (!Cesium.defined(result)) {
+                    result = {}
+                }
+                result.color = Cesium.Property.getValueOrClonedDefault(this._color, time, Cesium.Color.WHITE, result.color)
+                result.image = Cesium.Material.FlowLineImage
+                result.time = (((new Date()).getTime() - this._time) % this.duration) / this.duration
+                return result
+            }
+
+            equals (other) {
+                return this === other ||
+                    (other instanceof FlowLineMaterialProperty &&
+                        Property.equals(this._color, other._color))
+            }
+        }
+
+        Cesium.FlowLineMaterialProperty = FlowLineMaterialProperty
+        Cesium.Material.FlowLineType = 'FlowLine'
+        Cesium.Material.FlowLineImage = drawCanvas()
+        Cesium.Material.FlowLineSource = 'czm_material czm_getMaterial(czm_materialInput materialInput)\n\
+                                                  {\n\
+                                                       czm_material material = czm_getDefaultMaterial(materialInput);\n\
+                                                       vec2 st = materialInput.st;\n\
+                                                       vec4 colorImage = texture2D(image, vec2(fract(st.s), st.t));\n\
+                                                       material.alpha = colorImage.a * color.a;\n\
+                                                       material.diffuse = colorImage.rgb;\n\
+                                                       return material;\n\
+                                                   }'
+        Cesium.Material._materialCache.addMaterial(Cesium.Material.FlowLineType, {
+            fabric: {
+                type: Cesium.Material.FlowLineType,
+                uniforms: {
+                    color: new Cesium.Color(1.0, 1.0, 1.0, 1),
+                    image: Cesium.Material.FlowLineImage,
+                    time: 0
+                },
+                source: Cesium.Material.FlowLineSource
+            },
+            translucent: function (material) {
+                return true
+            }
+        })
+
+        function drawCanvas () {
+            let canvas = document.createElement('canvas')
+            canvas.width = 1200
+            canvas.height = 50
+            let ctx = canvas.getContext('2d')
+            let grd = ctx.createLinearGradient(0, 0, 1200, 0)
+            grd.addColorStop(0, 'rgba(255,255,0,0.2)')
+            grd.addColorStop(1, 'rgba(0,255,0,1)')
+            ctx.fillStyle = grd
+            ctx.fillRect(0, 0, 1200, 50)
+            return canvas.toDataURL('image/png')
+        }
+
+        this.app.viewer.entities.add({
+            name: 'PolylineTrail',
+            polyline: {
+                positions: Cesium.Cartesian3.fromDegreesArrayHeights(
+                    [
+                        102.65522062344772, 24.885658297532803, 1854.7618263277068,
+                        102.65455249694989, 24.890987614908887, 1888.7717509127956,
+                        102.65598127309781, 24.895192167561607, 1868.1795017975555,
+                        102.65483833999541, 24.902219367229762, 1856.3646821264895,
+                    ]),
+                width: 15,
+                material: new Cesium.FlowLineMaterialProperty(Cesium.Color.ORANGE, 3000)
+            }
+        })
+        this.app.viewer.zoomTo(this.app.viewer.entities)
+
     }
 }
