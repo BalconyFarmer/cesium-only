@@ -94,9 +94,8 @@ export default class Part {
             car.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
                 Cesium.Cartesian3.fromDegrees(102.65429951325757 + index, 24.902681903918705, 1856.1428287336178)
             )
-            console.log(car.modelMatrix, '++++++++++++++++++++++++')
             index += 0.00001
-            if (index>0.001) {
+            if (index > 0.001) {
                 index = 0.00001
             }
             requestAnimationFrame(run)
@@ -104,8 +103,8 @@ export default class Part {
 
         run()
 
-
-        this.app.cameraFlyTo(102.65393986790458, 24.90249056812303, 1856.407665633927)
+        // this.app.cameraFlyTo(102.65400663464233, 24.90300286288314, 1856.4620764260865, 4.583496596296543, -0.11011623452653185)
+        this.app.cameraFlyToCartesian3(-1268889.5819769907, 5649559.131514993, 2670092.8417171706, 4.589028797595305, -0.09566515321336477, 0.000004374750088409485)
 
     }
 
@@ -208,7 +207,7 @@ export default class Part {
      */
     addIcon () {
         this.app.viewer.entities.add({
-            position: Cesium.Cartesian3.fromDegrees(102.63749265495848, 24.899929322885566, 2020.096625999652),
+            position: Cesium.Cartesian3.fromDegrees(102.65425451755321, 24.902048298657025, 1856.639104950962),
             // 点
             point: {
                 color: Cesium.Color.RED, // 点位颜色
@@ -217,7 +216,7 @@ export default class Part {
             // 文字
             label: {
                 // 文本。支持显式换行符“ \ n”
-                text: '测试名称',
+                text: '1号房',
                 // 字体样式,以CSS语法指定字体
                 font: '14pt Source Han Sans CN',
                 // 字体颜色

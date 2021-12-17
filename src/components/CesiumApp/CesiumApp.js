@@ -42,39 +42,54 @@ export default class CesiumApp {
             navigationHelpButton: false, //
             imageryProvider: this.Imagery, //  影像图层
             terrainProvider: terrainProvider, // 地形图层,
-            shouldAnimate : true //动画播放
+            shouldAnimate: true //动画播放
 
         }
         this.viewer = new this.Cesium.Viewer('cesiumContainer', option)
 
-
         window.viewer = this.viewer
         console.log('viewer: ', this.viewer.scene.globe.enableLighting)
 
-        this.viewer.scene.globe.enableLighting = true; // 初始化光照
+        this.viewer.scene.globe.enableLighting = true // 初始化光照
 
         // 首次加载完成回调
+        const self = this
         const helper = new this.Cesium.EventHelper()
         helper.add(this.viewer.scene.globe.tileLoadProgressEvent, (number) => {
             if (number > 0) {
                 return
             }
-            if (this.firstIndex) {
+            if (self.firstIndex) {
             } else {
-                // this.part.toYN()
+                setTimeout(function () {
+                    self.addTimeAction()
+                },500)
             }
-            this.firstIndex = true
+            self.firstIndex = true
         })
+    }
+
+    /**
+     * time
+     */
+    addTimeAction () {
+        this.part.addModel()
+        this.part.addFlowLine()
+        this.part.addIcon()
+        const self = this
+        setTimeout(function () {
+            self.addImageryProviderLayerReal()
+        }, 15000)
     }
 
     /**
      * 开启关闭全球光照系统
      */
-    switchLight() {
+    switchLight () {
         if (this.viewer.scene.globe.enableLighting) {
-            this.viewer.scene.globe.enableLighting = false; // 初始化光照
+            this.viewer.scene.globe.enableLighting = false // 初始化光照
         } else {
-            this.viewer.scene.globe.enableLighting = true; // 初始化光照
+            this.viewer.scene.globe.enableLighting = true // 初始化光照
         }
     }
 
@@ -150,23 +165,39 @@ export default class CesiumApp {
             // // 获取海拔高度
             let height1 = self.viewer.scene.globe.getHeight(cartographic)
             let height2 = cartographic.height
-            console.log(lon+",", lat+",", height1+",", '当前选取: 经度 纬度 高度...')
+            console.log(lon + ',', lat + ',', height1 + ',', '当前选取: 经度 纬度 高度...')
+            console.log(self.viewer.camera.position, self.viewer.camera.heading, self.viewer.camera.pitch, self.viewer.camera.roll, '当前摄像机视角')
+            console.log(self.viewer.camera, '当前摄像机')
         }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
+
     }
 
     /**
      * 相机飞行至
-     * @param x
+     * @param x 经纬高
      * @param y
      * @param z
      */
-    cameraFlyTo(x,y,z) {
+    cameraFlyTo (x, y, z, heading, pitch) {
         this.viewer.camera.flyTo({// 设置视角
-            destination: this.Cesium.Cartesian3.fromDegrees(x,y,(z+10)),
+            destination: this.Cesium.Cartesian3.fromDegrees(x, y, (z + 10)),
             orientation: {
-                heading: this.Cesium.Math.toRadians(0), // east, default value is 0.0 (north) 左右摆头
-                pitch: this.Cesium.Math.toRadians(-90), // default value (looking down) 上下摆头 -90俯视 0 平视
+                heading: this.Cesium.Math.toRadians(heading || 0), // east, default value is 0.0 (north) 左右摆头
+                pitch: this.Cesium.Math.toRadians(pitch || -90), // default value (looking down) 上下摆头 -90俯视 0 平视
                 roll: 0.0 // default value
+            }
+        })
+
+    }
+
+    cameraFlyToCartesian3 (x, y, z, heading, pitch, roll) {
+        let cartesian3 = new Cesium.Cartesian3(x, y, z)
+        this.viewer.camera.flyTo({
+            destination: cartesian3,
+            orientation: {
+                heading: heading, // east, default value is 0.0 (north) 左右摆头
+                pitch: pitch, // default value (looking down) 上下摆头 -90俯视 0 平视
+                roll: roll // default value
             }
         })
     }
