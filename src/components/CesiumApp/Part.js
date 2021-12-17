@@ -31,30 +31,29 @@ export default class Part {
      */
     addModel () {
         //  工厂
-        // this.app.viewer.entities.add({
-        //     name: '工厂',
-        //     position: Cesium.Cartesian3.fromDegrees(102.6541668144539, 24.902819641220166, 1856.2860960758176),
-        //     orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
-        //     model: {
-        //         uri: 'http://localhost:1111/3Dstatic/loadData/tt/11.gltf',
-        //         minimumPixelSize: 100, // 最小大小
-        //         heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
-        //     }
-        //
-        // })
-
-        // 飞机
         this.app.viewer.entities.add({
-            name: '飞机',
-            position: Cesium.Cartesian3.fromDegrees(102.6545936749172, 24.903139350774303, 1000),
-            orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
+            name: '工厂',
+            position: Cesium.Cartesian3.fromDegrees(102.65393986790458, 24.90249056812303, 1856.407665633927),
+            orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65393986790458, 24.90249056812303, 1856.407665633927), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
             model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.gltf',
-                // maximumScale: 20000,
-                // minimumPixelSize: 100, // 最小大小
-                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND // Cesium.HeightReference.CLAMP_TO_GROUND 贴地 Cesium.HeightReference.RELATIVE_TO_GROUND//相对上方高度 Cesium.HeightReference.NONE//位置绝对
+                uri: 'http://localhost:1111/3Dstatic/loadData/tt/11.glb',
+                minimumPixelSize: 100, // 最小大小
+                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
             }
         })
+
+        // 飞机
+        // this.app.viewer.entities.add({
+        //     name: '飞机',
+        //     position: Cesium.Cartesian3.fromDegrees(102.65393986790458, 24.90249056812303, 1856.407665633927),
+        //     orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65393986790458, 24.90249056812303, 1856.407665633927), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
+        //     model: {
+        //         uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.gltf',
+        //         // maximumScale: 20000,
+        //         // minimumPixelSize: 100, // 最小大小
+        //         heightReference: Cesium.HeightReference.CLAMP_TO_GROUND // Cesium.HeightReference.CLAMP_TO_GROUND 贴地 Cesium.HeightReference.RELATIVE_TO_GROUND//相对上方高度 Cesium.HeightReference.NONE//位置绝对
+        //     }
+        // })
 
         // 行走的人
         // this.app.viewer.entities.add({
@@ -63,8 +62,8 @@ export default class Part {
         //     orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
         //     model: {
         //         uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',
-        //         minimumPixelSize: 100,
-        //         maximumScale: 100000
+        //         // minimumPixelSize: 100,
+        //         // maximumScale: 100000
         //     }
         // })
 
@@ -77,7 +76,7 @@ export default class Part {
         //     modelMatrix: modelMatrix,
         //     scale: 10.0
         // }))
-        this.app.cameraFlyTo(102.6545936749172, 24.903139350774303, 1000)
+        this.app.cameraFlyTo(102.65393986790458, 24.90249056812303, 1856.407665633927)
 
     }
 
