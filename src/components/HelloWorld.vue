@@ -10,6 +10,7 @@
             <el-menu-item index="7">addImageryLayer</el-menu-item>
             <el-menu-item index="8">addImageryProviderLayerNormal</el-menu-item>
             <el-menu-item index="9">switchLight</el-menu-item>
+            <el-menu-item index="10">addGeometry</el-menu-item>
         </el-menu>
         <div id="cesiumContainer"></div>
 
@@ -17,7 +18,7 @@
 </template>
 
 <script>
-    import CesiumApp from './CesiumApp'
+    import CesiumApp from './CesiumApp/CesiumApp'
     // 导出组件
     export default {
         name: 'hoting',
@@ -41,13 +42,15 @@
                 } else if (key == 5) {
                     this.cApp.addModel()
                 } else if (key == 6) {
-                    this.cApp.addFlowWall()
+                    this.cApp.part.addFlowWall()
                 } else if (key == 7) {
                     this.cApp.addImageryProviderLayerReal()
                 } else if (key == 8) {
                     this.cApp.addImageryProviderLayerNormal()
                 } else if (key == 9) {
                     this.cApp.switchLight()
+                }else if (key == 10) {
+                    this.cApp.part.addGeometry()
                 }
             }
 
