@@ -7,6 +7,7 @@ export default class CesiumApp {
         this.viewer = null
         this.Cesium = Cesium
         this.part = new Part(this)
+        this.staticServerAdress = "http://localhost:1111/3Dstatic/loadData"
     }
 
     /**
@@ -167,7 +168,6 @@ export default class CesiumApp {
             let height2 = cartographic.height
             console.log(lon + ',', lat + ',', height1 + ',', '当前选取: 经度 纬度 高度...')
             console.log(self.viewer.camera.position, self.viewer.camera.heading, self.viewer.camera.pitch, self.viewer.camera.roll, '当前摄像机视角')
-            console.log(self.viewer.camera, '当前摄像机')
         }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
     }

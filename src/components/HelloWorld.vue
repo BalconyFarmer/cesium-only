@@ -4,6 +4,7 @@
             <el-menu-item index="1">flowLine</el-menu-item>
             <el-menu-item index="2">云南</el-menu-item>
             <el-menu-item index="3">纽约</el-menu-item>
+            <el-menu-item index="11">成都tiles</el-menu-item>
             <el-menu-item index="4">add图标</el-menu-item>
             <el-menu-item index="5">add3d</el-menu-item>
             <el-menu-item index="6">addFlowWall</el-menu-item>
@@ -51,6 +52,8 @@
                     this.cApp.switchLight()
                 }else if (key == 10) {
                     this.cApp.part.addGeometry()
+                }else if (key == 11) {
+                    this.cApp.part.addTiles()
                 }
             }
 
