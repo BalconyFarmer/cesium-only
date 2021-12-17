@@ -60,6 +60,7 @@
                 this.cApp = new CesiumApp()
                 this.cApp.initMap()
                 this.cApp.getPosition()
+                this.cApp.part.addModel()
             })
         }
 

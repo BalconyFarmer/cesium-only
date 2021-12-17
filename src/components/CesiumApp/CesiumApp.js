@@ -61,7 +61,7 @@ export default class CesiumApp {
             }
             if (this.firstIndex) {
             } else {
-                this.part.toYN()
+                // this.part.toYN()
             }
             this.firstIndex = true
         })
