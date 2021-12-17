@@ -255,65 +255,6 @@ export default class CesiumApp {
         }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
     }
 
-    addModel () {
-        //  工厂
-        // this.viewer.entities.add({
-        //     name: '工厂',
-        //     position: Cesium.Cartesian3.fromDegrees(102.6541668144539, 24.902819641220166, 1856.2860960758176),
-        //     orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
-        //     model: {
-        //         uri: 'http://localhost:1111/3Dstatic/loadData/tt/11.gltf',
-        //         minimumPixelSize: 100, // 最小大小
-        //         heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
-        //     }
-        //
-        // })
-
-
-        // 飞机
-        this.viewer.entities.add({
-            name: '飞机',
-            position: Cesium.Cartesian3.fromDegrees(102.6545936749172, 24.903139350774303, 1000),
-            orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
-            model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.gltf',
-                maximumScale: 20000,
-                minimumPixelSize: 100, // 最小大小
-                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND // Cesium.HeightReference.CLAMP_TO_GROUND 贴地 Cesium.HeightReference.RELATIVE_TO_GROUND//相对上方高度 Cesium.HeightReference.NONE//位置绝对
-            }
-        })
-
-        // 行走的人
-        // this.viewer.entities.add({
-        //     name: '行走的人',
-        //     position: Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248),
-        //     orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
-        //     model: {
-        //         uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',
-        //         minimumPixelSize: 100,
-        //         maximumScale: 100000
-        //     }
-        // })
-
-        // .glb  二进制GLTF格式 车车车
-        // let modelMatrix = this.Cesium.Transforms.eastNorthUpToFixedFrame(
-        //     this.Cesium.Cartesian3.fromDegrees(102.65354807476618, 24.902574158112795, 1856.782176272045))
-        //
-        // this.viewer.scene.primitives.add(this.Cesium.Model.fromGltf({
-        //     url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
-        //     modelMatrix: modelMatrix,
-        //     scale: 10.0
-        // }))
-
-        this.viewer.camera.flyTo({// 设置视角
-            destination: this.Cesium.Cartesian3.fromDegrees(102.65354807476618, 24.902574158112795, 2856.782176272045),
-            orientation: {
-                heading: this.Cesium.Math.toRadians(0), // east, default value is 0.0 (north) 左右摆头
-                pitch: this.Cesium.Math.toRadians(-45), // default value (looking down) 上下摆头 -90俯视 0 平视
-                roll: 0.0 // default value
-            }
-        })
-    }
 
 
 

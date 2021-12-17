@@ -40,7 +40,7 @@
                 } else if (key == 4) {
                     this.cApp.addIcon()
                 } else if (key == 5) {
-                    this.cApp.addModel()
+                    this.cApp.part.addModel()
                 } else if (key == 6) {
                     this.cApp.part.addFlowWall()
                 } else if (key == 7) {
