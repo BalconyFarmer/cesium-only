@@ -6,6 +6,9 @@ export default class Part {
         this.app = app
     }
 
+    /**
+     * 原生geometry
+     */
     addGeometry() {
         //圆柱体
         this.app.viewer.entities.add({
@@ -23,6 +26,9 @@ export default class Part {
         this.app.cameraFlyTo(102.65555596144124, 24.898108323944797, 1862.4957134009137)
     }
 
+    /**
+     * 加载3D模型
+     */
     addModel () {
         //  工厂
         // this.app.viewer.entities.add({
@@ -76,6 +82,9 @@ export default class Part {
 
     }
 
+    /**
+     * 加载流动墙效果
+     */
     addFlowWall () {
         /*
           流动纹理线
@@ -175,6 +184,9 @@ export default class Part {
         this.app.viewer.zoomTo(this.app.viewer.entities)
     }
 
+    /**
+     * 加载bilbord
+     */
     addIcon () {
         this.app.viewer.entities.add({
             position: Cesium.Cartesian3.fromDegrees(102.63749265495848, 24.899929322885566, 2020.096625999652),
@@ -217,6 +229,9 @@ export default class Part {
         })
     }
 
+    /**
+     * 加载云南JSON
+     */
     loadJsonData () {
         const self = this
         // 还在geoJson数据 ()
@@ -236,6 +251,9 @@ export default class Part {
         })
     }
 
+    /**
+     * 加载纽约Tiles数据
+     */
     toYN () {
         // 设置camera
         // 1. Set position with a top-down view

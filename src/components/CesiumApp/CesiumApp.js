@@ -131,9 +131,6 @@ export default class CesiumApp {
         }
     }
 
-
-
-
     /**
      * 点击地图console位置
      */

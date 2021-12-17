@@ -34,7 +34,7 @@
                 } else if (key == 2) {
                     this.cApp.part.loadJsonData()
                 } else if (key == 3) {
-                    this.cApp.toYN()
+                    this.cApp.part.toYN()
                 } else if (key == 4) {
                     this.cApp.part.addIcon()
                 } else if (key == 5) {
