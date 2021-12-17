@@ -10,7 +10,7 @@ export default class Part {
         //圆柱体
         this.app.viewer.entities.add({
             name: '圆柱体',
-            position: Cesium.Cartesian3.fromDegrees(102.6545936749172, 24.903139350774303, 2),
+            position: Cesium.Cartesian3.fromDegrees(102.65555596144124, 24.898108323944797, 1862.4957134009137),
             cylinder: {
                 length: 4.0,//圆柱体高度
                 topRadius: 2.0,//圆柱体的顶部半径。
@@ -20,12 +20,12 @@ export default class Part {
                 outlineColor: Cesium.Color.DARK_GREEN//轮廓颜色深绿色
             }
         });
-        this.app.cameraFlyTo(102.6545936749172, 24.903139350774303, 2)
+        this.app.cameraFlyTo(102.65555596144124, 24.898108323944797, 1862.4957134009137)
     }
 
     addModel () {
         //  工厂
-        // this.viewer.entities.add({
+        // this.app.viewer.entities.add({
         //     name: '工厂',
         //     position: Cesium.Cartesian3.fromDegrees(102.6541668144539, 24.902819641220166, 1856.2860960758176),
         //     orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
@@ -45,14 +45,14 @@ export default class Part {
             orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(104, 30, 300000), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
             model: {
                 uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.gltf',
-                maximumScale: 20000,
-                minimumPixelSize: 100, // 最小大小
+                // maximumScale: 20000,
+                // minimumPixelSize: 100, // 最小大小
                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND // Cesium.HeightReference.CLAMP_TO_GROUND 贴地 Cesium.HeightReference.RELATIVE_TO_GROUND//相对上方高度 Cesium.HeightReference.NONE//位置绝对
             }
         })
 
         // 行走的人
-        // this.viewer.entities.add({
+        // this.app.viewer.entities.add({
         //     name: '行走的人',
         //     position: Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248),
         //     orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65339188565756, 24.903063377652526, 1857.062789496248), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
@@ -64,10 +64,10 @@ export default class Part {
         // })
 
         // .glb  二进制GLTF格式 车车车
-        // let modelMatrix = this.Cesium.Transforms.eastNorthUpToFixedFrame(
-        //     this.Cesium.Cartesian3.fromDegrees(102.65354807476618, 24.902574158112795, 1856.782176272045))
+        // let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
+        //     Cesium.Cartesian3.fromDegrees(102.65354807476618, 24.902574158112795, 1856.782176272045))
         //
-        // this.viewer.scene.primitives.add(this.Cesium.Model.fromGltf({
+        // this.app.viewer.scene.primitives.add(Cesium.Model.fromGltf({
         //     url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
         //     modelMatrix: modelMatrix,
         //     scale: 10.0
@@ -175,4 +175,95 @@ export default class Part {
         this.app.viewer.zoomTo(this.app.viewer.entities)
     }
 
+    addIcon () {
+        this.app.viewer.entities.add({
+            position: Cesium.Cartesian3.fromDegrees(102.63749265495848, 24.899929322885566, 2020.096625999652),
+            // 点
+            point: {
+                color: Cesium.Color.RED, // 点位颜色
+                pixelSize: 10 // 像素点大小
+            },
+            // 文字
+            label: {
+                // 文本。支持显式换行符“ \ n”
+                text: '测试名称',
+                // 字体样式,以CSS语法指定字体
+                font: '14pt Source Han Sans CN',
+                // 字体颜色
+                fillColor: Cesium.Color.BLACK,
+                // 背景颜色
+                backgroundColor: Cesium.Color.AQUA,
+                // 是否显示背景颜色
+                showBackground: true,
+                // 字体边框
+                outline: true,
+                // 字体边框颜色
+                outlineColor: Cesium.Color.WHITE,
+                // 字体边框尺寸
+                outlineWidth: 10,
+                // 应用于图像的统一比例。比例大于会1.0放大标签,而比例小于会1.0缩小标签。
+                scale: 1.0,
+                // 设置样式：FILL：填写标签的文本,但不要勾勒轮廓；OUTLINE：概述标签的文本,但不要填写；FILL_AND_OUTLINE：填写并概述标签文本。
+                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                // 相对于坐标的水平位置
+                verticalOrigin: Cesium.VerticalOrigin.CENTER,
+                // 相对于坐标的水平位置
+                horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+                // 该属性指定标签在屏幕空间中距此标签原点的像素偏移量
+                pixelOffset: new Cesium.Cartesian2(10, 0),
+                // 是否显示
+                show: true
+            }
+        })
+    }
+
+    loadJsonData () {
+        const self = this
+        // 还在geoJson数据 ()
+        Cesium.GeoJsonDataSource.load(require('../loadData/geoJson/云南省.json')).then(function (dataSource) {
+            self.viewer.dataSources.add(dataSource).then(res => {
+                const test = res
+                test.name = '测试'
+            })
+        })
+        self.app.viewer.camera.flyTo({
+            destination: Cesium.Cartesian3.fromDegrees(101.315555, 24.613368, 72000.0),
+            orientation: {
+                heading: 0, // east, default value is 0.0 (north) 左右摆头
+                pitch: -90, // default value (looking down) 上下摆头 -90俯视 0 平视
+                roll: 0.0 // default value
+            }
+        })
+    }
+
+    toYN () {
+        // 设置camera
+        // 1. Set position with a top-down view
+        this.app.viewer.camera.flyTo({
+            destination: Cesium.Cartesian3.fromDegrees(-73.940159, 40.800621, 2000.0),
+            orientation: {
+                heading: Cesium.Math.toRadians(0), // east, default value is 0.0 (north) 左右摆头
+                pitch: Cesium.Math.toRadians(-45), // default value (looking down) 上下摆头 -90俯视 0 平视
+                roll: 0.0 // default value
+            }
+        })
+
+        // 添加瓦片数据 (纽约)
+        let city = this.app.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({url: Cesium.IonResource.fromAssetId(3839)}))
+        let cityStyle = new Cesium.Cesium3DTileStyle({
+            color: 'color(\'blue\',0.2)',
+            show: true
+        })
+        // let cityStyle = new Cesium.Cesium3DTileStyle({
+        //   color: {
+        //     conditions: [
+        //       [`${Height} >= 100`, `color("purple", 0.5)`],
+        //       [`${Height} >= 50`, `color("red")`],
+        //       [`true`, `color("blue")`]
+        //     ]
+        //   },
+        //   show: `${Height} > 0`
+        // })
+        city.style = cityStyle
+    }
 }

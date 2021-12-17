@@ -41,7 +41,7 @@ export default class CesiumApp {
             timeline: false, //
             navigationHelpButton: false, //
             imageryProvider: this.Imagery, //  影像图层
-            // terrainProvider: terrainProvider // 地形图层,
+            terrainProvider: terrainProvider, // 地形图层,
             shouldAnimate : true //动画播放
 
         }
@@ -61,12 +61,15 @@ export default class CesiumApp {
             }
             if (this.firstIndex) {
             } else {
-                this.toKunming()
+                this.part.toYN()
             }
             this.firstIndex = true
         })
     }
 
+    /**
+     * 开启关闭全球光照系统
+     */
     switchLight() {
         if (this.viewer.scene.globe.enableLighting) {
             this.viewer.scene.globe.enableLighting = false; // 初始化光照
@@ -128,113 +131,12 @@ export default class CesiumApp {
         }
     }
 
-    toKunming () {
-        // viewer.camera.position // 控制台:获取当前状态
-        // viewer.camera.heading
-        // viewer.camera.pitch
 
-        this.viewer.camera.flyTo({
-            destination: {x: -1271845.9753471974, y: 5649476.392272105, z: 2669566.8441791297},
-            orientation: {
-                heading: 4.941377527440675, // east, default value is 0.0 (north) 左右摆头
-                pitch: -0.0872607638230507, // default value (looking down) 上下摆头 -90俯视 0 平视
-                roll: 0.0 // default value
-            }
-        })
-    }
 
-    toYunnan () {
-        const self = this
-        // 还在geoJson数据 ()
-        this.Cesium.GeoJsonDataSource.load(require('../loadData/geoJson/云南省.json')).then(function (dataSource) {
-            self.viewer.dataSources.add(dataSource).then(res => {
-                const test = res
-                test.name = '测试'
-            })
-        })
-        self.viewer.camera.flyTo({
-            destination: self.Cesium.Cartesian3.fromDegrees(101.315555, 24.613368, 72000.0),
-            orientation: {
-                heading: 0, // east, default value is 0.0 (north) 左右摆头
-                pitch: -90, // default value (looking down) 上下摆头 -90俯视 0 平视
-                roll: 0.0 // default value
-            }
-        })
-    }
 
-    toYN () {
-        // 设置camera
-        // 1. Set position with a top-down view
-        this.viewer.camera.flyTo({
-            destination: this.Cesium.Cartesian3.fromDegrees(-73.940159, 40.800621, 2000.0),
-            orientation: {
-                heading: this.Cesium.Math.toRadians(0), // east, default value is 0.0 (north) 左右摆头
-                pitch: this.Cesium.Math.toRadians(-45), // default value (looking down) 上下摆头 -90俯视 0 平视
-                roll: 0.0 // default value
-            }
-        })
-
-        // 添加瓦片数据 (纽约)
-        let city = this.viewer.scene.primitives.add(new this.Cesium.Cesium3DTileset({url: this.Cesium.IonResource.fromAssetId(3839)}))
-        let cityStyle = new this.Cesium.Cesium3DTileStyle({
-            color: 'color(\'blue\',0.2)',
-            show: true
-        })
-        // let cityStyle = new this.Cesium.Cesium3DTileStyle({
-        //   color: {
-        //     conditions: [
-        //       [`${Height} >= 100`, `color("purple", 0.5)`],
-        //       [`${Height} >= 50`, `color("red")`],
-        //       [`true`, `color("blue")`]
-        //     ]
-        //   },
-        //   show: `${Height} > 0`
-        // })
-        city.style = cityStyle
-    }
-
-    addIcon () {
-        this.viewer.entities.add({
-            position: this.Cesium.Cartesian3.fromDegrees(102.63749265495848, 24.899929322885566, 2020.096625999652),
-            // 点
-            point: {
-                color: this.Cesium.Color.RED, // 点位颜色
-                pixelSize: 10 // 像素点大小
-            },
-            // 文字
-            label: {
-                // 文本。支持显式换行符“ \ n”
-                text: '测试名称',
-                // 字体样式,以CSS语法指定字体
-                font: '14pt Source Han Sans CN',
-                // 字体颜色
-                fillColor: this.Cesium.Color.BLACK,
-                // 背景颜色
-                backgroundColor: this.Cesium.Color.AQUA,
-                // 是否显示背景颜色
-                showBackground: true,
-                // 字体边框
-                outline: true,
-                // 字体边框颜色
-                outlineColor: this.Cesium.Color.WHITE,
-                // 字体边框尺寸
-                outlineWidth: 10,
-                // 应用于图像的统一比例。比例大于会1.0放大标签,而比例小于会1.0缩小标签。
-                scale: 1.0,
-                // 设置样式：FILL：填写标签的文本,但不要勾勒轮廓；OUTLINE：概述标签的文本,但不要填写；FILL_AND_OUTLINE：填写并概述标签文本。
-                style: this.Cesium.LabelStyle.FILL_AND_OUTLINE,
-                // 相对于坐标的水平位置
-                verticalOrigin: this.Cesium.VerticalOrigin.CENTER,
-                // 相对于坐标的水平位置
-                horizontalOrigin: this.Cesium.HorizontalOrigin.LEFT,
-                // 该属性指定标签在屏幕空间中距此标签原点的像素偏移量
-                pixelOffset: new this.Cesium.Cartesian2(10, 0),
-                // 是否显示
-                show: true
-            }
-        })
-    }
-
+    /**
+     * 点击地图console位置
+     */
     getPosition () {
         const self = this
         let handler = new this.Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas)
@@ -251,12 +153,9 @@ export default class CesiumApp {
             // // 获取海拔高度
             let height1 = self.viewer.scene.globe.getHeight(cartographic)
             let height2 = cartographic.height
-            console.log(lon, lat, height1, '当前选取: 经度 纬度 高度...')
+            console.log(lon+",", lat+",", height1+",", '当前选取: 经度 纬度 高度...')
         }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
     }
-
-
-
 
     /**
      * 相机飞行至
