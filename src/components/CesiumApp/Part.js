@@ -13,7 +13,7 @@ export default class Part {
         //圆柱体
         this.app.viewer.entities.add({
             name: '圆柱体',
-            position: Cesium.Cartesian3.fromDegrees(102.65555596144124, 24.898108323944797, 1862.4957134009137),
+            position: Cesium.Cartesian3.fromDegrees(102.65461106848306, 24.902995899003997, 1857.9621251609599,),
             cylinder: {
                 length: 4.0,//圆柱体高度
                 topRadius: 2.0,//圆柱体的顶部半径。
@@ -23,7 +23,6 @@ export default class Part {
                 outlineColor: Cesium.Color.DARK_GREEN//轮廓颜色深绿色
             }
         })
-        this.app.cameraFlyTo(102.65555596144124, 24.898108323944797, 1862.4957134009137)
     }
 
     /**
@@ -189,7 +188,7 @@ export default class Part {
             }
         })
 
-        this.app.viewer.entities.add({
+        const flowWall = {
             name: '动态立体墙',
             wall: {
                 positions: Cesium.Cartesian3.fromDegreesArray([117.154815, 31.853495, 117.181255, 31.854257, 117.182284, 31.848255, 117.184748, 31.840141, 117.180557, 31.835556, 117.180023, 31.833741, 117.166846, 31.833737, 117.155531, 31.833151, 117.154787, 31.835978, 117.151994, 31.839036, 117.150691, 31.8416, 117.151215, 31.844734, 117.154457, 31.848152, 117.154815, 31.853495]),
@@ -197,7 +196,9 @@ export default class Part {
                 minimumHeights: [43.9, 49.4, 38.7, 40, 54, 51, 66.7, 44.6, 41.2, 31.2, 50.1, 53.8, 46.9, 43.9],
                 material: new PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 3000)
             }
-        })
+        }
+
+        this.app.viewer.entities.add(flowWall)
 
         this.app.viewer.zoomTo(this.app.viewer.entities)
     }
@@ -246,9 +247,6 @@ export default class Part {
             }
         })
     }
-
-
-
 
     /**
      * 添加流动线条
@@ -353,9 +351,4 @@ export default class Part {
         })
 
     }
-
-
-
-
-
 }

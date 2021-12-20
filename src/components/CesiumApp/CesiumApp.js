@@ -87,6 +87,7 @@ export default class CesiumApp {
         this.part.addModel()
         this.part.addFlowLine()
         this.part.addIcon()
+        this.part.addGeometry()
         const self = this
         setTimeout(function () {
             self.addImageryProviderLayerReal()

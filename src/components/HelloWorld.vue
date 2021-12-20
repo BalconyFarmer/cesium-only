@@ -1,16 +1,17 @@
 <template>
     <div class="all">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="2">云南</el-menu-item>
-            <el-menu-item index="3">纽约</el-menu-item>
+            <el-menu-item index="2">云南JSON</el-menu-item>
+            <el-menu-item index="3">纽约tiles</el-menu-item>
             <el-menu-item index="11">成都tiles</el-menu-item>
-            <el-menu-item index="5">add3d</el-menu-item>
+            <el-menu-item index="12">倾斜摄影</el-menu-item>
+            <el-menu-item index="5">add3dModel</el-menu-item>
+            <el-menu-item index="6">addFlowWall</el-menu-item>
+        </el-menu>
+        <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
             <el-menu-item index="7">实景图层</el-menu-item>
             <el-menu-item index="8">文字图层</el-menu-item>
             <el-menu-item index="9">光照系统</el-menu-item>
-            <el-menu-item index="12">倾斜摄影</el-menu-item>
-            <el-menu-item index="10">addGeometry</el-menu-item>
-            <el-menu-item index="6">addFlowWall</el-menu-item>
         </el-menu>
         <div id="cesiumContainer"></div>
 
@@ -45,8 +46,6 @@
                     this.cApp.addImageryProviderLayerNormal()
                 } else if (key == 9) {
                     this.cApp.switchLight()
-                } else if (key == 10) {
-                    this.cApp.part.addGeometry()
                 } else if (key == 11) {
                     this.cApp.cesium3DTileset.addTiles()
                 } else if (key == 12) {
@@ -75,7 +74,7 @@
 
     #cesiumContainer {
         width: 100%;
-        height: 844px;
+        height: 744px;
     }
 
     .all {
