@@ -1,6 +1,7 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 import Part from './Part'
+import {ImageryProviderWebExtendTool} from "./tool/ImageryProviderWebExtendTool"
 
 export default class CesiumApp {
     constructor () {
@@ -43,15 +44,18 @@ export default class CesiumApp {
             navigationHelpButton: false, //
             imageryProvider: this.Imagery, //  影像图层
             terrainProvider: terrainProvider, // 地形图层,
-            shouldAnimate: true //动画播放
-
+            shouldAnimate: true, //动画播放
+            // skyBox: false, // 关闭天空
+            // skyAtmosphere: false, // 关闭大气
         }
         this.viewer = new this.Cesium.Viewer('cesiumContainer', option)
 
         window.viewer = this.viewer
         console.log('viewer: ', this.viewer.scene.globe.enableLighting)
 
-        this.viewer.scene.globe.enableLighting = true // 初始化光照
+        this.viewer.scene.globe.enableLighting = false // 初始化光照
+
+        this.viewer.scene.fog.enabled = false;
 
         // 首次加载完成回调
         const self = this
@@ -95,7 +99,7 @@ export default class CesiumApp {
     }
 
     /**
-     * 添加google实景影像图层
+     * 添加实景影像图层
      */
     addImageryProviderLayerReal () {
         // t3fbd4010a8d2c73901a21c42efe3d2c0 天地图key
@@ -107,24 +111,31 @@ export default class CesiumApp {
             url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali'
         })
 
-        // 高德 细化无贴图
-        // var Imagery = new Cesium.UrlTemplateImageryProvider({
-        //     url: 'https://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
-        //     tilingScheme:new Cesium.WebMercatorTilingScheme(),
-        //     subdomains: '1234',
+        // ArcGis
+        // const Imagery = new Cesium.ArcGisMapServerImageryProvider({
+        //     url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
+        //     enablePickFeatures: false
         // });
 
-        // from ion
-        // const Imagery= new Cesium.IonImageryProvider({
-        //     assetId: 3,
-        //     accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJhMTg2Mzk0My02NWJmLTQ1ODgtOWRiMy0wODM1ZTkwNGM1NTYiLCJpZCI6MjM0NzYsInNjb3BlcyI6WyJhc2wiLCJhc3IiLCJhc3ciLCJnYyJdLCJpYXQiOjE1ODM0NjEyMDN9.qXnJKCaIHS7JkIPRySJmmbdHvyj1ihQ2CI3itKy9MvY'
-        // })
+
+
+        var noteLayer = new Cesium.WebMapTileServiceImageryProvider({
+            url: "http://t0.tianditu.gov.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=837264f46e683ec982d452e78d71052e",
+            layer: "tdtBasicLayer",
+            style: "default",
+            maximumLevel: 20,
+            format: "image/png",
+            tileMatrixSetID: "GoogleMapsCompatible",
+            show: true
+        });
 
         this.viewer.imageryLayers.addImageryProvider(Imagery)
+        this.viewer.imageryLayers.addImageryProvider(noteLayer)
+
     }
 
     /**
-     * 添加sampl实景影像图层
+     * 添加普通地图图层
      */
     addImageryProviderLayerNormal () {
         if (this.viewer) {
@@ -137,10 +148,7 @@ export default class CesiumApp {
             credit: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
         })
 
-        // this.Imagery = new Cesium.UrlTemplateImageryProvider({
-        //     url: 'https://webrd01.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}',
-        //     credit: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
-        // })
+
 
         if (this.viewer) {
             this.viewer.imageryLayers.addImageryProvider(this.Imagery)
