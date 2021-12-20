@@ -38,7 +38,7 @@
                 } else if (key == 2) {
                     this.cApp.part.loadJsonData()
                 } else if (key == 3) {
-                    this.cApp.part.toYN()
+                    this.cApp.cesium3DTileset.toYN()
                 } else if (key == 4) {
                     this.cApp.part.addIcon()
                 } else if (key == 5) {
@@ -54,7 +54,7 @@
                 }else if (key == 10) {
                     this.cApp.part.addGeometry()
                 }else if (key == 11) {
-                    this.cApp.part.addTiles()
+                    this.cApp.cesium3DTileset.addTiles()
                 }else if (key == 12) {
                     this.cApp.obliquePhotography.addOblique()
                 }

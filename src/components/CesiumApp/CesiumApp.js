@@ -3,14 +3,16 @@ import * as widget from 'cesium/Widgets/widgets.css'
 import Part from './Part'
 import {ImageryProviderWebExtendTool} from './tool/ImageryProviderWebExtendTool'
 import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
+import Cesium3DTileset from './some/Cesium3DTileset/Cesium3DTileset'
 
 export default class CesiumApp {
     constructor () {
+        this.staticServerAdress = 'http://localhost:1111/3Dstatic/loadData'
         this.viewer = null
         this.Cesium = Cesium
         this.part = new Part(this)
         this.obliquePhotography = new ObliquePhotography(this)
-        this.staticServerAdress = 'http://localhost:1111/3Dstatic/loadData'
+        this.cesium3DTileset = new Cesium3DTileset(this)
     }
 
     /**
