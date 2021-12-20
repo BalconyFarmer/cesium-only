@@ -1,6 +1,8 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 
+import {PolylineTrailLinkMaterialProperty} from './PolylineTrailLinkMaterialProperty'
+
 export default class Part {
     constructor (app) {
         this.app = app
@@ -74,55 +76,6 @@ export default class Part {
      * 加载流动墙效果
      */
     addFlowWall () {
-        /*
-          流动纹理线
-           color 颜色
-           duration 持续时间 毫秒
-        */
-
-        class PolylineTrailLinkMaterialProperty {
-            constructor (color, duration) {
-                this._definitionChanged = new Cesium.Event()
-                this._color = undefined
-                this._colorSubscription = undefined
-                this.color = color
-                this.duration = duration
-                this._time = (new Date()).getTime()
-                this.color = Cesium.createPropertyDescriptor('color')
-            }
-
-            get isConstant () {
-                return false
-            }
-
-            get definitionChanged () {
-                return this._definitionChanged
-            }
-
-            color () {
-                return Cesium.createPropertyDescriptor('color')
-            }
-
-            getType () {
-                return 'PolylineTrailLink'
-            }
-
-            getValue (time, result) {
-                if (!Cesium.defined(result)) {
-                    result = {}
-                }
-                result.color = Cesium.Property.getValueOrClonedDefault(this._color, time, Cesium.Color.WHITE, result.color)
-                result.image = Cesium.Material.PolylineTrailLinkImage
-                result.time = (((new Date()).getTime() - this._time) % this.duration) / this.duration
-                return result
-            }
-
-            equals (other) {
-                return this === other ||
-                    (other instanceof PolylineTrailLinkMaterialProperty &&
-                        Property.equals(this._color, other._color))
-            }
-        }
 
         Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty
         Cesium.Material.PolylineTrailLinkType = 'PolylineTrailLink'
@@ -152,12 +105,14 @@ export default class Part {
         })
 
         const flowWall = {
-            name: '动态立体墙',
+            name: 'WallTrail',
             wall: {
-                positions: Cesium.Cartesian3.fromDegreesArray([117.154815, 31.853495, 117.181255, 31.854257, 117.182284, 31.848255, 117.184748, 31.840141, 117.180557, 31.835556, 117.180023, 31.833741, 117.166846, 31.833737, 117.155531, 31.833151, 117.154787, 31.835978, 117.151994, 31.839036, 117.150691, 31.8416, 117.151215, 31.844734, 117.154457, 31.848152, 117.154815, 31.853495]),
-                maximumHeights: [600, 600, 600, 600, 600, 600, 600, 600, 600, 600, 600, 600, 600, 600],
-                minimumHeights: [43.9, 49.4, 38.7, 40, 54, 51, 66.7, 44.6, 41.2, 31.2, 50.1, 53.8, 46.9, 43.9],
-                material: new PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 3000)
+                positions: Cesium.Cartesian3.fromDegreesArrayHeights([-90.0, 43.0, 100000.0,
+                    -87.5, 45.0, 100000.0,
+                    -85.0, 43.0, 100000.0,
+                    -87.5, 41.0, 100000.0,
+                    -90.0, 43.0, 100000.0]),
+                material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }
         }
 
@@ -264,7 +219,8 @@ export default class Part {
                         102.65483833999541, 24.902219367229762, 1856.3646821264895,
                     ]),
                 width: 5,
-                material: new Cesium.FlowLineMaterialProperty(Cesium.Color.ORANGE, 3000)
+                // material: new Cesium.FlowLineMaterialProperty(Cesium.Color.ORANGE, 3000)
+                material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }
         })
 
