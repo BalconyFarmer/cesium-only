@@ -1,10 +1,10 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
-import Part from './Part'
-import {ImageryProviderWebExtendTool} from './tool/ImageryProviderWebExtendTool'
+import Part from './some/Part'
 import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
 import Cesium3DTileset from './some/Cesium3DTileset/Cesium3DTileset'
 import LoadJson from './some/LoadJson'
+import Load3DModel from './some/Load3DModel'
 
 export default class CesiumApp {
     constructor () {
@@ -15,6 +15,7 @@ export default class CesiumApp {
         this.obliquePhotography = new ObliquePhotography(this)
         this.cesium3DTileset = new Cesium3DTileset(this)
         this.loadJson = new LoadJson(this)
+        this.load3DModel = new Load3DModel(this)
     }
 
     /**
@@ -84,7 +85,7 @@ export default class CesiumApp {
      * time
      */
     addTimeAction () {
-        // this.part.addModel()
+        // this.load3DModel.addModel()
         // this.part.addFlowLine()
         // this.part.addIcon()
         // this.part.addGeometry()
