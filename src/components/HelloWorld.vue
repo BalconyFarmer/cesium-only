@@ -1,11 +1,11 @@
 <template>
     <div class="all">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+            <el-menu-item index="13">run</el-menu-item>
             <el-menu-item index="2">云南JSON</el-menu-item>
             <el-menu-item index="3">纽约tiles</el-menu-item>
             <el-menu-item index="11">成都tiles</el-menu-item>
             <el-menu-item index="12">倾斜摄影</el-menu-item>
-            <el-menu-item index="5">add3dModel</el-menu-item>
             <el-menu-item index="6">addFlowWall</el-menu-item>
         </el-menu>
         <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -36,8 +36,6 @@
                     this.cApp.loadJson.loadJsonData()
                 } else if (key == 3) {
                     this.cApp.cesium3DTileset.toYN()
-                } else if (key == 5) {
-                    this.cApp.load3DModel.addModel()
                 } else if (key == 6) {
                     this.cApp.part.addFlowWall()
                 } else if (key == 7) {
@@ -50,6 +48,8 @@
                     this.cApp.cesium3DTileset.addTiles()
                 } else if (key == 12) {
                     this.cApp.obliquePhotography.addOblique()
+                }else if (key == 13) {
+                    this.cApp.addTimeAction()
                 }
             }
 
