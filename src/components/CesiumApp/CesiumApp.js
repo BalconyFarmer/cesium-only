@@ -1,14 +1,16 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 import Part from './Part'
-import {ImageryProviderWebExtendTool} from "./tool/ImageryProviderWebExtendTool"
+import {ImageryProviderWebExtendTool} from './tool/ImageryProviderWebExtendTool'
+import ObliquePhotography from './some/ObliquePhotography'
 
 export default class CesiumApp {
     constructor () {
         this.viewer = null
         this.Cesium = Cesium
         this.part = new Part(this)
-        this.staticServerAdress = "http://localhost:1111/3Dstatic/loadData"
+        this.obliquePhotography = new ObliquePhotography(this)
+        this.staticServerAdress = 'http://localhost:1111/3Dstatic/loadData'
     }
 
     /**
@@ -55,7 +57,7 @@ export default class CesiumApp {
 
         this.viewer.scene.globe.enableLighting = false // 初始化光照
 
-        this.viewer.scene.fog.enabled = false;
+        this.viewer.scene.fog.enabled = false
 
         // 首次加载完成回调
         const self = this
@@ -68,7 +70,7 @@ export default class CesiumApp {
             } else {
                 setTimeout(function () {
                     self.addTimeAction()
-                },500)
+                }, 500)
             }
             self.firstIndex = true
         })
@@ -78,13 +80,14 @@ export default class CesiumApp {
      * time
      */
     addTimeAction () {
-        this.part.addModel()
-        this.part.addFlowLine()
-        this.part.addIcon()
-        const self = this
-        setTimeout(function () {
-            self.addImageryProviderLayerReal()
-        }, 15000)
+        // this.part.addModel()
+        // this.part.addFlowLine()
+        // this.part.addIcon()
+        // const self = this
+        // setTimeout(function () {
+        //     self.addImageryProviderLayerReal()
+        // }, 15000)
+        this.obliquePhotography.addOblique()
     }
 
     /**
@@ -117,20 +120,18 @@ export default class CesiumApp {
         //     enablePickFeatures: false
         // });
 
-
-
         var noteLayer = new Cesium.WebMapTileServiceImageryProvider({
-            url: "http://t0.tianditu.gov.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=837264f46e683ec982d452e78d71052e",
-            layer: "tdtBasicLayer",
-            style: "default",
+            url: 'http://t0.tianditu.gov.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=837264f46e683ec982d452e78d71052e',
+            layer: 'tdtBasicLayer',
+            style: 'default',
             maximumLevel: 20,
-            format: "image/png",
-            tileMatrixSetID: "GoogleMapsCompatible",
+            format: 'image/png',
+            tileMatrixSetID: 'GoogleMapsCompatible',
             show: true
-        });
+        })
 
         this.viewer.imageryLayers.addImageryProvider(Imagery)
-        this.viewer.imageryLayers.addImageryProvider(noteLayer)
+        // this.viewer.imageryLayers.addImageryProvider(noteLayer)
 
     }
 
@@ -147,8 +148,6 @@ export default class CesiumApp {
             url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
             credit: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
         })
-
-
 
         if (this.viewer) {
             this.viewer.imageryLayers.addImageryProvider(this.Imagery)
@@ -178,10 +177,10 @@ export default class CesiumApp {
             console.log(self.viewer.camera.position, self.viewer.camera.heading, self.viewer.camera.pitch, self.viewer.camera.roll, '当前摄像机视角')
 
             // 选取模型 事件
-            var pick = self.viewer.scene.pick(event.position);
-            console.log(pick,"pick-pick-pick-pick-pick")
+            var pick = self.viewer.scene.pick(event.position)
+            console.log(pick, 'pick-pick-pick-pick-pick')
             if (Cesium.defined(pick) && (pick.id === 'rectangle-1')) {
-                alert('矩形被选取');
+                alert('矩形被选取')
             }
         }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
