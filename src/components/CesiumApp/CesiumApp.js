@@ -158,7 +158,7 @@ export default class CesiumApp {
     /**
      * 点击地图console位置
      */
-    getPosition () {
+    addEvent () {
         const self = this
         let handler = new this.Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas)
         handler.setInputAction(function (event) {
@@ -176,6 +176,13 @@ export default class CesiumApp {
             let height2 = cartographic.height
             console.log(lon + ',', lat + ',', height1 + ',', '当前选取: 经度 纬度 高度...')
             console.log(self.viewer.camera.position, self.viewer.camera.heading, self.viewer.camera.pitch, self.viewer.camera.roll, '当前摄像机视角')
+
+            // 选取模型 事件
+            var pick = self.viewer.scene.pick(event.position);
+            console.log(pick,"pick-pick-pick-pick-pick")
+            if (Cesium.defined(pick) && (pick.id === 'rectangle-1')) {
+                alert('矩形被选取');
+            }
         }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
     }
