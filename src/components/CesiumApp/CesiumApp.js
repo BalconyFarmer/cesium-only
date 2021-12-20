@@ -84,14 +84,14 @@ export default class CesiumApp {
      * time
      */
     addTimeAction () {
-        this.part.addModel()
-        this.part.addFlowLine()
-        this.part.addIcon()
-        this.part.addGeometry()
-        const self = this
-        setTimeout(function () {
-            self.addImageryProviderLayerReal()
-        }, 15000)
+        // this.part.addModel()
+        // this.part.addFlowLine()
+        // this.part.addIcon()
+        // this.part.addGeometry()
+        // const self = this
+        // setTimeout(function () {
+        //     self.addImageryProviderLayerReal()
+        // }, 15000)
     }
 
     /**
