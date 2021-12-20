@@ -7,11 +7,12 @@
             <el-menu-item index="11">成都tiles</el-menu-item>
             <el-menu-item index="4">add图标</el-menu-item>
             <el-menu-item index="5">add3d</el-menu-item>
-            <el-menu-item index="6">addFlowWall</el-menu-item>
-            <el-menu-item index="7">addImageryLayer</el-menu-item>
-            <el-menu-item index="8">addImageryProviderLayerNormal</el-menu-item>
-            <el-menu-item index="9">switchLight</el-menu-item>
+            <el-menu-item index="7">实景图层</el-menu-item>
+            <el-menu-item index="8">文字图层</el-menu-item>
+            <el-menu-item index="9">光照系统</el-menu-item>
+            <el-menu-item index="12">倾斜摄影</el-menu-item>
             <el-menu-item index="10">addGeometry</el-menu-item>
+            <el-menu-item index="6">addFlowWall</el-menu-item>
         </el-menu>
         <div id="cesiumContainer"></div>
 
@@ -54,6 +55,8 @@
                     this.cApp.part.addGeometry()
                 }else if (key == 11) {
                     this.cApp.part.addTiles()
+                }else if (key == 12) {
+                    this.cApp.obliquePhotography.addOblique()
                 }
             }
 

@@ -2,7 +2,7 @@ import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 import Part from './Part'
 import {ImageryProviderWebExtendTool} from './tool/ImageryProviderWebExtendTool'
-import ObliquePhotography from './some/ObliquePhotography'
+import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
 
 export default class CesiumApp {
     constructor () {
@@ -80,14 +80,13 @@ export default class CesiumApp {
      * time
      */
     addTimeAction () {
-        // this.part.addModel()
-        // this.part.addFlowLine()
-        // this.part.addIcon()
-        // const self = this
-        // setTimeout(function () {
-        //     self.addImageryProviderLayerReal()
-        // }, 15000)
-        this.obliquePhotography.addOblique()
+        this.part.addModel()
+        this.part.addFlowLine()
+        this.part.addIcon()
+        const self = this
+        setTimeout(function () {
+            self.addImageryProviderLayerReal()
+        }, 15000)
     }
 
     /**
