@@ -4,6 +4,7 @@ import Part from './Part'
 import {ImageryProviderWebExtendTool} from './tool/ImageryProviderWebExtendTool'
 import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
 import Cesium3DTileset from './some/Cesium3DTileset/Cesium3DTileset'
+import LoadJson from './some/LoadJson'
 
 export default class CesiumApp {
     constructor () {
@@ -13,6 +14,7 @@ export default class CesiumApp {
         this.part = new Part(this)
         this.obliquePhotography = new ObliquePhotography(this)
         this.cesium3DTileset = new Cesium3DTileset(this)
+        this.loadJson = new LoadJson(this)
     }
 
     /**

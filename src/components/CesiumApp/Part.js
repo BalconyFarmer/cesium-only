@@ -247,27 +247,7 @@ export default class Part {
         })
     }
 
-    /**
-     * 加载云南JSON
-     */
-    loadJsonData () {
-        const self = this
-        // 还在geoJson数据 ()
-        Cesium.GeoJsonDataSource.load(require('../loadData/geoJson/云南省.json')).then(function (dataSource) {
-            self.viewer.dataSources.add(dataSource).then(res => {
-                const test = res
-                test.name = '测试'
-            })
-        })
-        self.app.viewer.camera.flyTo({
-            destination: Cesium.Cartesian3.fromDegrees(101.315555, 24.613368, 72000.0),
-            orientation: {
-                heading: 0, // east, default value is 0.0 (north) 左右摆头
-                pitch: -90, // default value (looking down) 上下摆头 -90俯视 0 平视
-                roll: 0.0 // default value
-            }
-        })
-    }
+
 
 
     /**

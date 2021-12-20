@@ -1,11 +1,9 @@
 <template>
     <div class="all">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="1">flowLine</el-menu-item>
             <el-menu-item index="2">云南</el-menu-item>
             <el-menu-item index="3">纽约</el-menu-item>
             <el-menu-item index="11">成都tiles</el-menu-item>
-            <el-menu-item index="4">add图标</el-menu-item>
             <el-menu-item index="5">add3d</el-menu-item>
             <el-menu-item index="7">实景图层</el-menu-item>
             <el-menu-item index="8">文字图层</el-menu-item>
@@ -33,14 +31,10 @@
         },
         methods: {
             handleSelect (key, keyPath) {
-                if (key == 1) {
-                    this.cApp.part.addFlowLine()
-                } else if (key == 2) {
-                    this.cApp.part.loadJsonData()
+                if (key == 2) {
+                    this.cApp.loadJson.loadJsonData()
                 } else if (key == 3) {
                     this.cApp.cesium3DTileset.toYN()
-                } else if (key == 4) {
-                    this.cApp.part.addIcon()
                 } else if (key == 5) {
                     this.cApp.part.addModel()
                 } else if (key == 6) {
@@ -51,11 +45,11 @@
                     this.cApp.addImageryProviderLayerNormal()
                 } else if (key == 9) {
                     this.cApp.switchLight()
-                }else if (key == 10) {
+                } else if (key == 10) {
                     this.cApp.part.addGeometry()
-                }else if (key == 11) {
+                } else if (key == 11) {
                     this.cApp.cesium3DTileset.addTiles()
-                }else if (key == 12) {
+                } else if (key == 12) {
                     this.cApp.obliquePhotography.addOblique()
                 }
             }
