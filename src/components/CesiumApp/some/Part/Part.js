@@ -218,7 +218,7 @@ export default class Part {
                         102.65598127309781, 24.895192167561607, 1868.1795017975555,
                         102.65483833999541, 24.902219367229762, 1856.3646821264895,
                     ]),
-                width: 5,
+                width: 15,
                 // material: new Cesium.FlowLineMaterialProperty(Cesium.Color.ORANGE, 3000)
                 material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }
