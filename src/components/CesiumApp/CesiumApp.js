@@ -1,11 +1,12 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
-import Part from './some/Part/Part'
+import CustomStyle from './some/CustomStyle/CustomStyle'
 import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
 import Cesium3DTileset from './some/Cesium3DTileset/Cesium3DTileset'
 import LoadJson from './some/LoadJson'
 import Load3DModel from './some/Load3DModel'
-import {initFlowMatetial} from "./some/Part/_PolylineTrailLinkMaterialProperty"
+import {initFlowMatetial} from "./some/CustomStyle/_PolylineTrailLinkMaterialProperty"
+import InnerGeometry from './some/InnerGeometry'
 
 export default class CesiumApp {
     constructor () {
@@ -13,11 +14,12 @@ export default class CesiumApp {
         this.viewer = null
         this.option = null
         this.Cesium = Cesium
-        this.part = new Part(this)
+        this.part = new CustomStyle(this)
         this.obliquePhotography = new ObliquePhotography(this)
         this.cesium3DTileset = new Cesium3DTileset(this)
         this.loadJson = new LoadJson(this)
         this.load3DModel = new Load3DModel(this)
+        this.innerGeometry = new InnerGeometry(this)
     }
 
     /**
@@ -93,8 +95,8 @@ export default class CesiumApp {
      */
     addTimeAction () {
         this.load3DModel.addModel()
-        this.part.addIcon()
-        this.part.addGeometry()
+        this.innerGeometry.addIcon()
+        this.innerGeometry.addGeometry()
         this.part.addFlowLine()
         this.part.addCircleScan()
         this.part.addRadarScan()

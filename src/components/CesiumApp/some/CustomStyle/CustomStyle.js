@@ -3,75 +3,12 @@ import * as widget from 'cesium/Widgets/widgets.css'
 
 // import {PolylineTrailLinkMaterialProperty} from './PolylineTrailLinkMaterialProperty'
 
-export default class Part {
+/**
+ * 自定义着色器样式类
+ */
+export default class CustomStyle {
     constructor (app) {
         this.app = app
-    }
-
-    /**
-     * 原生geometry
-     */
-    addGeometry () {
-        //圆柱体
-        this.app.viewer.entities.add({
-            name: '圆柱体',
-            position: Cesium.Cartesian3.fromDegrees(102.65461106848306, 24.902995899003997, 1857.9621251609599,),
-            cylinder: {
-                length: 4.0,//圆柱体高度
-                topRadius: 2.0,//圆柱体的顶部半径。
-                bottomRadius: 2.0,//    圆柱体底部的半径。
-                material: Cesium.Color.GREEN.withAlpha(0.5),//绿色半透明
-                outline: true,//轮廓
-                outlineColor: Cesium.Color.DARK_GREEN//轮廓颜色深绿色
-            }
-        })
-    }
-
-
-
-    /**
-     * 加载bilbord
-     */
-    addIcon () {
-        this.app.viewer.entities.add({
-            position: Cesium.Cartesian3.fromDegrees(102.65425451755321, 24.902048298657025, 1856.639104950962),
-            // 点
-            point: {
-                color: Cesium.Color.RED, // 点位颜色
-                pixelSize: 10 // 像素点大小
-            },
-            // 文字
-            label: {
-                // 文本。支持显式换行符“ \ n”
-                text: '1号房',
-                // 字体样式,以CSS语法指定字体
-                font: '14pt Source Han Sans CN',
-                // 字体颜色
-                fillColor: Cesium.Color.BLACK,
-                // 背景颜色
-                backgroundColor: Cesium.Color.AQUA,
-                // 是否显示背景颜色
-                showBackground: true,
-                // 字体边框
-                outline: true,
-                // 字体边框颜色
-                outlineColor: Cesium.Color.WHITE,
-                // 字体边框尺寸
-                outlineWidth: 10,
-                // 应用于图像的统一比例。比例大于会1.0放大标签,而比例小于会1.0缩小标签。
-                scale: 1.0,
-                // 设置样式：FILL：填写标签的文本,但不要勾勒轮廓；OUTLINE：概述标签的文本,但不要填写；FILL_AND_OUTLINE：填写并概述标签文本。
-                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-                // 相对于坐标的水平位置
-                verticalOrigin: Cesium.VerticalOrigin.CENTER,
-                // 相对于坐标的水平位置
-                horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
-                // 该属性指定标签在屏幕空间中距此标签原点的像素偏移量
-                pixelOffset: new Cesium.Cartesian2(10, 0),
-                // 是否显示
-                show: true
-            }
-        })
     }
 
     /**
@@ -113,6 +50,174 @@ export default class Part {
                 material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }
         })
+    }
+
+    /**
+     * 添加flyline
+     */
+    addFlyLine3D () {
+        /*
+          流纹纹理线
+          color 颜色
+          duration 持续时间 毫秒
+       */
+        function PolylineTrailLinkMaterialProperty (color, duration) {
+            this._definitionChanged = new Cesium.Event()
+            this._color = undefined
+            this._colorSubscription = undefined
+            this.color = color
+            this.duration = duration
+            this._time = (new Date()).getTime()
+        }
+
+        Object.defineProperties(PolylineTrailLinkMaterialProperty.prototype, {
+            isConstant: {
+                get: function () {
+                    return false
+                }
+            },
+            definitionChanged: {
+                get: function () {
+                    return this._definitionChanged
+                }
+            },
+            color: Cesium.createPropertyDescriptor('color')
+        })
+        PolylineTrailLinkMaterialProperty.prototype.getType = function (time) {
+            return 'PolylineTrailLink'
+        }
+        PolylineTrailLinkMaterialProperty.prototype.getValue = function (time, result) {
+            if (!Cesium.defined(result)) {
+                result = {}
+            }
+            result.color = Cesium.Property.getValueOrClonedDefault(this._color, time, Cesium.Color.WHITE, result.color)
+            result.image = Cesium.Material.PolylineTrailLinkImage
+            result.time = (((new Date()).getTime() - this._time) % this.duration) / this.duration
+            return result
+        }
+        PolylineTrailLinkMaterialProperty.prototype.equals = function (other) {
+            return this === other ||
+                (other instanceof PolylineTrailLinkMaterialProperty &&
+                    Cesium.Property.equals(this._color, other._color))
+        }
+        Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty
+        Cesium.Material.PolylineTrailLinkType = 'PolylineTrailLink'
+        Cesium.Material.PolylineTrailLinkImage = 'http://localhost:1111/3Dstatic/loadData/colors3.png'
+        Cesium.Material.PolylineTrailLinkSource = 'czm_material czm_getMaterial(czm_materialInput materialInput)\n\
+                                                      {\n\
+                                                           czm_material material = czm_getDefaultMaterial(materialInput);\n\
+                                                           vec2 st = materialInput.st;\n\
+                                                           vec4 colorImage = texture2D(image, vec2(fract(st.s - time), st.t));\n\
+                                                           material.alpha = colorImage.a * color.a;\n\
+                                                           material.diffuse = (colorImage.rgb+color.rgb)/2.0;\n\
+                                                           return material;\n\
+                                                       }'
+        Cesium.Material._materialCache.addMaterial(Cesium.Material.PolylineTrailLinkType, {
+            fabric: {
+                type: Cesium.Material.PolylineTrailLinkType,
+                uniforms: {
+                    color: new Cesium.Color(1.0, 0.0, 0.0, 0.5),
+                    image: Cesium.Material.PolylineTrailLinkImage,
+                    time: 0
+                },
+                source: Cesium.Material.PolylineTrailLinkSource
+            },
+            translucent: function (material) {
+                return true
+            }
+        })
+
+        function parabolaEquation (options, resultOut) {
+            //方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
+            let h = options.height && options.height > 5000 ? options.height : 5000
+            let L = Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat) ? Math.abs(options.pt1.lon - options.pt2.lon) : Math.abs(options.pt1.lat - options.pt2.lat)
+            let num = options.num && options.num > 50 ? options.num : 50
+            let result = []
+            let dlt = L / num
+            if (Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat)) {//以lon为基准
+                let delLat = (options.pt2.lat - options.pt1.lat) / num
+                if (options.pt1.lon - options.pt2.lon > 0) {
+                    dlt = -dlt
+                }
+                for (let i = 0; i < num; i++) {
+                    let tempH = h - Math.pow((-0.5 * L + Math.abs(dlt) * i), 2) * 4 * h / Math.pow(L, 2)
+                    let lon = options.pt1.lon + dlt * i
+                    let lat = options.pt1.lat + delLat * i
+                    result.push([lon, lat, tempH])
+                }
+            } else {//以lat为基准
+                let delLon = (options.pt2.lon - options.pt1.lon) / num
+                if (options.pt1.lat - options.pt2.lat > 0) {
+                    dlt = -dlt
+                }
+                for (let i = 0; i < num; i++) {
+                    let tempH = h - Math.pow((-0.5 * L + Math.abs(dlt) * i), 2) * 4 * h / Math.pow(L, 2)
+                    let lon = options.pt1.lon + delLon * i
+                    let lat = options.pt1.lat + dlt * i
+                    result.push([lon, lat, tempH])
+                }
+            }
+            if (resultOut != undefined) {
+                resultOut = result
+            }
+            return result
+        }
+        let material = null;
+        let center = {lon: 102.65416219381753, lat: 24.90134988427503}
+        let cities = [
+            {'lon': 115.028495718, 'lat': 30.200814617},
+            {'lon': 110.795000473, 'lat': 32.638540762},
+            // { "lon": 111.267729446, "lat": 30.698151246 },
+            // { "lon": 112.126643144, "lat": 32.058588576 },
+            // { "lon": 114.885884938, "lat": 30.395401912 },
+            // { "lon": 112.190419415, "lat": 31.043949588 },
+            // { "lon": 113.903569642, "lat": 30.932054050 },
+            // { "lon": 112.226648859, "lat": 30.367904255 },
+            // { "lon": 114.861716770, "lat": 30.468634833 },
+            // { "lon": 114.317846048, "lat": 29.848946148 },
+            // { "lon": 113.371985426, "lat": 31.704988330 },
+            // { "lon": 109.468884533, "lat": 30.289012191 },
+            // { "lon": 113.414585069, "lat": 30.368350431 },
+            // { "lon": 112.892742589, "lat": 30.409306203 },
+            // { "lon": 113.160853710, "lat": 30.667483468 },
+            // { "lon": 110.670643354, "lat": 31.748540780 }
+        ]
+        if (material != null) {
+        } else {
+            material = new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 3000)
+        }
+        for (let j = 0; j < cities.length; j++) {
+            let points = parabolaEquation({pt1: center, pt2: cities[j], height: 50000, num: 100})
+            let pointArr = []
+            for (let i = 0; i < points.length; i++) {
+                pointArr.push(points[i][0], points[i][1], points[i][2])
+            }
+            viewer.entities.add({
+                name: 'PolylineTrailLink' + j,
+                polyline: {
+                    positions: Cesium.Cartesian3.fromDegreesArrayHeights(pointArr),
+                    width: 2,
+                    material: material
+                }
+            })
+        }
+
+        viewer.entities.add({
+            position: Cesium.Cartesian3.fromDegrees(center.lon, center.lat, 1),
+            point: {
+                pixelSize: 6,
+                color: Cesium.Color.BLUE
+            }
+        })
+        for (let i = 0; i < cities.length; i++) {
+            viewer.entities.add({
+                position: Cesium.Cartesian3.fromDegrees(cities[i].lon, cities[i].lat, 1),
+                point: {
+                    pixelSize: 6,
+                    color: Cesium.Color.RED
+                }
+            })
+        }
     }
 
     /**
@@ -394,171 +499,5 @@ export default class Part {
         AddRadarScanPostStage(this.app.viewer, CartographicCenter, 100, scanColor, 4000)
     }
 
-    /**
-     * 添加flyline
-     */
-    addFlyLine3D () {
-        /*
-          流纹纹理线
-          color 颜色
-          duration 持续时间 毫秒
-       */
-        function PolylineTrailLinkMaterialProperty (color, duration) {
-            this._definitionChanged = new Cesium.Event()
-            this._color = undefined
-            this._colorSubscription = undefined
-            this.color = color
-            this.duration = duration
-            this._time = (new Date()).getTime()
-        }
 
-        Object.defineProperties(PolylineTrailLinkMaterialProperty.prototype, {
-            isConstant: {
-                get: function () {
-                    return false
-                }
-            },
-            definitionChanged: {
-                get: function () {
-                    return this._definitionChanged
-                }
-            },
-            color: Cesium.createPropertyDescriptor('color')
-        })
-        PolylineTrailLinkMaterialProperty.prototype.getType = function (time) {
-            return 'PolylineTrailLink'
-        }
-        PolylineTrailLinkMaterialProperty.prototype.getValue = function (time, result) {
-            if (!Cesium.defined(result)) {
-                result = {}
-            }
-            result.color = Cesium.Property.getValueOrClonedDefault(this._color, time, Cesium.Color.WHITE, result.color)
-            result.image = Cesium.Material.PolylineTrailLinkImage
-            result.time = (((new Date()).getTime() - this._time) % this.duration) / this.duration
-            return result
-        }
-        PolylineTrailLinkMaterialProperty.prototype.equals = function (other) {
-            return this === other ||
-                (other instanceof PolylineTrailLinkMaterialProperty &&
-                    Cesium.Property.equals(this._color, other._color))
-        }
-        Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty
-        Cesium.Material.PolylineTrailLinkType = 'PolylineTrailLink'
-        Cesium.Material.PolylineTrailLinkImage = 'http://localhost:1111/3Dstatic/loadData/colors3.png'
-        Cesium.Material.PolylineTrailLinkSource = 'czm_material czm_getMaterial(czm_materialInput materialInput)\n\
-                                                      {\n\
-                                                           czm_material material = czm_getDefaultMaterial(materialInput);\n\
-                                                           vec2 st = materialInput.st;\n\
-                                                           vec4 colorImage = texture2D(image, vec2(fract(st.s - time), st.t));\n\
-                                                           material.alpha = colorImage.a * color.a;\n\
-                                                           material.diffuse = (colorImage.rgb+color.rgb)/2.0;\n\
-                                                           return material;\n\
-                                                       }'
-        Cesium.Material._materialCache.addMaterial(Cesium.Material.PolylineTrailLinkType, {
-            fabric: {
-                type: Cesium.Material.PolylineTrailLinkType,
-                uniforms: {
-                    color: new Cesium.Color(1.0, 0.0, 0.0, 0.5),
-                    image: Cesium.Material.PolylineTrailLinkImage,
-                    time: 0
-                },
-                source: Cesium.Material.PolylineTrailLinkSource
-            },
-            translucent: function (material) {
-                return true
-            }
-        })
-
-        function parabolaEquation (options, resultOut) {
-            //方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
-            let h = options.height && options.height > 5000 ? options.height : 5000
-            let L = Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat) ? Math.abs(options.pt1.lon - options.pt2.lon) : Math.abs(options.pt1.lat - options.pt2.lat)
-            let num = options.num && options.num > 50 ? options.num : 50
-            let result = []
-            let dlt = L / num
-            if (Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat)) {//以lon为基准
-                let delLat = (options.pt2.lat - options.pt1.lat) / num
-                if (options.pt1.lon - options.pt2.lon > 0) {
-                    dlt = -dlt
-                }
-                for (let i = 0; i < num; i++) {
-                    let tempH = h - Math.pow((-0.5 * L + Math.abs(dlt) * i), 2) * 4 * h / Math.pow(L, 2)
-                    let lon = options.pt1.lon + dlt * i
-                    let lat = options.pt1.lat + delLat * i
-                    result.push([lon, lat, tempH])
-                }
-            } else {//以lat为基准
-                let delLon = (options.pt2.lon - options.pt1.lon) / num
-                if (options.pt1.lat - options.pt2.lat > 0) {
-                    dlt = -dlt
-                }
-                for (let i = 0; i < num; i++) {
-                    let tempH = h - Math.pow((-0.5 * L + Math.abs(dlt) * i), 2) * 4 * h / Math.pow(L, 2)
-                    let lon = options.pt1.lon + delLon * i
-                    let lat = options.pt1.lat + dlt * i
-                    result.push([lon, lat, tempH])
-                }
-            }
-            if (resultOut != undefined) {
-                resultOut = result
-            }
-            return result
-        }
-        let material = null;
-        let center = {lon: 102.65416219381753, lat: 24.90134988427503}
-        let cities = [
-            {'lon': 115.028495718, 'lat': 30.200814617},
-            {'lon': 110.795000473, 'lat': 32.638540762},
-            // { "lon": 111.267729446, "lat": 30.698151246 },
-            // { "lon": 112.126643144, "lat": 32.058588576 },
-            // { "lon": 114.885884938, "lat": 30.395401912 },
-            // { "lon": 112.190419415, "lat": 31.043949588 },
-            // { "lon": 113.903569642, "lat": 30.932054050 },
-            // { "lon": 112.226648859, "lat": 30.367904255 },
-            // { "lon": 114.861716770, "lat": 30.468634833 },
-            // { "lon": 114.317846048, "lat": 29.848946148 },
-            // { "lon": 113.371985426, "lat": 31.704988330 },
-            // { "lon": 109.468884533, "lat": 30.289012191 },
-            // { "lon": 113.414585069, "lat": 30.368350431 },
-            // { "lon": 112.892742589, "lat": 30.409306203 },
-            // { "lon": 113.160853710, "lat": 30.667483468 },
-            // { "lon": 110.670643354, "lat": 31.748540780 }
-        ]
-        if (material != null) {
-        } else {
-            material = new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 3000)
-        }
-        for (let j = 0; j < cities.length; j++) {
-            let points = parabolaEquation({pt1: center, pt2: cities[j], height: 50000, num: 100})
-            let pointArr = []
-            for (let i = 0; i < points.length; i++) {
-                pointArr.push(points[i][0], points[i][1], points[i][2])
-            }
-            viewer.entities.add({
-                name: 'PolylineTrailLink' + j,
-                polyline: {
-                    positions: Cesium.Cartesian3.fromDegreesArrayHeights(pointArr),
-                    width: 2,
-                    material: material
-                }
-            })
-        }
-
-        viewer.entities.add({
-            position: Cesium.Cartesian3.fromDegrees(center.lon, center.lat, 1),
-            point: {
-                pixelSize: 6,
-                color: Cesium.Color.BLUE
-            }
-        })
-        for (let i = 0; i < cities.length; i++) {
-            viewer.entities.add({
-                position: Cesium.Cartesian3.fromDegrees(cities[i].lon, cities[i].lat, 1),
-                point: {
-                    pixelSize: 6,
-                    color: Cesium.Color.RED
-                }
-            })
-        }
-    }
 }
