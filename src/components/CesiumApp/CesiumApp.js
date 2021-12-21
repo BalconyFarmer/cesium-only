@@ -11,6 +11,7 @@ export default class CesiumApp {
     constructor () {
         this.staticServerAdress = 'http://localhost:1111/3Dstatic/loadData'
         this.viewer = null
+        this.option = null
         this.Cesium = Cesium
         this.part = new Part(this)
         this.obliquePhotography = new ObliquePhotography(this)
@@ -57,6 +58,7 @@ export default class CesiumApp {
             // skyBox: false, // 关闭天空
             // skyAtmosphere: false, // 关闭大气
         }
+        this.option = option
         this.viewer = new this.Cesium.Viewer('cesiumContainer', option)
 
         window.viewer = this.viewer
@@ -82,12 +84,11 @@ export default class CesiumApp {
             self.firstIndex = true
         })
 
-        this.viewer.imageryLayers.get(0).show = false;//不显示底图
-        this.viewer.scene.globe.baseColor = Cesium.Color.WHITE;//设置地球颜色
+
     }
 
     /**
-     * time
+     * 效果演示时间线
      */
     addTimeAction () {
         this.load3DModel.addModel()
@@ -97,6 +98,16 @@ export default class CesiumApp {
         this.part.addCircleScan()
         this.part.addRadarScan()
         this.part.addFlyLine3D()
+    }
+
+    /**
+     * 关闭次要效果
+     */
+    closeAll() {
+        this.viewer.imageryLayers.get(0).show = false;//不显示底图
+        this.viewer.scene.globe.baseColor = Cesium.Color.GRAY;//设置地球颜色
+        this.option.skyBox = false // 关闭天空盒
+        this.option.skyAtmosphere = false // 关闭大气效果
     }
 
     /**

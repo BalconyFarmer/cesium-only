@@ -12,6 +12,7 @@
             <el-menu-item index="7">实景图层</el-menu-item>
             <el-menu-item index="8">文字图层</el-menu-item>
             <el-menu-item index="9">光照系统</el-menu-item>
+            <el-menu-item index="14">关闭冗余</el-menu-item>
         </el-menu>
         <div id="cesiumContainer"></div>
 
@@ -50,6 +51,8 @@
                     this.cApp.obliquePhotography.addOblique()
                 }else if (key == 13) {
                     this.cApp.addTimeAction()
+                }else if (key == 14) {
+                    this.cApp.closeAll()
                 }
             }
 
