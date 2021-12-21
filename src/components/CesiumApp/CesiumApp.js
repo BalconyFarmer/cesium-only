@@ -91,6 +91,8 @@ export default class CesiumApp {
         this.part.addIcon()
         this.part.addGeometry()
         this.part.addFlowLine()
+        // this.part.addCircleScan()
+        // this.part.addRadarScan()
     }
 
     /**
@@ -186,6 +188,8 @@ export default class CesiumApp {
                 alert('矩形被选取')
             }
         }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
+
+        this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
 
     }
 
