@@ -91,8 +91,8 @@ export default class CesiumApp {
         this.part.addIcon()
         this.part.addGeometry()
         this.part.addFlowLine()
-        // this.part.addCircleScan()
-        // this.part.addRadarScan()
+        this.part.addCircleScan()
+        this.part.addRadarScan()
     }
 
     /**
