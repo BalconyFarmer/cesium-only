@@ -76,9 +76,6 @@ export default class Part {
      * 加载流动墙效果
      */
     addFlowWall () {
-
-
-
         const flowWall = {
             name: 'WallTrail',
             wall: {
@@ -87,12 +84,10 @@ export default class Part {
                     -85.0, 43.0, 100000.0,
                     -87.5, 41.0, 100000.0,
                     -90.0, 43.0, 100000.0]),
-                material: new PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
+                material: new PolylineTrailLinkMaterialProperty('#F8BE65', 9000)
             }
         }
-
         this.app.viewer.entities.add(flowWall)
-
         this.app.viewer.zoomTo(this.app.viewer.entities)
     }
 
@@ -100,88 +95,7 @@ export default class Part {
      * 添加流动线条
      */
     addFlowLine () {
-        class FlowLineMaterialProperty {
-            constructor (color, duration) {
-                this._definitionChanged = new Cesium.Event()
-                this._color = undefined
-                this._colorSubscription = undefined
-                this.color = color
-                this.duration = duration
-                this._time = (new Date()).getTime()
-            }
-
-            get isConstant () {
-                return false
-            }
-
-            get definitionChanged () {
-                return this._definitionChanged
-            }
-
-            color () {
-                return Cesium.createPropertyDescriptor('color')
-            }
-
-            getType () {
-                return 'FlowLine'
-            }
-
-            getValue (time, result) {
-                if (!Cesium.defined(result)) {
-                    result = {}
-                }
-                result.color = Cesium.Property.getValueOrClonedDefault(this._color, time, Cesium.Color.WHITE, result.color)
-                result.image = Cesium.Material.FlowLineImage
-                result.time = (((new Date()).getTime() - this._time) % this.duration) / this.duration
-                return result
-            }
-
-            equals (other) {
-                return this === other ||
-                    (other instanceof FlowLineMaterialProperty &&
-                        Property.equals(this._color, other._color))
-            }
-        }
-
-        Cesium.FlowLineMaterialProperty = FlowLineMaterialProperty
-        Cesium.Material.FlowLineType = 'FlowLine'
-        Cesium.Material.FlowLineImage = drawCanvas()
-        Cesium.Material.FlowLineSource = 'czm_material czm_getMaterial(czm_materialInput materialInput)\n\
-                                                  {\n\
-                                                       czm_material material = czm_getDefaultMaterial(materialInput);\n\
-                                                       vec2 st = materialInput.st;\n\
-                                                       vec4 colorImage = texture2D(image, vec2(fract(st.s), st.t));\n\
-                                                       material.alpha = colorImage.a * color.a;\n\
-                                                       material.diffuse = colorImage.rgb;\n\
-                                                       return material;\n\
-                                                   }'
-        Cesium.Material._materialCache.addMaterial(Cesium.Material.FlowLineType, {
-            fabric: {
-                type: Cesium.Material.FlowLineType,
-                uniforms: {
-                    color: new Cesium.Color(1.0, 1.0, 1.0, 1),
-                    image: Cesium.Material.FlowLineImage,
-                    time: 0
-                },
-                source: Cesium.Material.FlowLineSource
-            },
-            translucent: function (material) {
-                return true
-            }
-        })
-
-        function drawCanvas () {
-            let canvas = document.createElement('canvas')
-            canvas.width = 1200
-            canvas.height = 50
-            let ctx = canvas.getContext('2d')
-            let grd = ctx.createLinearGradient(0, 0, 1200, 0)
-            grd.addColorStop(0, 'rgba(255,255,0,0.2)')
-            grd.addColorStop(1, 'rgba(0,255,0,1)')
-            ctx.fillStyle = grd
-            ctx.fillRect(0, 0, 1200, 50)
-            return canvas.toDataURL('image/png')
-        }
+        Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty
 
         this.app.viewer.entities.add({
             name: 'PolylineTrail',
@@ -194,9 +108,8 @@ export default class Part {
                         102.65483833999541, 24.902219367229762, 1856.3646821264895,
                     ]),
                 width: 15,
-                material: new PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
+                material: new Cesium.PolylineTrailLinkMaterialProperty('#F8BE65', 9000)
             }
         })
-
     }
 }
