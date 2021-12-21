@@ -84,6 +84,7 @@ export default class CesiumApp {
             self.firstIndex = true
         })
 
+        this.viewer.scene.debugShowFramesPerSecond = true; // 帧率显示框
 
     }
 
@@ -106,8 +107,8 @@ export default class CesiumApp {
     closeAll() {
         this.viewer.imageryLayers.get(0).show = false;//不显示底图
         this.viewer.scene.globe.baseColor = Cesium.Color.GRAY;//设置地球颜色
-        this.option.skyBox = false // 关闭天空盒
-        this.option.skyAtmosphere = false // 关闭大气效果
+        this.viewer.scene.skyAtmosphere.show = false; // 关闭大气效果
+        this.viewer.scene.skyBox.show = false; // 关闭大气效果
     }
 
     /**
