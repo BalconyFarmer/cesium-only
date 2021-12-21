@@ -5,6 +5,7 @@ import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
 import Cesium3DTileset from './some/Cesium3DTileset/Cesium3DTileset'
 import LoadJson from './some/LoadJson'
 import Load3DModel from './some/Load3DModel'
+import {initFlowMatetial} from "./some/Part/_PolylineTrailLinkMaterialProperty"
 
 export default class CesiumApp {
     constructor () {
@@ -22,6 +23,7 @@ export default class CesiumApp {
      * 初始化3D基础场景
      */
     initMap () {
+        initFlowMatetial()
         this.addImageryProviderLayerNormal()
 
         // 加载地形数据
@@ -86,9 +88,9 @@ export default class CesiumApp {
      */
     addTimeAction () {
         this.load3DModel.addModel()
-        this.part.addFlowLine()
         this.part.addIcon()
         this.part.addGeometry()
+        this.part.addFlowLine()
     }
 
     /**

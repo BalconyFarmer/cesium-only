@@ -1,10 +1,10 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 
+
 /*
-  流动纹理线
-   color 颜色
-   duration 持续时间 毫秒
+    ES6 改写
+    bug 无颜色贴图
 */
 
 class PolylineTrailLinkMaterialProperty {
@@ -21,7 +21,7 @@ class PolylineTrailLinkMaterialProperty {
     addMaterial () {
         Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty
         Cesium.Material.PolylineTrailLinkType = 'PolylineTrailLink'
-        Cesium.Material.PolylineTrailLinkImage = 'http://localhost:1111/3Dstatic/loadData/colors.png'
+        Cesium.Material.PolylineTrailLinkImage = 'http://localhost:1111/3Dstatic/loadData/colors3.png'
         Cesium.Material.PolylineTrailLinkSource = 'czm_material czm_getMaterial(czm_materialInput materialInput)\n\
                                                       {\n\
                                                            czm_material material = czm_getDefaultMaterial(materialInput);\n\

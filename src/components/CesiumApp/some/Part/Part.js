@@ -1,7 +1,7 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 
-import {PolylineTrailLinkMaterialProperty} from './PolylineTrailLinkMaterialProperty'
+// import {PolylineTrailLinkMaterialProperty} from './PolylineTrailLinkMaterialProperty'
 
 export default class Part {
     constructor (app) {
@@ -76,6 +76,8 @@ export default class Part {
      * 加载流动墙效果
      */
     addFlowWall () {
+
+
         const flowWall = {
             name: 'WallTrail',
             wall: {
@@ -84,7 +86,7 @@ export default class Part {
                     -85.0, 43.0, 100000.0,
                     -87.5, 41.0, 100000.0,
                     -90.0, 43.0, 100000.0]),
-                material: new PolylineTrailLinkMaterialProperty('#F8BE65', 9000)
+                material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }
         }
         this.app.viewer.entities.add(flowWall)
@@ -95,7 +97,6 @@ export default class Part {
      * 添加流动线条
      */
     addFlowLine () {
-        Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty
 
         this.app.viewer.entities.add({
             name: 'PolylineTrail',
@@ -108,7 +109,7 @@ export default class Part {
                         102.65483833999541, 24.902219367229762, 1856.3646821264895,
                     ]),
                 width: 15,
-                material: new Cesium.PolylineTrailLinkMaterialProperty('#F8BE65', 9000)
+                material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }
         })
     }
