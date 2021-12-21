@@ -77,32 +77,7 @@ export default class Part {
      */
     addFlowWall () {
 
-        Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty
-        Cesium.Material.PolylineTrailLinkType = 'PolylineTrailLink'
-        Cesium.Material.PolylineTrailLinkImage = 'http://localhost:1111/3Dstatic/loadData/colors3.png'
-        Cesium.Material.PolylineTrailLinkSource = 'czm_material czm_getMaterial(czm_materialInput materialInput)\n\
-                                                      {\n\
-                                                           czm_material material = czm_getDefaultMaterial(materialInput);\n\
-                                                           vec2 st = materialInput.st;\n\
-                                                           vec4 colorImage = texture2D(image, vec2(fract(st.s - time), st.t));\n\
-                                                           material.alpha = colorImage.a * color.a;\n\
-                                                           material.diffuse = (colorImage.rgb+color.rgb)/2.0;\n\
-                                                           return material;\n\
-                                                       }'
-        Cesium.Material._materialCache.addMaterial(Cesium.Material.PolylineTrailLinkType, {
-            fabric: {
-                type: Cesium.Material.PolylineTrailLinkType,
-                uniforms: {
-                    color: new Cesium.Color(1.0, 0.0, 0.0, 0.5),
-                    image: Cesium.Material.PolylineTrailLinkImage,
-                    time: 0
-                },
-                source: Cesium.Material.PolylineTrailLinkSource
-            },
-            translucent: function (material) {
-                return true
-            }
-        })
+
 
         const flowWall = {
             name: 'WallTrail',
@@ -112,7 +87,7 @@ export default class Part {
                     -85.0, 43.0, 100000.0,
                     -87.5, 41.0, 100000.0,
                     -90.0, 43.0, 100000.0]),
-                material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
+                material: new PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }
         }
 
@@ -219,8 +194,7 @@ export default class Part {
                         102.65483833999541, 24.902219367229762, 1856.3646821264895,
                     ]),
                 width: 15,
-                // material: new Cesium.FlowLineMaterialProperty(Cesium.Color.ORANGE, 3000)
-                material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
+                material: new PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }
         })
 
