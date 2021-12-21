@@ -93,6 +93,7 @@ export default class CesiumApp {
         this.part.addFlowLine()
         this.part.addCircleScan()
         this.part.addRadarScan()
+        this.part.addFlyLine3D()
     }
 
     /**
