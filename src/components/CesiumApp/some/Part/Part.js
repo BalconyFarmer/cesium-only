@@ -136,7 +136,7 @@ export default class Part {
         duration 持续时间 毫秒
         */
         function AddCircleScanPostStage (viewer, cartographicCenter, maxRadius, scanColor, duration) {
-            var ScanSegmentShader =
+            let ScanSegmentShader =
                 'uniform sampler2D colorTexture;\n' +
                 'uniform sampler2D depthTexture;\n' +
                 'varying vec2 v_textureCoordinates;\n' +
@@ -184,28 +184,28 @@ export default class Part {
                 '}\n' +
                 '}\n'
 
-            var _Cartesian3Center = Cesium.Cartographic.toCartesian(cartographicCenter)
-            var _Cartesian4Center = new Cesium.Cartesian4(_Cartesian3Center.x, _Cartesian3Center.y, _Cartesian3Center.z, 1)
+            let _Cartesian3Center = Cesium.Cartographic.toCartesian(cartographicCenter)
+            let _Cartesian4Center = new Cesium.Cartesian4(_Cartesian3Center.x, _Cartesian3Center.y, _Cartesian3Center.z, 1)
 
-            var _CartographicCenter1 = new Cesium.Cartographic(cartographicCenter.longitude, cartographicCenter.latitude, cartographicCenter.height + 500)
-            var _Cartesian3Center1 = Cesium.Cartographic.toCartesian(_CartographicCenter1)
-            var _Cartesian4Center1 = new Cesium.Cartesian4(_Cartesian3Center1.x, _Cartesian3Center1.y, _Cartesian3Center1.z, 1)
+            let _CartographicCenter1 = new Cesium.Cartographic(cartographicCenter.longitude, cartographicCenter.latitude, cartographicCenter.height + 500)
+            let _Cartesian3Center1 = Cesium.Cartographic.toCartesian(_CartographicCenter1)
+            let _Cartesian4Center1 = new Cesium.Cartesian4(_Cartesian3Center1.x, _Cartesian3Center1.y, _Cartesian3Center1.z, 1)
 
-            var _time = (new Date()).getTime()
+            let _time = (new Date()).getTime()
 
-            var _scratchCartesian4Center = new Cesium.Cartesian4()
-            var _scratchCartesian4Center1 = new Cesium.Cartesian4()
-            var _scratchCartesian3Normal = new Cesium.Cartesian3()
+            let _scratchCartesian4Center = new Cesium.Cartesian4()
+            let _scratchCartesian4Center1 = new Cesium.Cartesian4()
+            let _scratchCartesian3Normal = new Cesium.Cartesian3()
 
-            var ScanPostStage = new Cesium.PostProcessStage({
+            let ScanPostStage = new Cesium.PostProcessStage({
                 fragmentShader: ScanSegmentShader,
                 uniforms: {
                     u_scanCenterEC: function () {
                         return Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center, _scratchCartesian4Center)
                     },
                     u_scanPlaneNormalEC: function () {
-                        var temp = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center, _scratchCartesian4Center)
-                        var temp1 = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center1, _scratchCartesian4Center1)
+                        let temp = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center, _scratchCartesian4Center)
+                        let temp1 = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center1, _scratchCartesian4Center1)
                         _scratchCartesian3Normal.x = temp1.x - temp.x
                         _scratchCartesian3Normal.y = temp1.y - temp.y
                         _scratchCartesian3Normal.z = temp1.z - temp.z
@@ -245,7 +245,7 @@ export default class Part {
         this.app.viewer.scene.globe.depthTestAgainstTerrain = true // 必须开启,否则
 
         function AddRadarScanPostStage (viewer, cartographicCenter, radius, scanColor, duration) {
-            var ScanSegmentShader =
+            let ScanSegmentShader =
                 'uniform sampler2D colorTexture;\n' +
                 'uniform sampler2D depthTexture;\n' +
                 'varying vec2 v_textureCoordinates;\n' +
@@ -318,36 +318,36 @@ export default class Part {
                 '}\n' +
                 '}\n'
 
-            var _Cartesian3Center = Cesium.Cartographic.toCartesian(cartographicCenter)
-            var _Cartesian4Center = new Cesium.Cartesian4(_Cartesian3Center.x, _Cartesian3Center.y, _Cartesian3Center.z, 1)
+            let _Cartesian3Center = Cesium.Cartographic.toCartesian(cartographicCenter)
+            let _Cartesian4Center = new Cesium.Cartesian4(_Cartesian3Center.x, _Cartesian3Center.y, _Cartesian3Center.z, 1)
 
-            var _CartographicCenter1 = new Cesium.Cartographic(cartographicCenter.longitude, cartographicCenter.latitude, cartographicCenter.height + 500)
-            var _Cartesian3Center1 = Cesium.Cartographic.toCartesian(_CartographicCenter1)
-            var _Cartesian4Center1 = new Cesium.Cartesian4(_Cartesian3Center1.x, _Cartesian3Center1.y, _Cartesian3Center1.z, 1)
+            let _CartographicCenter1 = new Cesium.Cartographic(cartographicCenter.longitude, cartographicCenter.latitude, cartographicCenter.height + 500)
+            let _Cartesian3Center1 = Cesium.Cartographic.toCartesian(_CartographicCenter1)
+            let _Cartesian4Center1 = new Cesium.Cartesian4(_Cartesian3Center1.x, _Cartesian3Center1.y, _Cartesian3Center1.z, 1)
 
-            var _CartographicCenter2 = new Cesium.Cartographic(cartographicCenter.longitude + Cesium.Math.toRadians(0.001), cartographicCenter.latitude, cartographicCenter.height)
-            var _Cartesian3Center2 = Cesium.Cartographic.toCartesian(_CartographicCenter2)
-            var _Cartesian4Center2 = new Cesium.Cartesian4(_Cartesian3Center2.x, _Cartesian3Center2.y, _Cartesian3Center2.z, 1)
-            var _RotateQ = new Cesium.Quaternion()
-            var _RotateM = new Cesium.Matrix3()
+            let _CartographicCenter2 = new Cesium.Cartographic(cartographicCenter.longitude + Cesium.Math.toRadians(0.001), cartographicCenter.latitude, cartographicCenter.height)
+            let _Cartesian3Center2 = Cesium.Cartographic.toCartesian(_CartographicCenter2)
+            let _Cartesian4Center2 = new Cesium.Cartesian4(_Cartesian3Center2.x, _Cartesian3Center2.y, _Cartesian3Center2.z, 1)
+            let _RotateQ = new Cesium.Quaternion()
+            let _RotateM = new Cesium.Matrix3()
 
-            var _time = (new Date()).getTime()
+            let _time = (new Date()).getTime()
 
-            var _scratchCartesian4Center = new Cesium.Cartesian4()
-            var _scratchCartesian4Center1 = new Cesium.Cartesian4()
-            var _scratchCartesian4Center2 = new Cesium.Cartesian4()
-            var _scratchCartesian3Normal = new Cesium.Cartesian3()
-            var _scratchCartesian3Normal1 = new Cesium.Cartesian3()
+            let _scratchCartesian4Center = new Cesium.Cartesian4()
+            let _scratchCartesian4Center1 = new Cesium.Cartesian4()
+            let _scratchCartesian4Center2 = new Cesium.Cartesian4()
+            let _scratchCartesian3Normal = new Cesium.Cartesian3()
+            let _scratchCartesian3Normal1 = new Cesium.Cartesian3()
 
-            var ScanPostStage = new Cesium.PostProcessStage({
+            let ScanPostStage = new Cesium.PostProcessStage({
                 fragmentShader: ScanSegmentShader,
                 uniforms: {
                     u_scanCenterEC: function () {
                         return Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center, _scratchCartesian4Center)
                     },
                     u_scanPlaneNormalEC: function () {
-                        var temp = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center, _scratchCartesian4Center)
-                        var temp1 = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center1, _scratchCartesian4Center1)
+                        let temp = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center, _scratchCartesian4Center)
+                        let temp1 = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center1, _scratchCartesian4Center1)
                         _scratchCartesian3Normal.x = temp1.x - temp.x
                         _scratchCartesian3Normal.y = temp1.y - temp.y
                         _scratchCartesian3Normal.z = temp1.z - temp.z
@@ -357,9 +357,9 @@ export default class Part {
                     },
                     u_radius: radius,
                     u_scanLineNormalEC: function () {
-                        var temp = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center, _scratchCartesian4Center)
-                        var temp1 = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center1, _scratchCartesian4Center1)
-                        var temp2 = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center2, _scratchCartesian4Center2)
+                        let temp = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center, _scratchCartesian4Center)
+                        let temp1 = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center1, _scratchCartesian4Center1)
+                        let temp2 = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center2, _scratchCartesian4Center2)
 
                         _scratchCartesian3Normal.x = temp1.x - temp.x
                         _scratchCartesian3Normal.y = temp1.y - temp.y
@@ -371,7 +371,7 @@ export default class Part {
                         _scratchCartesian3Normal1.y = temp2.y - temp.y
                         _scratchCartesian3Normal1.z = temp2.z - temp.z
 
-                        var tempTime = (((new Date()).getTime() - _time) % duration) / duration
+                        let tempTime = (((new Date()).getTime() - _time) % duration) / duration
                         Cesium.Quaternion.fromAxisAngle(_scratchCartesian3Normal, tempTime * Cesium.Math.PI * 2, _RotateQ)
                         Cesium.Matrix3.fromQuaternion(_RotateQ, _RotateM)
                         Cesium.Matrix3.multiplyByVector(_RotateM, _scratchCartesian3Normal1, _scratchCartesian3Normal1)
@@ -469,31 +469,31 @@ export default class Part {
 
         function parabolaEquation (options, resultOut) {
             //方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
-            var h = options.height && options.height > 5000 ? options.height : 5000
-            var L = Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat) ? Math.abs(options.pt1.lon - options.pt2.lon) : Math.abs(options.pt1.lat - options.pt2.lat)
-            var num = options.num && options.num > 50 ? options.num : 50
-            var result = []
-            var dlt = L / num
+            let h = options.height && options.height > 5000 ? options.height : 5000
+            let L = Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat) ? Math.abs(options.pt1.lon - options.pt2.lon) : Math.abs(options.pt1.lat - options.pt2.lat)
+            let num = options.num && options.num > 50 ? options.num : 50
+            let result = []
+            let dlt = L / num
             if (Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat)) {//以lon为基准
-                var delLat = (options.pt2.lat - options.pt1.lat) / num
+                let delLat = (options.pt2.lat - options.pt1.lat) / num
                 if (options.pt1.lon - options.pt2.lon > 0) {
                     dlt = -dlt
                 }
-                for (var i = 0; i < num; i++) {
-                    var tempH = h - Math.pow((-0.5 * L + Math.abs(dlt) * i), 2) * 4 * h / Math.pow(L, 2)
-                    var lon = options.pt1.lon + dlt * i
-                    var lat = options.pt1.lat + delLat * i
+                for (let i = 0; i < num; i++) {
+                    let tempH = h - Math.pow((-0.5 * L + Math.abs(dlt) * i), 2) * 4 * h / Math.pow(L, 2)
+                    let lon = options.pt1.lon + dlt * i
+                    let lat = options.pt1.lat + delLat * i
                     result.push([lon, lat, tempH])
                 }
             } else {//以lat为基准
-                var delLon = (options.pt2.lon - options.pt1.lon) / num
+                let delLon = (options.pt2.lon - options.pt1.lon) / num
                 if (options.pt1.lat - options.pt2.lat > 0) {
                     dlt = -dlt
                 }
-                for (var i = 0; i < num; i++) {
-                    var tempH = h - Math.pow((-0.5 * L + Math.abs(dlt) * i), 2) * 4 * h / Math.pow(L, 2)
-                    var lon = options.pt1.lon + delLon * i
-                    var lat = options.pt1.lat + dlt * i
+                for (let i = 0; i < num; i++) {
+                    let tempH = h - Math.pow((-0.5 * L + Math.abs(dlt) * i), 2) * 4 * h / Math.pow(L, 2)
+                    let lon = options.pt1.lon + delLon * i
+                    let lat = options.pt1.lat + dlt * i
                     result.push([lon, lat, tempH])
                 }
             }
@@ -502,9 +502,9 @@ export default class Part {
             }
             return result
         }
-        var material = null;
-        var center = {lon: 114.302312702, lat: 30.598026044}
-        var cities = [
+        let material = null;
+        let center = {lon: 102.65416219381753, lat: 24.90134988427503}
+        let cities = [
             {'lon': 115.028495718, 'lat': 30.200814617},
             {'lon': 110.795000473, 'lat': 32.638540762},
             // { "lon": 111.267729446, "lat": 30.698151246 },
@@ -526,10 +526,10 @@ export default class Part {
         } else {
             material = new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 3000)
         }
-        for (var j = 0; j < cities.length; j++) {
-            var points = parabolaEquation({pt1: center, pt2: cities[j], height: 50000, num: 100})
-            var pointArr = []
-            for (var i = 0; i < points.length; i++) {
+        for (let j = 0; j < cities.length; j++) {
+            let points = parabolaEquation({pt1: center, pt2: cities[j], height: 50000, num: 100})
+            let pointArr = []
+            for (let i = 0; i < points.length; i++) {
                 pointArr.push(points[i][0], points[i][1], points[i][2])
             }
             viewer.entities.add({
@@ -549,7 +549,7 @@ export default class Part {
                 color: Cesium.Color.BLUE
             }
         })
-        for (var i = 0; i < cities.length; i++) {
+        for (let i = 0; i < cities.length; i++) {
             viewer.entities.add({
                 position: Cesium.Cartesian3.fromDegrees(cities[i].lon, cities[i].lat, 1),
                 point: {
