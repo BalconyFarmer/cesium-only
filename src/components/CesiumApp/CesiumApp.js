@@ -81,6 +81,9 @@ export default class CesiumApp {
             }
             self.firstIndex = true
         })
+
+        this.viewer.imageryLayers.get(0).show = false;//不显示底图
+        this.viewer.scene.globe.baseColor = Cesium.Color.WHITE;//设置地球颜色
     }
 
     /**
