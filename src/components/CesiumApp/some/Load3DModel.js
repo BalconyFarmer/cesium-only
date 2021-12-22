@@ -64,6 +64,7 @@ export default class Load3DModel {
                 scale: 1.0
             }
         )
+        car.name = "车车车" // 失效
 
         this.app.viewer.scene.primitives.add(car)
         // 循环执行函数

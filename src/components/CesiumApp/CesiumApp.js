@@ -57,7 +57,7 @@ export default class CesiumApp {
             timeline: false, //
             navigationHelpButton: false, //
             imageryProvider: this.Imagery, //  影像图层
-            terrainProvider: terrainProvider, // 地形图层,
+            // terrainProvider: terrainProvider, // 地形图层,
             shouldAnimate: true, //动画播放
             // skyBox: false, // 关闭天空
             // skyAtmosphere: false, // 关闭大气
@@ -186,6 +186,7 @@ export default class CesiumApp {
     addEvent () {
         const self = this
         let handler = new this.Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas)
+/*
         handler.setInputAction(function (event) {
             // // 屏幕坐标转世界坐标——关键点
             let ray = self.viewer.camera.getPickRay(event.position)
@@ -205,13 +206,75 @@ export default class CesiumApp {
             // 选取模型 事件
             var pick = self.viewer.scene.pick(event.position)
             console.log(pick, 'pick-pick-pick-pick-pick')
+            self.testChangePosition(pick)
+
             if (Cesium.defined(pick) && (pick.id === 'rectangle-1')) {
                 alert('矩形被选取')
             }
         }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
+*/
 
-        this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+        this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);// 取消双击事件
 
+
+        let leftDownFlag = false; // 鼠标左键是否按下
+        let pickedEntity = null; //被选中的Entity
+
+        // 拖拽模型-左键按下
+        function leftDownAction(e) {
+            leftDownFlag = true;
+            let picked = self.viewer.scene.pick(e.position);
+            if (picked) {
+                document.body.style.cursor = 'move';
+                pickedEntity = Cesium.defaultValue(picked.id, picked.primitive.id);
+                if (pickedEntity instanceof Cesium.Entity && pickedEntity.model) {
+                    //锁定相机
+                    self.viewer.scene.screenSpaceCameraController.enableRotate = false;
+                }
+            }
+        }
+
+        // 拖拽模型-鼠标移动
+        function mouseMoveAction(e) {
+            if (leftDownFlag && pickedEntity) {
+                // let ray = viewer.camera.getPickRay(e.endPosition);
+                // let cartesian = viewer.scene.globe.pick(ray, viewer.scene);
+                let cartesian = self.viewer.scene.camera.pickEllipsoid(
+                    e.endPosition,
+                    self.viewer.scene.globe.ellipsoid
+                );
+                pickedEntity.position = cartesian;
+            }
+        }
+
+        // 拖拽模型-左键抬起
+        function leftUpAction(e) {
+            document.body.style.cursor = 'default';
+            leftDownFlag = false;
+            pickedEntity = null;
+            // 解除相机锁定
+            self.viewer.scene.screenSpaceCameraController.enableRotate = true;
+        }
+
+        this.viewer.screenSpaceEventHandler.setInputAction((e) => {
+            leftDownAction(e);
+        }, Cesium.ScreenSpaceEventType.LEFT_DOWN);
+
+        this.viewer.screenSpaceEventHandler.setInputAction((e) => {
+            mouseMoveAction(e);
+        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+        this.viewer.screenSpaceEventHandler.setInputAction((e) => {
+            leftUpAction(e);
+        }, Cesium.ScreenSpaceEventType.LEFT_UP);
+    }
+
+    /**
+     * 动态改变模型位置
+     */
+    testChangePosition(entities) {
+        let Entity = entities.id
+        Entity.show = false
     }
 
     /**
