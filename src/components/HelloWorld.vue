@@ -18,6 +18,9 @@
             <div>ENTITIES</div>
             <el-tree :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
         </div>
+        <div class="rightPart">
+            MATH
+        </div>
         <div id="cesiumContainer"></div>
 
     </div>
@@ -161,6 +164,16 @@
         position: absolute;
         left: 0px;
         top: 20%;
+        z-index: 999;
+        overflow-y: auto;
+    }
+
+    .rightPart {
+        width: 10%;
+        height: 70%;
+        position: absolute;
+        right: 0px;
+        top: 30%;
         z-index: 999;
         overflow-y: auto;
     }
