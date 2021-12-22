@@ -12,6 +12,7 @@
     "lint": "eslint --ext .js,.vue src test/e2e/specs",
     "build": "node build/build.js"
   },
+
   "dependencies": {
     "@open-wc/webpack-import-meta-loader": "^0.4.7",
     "cesium": "^1.88.0",
@@ -62,6 +63,7 @@
     "selenium-server": "^3.0.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
+    "three": "^0.128.0",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",

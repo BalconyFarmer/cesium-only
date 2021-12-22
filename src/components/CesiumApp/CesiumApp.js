@@ -1,3 +1,4 @@
+import * as THREE from "three";
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 import CustomStyle from './some/CustomStyle/CustomStyle'
@@ -20,6 +21,7 @@ export default class CesiumApp {
         this.loadJson = new LoadJson(this)
         this.load3DModel = new Load3DModel(this)
         this.innerGeometry = new InnerGeometry(this)
+        this.eventBus = new THREE.EventDispatcher(); // 3D事件中心
     }
 
     /**
