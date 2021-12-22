@@ -1,20 +1,23 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 
+/**
+ * 点击地球事件
+ * 拖拽entities事件
+ */
 export default class Event {
     constructor (app) {
         this.app = app
         this.init.bind(this)()
+        this.startDrag()
     }
 
     init () {
-        // const see = this.app
-        // console.log(see)
-        // debugger
-        // 取消双击事件
-        // this.app.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
-
         const self = this
+
+        // 取消双击事件
+        this.app.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
+
         let handler = new Cesium.ScreenSpaceEventHandler(this.app.viewer.scene.canvas)
 
         handler.setInputAction(function (event) {
@@ -41,6 +44,13 @@ export default class Event {
             console.log(pick, 'pick-pick-pick-pick-pick')
 
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+    }
+
+    /**
+     * 开启拖拽模式
+     */
+    startDrag() {
+        const self = this
 
         let leftDownFlag = false // 鼠标左键是否按下
         let pickedEntity = null //被选中的Entity
@@ -92,6 +102,5 @@ export default class Event {
         this.app.viewer.screenSpaceEventHandler.setInputAction((e) => {
             leftUpAction(e)
         }, Cesium.ScreenSpaceEventType.LEFT_UP)
-
     }
 }
