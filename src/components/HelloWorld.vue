@@ -135,7 +135,6 @@
             this.$nextTick(() => {
                 this.cApp = new CesiumApp()
                 this.cApp.initMap()
-                this.cApp.addEvent()
                 this.entitysList = this.cApp.getViewerEntitys()
                 this.cApp.eventCenter.addEventListener('clickPosition', function (data) {
                     self.clickPosition = data.message.position
@@ -146,7 +145,6 @@
             })
 
             setInterval(function () {
-                console.log(self.entitysList, '++++++++++++++')
                 self.treeData = []
                 self.entitysList.forEach(item => {
                     if (item.name) {

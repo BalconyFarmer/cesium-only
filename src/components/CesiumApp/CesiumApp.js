@@ -8,6 +8,7 @@ import LoadJson from './some/LoadJson'
 import Load3DModel from './some/Load3DModel'
 import {initFlowMatetial} from './some/CustomStyle/_PolylineTrailLinkMaterialProperty'
 import InnerGeometry from './some/InnerGeometry'
+import Event from './some/Event'
 
 export default class CesiumApp {
     constructor () {
@@ -22,6 +23,7 @@ export default class CesiumApp {
         this.load3DModel = new Load3DModel(this)
         this.innerGeometry = new InnerGeometry(this)
         this.eventCenter = new THREE.EventDispatcher() // 3D事件中心
+        this.event = null
     }
 
     /**
@@ -89,6 +91,8 @@ export default class CesiumApp {
         })
 
         this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
+
+        this.event = new Event(this)
 
     }
 
@@ -179,96 +183,6 @@ export default class CesiumApp {
             this.viewer.imageryLayers.addImageryProvider(this.Imagery)
         }
     }
-
-    /**
-     * 点击地图console位置
-     */
-    addEvent () {
-        // 取消双击事件
-        this.viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
-
-        const self = this
-        let handler = new this.Cesium.ScreenSpaceEventHandler(this.viewer.scene.canvas)
-
-        handler.setInputAction(function (event) {
-            // 屏幕坐标转世界坐标——关键点
-            let ray = self.viewer.camera.getPickRay(event.position)
-            let cartesian = self.viewer.scene.globe.pick(ray, self.viewer.scene)
-
-            // //将笛卡尔坐标转换为地理坐标
-            let cartographic = self.Cesium.Cartographic.fromCartesian(cartesian)
-            // //将弧度转为度的十进制度表示
-            let lon = self.Cesium.Math.toDegrees(cartographic.longitude)
-            let lat = self.Cesium.Math.toDegrees(cartographic.latitude)
-            // // 获取海拔高度
-            let height1 = self.viewer.scene.globe.getHeight(cartographic)
-
-            self.eventCenter.dispatchEvent({type: 'clickPosition', message: {position: [lon, lat, height1]}})
-            self.eventCenter.dispatchEvent({
-                type: 'cameraPosition',
-                message: {position: [self.viewer.camera.position, self.viewer.camera.heading, self.viewer.camera.pitch, self.viewer.camera.roll]}
-            })
-
-            // 选取模型 事件
-            var pick = self.viewer.scene.pick(event.position)
-            console.log(pick, 'pick-pick-pick-pick-pick')
-
-        }, this.Cesium.ScreenSpaceEventType.LEFT_CLICK)
-
-
-
-        let leftDownFlag = false // 鼠标左键是否按下
-        let pickedEntity = null //被选中的Entity
-
-        // 拖拽模型-左键按下
-        function leftDownAction (e) {
-            leftDownFlag = true
-            let picked = self.viewer.scene.pick(e.position)
-            if (picked) {
-                document.body.style.cursor = 'move'
-                pickedEntity = Cesium.defaultValue(picked.id, picked.primitive.id)
-                if (pickedEntity instanceof Cesium.Entity && pickedEntity.model) {
-                    //锁定相机
-                    self.viewer.scene.screenSpaceCameraController.enableRotate = false
-                }
-            }
-        }
-
-        // 拖拽模型-鼠标移动
-        function mouseMoveAction (e) {
-            if (leftDownFlag && pickedEntity) {
-                // let ray = viewer.camera.getPickRay(e.endPosition);
-                // let cartesian = viewer.scene.globe.pick(ray, viewer.scene);
-                let cartesian = self.viewer.scene.camera.pickEllipsoid(
-                    e.endPosition,
-                    self.viewer.scene.globe.ellipsoid
-                )
-                pickedEntity.position = cartesian
-            }
-        }
-
-        // 拖拽模型-左键抬起
-        function leftUpAction (e) {
-            document.body.style.cursor = 'default'
-            leftDownFlag = false
-            pickedEntity = null
-            // 解除相机锁定
-            self.viewer.scene.screenSpaceCameraController.enableRotate = true
-        }
-
-        this.viewer.screenSpaceEventHandler.setInputAction((e) => {
-            leftDownAction(e)
-        }, Cesium.ScreenSpaceEventType.LEFT_DOWN)
-
-        this.viewer.screenSpaceEventHandler.setInputAction((e) => {
-            mouseMoveAction(e)
-        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
-
-        this.viewer.screenSpaceEventHandler.setInputAction((e) => {
-            leftUpAction(e)
-        }, Cesium.ScreenSpaceEventType.LEFT_UP)
-    }
-
 
     /**
      * 相机飞行至
