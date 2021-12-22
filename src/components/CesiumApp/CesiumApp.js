@@ -59,7 +59,7 @@ export default class CesiumApp {
             timeline: false, //
             navigationHelpButton: false, //
             imageryProvider: this.Imagery, //  影像图层
-            // terrainProvider: terrainProvider, // 地形图层,
+            terrainProvider: terrainProvider, // 地形图层,
             shouldAnimate: true, //动画播放
             // skyBox: false, // 关闭天空
             // skyAtmosphere: false, // 关闭大气
@@ -93,7 +93,13 @@ export default class CesiumApp {
         this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
 
         this.event = new Event(this)
+    }
 
+    /**
+     * 移除地形
+     */
+    removeTerrain() {
+        this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({});
     }
 
     /**
@@ -118,6 +124,8 @@ export default class CesiumApp {
         this.viewer.scene.globe.baseColor = Cesium.Color.GRAY//设置地球颜色
         this.viewer.scene.skyAtmosphere.show = false // 关闭大气效果
         this.viewer.scene.skyBox.show = false // 关闭大气效果
+        this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({}); // 清除地形
+
     }
 
     /**

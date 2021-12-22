@@ -50,6 +50,7 @@
                 <div>{{cameraPosition[3]|| 0}}</div>
             </div>
         </div>
+        <div class="bottomCenter">bottombottombottombottombottom</div>
         <div id="cesiumContainer"></div>
 
     </div>
@@ -201,12 +202,20 @@
 
     .leftTree {
         width: 10%;
-        height: 70%;
+        height: 50%;
         position: absolute;
-        left: 0px;
-        top: 20%;
+        left: 10px;
+        top: 30%;
         z-index: 999;
         overflow-y: auto;
+        background-color: #2B2B2B;
+    }
+
+    .el-tree {
+        position: relative;
+        cursor: default;
+        background: #2B2B2B;
+        color: #606266;
     }
 
     .rightPart {
@@ -218,7 +227,18 @@
         z-index: 999;
         overflow-y: auto;
         color: white;
-        background-color: black;
+        background-color: #2B2B2B;
+    }
+
+    .bottomCenter {
+        width: 50%;
+        height: 20%;
+        position: absolute;
+        left: 480px;
+        bottom: 10%;
+        background-color: #2B2B2B;
+        z-index: 999;
+
     }
 
 </style>

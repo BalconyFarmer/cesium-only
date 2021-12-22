@@ -8,7 +8,7 @@ import * as widget from 'cesium/Widgets/widgets.css'
 export default class Event {
     constructor (app) {
         this.app = app
-        this.init.bind()
+        this.init()
         this.startDrag()
         this.dragFlag = false
     }
