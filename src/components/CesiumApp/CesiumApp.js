@@ -101,6 +101,7 @@ export default class CesiumApp {
         this.part.addCircleScan()
         this.part.addRadarScan()
         this.part.addFlyLine3D()
+        this.getViewerEntitys()
     }
 
     /**
@@ -239,5 +240,9 @@ export default class CesiumApp {
                 roll: roll // default value
             }
         })
+    }
+
+    getViewerEntitys() {
+        return this.viewer.entities.values
     }
 }

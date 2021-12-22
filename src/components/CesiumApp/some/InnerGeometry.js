@@ -24,6 +24,7 @@ export default class InnerGeometry {
                 outlineColor: Cesium.Color.DARK_GREEN//轮廓颜色深绿色
             }
         })
+
     }
 
     /**

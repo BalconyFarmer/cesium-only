@@ -14,6 +14,10 @@
             <el-menu-item index="9">光照系统</el-menu-item>
             <el-menu-item index="14">关闭冗余</el-menu-item>
         </el-menu>
+        <div class="leftTree">
+            <div>ENTITIES</div>
+            <el-tree :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+        </div>
         <div id="cesiumContainer"></div>
 
     </div>
@@ -24,14 +28,61 @@
     // 导出组件
     export default {
         name: 'hoting',
+        watch: {
+
+        },
+
         data () {
             return {
                 activeIndex: '1',
                 activeIndex2: '1',
-                viewer: null
+                viewer: null,
+                entitysList: [],
+                treeData: [{
+                    label: '一级 1',
+                    children: [{
+                        label: '二级 1-1',
+                        children: [{
+                            label: '三级 1-1-1'
+                        }]
+                    }]
+                }, {
+                    label: '一级 2',
+                    children: [{
+                        label: '二级 2-1',
+                        children: [{
+                            label: '三级 2-1-1'
+                        }]
+                    }, {
+                        label: '二级 2-2',
+                        children: [{
+                            label: '三级 2-2-1'
+                        }]
+                    }]
+                }, {
+                    label: '一级 3',
+                    children: [{
+                        label: '二级 3-1',
+                        children: [{
+                            label: '三级 3-1-1'
+                        }]
+                    }, {
+                        label: '二级 3-2',
+                        children: [{
+                            label: '三级 3-2-1'
+                        }]
+                    }]
+                }],
+                defaultProps: {
+                    children: 'children',
+                    label: 'label'
+                }
             }
         },
         methods: {
+            handleNodeClick (data) {
+                console.log(data)
+            },
             handleSelect (key, keyPath) {
                 if (key == 2) {
                     this.cApp.loadJson.loadJsonData()
@@ -49,9 +100,9 @@
                     this.cApp.cesium3DTileset.addTiles()
                 } else if (key == 12) {
                     this.cApp.obliquePhotography.addOblique()
-                }else if (key == 13) {
+                } else if (key == 13) {
                     this.cApp.addTimeAction()
-                }else if (key == 14) {
+                } else if (key == 14) {
                     this.cApp.closeAll()
                 }
             }
@@ -62,7 +113,26 @@
                 this.cApp = new CesiumApp()
                 this.cApp.initMap()
                 this.cApp.addEvent()
+                this.entitysList = this.cApp.getViewerEntitys()
             })
+
+            const self = this
+            setInterval(function () {
+                console.log(self.entitysList, '++++++++++++++')
+                self.treeData = []
+                self.entitysList.forEach(item => {
+                    if (item.name) {
+                        self.treeData.push({
+                            label: item.name
+                        })
+                    } else {
+                        self.treeData.push({
+                            label: '未定义'
+                        })
+                    }
+
+                })
+            }, 1000)
         }
 
     }
@@ -85,4 +155,15 @@
         height: 50%;
     }
 
+    .leftTree {
+        width: 10%;
+        height: 70%;
+        position: absolute;
+        left: 0px;
+        top: 20%;
+        z-index: 999;
+        overflow-y: auto;
+    }
+
 </style>
+

@@ -29,6 +29,7 @@ export default class CustomStyle {
         }
         this.app.viewer.entities.add(flowWall)
         this.app.viewer.zoomTo(this.app.viewer.entities)
+
     }
 
     /**
