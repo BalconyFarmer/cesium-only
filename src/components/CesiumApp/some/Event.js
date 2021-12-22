@@ -8,8 +8,9 @@ import * as widget from 'cesium/Widgets/widgets.css'
 export default class Event {
     constructor (app) {
         this.app = app
-        this.init.bind(this)()
+        this.init.bind()
         this.startDrag()
+        this.dragFlag = false
     }
 
     init () {
@@ -49,7 +50,7 @@ export default class Event {
     /**
      * 开启拖拽模式
      */
-    startDrag() {
+    startDrag () {
         const self = this
 
         let leftDownFlag = false // 鼠标左键是否按下
@@ -71,7 +72,7 @@ export default class Event {
 
         // 拖拽模型-鼠标移动
         function mouseMoveAction (e) {
-            if (leftDownFlag && pickedEntity) {
+            if (leftDownFlag && pickedEntity && self.dragFlag) {
                 // let ray = viewer.camera.getPickRay(e.endPosition);
                 // let cartesian = viewer.scene.globe.pick(ray, viewer.scene);
                 let cartesian = self.app.viewer.scene.camera.pickEllipsoid(

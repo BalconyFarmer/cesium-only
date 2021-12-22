@@ -13,6 +13,16 @@
             <el-menu-item index="8">文字图层</el-menu-item>
             <el-menu-item index="9">光照系统</el-menu-item>
             <el-menu-item index="14">关闭冗余</el-menu-item>
+            <el-menu-item index="">
+                <el-tooltip :content="'拖拽模型'" placement="top">
+                    <el-switch
+                            @change="dragChange"
+                            v-model="switchValue"
+                            active-color="#13ce66"
+                            inactive-color="#ff4949">
+                    </el-switch>
+                </el-tooltip>
+            </el-menu-item>
         </el-menu>
         <div class="leftTree">
             <div>ENTITIES</div>
@@ -56,7 +66,6 @@
             return {
                 activeIndex: '1',
                 activeIndex2: '1',
-                viewer: null,
                 entitysList: [],
                 treeData: [{
                     label: '一级 1',
@@ -98,10 +107,19 @@
                     label: 'label'
                 },
                 clickPosition: [],
-                cameraPosition: []
+                cameraPosition: [],
+                switchValue: false
+
             }
         },
         methods: {
+            dragChange () {
+                if (this.switchValue) {
+                    this.cApp.event.dragFlag = true
+                } else {
+                    this.cApp.event.dragFlag = false
+                }
+            },
             handleNodeClick (data) {
                 console.log(data)
             },
