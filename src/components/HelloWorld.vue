@@ -20,6 +20,25 @@
         </div>
         <div class="rightPart">
             MATH
+            <div>
+                log,
+                <div>{{clickPosition[0]|| 0}}</div>
+                lat,
+                <div>{{clickPosition[1]|| 0}}</div>
+                height
+                <div>{{clickPosition[2]|| 0}}</div>
+            </div>
+            <div>
+                camera
+                log,lat,height
+                <div>{{cameraPosition[0]|| 0}}</div>
+                heading
+                <div>{{cameraPosition[1]|| 0}}</div>
+                pitch
+                <div>{{cameraPosition[2]|| 0}}</div>
+                roll
+                <div>{{cameraPosition[3]|| 0}}</div>
+            </div>
         </div>
         <div id="cesiumContainer"></div>
 
@@ -31,9 +50,7 @@
     // 导出组件
     export default {
         name: 'hoting',
-        watch: {
-
-        },
+        watch: {},
 
         data () {
             return {
@@ -79,7 +96,9 @@
                 defaultProps: {
                     children: 'children',
                     label: 'label'
-                }
+                },
+                clickPosition: [],
+                cameraPosition: []
             }
         },
         methods: {
@@ -112,14 +131,20 @@
 
         },
         mounted () {
+            const self = this
             this.$nextTick(() => {
                 this.cApp = new CesiumApp()
                 this.cApp.initMap()
                 this.cApp.addEvent()
                 this.entitysList = this.cApp.getViewerEntitys()
+                this.cApp.eventCenter.addEventListener('clickPosition', function (data) {
+                    self.clickPosition = data.message.position
+                })
+                this.cApp.eventCenter.addEventListener('cameraPosition', function (data) {
+                    self.cameraPosition = data.message.position
+                })
             })
 
-            const self = this
             setInterval(function () {
                 console.log(self.entitysList, '++++++++++++++')
                 self.treeData = []
@@ -170,12 +195,14 @@
 
     .rightPart {
         width: 10%;
-        height: 70%;
+        height: 50%;
         position: absolute;
-        right: 0px;
+        right: 10px;
         top: 30%;
         z-index: 999;
         overflow-y: auto;
+        color: white;
+        background-color: black;
     }
 
 </style>
