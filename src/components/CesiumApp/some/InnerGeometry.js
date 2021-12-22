@@ -18,7 +18,7 @@ export default class InnerGeometry {
             cylinder: {
                 length: 4.0,//圆柱体高度
                 topRadius: 2.0,//圆柱体的顶部半径。
-                bottomRadius: 2.0,//    圆柱体底部的半径。
+                 bottomRadius: 2.0,//    圆柱体底部的半径。
                 material: Cesium.Color.GREEN.withAlpha(0.5),//绿色半透明
                 outline: true,//轮廓
                 outlineColor: Cesium.Color.DARK_GREEN//轮廓颜色深绿色
