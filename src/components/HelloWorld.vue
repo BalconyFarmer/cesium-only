@@ -196,6 +196,30 @@
         margin: 0px;
         overflow-y: hidden;
     }
+    /*定义滚动条高宽及背景
+    高宽分别对应横竖滚动条的尺寸*/
+    ::-webkit-scrollbar
+    {
+        width:5px;
+        height:16px;
+        background-color:#F5F5F5;
+    }
+    /*定义滚动条轨道
+     内阴影+圆角*/
+    ::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius:10px;
+        background-color:#F5F5F5;
+    }
+    /*定义滑块
+     内阴影+圆角*/
+    ::-webkit-scrollbar-thumb
+    {
+        border-radius:10px;
+        -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);
+        background-color:#555;
+    }
     .cesium-viewer-bottom {
         display: none !important;
         visibility: hidden !important;
@@ -213,10 +237,10 @@
 
     .leftTree {
         width: 10%;
-        height: 50%;
+        height: 90%;
         position: absolute;
-        left: 10px;
-        top: 30%;
+        left: 0px;
+        top: 10%;
         z-index: 999;
         overflow-y: auto;
         background-color: #2B2B2B;
@@ -231,10 +255,10 @@
 
     .rightPart {
         width: 10%;
-        height: 50%;
+        height: 90%;
         position: absolute;
-        right: 10px;
-        top: 30%;
+        right: 0px;
+        top: 10%;
         z-index: 999;
         overflow-y: auto;
         color: white;
@@ -242,11 +266,11 @@
     }
 
     .bottomCenter {
-        width: 50%;
+        width: 70%;
         height: 20%;
         position: absolute;
-        left: 480px;
-        bottom: 10%;
+        left: 15%;
+        bottom: 0%;
         background-color: #2B2B2B;
         z-index: 999;
 
@@ -263,8 +287,6 @@
         z-index: 999;
         background-color: #FFFFFF;
     }
-
-
 
 </style>
 
