@@ -63,7 +63,7 @@ export default class Load3DModel {
             {
                 url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
                 modelMatrix: modelMatrix,
-                scale: 1.0
+                scale: 1.0,
             }
         )
         car.name = "车车车" // 失效
