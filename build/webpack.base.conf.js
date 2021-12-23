@@ -45,6 +45,10 @@ module.exports = {
         rules: [
             ...(config.dev.useEslint ? [] : []),
             {
+                test: /\.sass$/,
+                loaders: ['style', 'css', 'sass']
+            },
+            {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: vueLoaderConfig
