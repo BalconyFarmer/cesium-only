@@ -57,7 +57,9 @@
                 <div>{{cameraPosition[3]|| 0}}</div>
             </div>
         </div>
-        <div class="bottomCenter">bottombottombottombottombottom</div>
+        <div class="bottomCenter">
+            {{currentEntities? currentEntities.name: 0}}
+        </div>
         <div id="cesiumContainer"></div>
 
     </div>
@@ -116,7 +118,8 @@
                 },
                 clickPosition: [],
                 cameraPosition: [],
-                switchValue: false
+                switchValue: false,
+                currentEntities: null
 
             }
         },
@@ -167,6 +170,9 @@
                 })
                 this.cApp.eventCenter.addEventListener('cameraPosition', function (data) {
                     self.cameraPosition = data.message.position
+                })
+                this.cApp.eventCenter.addEventListener('pickEntity', function (data) {
+                    self.currentEntities = data.message.position
                 })
             })
 
@@ -234,18 +240,55 @@
     .all {
         width: 100%;
         height: 50%;
+
+        .header {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 999;
+            background-color: #FFFFFF;
+        }
+
+        .leftTree {
+            width: 10%;
+            height: 90%;
+            position: absolute;
+            left: 0px;
+            top: 10%;
+            z-index: 999;
+            overflow-y: auto;
+            background-color: #2B2B2B;
+        }
+
+        .rightPart {
+            width: 10%;
+            height: 90%;
+            position: absolute;
+            right: 0px;
+            top: 10%;
+            z-index: 999;
+            overflow-y: auto;
+            color: white;
+            background-color: #2B2B2B;
+        }
+
+        .bottomCenter {
+            width: 70%;
+            height: 20%;
+            position: absolute;
+            left: 15%;
+            bottom: 0%;
+            background-color: #2B2B2B;
+            z-index: 999;
+            color: white;
+
+        }
     }
 
-    .leftTree {
-        width: 10%;
-        height: 90%;
-        position: absolute;
-        left: 0px;
-        top: 10%;
-        z-index: 999;
-        overflow-y: auto;
-        background-color: #2B2B2B;
-    }
 
     .el-tree {
         position: relative;
@@ -254,40 +297,6 @@
         color: #606266;
     }
 
-    .rightPart {
-        width: 10%;
-        height: 90%;
-        position: absolute;
-        right: 0px;
-        top: 10%;
-        z-index: 999;
-        overflow-y: auto;
-        color: white;
-        background-color: #2B2B2B;
-    }
-
-    .bottomCenter {
-        width: 70%;
-        height: 20%;
-        position: absolute;
-        left: 15%;
-        bottom: 0%;
-        background-color: #2B2B2B;
-        z-index: 999;
-
-    }
-
-    .header {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: 999;
-        background-color: #FFFFFF;
-    }
 
 </style>
 

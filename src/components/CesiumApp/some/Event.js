@@ -43,6 +43,10 @@ export default class Event {
             // 选取模型 事件
             var pick = self.app.viewer.scene.pick(event.position)
             console.log(pick, 'pick-pick-pick-pick-pick')
+            self.app.eventCenter.dispatchEvent({
+                type: 'pickEntity',
+                message: {position: pick.id}
+            })
 
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
     }
