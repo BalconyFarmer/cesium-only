@@ -1,29 +1,36 @@
 <template>
     <div class="all">
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="13">run</el-menu-item>
-            <el-menu-item index="2">云南JSON</el-menu-item>
-            <el-menu-item index="3">纽约tiles</el-menu-item>
-            <el-menu-item index="11">成都tiles</el-menu-item>
-            <el-menu-item index="12">倾斜摄影</el-menu-item>
-            <el-menu-item index="6">addFlowWall</el-menu-item>
-        </el-menu>
-        <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-            <el-menu-item index="7">实景图层</el-menu-item>
-            <el-menu-item index="8">文字图层</el-menu-item>
-            <el-menu-item index="9">光照系统</el-menu-item>
-            <el-menu-item index="14">关闭冗余</el-menu-item>
-            <el-menu-item index="">
-                <el-tooltip :content="'拖拽模型'" placement="top">
-                    <el-switch
-                            @change="dragChange"
-                            v-model="switchValue"
-                            active-color="#13ce66"
-                            inactive-color="#ff4949">
-                    </el-switch>
-                </el-tooltip>
-            </el-menu-item>
-        </el-menu>
+        <div class="header">
+            <div>
+                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                    <el-menu-item index="13">run</el-menu-item>
+                    <el-menu-item index="2">云南JSON</el-menu-item>
+                    <el-menu-item index="3">纽约tiles</el-menu-item>
+                    <el-menu-item index="11">成都tiles</el-menu-item>
+                    <el-menu-item index="12">倾斜摄影</el-menu-item>
+                    <el-menu-item index="6">addFlowWall</el-menu-item>
+                </el-menu>
+            </div>
+            <div>
+                <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+                    <el-menu-item index="7">实景图层</el-menu-item>
+                    <el-menu-item index="8">文字图层</el-menu-item>
+                    <el-menu-item index="9">光照系统</el-menu-item>
+                    <el-menu-item index="14">关闭冗余</el-menu-item>
+                    <el-menu-item index="">
+                        <el-tooltip :content="'拖拽模型'" placement="top">
+                            <el-switch
+                                    @change="dragChange"
+                                    v-model="switchValue"
+                                    active-color="#13ce66"
+                                    inactive-color="#ff4949">
+                            </el-switch>
+                        </el-tooltip>
+                    </el-menu-item>
+                </el-menu>
+            </div>
+        </div>
+
         <div class="leftTree">
             <div>ENTITIES</div>
             <el-tree :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
@@ -184,7 +191,11 @@
 </script>
 
 <style>
-
+    body {
+        display: block;
+        margin: 0px;
+        overflow-y: hidden;
+    }
     .cesium-viewer-bottom {
         display: none !important;
         visibility: hidden !important;
@@ -192,7 +203,7 @@
 
     #cesiumContainer {
         width: 100%;
-        height: 744px;
+        height: 100%;
     }
 
     .all {
@@ -240,6 +251,20 @@
         z-index: 999;
 
     }
+
+    .header {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        background-color: #FFFFFF;
+    }
+
+
 
 </style>
 
