@@ -13,11 +13,11 @@ export default class Load3DModel {
         //  工厂
         this.app.viewer.entities.add({
             name: '工厂',
-            position: Cesium.Cartesian3.fromDegrees(102.65393986790458, 24.90249056812303, 1856.407665633927),
+            position: new Cesium.Cartesian3(-1268030.5434272639, 5647967.610935615, 2669301.76723298),
             orientation: Cesium.Transforms.headingPitchRollQuaternion(
-                Cesium.Cartesian3.fromDegrees(102.65393986790458, 24.90249056812303, 1856.407665633927),
-                new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)
-            ), // 和飞行姿态相关
+                new Cesium.Cartesian3(-1268030.5434272639, 5647967.610935615, 2669301.76723298),
+                new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(7), 0, 0)
+            ),
             model: {
                 uri: 'http://localhost:1111/3Dstatic/loadData/tt/11.glb',
                 // minimumPixelSize: 100, // 最小大小
@@ -47,7 +47,8 @@ export default class Load3DModel {
                 uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',
                 // minimumPixelSize: 100,
                 // maximumScale: 100000,
-                scale: 2.0
+                scale: 2.0,
+                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
             }
         }
 

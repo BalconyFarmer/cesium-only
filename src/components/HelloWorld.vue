@@ -69,7 +69,7 @@
             <div class="inpu">
                 <el-input size="small" v-model="rotationgPatams.Roll" placeholder="Roll"></el-input>
             </div>
-            <div>
+            <div class="inpu">
                 <el-button @click="rotateEntity">rotate</el-button>
             </div>
         </div>
@@ -112,9 +112,9 @@
                 switchValue: false,
                 currentEntities: null,
                 rotationgPatams: {
-                    Heading: 100,
-                    Pitch: 100,
-                    Roll: 100
+                    Heading: 0,
+                    Pitch: 0,
+                    Roll: 0
                 }
 
             }

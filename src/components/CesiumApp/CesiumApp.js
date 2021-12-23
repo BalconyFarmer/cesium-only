@@ -240,4 +240,29 @@ export default class CesiumApp {
         )
         entity.orientation = newOrirentation
     }
+
+    /**
+     * 经纬度转世界坐标
+     */
+    cartesian3ToLong (x, y, z) {
+        let ellipsoid = this.cApp.viewer.scene.globe.ellipsoid
+        let cartesian3 = new Cesium.Cartesian3(x, y, z)
+        let cartographic = ellipsoid.cartesianToCartographic(cartesian3)
+        let lat = Cesium.Math.toDegrees(cartographic.latitude)
+        let lng = Cesium.Math.toDegrees(cartographic.longitude)
+        let alt = cartographic.height
+        return [lat, lng, alt]
+        console.log('onCheckonCheckonCheckonCheck', lat, lng, alt)
+    }
+
+    /**
+     * 经纬度转世界坐标
+     */
+    longToC3 (longitude, latitude, height) {
+        let ellipsoid = this.cApp.viewer.scene.globe.ellipsoid
+        let cartographic = Cesium.Cartographic.fromDegrees(longitude, latitude, height)
+        let cartesian3 = ellipsoid.cartographicToCartesian(cartographic)
+        console.log(cartesian3, 'cartesian3cartesian3cartesian3cartesian3')
+        return cartesian3
+    }
 }
