@@ -98,8 +98,8 @@ export default class CesiumApp {
     /**
      * 移除地形
      */
-    removeTerrain() {
-        this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({});
+    removeTerrain () {
+        this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({})
     }
 
     /**
@@ -124,7 +124,7 @@ export default class CesiumApp {
         this.viewer.scene.globe.baseColor = Cesium.Color.GRAY//设置地球颜色
         this.viewer.scene.skyAtmosphere.show = false // 关闭大气效果
         this.viewer.scene.skyBox.show = false // 关闭大气效果
-        this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({}); // 清除地形
+        this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({}) // 清除地形
 
     }
 
@@ -224,5 +224,20 @@ export default class CesiumApp {
 
     getViewerEntitys () {
         return this.viewer.entities.values
+    }
+
+    /**
+     * 旋转entity
+     * @param Heading
+     * @param Pitch
+     * @param Roll
+     * @param entity
+     */
+    rotateEntity (Heading, Pitch, Roll, entity) {
+        const newOrirentation = Cesium.Transforms.headingPitchRollQuaternion(
+            entity.position._value,
+            new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(Heading), Pitch, Roll)
+        )
+        entity.orientation = newOrirentation
     }
 }

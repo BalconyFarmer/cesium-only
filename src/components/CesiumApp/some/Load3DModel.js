@@ -10,13 +10,14 @@ export default class Load3DModel {
      * 加载3D模型
      */
     addModel () {
-        // this.viewer.entities.removeAll();//删除所有entities
-
         //  工厂
         this.app.viewer.entities.add({
             name: '工厂',
             position: Cesium.Cartesian3.fromDegrees(102.65393986790458, 24.90249056812303, 1856.407665633927),
-            orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65393986790458, 24.90249056812303, 1856.407665633927), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
+            orientation: Cesium.Transforms.headingPitchRollQuaternion(
+                Cesium.Cartesian3.fromDegrees(102.65393986790458, 24.90249056812303, 1856.407665633927),
+                new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)
+            ), // 和飞行姿态相关
             model: {
                 uri: 'http://localhost:1111/3Dstatic/loadData/tt/11.glb',
                 // minimumPixelSize: 100, // 最小大小

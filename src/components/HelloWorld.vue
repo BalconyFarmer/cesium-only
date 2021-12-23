@@ -58,7 +58,20 @@
             </div>
         </div>
         <div class="bottomCenter">
-            {{currentEntities? currentEntities.name: 0}}
+            <div>name: {{currentEntities? currentEntities.name: '暂无数据'}}</div>
+            <div>Cartesian3: {{currentEntities? currentEntities.position._value: '暂无数据'}}</div>
+            <div class="inpu">
+                <el-input size="small" v-model="rotationgPatams.Heading" placeholder="Heading"></el-input>
+            </div>
+            <div class="inpu">
+                <el-input size="small" v-model="rotationgPatams.Pitch" placeholder="Pitch"></el-input>
+            </div>
+            <div class="inpu">
+                <el-input size="small" v-model="rotationgPatams.Roll" placeholder="Roll"></el-input>
+            </div>
+            <div>
+                <el-button @click="rotateEntity">rotate</el-button>
+            </div>
         </div>
         <div id="cesiumContainer"></div>
 
@@ -66,52 +79,30 @@
 </template>
 
 <script>
+    import * as Cesium from 'cesium/Cesium'
+    import * as widget from 'cesium/Widgets/widgets.css'
     import CesiumApp from './CesiumApp/CesiumApp'
-    // 导出组件
+
     export default {
         name: 'hoting',
-        watch: {},
+        watch: {
+            // currentEntities: {
+            //     handler (newValue) {
+            //         if (this.cApp) {
+            //
+            //         }
+            //     },
+            //     deep: true,
+            //     immediate: true
+            // },
+        },
 
         data () {
             return {
                 activeIndex: '1',
                 activeIndex2: '1',
                 entitysList: [],
-                treeData: [{
-                    label: '一级 1',
-                    children: [{
-                        label: '二级 1-1',
-                        children: [{
-                            label: '三级 1-1-1'
-                        }]
-                    }]
-                }, {
-                    label: '一级 2',
-                    children: [{
-                        label: '二级 2-1',
-                        children: [{
-                            label: '三级 2-1-1'
-                        }]
-                    }, {
-                        label: '二级 2-2',
-                        children: [{
-                            label: '三级 2-2-1'
-                        }]
-                    }]
-                }, {
-                    label: '一级 3',
-                    children: [{
-                        label: '二级 3-1',
-                        children: [{
-                            label: '三级 3-1-1'
-                        }]
-                    }, {
-                        label: '二级 3-2',
-                        children: [{
-                            label: '三级 3-2-1'
-                        }]
-                    }]
-                }],
+                treeData: [],
                 defaultProps: {
                     children: 'children',
                     label: 'label'
@@ -119,11 +110,20 @@
                 clickPosition: [],
                 cameraPosition: [],
                 switchValue: false,
-                currentEntities: null
+                currentEntities: null,
+                rotationgPatams: {
+                    Heading: 100,
+                    Pitch: 100,
+                    Roll: 100
+                }
 
             }
         },
         methods: {
+            rotateEntity () {
+                const self = this
+                self.cApp.rotateEntity(parseInt(self.rotationgPatams.Heading), parseInt(self.rotationgPatams.Pitch), parseInt(self.rotationgPatams.Roll), self.currentEntities)
+            },
             dragChange () {
                 if (this.switchValue) {
                     this.cApp.event.dragFlag = true
@@ -174,6 +174,7 @@
                 this.cApp.eventCenter.addEventListener('pickEntity', function (data) {
                     self.currentEntities = data.message.position
                 })
+
             })
 
             setInterval(function () {
@@ -191,6 +192,7 @@
 
                 })
             }, 1000)
+
         }
 
     }
@@ -286,6 +288,9 @@
             z-index: 999;
             color: white;
 
+            .inpu {
+                width: 100px;
+            }
         }
     }
 

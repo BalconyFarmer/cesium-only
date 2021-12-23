@@ -43,10 +43,14 @@ export default class Event {
             // 选取模型 事件
             var pick = self.app.viewer.scene.pick(event.position)
             console.log(pick, 'pick-pick-pick-pick-pick')
-            self.app.eventCenter.dispatchEvent({
-                type: 'pickEntity',
-                message: {position: pick.id}
-            })
+            if (pick) {
+                if (pick.id) {
+                    self.app.eventCenter.dispatchEvent({
+                        type: 'pickEntity',
+                        message: {position: pick.id}
+                    })
+                }
+            }
 
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
     }
@@ -66,7 +70,7 @@ export default class Event {
             let picked = self.app.viewer.scene.pick(e.position)
             if (picked) {
                 document.body.style.cursor = 'move'
-                pickedEntity = Cesium.defaultValue(picked.id, picked.primitive.id)
+                pickedEntity = Cesium.defaultValue(picked.id, picked.primitive.id) //如果未定义，则返回第一个参数，否则返回第二个参数。
                 if (pickedEntity instanceof Cesium.Entity && pickedEntity.model) {
                     //锁定相机
                     self.app.viewer.scene.screenSpaceCameraController.enableRotate = false
@@ -108,4 +112,30 @@ export default class Event {
             leftUpAction(e)
         }, Cesium.ScreenSpaceEventType.LEFT_UP)
     }
+
+    /**
+     * 经纬度转世界坐标
+     */
+    cartesian3ToLong (x, y, z) {
+        let ellipsoid = this.cApp.viewer.scene.globe.ellipsoid
+        let cartesian3 = new Cesium.Cartesian3(x, y, z)
+        let cartographic = ellipsoid.cartesianToCartographic(cartesian3)
+        let lat = Cesium.Math.toDegrees(cartographic.latitude)
+        let lng = Cesium.Math.toDegrees(cartographic.longitude)
+        let alt = cartographic.height
+        return [lat, lng, alt]
+        console.log('onCheckonCheckonCheckonCheck', lat, lng, alt)
+    }
+
+    /**
+     * 经纬度转世界坐标
+     */
+    longToC3 (longitude, latitude, height) {
+        let ellipsoid = this.cApp.viewer.scene.globe.ellipsoid
+        let cartographic = Cesium.Cartographic.fromDegrees(longitude, latitude, height)
+        let cartesian3 = ellipsoid.cartographicToCartesian(cartographic)
+        console.log(cartesian3, 'cartesian3cartesian3cartesian3cartesian3')
+        return cartesian3
+    }
+
 }
