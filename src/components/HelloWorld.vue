@@ -27,6 +27,16 @@
                             </el-switch>
                         </el-tooltip>
                     </el-menu-item>
+                    <el-menu-item index="14">
+                        <el-select v-model="value" placeholder="请选择">
+                            <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-menu-item>
                 </el-menu>
             </div>
         </div>
@@ -72,6 +82,7 @@
             <div class="inpu">
                 <el-button @click="rotateEntity">rotate</el-button>
             </div>
+
         </div>
         <div id="cesiumContainer"></div>
 
@@ -86,19 +97,30 @@
     export default {
         name: 'hoting',
         watch: {
-            // currentEntities: {
-            //     handler (newValue) {
-            //         if (this.cApp) {
-            //
-            //         }
-            //     },
-            //     deep: true,
-            //     immediate: true
-            // },
+            value: {
+                handler (newValue) {
+                    if (this.cApp) {
+                        this.cApp.switchViewMode(this.value)
+                    }
+                },
+                deep: true,
+                immediate: true
+            },
         },
 
         data () {
             return {
+                value: '2.5D模式',
+                options: [{
+                    value: '3D模式',
+                    label: '3D模式'
+                }, {
+                    value: '2.5D模式',
+                    label: '2.5D模式'
+                }, {
+                    value: '2D模式',
+                    label: '2D模式'
+                },],
                 activeIndex: '1',
                 activeIndex2: '1',
                 entitysList: [],

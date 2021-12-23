@@ -63,6 +63,7 @@ export default class CesiumApp {
             shouldAnimate: true, //动画播放
             // skyBox: false, // 关闭天空
             // skyAtmosphere: false, // 关闭大气
+            SceneModePicker: '2D'
         }
         this.option = option
         this.viewer = new this.Cesium.Viewer('cesiumContainer', option)
@@ -93,6 +94,21 @@ export default class CesiumApp {
         this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
 
         this.event = new Event(this)
+        this.switchViewMode('2.5D模式')
+    }
+
+    switchViewMode (data) {
+        switch (data) {
+            case '2.5D模式':
+                this.viewer.scene.mode = Cesium.SceneMode.COLUMBUS_VIEW //哥伦布视图
+                break
+            case '3D模式':
+                this.viewer.scene.mode = Cesium.SceneMode.SCENE3D//3维模式
+                break
+            case '2D模式':
+                this.viewer.scene.mode = Cesium.SceneMode.SCENE2D//2维模式
+                break
+        }
     }
 
     /**
