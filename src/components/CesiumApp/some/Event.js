@@ -53,6 +53,7 @@ export default class Event {
             }
 
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+
     }
 
     /**
@@ -113,6 +114,20 @@ export default class Event {
         }, Cesium.ScreenSpaceEventType.LEFT_UP)
     }
 
-
+    addMoveToolTip () {
+        const self = this
+        // setTimeout(function () {
+        //一 鼠标MOUSE_MOVE
+        let handler = new Cesium.ScreenSpaceEventHandler(this.app.viewer.scene.canvas)
+        handler.setInputAction(function (movement) {
+            let cartesian = self.app.viewer.camera.pickEllipsoid(movement.endPosition, self.app.viewer.scene.globe.ellipsoid)
+            if (cartesian) {
+                self.app.innerGeometry.TooltipCesium.showAt(movement.endPosition, 'MOUSE_MOVE')
+            } else {
+                self.app.innerGeometry.TooltipCesium.setVisible(false)
+            }
+        }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
+        // },500)
+    }
 
 }

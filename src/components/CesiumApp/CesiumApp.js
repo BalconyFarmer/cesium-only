@@ -7,7 +7,7 @@ import Cesium3DTileset from './some/Cesium3DTileset/Cesium3DTileset'
 import LoadJson from './some/LoadJson'
 import Load3DModel from './some/Load3DModel'
 import {initFlowMatetial} from './some/CustomStyle/_PolylineTrailLinkMaterialProperty'
-import InnerGeometry from './some/InnerGeometry'
+import InnerGeometry from './some/InnerGeometry/InnerGeometry'
 import Event from './some/Event'
 
 export default class CesiumApp {
@@ -129,6 +129,9 @@ export default class CesiumApp {
         this.part.addRadarScan()
         this.part.addFlyLine3D()
         this.getViewerEntitys()
+
+        this.innerGeometry.initMoveToolTips()
+        this.event.addMoveToolTip()
     }
 
     /**

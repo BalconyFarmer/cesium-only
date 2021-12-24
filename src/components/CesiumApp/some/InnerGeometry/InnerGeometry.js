@@ -1,9 +1,16 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
+import TooltipCesium from './Tools-01Tooltip-entity'
 
 export default class InnerGeometry {
     constructor (app) {
         this.app = app
+        this.TooltipCesium = null
+    }
+
+    initMoveToolTips () {
+        TooltipCesium.initTool(this.app.viewer)
+        this.TooltipCesium = TooltipCesium
     }
 
     /**
