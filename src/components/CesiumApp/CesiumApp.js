@@ -31,8 +31,7 @@ export default class CesiumApp {
      */
     initMap () {
         initFlowMatetial()
-        this.addImageryProviderLayerNormal()
-
+        this.switchLayer("3D模式")
         // 加载地形数据
         let terrainProvider = this.Cesium.createWorldTerrain(
             {
@@ -155,57 +154,48 @@ export default class CesiumApp {
         }
     }
 
-    /**
-     * 添加实景影像图层
-     */
-    addImageryProviderLayerReal () {
+    switchLayer (data) {
         // t3fbd4010a8d2c73901a21c42efe3d2c0 天地图key
 
-        this.viewer.imageryLayers.removeAll() // 清除所有图层
-
-        // google实景
-        const Imagery = new Cesium.UrlTemplateImageryProvider({
-            url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali'
-        })
-
-        // ArcGis
-        // const Imagery = new Cesium.ArcGisMapServerImageryProvider({
-        //     url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
-        //     enablePickFeatures: false
-        // });
-
-        var noteLayer = new Cesium.WebMapTileServiceImageryProvider({
-            url: 'http://t0.tianditu.gov.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=837264f46e683ec982d452e78d71052e',
-            layer: 'tdtBasicLayer',
-            style: 'default',
-            maximumLevel: 20,
-            format: 'image/png',
-            tileMatrixSetID: 'GoogleMapsCompatible',
-            show: true
-        })
-
-        this.viewer.imageryLayers.addImageryProvider(Imagery)
-        // this.viewer.imageryLayers.addImageryProvider(noteLayer)
-
-    }
-
-    /**
-     * 添加普通地图图层
-     */
-    addImageryProviderLayerNormal () {
         if (this.viewer) {
             this.viewer.imageryLayers.removeAll() // 清除所有图层
         }
-
-        // Access the CartoDB Positron basemap, which uses an OpenStreetMap-like tiling scheme.
-        this.Imagery = new Cesium.UrlTemplateImageryProvider({
-            url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-            credit: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
-        })
-
-        if (this.viewer) {
-            this.viewer.imageryLayers.addImageryProvider(this.Imagery)
+        let Imagery = null
+        switch (data) {
+            case 'google实景图层':
+                Imagery = new Cesium.UrlTemplateImageryProvider({
+                    url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali'
+                })
+                this.viewer.imageryLayers.addImageryProvider(Imagery)
+                break
+            case 'ArcGis实景图层':
+                Imagery = new Cesium.ArcGisMapServerImageryProvider({
+                    url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
+                    enablePickFeatures: false
+                })
+                this.viewer.imageryLayers.addImageryProvider(Imagery)
+                break
+            case '文字图层':
+                Imagery = new Cesium.UrlTemplateImageryProvider({
+                    url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+                    credit: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
+                })
+                this.viewer.imageryLayers.addImageryProvider(Imagery)
+                break
+            case 'note':
+                Imagery = new Cesium.WebMapTileServiceImageryProvider({
+                    url: "http://t0.tianditu.gov.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=837264f46e683ec982d452e78d71052e",
+                    layer: "tdtBasicLayer",
+                    style: "default",
+                    maximumLevel: 20,
+                    format: "image/png",
+                    tileMatrixSetID: "GoogleMapsCompatible",
+                    show: true
+                });
+                this.viewer.imageryLayers.addImageryProvider(Imagery)
+                break
         }
+        this.Imagery = Imagery
     }
 
     /**

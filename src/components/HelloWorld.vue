@@ -13,8 +13,7 @@
             </div>
             <div>
                 <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                    <el-menu-item index="7">实景图层</el-menu-item>
-                    <el-menu-item index="8">文字图层</el-menu-item>
+
                     <el-menu-item index="9">光照系统</el-menu-item>
                     <el-menu-item index="14">关闭冗余</el-menu-item>
                     <el-menu-item index="">
@@ -27,10 +26,20 @@
                             </el-switch>
                         </el-tooltip>
                     </el-menu-item>
-                    <el-menu-item index="14">
+                    <el-menu-item>
                         <el-select v-model="value" placeholder="请选择">
                             <el-option
                                     v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </el-menu-item>
+                    <el-menu-item>
+                        <el-select v-model="optionsLayersIndex" placeholder="图层切换">
+                            <el-option
+                                    v-for="item in optionsLayers"
                                     :key="item.value"
                                     :label="item.label"
                                     :value="item.value">
@@ -104,7 +113,16 @@
                     }
                 },
                 deep: true,
-                immediate: true
+                immediate: false
+            },
+            optionsLayersIndex: {
+                handler (newValue) {
+                    if (this.cApp) {
+                        this.cApp.switchLayer(this.optionsLayersIndex)
+                    }
+                },
+                deep: true,
+                immediate: false
             },
         },
 
@@ -120,6 +138,20 @@
                 }, {
                     value: '2D模式',
                     label: '2D模式'
+                },],
+                optionsLayersIndex: null,
+                optionsLayers: [{
+                    value: '文字图层',
+                    label: '文字图层'
+                }, {
+                    value: 'google实景图层',
+                    label: 'google实景图层'
+                }, {
+                    value: 'ArcGis实景图层',
+                    label: 'ArcGis实景图层'
+                }, {
+                    value: 'note',
+                    label: 'note'
                 },],
                 activeIndex: '1',
                 activeIndex2: '1',
@@ -163,10 +195,6 @@
                     this.cApp.cesium3DTileset.toYN()
                 } else if (key == 6) {
                     this.cApp.part.addFlowWall()
-                } else if (key == 7) {
-                    this.cApp.addImageryProviderLayerReal()
-                } else if (key == 8) {
-                    this.cApp.addImageryProviderLayerNormal()
                 } else if (key == 9) {
                     this.cApp.switchLight()
                 } else if (key == 11) {
