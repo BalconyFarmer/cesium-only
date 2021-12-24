@@ -17,6 +17,7 @@
                     <el-menu-item index="9">光照系统</el-menu-item>
                     <el-menu-item index="14">关闭冗余</el-menu-item>
                     <el-menu-item index="">
+                        <span>drag</span>
                         <el-tooltip :content="'拖拽模型'" placement="top">
                             <el-switch
                                     @change="dragChange"
@@ -27,10 +28,22 @@
                         </el-tooltip>
                     </el-menu-item>
                     <el-menu-item index="">
+                        <span>moveTip</span>
                         <el-tooltip :content="'moveToolTips'" placement="top">
                             <el-switch
                                     @change="moveToolTipsChange"
                                     v-model="moveToolFlag"
+                                    active-color="#13ce66"
+                                    inactive-color="#ff4949">
+                            </el-switch>
+                        </el-tooltip>
+                    </el-menu-item>
+                    <el-menu-item index="">
+                        <span>地形</span>
+                        <el-tooltip :content="'关闭地形'" placement="top">
+                            <el-switch
+                                    @change="terrainChange"
+                                    v-model="terrainFlag"
                                     active-color="#13ce66"
                                     inactive-color="#ff4949">
                             </el-switch>
@@ -136,6 +149,7 @@
 
         data () {
             return {
+                terrainFlag: true,
                 moveToolFlag: false,
                 value: '2.5D模式',
                 options: [{
@@ -183,6 +197,13 @@
             }
         },
         methods: {
+            terrainChange () {
+                if (this.terrainFlag) {
+                    this.cApp.addTerrain()
+                } else {
+                    this.cApp.removeTerrain()
+                }
+            },
             moveToolTipsChange () {
                 this.cApp.startMoveTips()
             },

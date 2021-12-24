@@ -177,28 +177,14 @@ export default class CustomStyle {
         }
 
         let material = null
-        let center = {lon: 102.65416219381753, lat: 24.90134988427503}
+        let center = {lon: 102.6527445274038, lat: 24.902615750602656}
         let cities = [
-            {'lon': 115.028495718, 'lat': 30.200814617},
+            {'lon': 102.65487540422131, 'lat': 24.903678928793752},
             {'lon': 110.795000473, 'lat': 32.638540762},
-            // { "lon": 111.267729446, "lat": 30.698151246 },
-            // { "lon": 112.126643144, "lat": 32.058588576 },
-            // { "lon": 114.885884938, "lat": 30.395401912 },
-            // { "lon": 112.190419415, "lat": 31.043949588 },
-            // { "lon": 113.903569642, "lat": 30.932054050 },
-            // { "lon": 112.226648859, "lat": 30.367904255 },
-            // { "lon": 114.861716770, "lat": 30.468634833 },
-            // { "lon": 114.317846048, "lat": 29.848946148 },
-            // { "lon": 113.371985426, "lat": 31.704988330 },
-            // { "lon": 109.468884533, "lat": 30.289012191 },
-            // { "lon": 113.414585069, "lat": 30.368350431 },
-            // { "lon": 112.892742589, "lat": 30.409306203 },
-            // { "lon": 113.160853710, "lat": 30.667483468 },
-            // { "lon": 110.670643354, "lat": 31.748540780 }
         ]
         if (material != null) {
         } else {
-            material = new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 3000)
+            material = new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 1000)
         }
         for (let j = 0; j < cities.length; j++) {
             let points = parabolaEquation({pt1: center, pt2: cities[j], height: 50000, num: 100})
@@ -210,7 +196,7 @@ export default class CustomStyle {
                 name: 'PolylineTrailLink' + j,
                 polyline: {
                     positions: Cesium.Cartesian3.fromDegreesArrayHeights(pointArr),
-                    width: 2,
+                    width: 10,
                     material: material
                 }
             })
@@ -219,7 +205,7 @@ export default class CustomStyle {
         viewer.entities.add({
             position: Cesium.Cartesian3.fromDegrees(center.lon, center.lat, 1),
             point: {
-                pixelSize: 6,
+                pixelSize: 10,
                 color: Cesium.Color.BLUE
             }
         })
@@ -227,8 +213,8 @@ export default class CustomStyle {
             viewer.entities.add({
                 position: Cesium.Cartesian3.fromDegrees(cities[i].lon, cities[i].lat, 1),
                 point: {
-                    pixelSize: 6,
-                    color: Cesium.Color.RED
+                    pixelSize: 10,
+                    color: Cesium.Color.YELLOW
                 }
             })
         }

@@ -32,13 +32,6 @@ export default class CesiumApp {
     initMap () {
         initFlowMatetial()
         this.switchLayer('3D模式')
-        // 加载地形数据
-        let terrainProvider = this.Cesium.createWorldTerrain(
-            {
-                requestWaterMask: true,
-                requestVertexNormals: true
-            }
-        )
 
         this.option = {
             animation: false, // 如果设置为false,则不会创建'动画'小部件。
@@ -58,7 +51,7 @@ export default class CesiumApp {
             timeline: false, //
             navigationHelpButton: false, //
             imageryProvider: this.Imagery, //  影像图层
-            terrainProvider: terrainProvider, // 地形图层,
+            // terrainProvider: terrainProvider, // 地形图层,
             shouldAnimate: true, //动画播放
             // skyBox: false, // 关闭天空
             // skyAtmosphere: false, // 关闭大气
@@ -73,6 +66,7 @@ export default class CesiumApp {
         this.switchViewMode('3D模式')
         this.firstCallBack()
         window.viewer = this.viewer
+        this.addTerrain()
     }
 
     /**
@@ -107,6 +101,26 @@ export default class CesiumApp {
                 this.viewer.scene.mode = Cesium.SceneMode.SCENE2D//2维模式
                 break
         }
+    }
+
+    /**
+     * 添加地形
+     */
+    addTerrain () {
+        // let terrainProvider = new Cesium.CesiumTerrainProvider({
+        //     url : 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles',
+        //     //请求水波纹效果
+        //     requestWaterMask: true
+        // });
+
+        // 加载地形数据
+        let terrainProvider = this.Cesium.createWorldTerrain(
+            {
+                requestWaterMask: true,
+                requestVertexNormals: true
+            }
+        )
+        this.viewer.terrainProvider = terrainProvider
     }
 
     /**
