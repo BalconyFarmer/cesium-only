@@ -130,9 +130,16 @@ export default class CesiumApp {
         this.part.addFlyLine3D()
         this.getViewerEntitys()
 
+    }
+
+    /**
+     * 开启moveToolTips
+     */
+    startMoveTips() {
         this.innerGeometry.initMoveToolTips()
         this.event.addMoveToolTip()
     }
+
 
     /**
      * 关闭次要效果

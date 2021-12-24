@@ -26,6 +26,16 @@
                             </el-switch>
                         </el-tooltip>
                     </el-menu-item>
+                    <el-menu-item index="">
+                        <el-tooltip :content="'moveToolTips'" placement="top">
+                            <el-switch
+                                    @change="moveToolTipsChange"
+                                    v-model="moveToolFlag"
+                                    active-color="#13ce66"
+                                    inactive-color="#ff4949">
+                            </el-switch>
+                        </el-tooltip>
+                    </el-menu-item>
                     <el-menu-item>
                         <el-select v-model="value" placeholder="请选择">
                             <el-option
@@ -128,6 +138,7 @@
 
         data () {
             return {
+                moveToolFlag: false,
                 value: '2.5D模式',
                 options: [{
                     value: '3D模式',
@@ -174,6 +185,9 @@
             }
         },
         methods: {
+            moveToolTipsChange () {
+                this.cApp.startMoveTips()
+            },
             rotateEntity () {
                 const self = this
                 self.cApp.rotateEntity(parseInt(self.rotationgPatams.Heading), parseInt(self.rotationgPatams.Pitch), parseInt(self.rotationgPatams.Roll), self.currentEntities)
