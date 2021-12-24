@@ -32,7 +32,6 @@ export default class CesiumApp {
     initMap () {
         initFlowMatetial()
         this.switchLayer('3D模式')
-
         this.option = {
             animation: false, // 如果设置为false,则不会创建'动画'小部件。
             contextOptions: {
@@ -61,12 +60,26 @@ export default class CesiumApp {
         this.viewer.scene.globe.enableLighting = false // 初始化光照
         this.viewer.scene.fog.enabled = false // 烟雾效果
         this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
-
         this.event = new Event(this)
         this.switchViewMode('3D模式')
+        this.addTerrain()
         this.firstCallBack()
         window.viewer = this.viewer
-        this.addTerrain()
+    }
+
+    /**
+     * 效果演示时间线
+     */
+    addTimeAction () {
+        this.load3DModel.addModel()
+        this.innerGeometry.addIcon()
+        // this.innerGeometry.addMesh()
+        this.innerGeometry.addGeometry()
+        this.part.addFlowLine()
+        this.part.addCircleScan()
+        this.part.addRadarScan()
+        this.part.addFlyLine3D()
+        this.getViewerEntitys()
     }
 
     /**
@@ -128,20 +141,6 @@ export default class CesiumApp {
      */
     removeTerrain () {
         this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({})
-    }
-
-    /**
-     * 效果演示时间线
-     */
-    addTimeAction () {
-        this.load3DModel.addModel()
-        this.innerGeometry.addIcon()
-        this.innerGeometry.addGeometry()
-        this.part.addFlowLine()
-        this.part.addCircleScan()
-        this.part.addRadarScan()
-        this.part.addFlyLine3D()
-        this.getViewerEntitys()
     }
 
     /**
