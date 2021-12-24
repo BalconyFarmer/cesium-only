@@ -31,7 +31,7 @@ export default class CesiumApp {
      */
     initMap () {
         initFlowMatetial()
-        this.switchLayer("3D模式")
+        this.switchLayer('3D模式')
         // 加载地形数据
         let terrainProvider = this.Cesium.createWorldTerrain(
             {
@@ -40,7 +40,7 @@ export default class CesiumApp {
             }
         )
 
-        const option = {
+        this.option = {
             animation: false, // 如果设置为false,则不会创建'动画'小部件。
             contextOptions: {
                 webgl: {
@@ -64,17 +64,21 @@ export default class CesiumApp {
             // skyAtmosphere: false, // 关闭大气
             SceneModePicker: '2D'
         }
-        this.option = option
-        this.viewer = new this.Cesium.Viewer('cesiumContainer', option)
-
-        window.viewer = this.viewer
-        console.log('viewer: ', this.viewer.scene.globe.enableLighting)
-
+        this.viewer = new this.Cesium.Viewer('cesiumContainer', this.option)
         this.viewer.scene.globe.enableLighting = false // 初始化光照
+        this.viewer.scene.fog.enabled = false // 烟雾效果
+        this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
 
-        this.viewer.scene.fog.enabled = false
+        this.event = new Event(this)
+        this.switchViewMode('3D模式')
+        this.firstCallBack()
+        window.viewer = this.viewer
+    }
 
-        // 首次加载完成回调
+    /**
+     * 首次加载完成回调
+     */
+    firstCallBack () {
         const self = this
         const helper = new this.Cesium.EventHelper()
         helper.add(this.viewer.scene.globe.tileLoadProgressEvent, (number) => {
@@ -89,11 +93,6 @@ export default class CesiumApp {
             }
             self.firstIndex = true
         })
-
-        this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
-
-        this.event = new Event(this)
-        this.switchViewMode('2.5D模式')
     }
 
     switchViewMode (data) {
@@ -129,17 +128,15 @@ export default class CesiumApp {
         this.part.addRadarScan()
         this.part.addFlyLine3D()
         this.getViewerEntitys()
-
     }
 
     /**
      * 开启moveToolTips
      */
-    startMoveTips() {
+    startMoveTips () {
         this.innerGeometry.initMoveToolTips()
         this.event.addMoveToolTip()
     }
-
 
     /**
      * 关闭次要效果
@@ -194,14 +191,14 @@ export default class CesiumApp {
                 break
             case 'note':
                 Imagery = new Cesium.WebMapTileServiceImageryProvider({
-                    url: "http://t0.tianditu.gov.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=837264f46e683ec982d452e78d71052e",
-                    layer: "tdtBasicLayer",
-                    style: "default",
+                    url: 'http://t0.tianditu.gov.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=837264f46e683ec982d452e78d71052e',
+                    layer: 'tdtBasicLayer',
+                    style: 'default',
                     maximumLevel: 20,
-                    format: "image/png",
-                    tileMatrixSetID: "GoogleMapsCompatible",
+                    format: 'image/png',
+                    tileMatrixSetID: 'GoogleMapsCompatible',
                     show: true
-                });
+                })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
         }

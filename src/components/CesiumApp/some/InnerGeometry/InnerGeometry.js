@@ -20,11 +20,15 @@ export default class InnerGeometry {
         //圆柱体
         this.app.viewer.entities.add({
             name: '圆柱体',
-            position: Cesium.Cartesian3.fromDegrees(102.65461106848306, 24.902995899003997, 1857.9621251609599,),
+            position: Cesium.Cartesian3.fromDegrees(
+                102.65396035468552,
+                24.902486377790712,
+                1856.388665600861
+            ),
             cylinder: {
-                length: 4.0,//圆柱体高度
-                topRadius: 2.0,//圆柱体的顶部半径。
-                bottomRadius: 2.0,//    圆柱体底部的半径。
+                length: 10.0,//圆柱体高度
+                topRadius: 2,//圆柱体的顶部半径。
+                bottomRadius: 2,//    圆柱体底部的半径。
                 material: Cesium.Color.GREEN.withAlpha(0.5),//绿色半透明
                 outline: true,//轮廓
                 outlineColor: Cesium.Color.DARK_GREEN,//轮廓颜色深绿色
@@ -33,6 +37,8 @@ export default class InnerGeometry {
             }
         })
 
+
+
     }
 
     /**
@@ -40,7 +46,10 @@ export default class InnerGeometry {
      */
     addIcon () {
         this.app.viewer.entities.add({
-            position: Cesium.Cartesian3.fromDegrees(102.65425451755321, 24.902048298657025, 1856.639104950962),
+            position: Cesium.Cartesian3.fromDegrees(
+                102.65401175390049,
+                24.90222947105644,
+                1856.4496713384267,),
             // 点
             point: {
                 color: Cesium.Color.RED, // 点位颜色

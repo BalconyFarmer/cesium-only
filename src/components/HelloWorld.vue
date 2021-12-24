@@ -67,12 +67,10 @@
         <div class="rightPart">
             MATH
             <div>
-                log,
-                <div>{{clickPosition[0]|| 0}}</div>
-                lat,
-                <div>{{clickPosition[1]|| 0}}</div>
-                height
-                <div>{{clickPosition[2]|| 0}}</div>
+                log,lat,height
+                <div>{{clickPosition[0]|| 0}},</div>
+                <div>{{clickPosition[1]|| 0}},</div>
+                <div>{{clickPosition[2]|| 0}},</div>
             </div>
             <div>
                 camera

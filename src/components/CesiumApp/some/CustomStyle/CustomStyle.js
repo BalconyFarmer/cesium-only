@@ -42,12 +42,24 @@ export default class CustomStyle {
             polyline: {
                 positions: Cesium.Cartesian3.fromDegreesArrayHeights(
                     [
-                        102.65522062344772, 24.885658297532803, 1854.7618263277068,
-                        102.65455249694989, 24.890987614908887, 1888.7717509127956,
-                        102.65598127309781, 24.895192167561607, 1868.1795017975555,
-                        102.65483833999541, 24.902219367229762, 1856.3646821264895,
+                        102.65350192582177,
+                        24.90245912637886,
+                        1856.801867224477,
+
+                        102.65398695287782,
+                        24.90242237510545,
+                        1856.801867224477,
+
+                        102.65392975708504,
+                        24.90199492576048,
+                        1856.801867224477,
+
+                        102.65341015592861,
+                        24.9019991170425,
+                        1856.801867224477,
+
                     ]),
-                width: 15,
+                width: 20,
                 material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }
         })
@@ -163,7 +175,8 @@ export default class CustomStyle {
             }
             return result
         }
-        let material = null;
+
+        let material = null
         let center = {lon: 102.65416219381753, lat: 24.90134988427503}
         let cities = [
             {'lon': 115.028495718, 'lat': 30.200814617},
@@ -499,6 +512,5 @@ export default class CustomStyle {
         let scanColor = new Cesium.Color(1.0, 0.0, 0.0, 1)
         AddRadarScanPostStage(this.app.viewer, CartographicCenter, 100, scanColor, 4000)
     }
-
 
 }
