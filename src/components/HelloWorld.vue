@@ -274,7 +274,7 @@
                     }
 
                 })
-            }, 1000)
+            }, 10000)
 
         }
 
@@ -382,9 +382,8 @@
         position: relative;
         cursor: default;
         background: #2B2B2B;
-        color: #606266;
+        color: #ffffff;
     }
-
 
 </style>
 

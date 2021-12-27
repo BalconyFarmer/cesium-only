@@ -9,6 +9,7 @@ import Load3DModel from './some/Load3DModel'
 import {initFlowMatetial} from './some/CustomStyle/_PolylineTrailLinkMaterialProperty'
 import InnerGeometry from './some/InnerGeometry/InnerGeometry'
 import Event from './some/Event'
+import ParticleSystems from './some/ParticleSystems'
 
 export default class CesiumApp {
     constructor () {
@@ -24,6 +25,7 @@ export default class CesiumApp {
         this.innerGeometry = new InnerGeometry(this)
         this.eventCenter = new THREE.EventDispatcher() // 3D事件中心
         this.event = null
+        this.particleSystems = null
     }
 
     /**
@@ -61,6 +63,7 @@ export default class CesiumApp {
         this.viewer.scene.fog.enabled = false // 烟雾效果
         this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
         this.event = new Event(this)
+        this.particleSystems = new ParticleSystems(this)
         this.switchViewMode('3D模式')
         this.addTerrain()
         this.firstCallBack()
