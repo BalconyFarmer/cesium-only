@@ -73,7 +73,6 @@ export default class CesiumApp {
     addTimeAction () {
         this.load3DModel.addModel()
         this.innerGeometry.addIcon()
-        // this.innerGeometry.addMesh()
         this.innerGeometry.addGeometry()
         this.part.addFlowLine()
         this.part.addCircleScan()
