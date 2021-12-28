@@ -42,5 +42,19 @@ export default class ChengDu {
             self.app.cameraAutoRoll(aim1)
         }, 9000)
 
+        const option = {
+            lon: 104.08867088908544,
+            lat: 30.649448026709173,
+            radius: 500
+        }
+        self.app.part.addRadarScan(option)
+
+        const option1 = {
+            lon: 104.08077683485338,
+            lat: 30.635968171376696,
+            radius: 300
+        }
+        self.app.part.addCircleScan(option1)
+
     }
 }

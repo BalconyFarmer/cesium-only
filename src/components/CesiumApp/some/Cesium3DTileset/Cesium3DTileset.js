@@ -48,7 +48,7 @@ export default class Cesium3DTileset {
             url: (this.app.staticServerAdress + '/3DTiles/building/tileset.json')
         }))
         let cityStyle = new Cesium.Cesium3DTileStyle({
-            color: 'rgba(101,113,164, 0.95)',
+            color: 'rgba(101,113,164, 1)',
             show: true
         })
         const self = this

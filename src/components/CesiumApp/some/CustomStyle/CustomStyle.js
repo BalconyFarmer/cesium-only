@@ -115,7 +115,7 @@ export default class CustomStyle {
         }
         Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty
         Cesium.Material.PolylineTrailLinkType = 'PolylineTrailLink'
-        Cesium.Material.PolylineTrailLinkImage = 'http://localhost:1111/3Dstatic/loadData/colors3.png'
+        Cesium.Material.PolylineTrailLinkImage = 'http://localhost:1111/3Dstatic/loadData/flowNumber/11.png'
         Cesium.Material.PolylineTrailLinkSource = 'czm_material czm_getMaterial(czm_materialInput materialInput)\n\
                                                       {\n\
                                                            czm_material material = czm_getDefaultMaterial(materialInput);\n\
@@ -223,7 +223,7 @@ export default class CustomStyle {
     /**
      * 添加原型扫描
      */
-    addCircleScan () {
+    addCircleScan (option) {
         /*
         添加扫描线 depth关闭   lon:-74.01296152309055 lat:40.70524201566827 height:129.14366696393927
         viewer
@@ -332,15 +332,21 @@ export default class CustomStyle {
 
         let lon = 102.65416219381753
         let lat = 24.90134988427503
+        let radius = 50
+        if (option) {
+            lon = option.lon
+            lat = option.lat
+            radius = option.radius
+        }
         let CartographicCenter = new Cesium.Cartographic(Cesium.Math.toRadians(lon), Cesium.Math.toRadians(lat), 0)
-        let scanColor = new Cesium.Color(1.0, 0.0, 0.0, 1)
-        AddCircleScanPostStage(this.app.viewer, CartographicCenter, 50, scanColor, 4000)
+        let scanColor = new Cesium.Color.fromCssColorString('rgba(85, 66, 225, 1)')
+        AddCircleScanPostStage(this.app.viewer, CartographicCenter, radius, scanColor, 4000)
     }
 
     /**
      * 添加雷达原型扫描
      */
-    addRadarScan () {
+    addRadarScan (option) {
         /*
           添加雷达扫描线 地形遮挡开启   lon:-74.01296152309055 lat:40.70524201566827 height:129.14366696393927
           viewer
@@ -494,9 +500,16 @@ export default class CustomStyle {
 
         let lon = 102.65416219381753
         let lat = 24.90134988427503
+        let radius = 100
+        if (option) {
+            lon = option.lon
+            lat = option.lat
+            radius = option.radius
+        }
+
         let CartographicCenter = new Cesium.Cartographic(Cesium.Math.toRadians(lon), Cesium.Math.toRadians(lat), 0)
-        let scanColor = new Cesium.Color(1.0, 0.0, 0.0, 1)
-        AddRadarScanPostStage(this.app.viewer, CartographicCenter, 100, scanColor, 4000)
+        let scanColor = new Cesium.Color.fromCssColorString('rgba(254, 129, 6, 0.75)')
+        AddRadarScanPostStage(this.app.viewer, CartographicCenter, radius, scanColor, 4000)
     }
 
 }
