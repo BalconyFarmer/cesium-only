@@ -35,30 +35,37 @@ export default class CustomStyle {
     /**
      * 添加流动线条
      */
-    addFlowLine () {
+    addFlowLine (points) {
+
+        let _p = null
+        if (points) {
+            _p = Cesium.Cartesian3.fromDegreesArrayHeights(points)
+        } else {
+            _p = Cesium.Cartesian3.fromDegreesArrayHeights(
+                [
+                    102.65350192582177,
+                    24.90245912637886,
+                    1856.801867224477,
+
+                    102.65398695287782,
+                    24.90242237510545,
+                    1856.801867224477,
+
+                    102.65392975708504,
+                    24.90199492576048,
+                    1856.801867224477,
+
+                    102.65341015592861,
+                    24.9019991170425,
+                    1856.801867224477,
+
+                ])
+        }
 
         this.app.viewer.entities.add({
             name: 'PolylineTrail',
             polyline: {
-                positions: Cesium.Cartesian3.fromDegreesArrayHeights(
-                    [
-                        102.65350192582177,
-                        24.90245912637886,
-                        1856.801867224477,
-
-                        102.65398695287782,
-                        24.90242237510545,
-                        1856.801867224477,
-
-                        102.65392975708504,
-                        24.90199492576048,
-                        1856.801867224477,
-
-                        102.65341015592861,
-                        24.9019991170425,
-                        1856.801867224477,
-
-                    ]),
+                positions: _p,
                 width: 20,
                 material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }

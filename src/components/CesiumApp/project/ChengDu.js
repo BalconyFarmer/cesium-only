@@ -56,5 +56,17 @@ export default class ChengDu {
         }
         self.app.part.addCircleScan(option1)
 
+        const points = [
+            104.08055789083461,
+            30.642949020712404,
+            -0.00416811510864983,
+
+            104.08055789083461,
+            30.642949020712404,
+            1000,
+        ]
+        self.app.part.addFlowLine(points)
+
+
     }
 }
