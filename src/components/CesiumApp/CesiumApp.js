@@ -263,6 +263,56 @@ export default class CesiumApp {
         })
     }
 
+    /**
+     * 相机绕点自动旋转
+     */
+    cameraAutoRoll (options) {
+        const self = this
+
+        let position = new Cesium.Cartesian3(options.x, options.y, options.z)
+
+        // 相机看点的角度，如果大于0那么则是从地底往上看，所以要为负值，这里取-30度
+        let pitch = options.pitch
+
+        // 给定飞行一周所需时间，比如10s, 那么每秒转动度数
+        let angle = 360 / 30
+
+        // 给定相机距离点多少距离飞行，这里取值为5000m
+        let distance = 5000
+
+        let startTime = Cesium.JulianDate.fromDate(new Date())
+
+        let stopTime = Cesium.JulianDate.addSeconds(startTime, 3, new Cesium.JulianDate());
+
+        this.viewer.clock.startTime = startTime.clone()  // 开始时间
+        viewer.clock.stopTime = stopTime.clone();     // 结速时间
+        this.viewer.clock.currentTime = startTime.clone() // 当前时间
+        this.viewer.clock.clockRange = Cesium.ClockRange.CLAMPED // 行为方式
+        this.viewer.clock.clockStep = Cesium.ClockStep.SYSTEM_CLOCK // 时钟设置为当前系统时间; 忽略所有其他设置。
+        // 相机的当前heading
+        let initialHeading = this.viewer.camera.heading
+        let Exection = function TimeExecution () {
+            // 当前已经过去的时间，单位s
+            let delTime = Cesium.JulianDate.secondsDifference(self.viewer.clock.currentTime, self.viewer.clock.startTime)
+            let heading = Cesium.Math.toRadians(delTime * angle) + initialHeading
+            self.viewer.scene.camera.setView({
+                destination: position, // 点的坐标
+                orientation: {
+                    heading: heading,
+                    pitch: pitch,
+
+                }
+            })
+            self.viewer.scene.camera.moveBackward(distance)
+
+            if (Cesium.JulianDate.compare(self.viewer.clock.currentTime, self.viewer.clock.stopTime) >= 0) {
+                self.viewer.clock.onTick.removeEventListener(Exection)
+            }
+        }
+
+        this.viewer.clock.onTick.addEventListener(Exection)
+    }
+
     getViewerEntitys () {
         return this.viewer.entities.values
     }
