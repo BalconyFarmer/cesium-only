@@ -10,6 +10,7 @@ import {initFlowMatetial} from './some/CustomStyle/_PolylineTrailLinkMaterialPro
 import InnerGeometry from './some/InnerGeometry/InnerGeometry'
 import Event from './some/Event'
 import ParticleSystems from './some/ParticleSystems'
+import CustomShaderTest from './some/CustomStyle/CustomShaderTest'
 
 export default class CesiumApp {
     constructor () {
@@ -26,6 +27,7 @@ export default class CesiumApp {
         this.eventCenter = new THREE.EventDispatcher() // 3D事件中心
         this.event = null
         this.particleSystems = null
+        this.customShaderTest = null
     }
 
     /**
@@ -64,6 +66,7 @@ export default class CesiumApp {
         this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
         this.event = new Event(this)
         this.particleSystems = new ParticleSystems(this)
+        this.customShaderTest = new CustomShaderTest(this)
         this.switchViewMode('3D模式')
         this.addTerrain()
         this.firstCallBack()
