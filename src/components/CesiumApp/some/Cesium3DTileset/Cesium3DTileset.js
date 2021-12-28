@@ -48,13 +48,13 @@ export default class Cesium3DTileset {
             url: (this.app.staticServerAdress + '/3DTiles/building/tileset.json')
         }))
         let cityStyle = new Cesium.Cesium3DTileStyle({
-            color: 'rgba(45, 0, 75, 0.5)',
+            color: 'rgba(101,113,164, 0.95)',
             show: true
         })
         const self = this
         tileset.readyPromise.then(function (tileset) {
             let city = self.app.viewer.scene.primitives.add(tileset)
-            // city.style = cityStyle
+            city.style = cityStyle
             self.app.viewer.zoomTo(tileset, new Cesium.HeadingPitchRange(0.5, -0.2, tileset.boundingSphere.radius * 1.0))
         }).otherwise(function (error) {
             console.log(error)

@@ -69,6 +69,10 @@
                             </el-option>
                         </el-select>
                     </el-menu-item>
+                    <el-menu-item>
+                        <span class="demonstration">亮度</span>
+                        <el-slider :max="1" :step="0.1" v-model="brightness"></el-slider>
+                    </el-menu-item>
                 </el-menu>
             </div>
         </div>
@@ -127,6 +131,15 @@
     export default {
         name: 'hoting',
         watch: {
+            brightness: {
+                handler (newValue) {
+                    if (this.cApp) {
+                        this.cApp.updateBrightness(this.brightness)
+                    }
+                },
+                deep: true,
+                immediate: false
+            },
             value: {
                 handler (newValue) {
                     if (this.cApp) {
@@ -149,6 +162,7 @@
 
         data () {
             return {
+                brightness: 1,
                 terrainFlag: true,
                 moveToolFlag: false,
                 value: '2.5D模式',

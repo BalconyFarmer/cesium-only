@@ -116,6 +116,17 @@ export default class CesiumApp {
         })
     }
 
+    /**
+     * 调整亮度
+     * @param data
+     */
+    updateBrightness (value) {
+        let stages = this.viewer.scene.postProcessStages
+        this.viewer.scene.brightness = this.viewer.scene.brightness || stages.add(Cesium.PostProcessStageLibrary.createBrightnessStage())
+        this.viewer.scene.brightness.enabled = true
+        this.viewer.scene.brightness.uniforms.brightness = Number(value)
+    }
+
     switchViewMode (data) {
         switch (data) {
             case '2.5D模式':
@@ -282,10 +293,10 @@ export default class CesiumApp {
 
         let startTime = Cesium.JulianDate.fromDate(new Date())
 
-        let stopTime = Cesium.JulianDate.addSeconds(startTime, 3, new Cesium.JulianDate());
+        let stopTime = Cesium.JulianDate.addSeconds(startTime, 3, new Cesium.JulianDate())
 
         this.viewer.clock.startTime = startTime.clone()  // 开始时间
-        viewer.clock.stopTime = stopTime.clone();     // 结速时间
+        viewer.clock.stopTime = stopTime.clone()     // 结速时间
         this.viewer.clock.currentTime = startTime.clone() // 当前时间
         this.viewer.clock.clockRange = Cesium.ClockRange.CLAMPED // 行为方式
         this.viewer.clock.clockStep = Cesium.ClockStep.SYSTEM_CLOCK // 时钟设置为当前系统时间; 忽略所有其他设置。
