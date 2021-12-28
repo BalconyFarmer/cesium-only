@@ -43,19 +43,21 @@ export default class Cesium3DTileset {
     /**
      * 加载本地3D tiles 文件
      */
-    addTiles() {
+    addTiles () {
         let tileset = this.app.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
             url: (this.app.staticServerAdress + '/3DTiles/building/tileset.json')
-        }));
-
+        }))
+        let cityStyle = new Cesium.Cesium3DTileStyle({
+            color: 'rgba(45, 0, 75, 0.5)',
+            show: true
+        })
         const self = this
         tileset.readyPromise.then(function (tileset) {
-            self.app.viewer.scene.primitives.add(tileset);
-            self.app.viewer.zoomTo(tileset, new Cesium.HeadingPitchRange(0.5, -0.2, tileset.boundingSphere.radius * 1.0));
+            let city = self.app.viewer.scene.primitives.add(tileset)
+            // city.style = cityStyle
+            self.app.viewer.zoomTo(tileset, new Cesium.HeadingPitchRange(0.5, -0.2, tileset.boundingSphere.radius * 1.0))
         }).otherwise(function (error) {
-            console.log(error);
-        });
-        this.app.cameraFlyTo(104.06314931955744, 30.66022435640493, 455.3754270612839,)
-
+            console.log(error)
+        })
     }
 }

@@ -66,7 +66,7 @@ export default class Load3DModel {
                 scale: 1.0,
             }
         )
-        car.name = "车车车" // 失效
+        car.name = '车车车' // 失效
 
         this.app.viewer.scene.primitives.add(car)
         // 循环执行函数
@@ -87,7 +87,16 @@ export default class Load3DModel {
         run()
 
         // this.app.cameraFlyTo(102.65400663464233, 24.90300286288314, 1856.4620764260865, 4.583496596296543, -0.11011623452653185)
-        this.app.cameraFlyToCartesian3(-1268889.5819769907, 5649559.131514993, 2670092.8417171706, 4.589028797595305, -0.09566515321336477, 0.000004374750088409485)
+        const aim = {
+            x: -1268889.5819769907,
+            y: 5649559.131514993,
+            z: 2670092.8417171706,
+            heading: 4.589028797595305,
+            pitch: -0.09566515321336477,
+            roll: 0.000004374750088409485,
+            duration: 1,
+        }
+        this.app.cameraFlyToCartesian3(aim)
 
     }
 

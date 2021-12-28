@@ -231,7 +231,7 @@
                 } else if (key == 9) {
                     this.cApp.switchLight()
                 } else if (key == 11) {
-                    this.cApp.cesium3DTileset.addTiles()
+                    this.cApp.runChengDu()
                 } else if (key == 12) {
                     this.cApp.obliquePhotography.addOblique()
                 } else if (key == 13) {

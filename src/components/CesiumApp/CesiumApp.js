@@ -11,6 +11,7 @@ import InnerGeometry from './some/InnerGeometry/InnerGeometry'
 import Event from './some/Event'
 import ParticleSystems from './some/ParticleSystems'
 import CustomShaderTest from './some/CustomStyle/CustomShaderTest'
+import ChengDu from './project/ChengDu'
 
 export default class CesiumApp {
     constructor () {
@@ -65,8 +66,6 @@ export default class CesiumApp {
         this.viewer.scene.fog.enabled = false // 烟雾效果
         this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
         this.event = new Event(this)
-        this.particleSystems = new ParticleSystems(this)
-        this.customShaderTest = new CustomShaderTest(this)
         this.switchViewMode('3D模式')
         this.addTerrain()
         this.firstCallBack()
@@ -74,6 +73,7 @@ export default class CesiumApp {
     }
 
     /**
+     * run
      * 效果演示时间线
      */
     addTimeAction () {
@@ -85,6 +85,15 @@ export default class CesiumApp {
         this.part.addRadarScan()
         this.part.addFlyLine3D()
         this.getViewerEntitys()
+        this.particleSystems = new ParticleSystems(this) // 粒子系统
+        this.customShaderTest = new CustomShaderTest(this) // 自定义着色器
+    }
+
+    /**
+     * 成都项目时间线
+     */
+    runChengDu () {
+        new ChengDu(this)
     }
 
     /**
@@ -241,15 +250,16 @@ export default class CesiumApp {
 
     }
 
-    cameraFlyToCartesian3 (x, y, z, heading, pitch, roll) {
-        let cartesian3 = new Cesium.Cartesian3(x, y, z)
+    cameraFlyToCartesian3 (aim) {
+        let cartesian3 = new Cesium.Cartesian3(aim.x, aim.y, aim.z)
         this.viewer.camera.flyTo({
             destination: cartesian3,
             orientation: {
-                heading: heading, // east, default value is 0.0 (north) 左右摆头
-                pitch: pitch, // default value (looking down) 上下摆头 -90俯视 0 平视
-                roll: roll // default value
-            }
+                heading: aim.heading, // east, default value is 0.0 (north) 左右摆头
+                pitch: aim.pitch, // default value (looking down) 上下摆头 -90俯视 0 平视
+                roll: aim.roll // default value
+            },
+            duration: aim.duration, // 飞行时长
         })
     }
 
