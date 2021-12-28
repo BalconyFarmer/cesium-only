@@ -347,6 +347,7 @@
             z-index: 999;
             overflow-y: auto;
             background-color: #2B2B2B;
+            color: white;
         }
 
         .rightPart {
