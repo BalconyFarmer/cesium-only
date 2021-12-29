@@ -51,6 +51,10 @@ export default class Cesium3DTileset {
             color: 'rgba(101,113,164, 1)',
             show: true
         })
+        let specialCityStyle = new Cesium.Cesium3DTileStyle({
+            color: 'rgb(150,253,0)',
+            show: true
+        })
         const self = this
         tileset.readyPromise.then(function (tileset) {
             let city = self.app.viewer.scene.primitives.add(tileset)

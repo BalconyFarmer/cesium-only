@@ -43,6 +43,7 @@ export default class Event {
             // 选取模型 事件
             var pick = self.app.viewer.scene.pick(event.position)
             console.log(pick, 'pick-pick-pick-pick-pick')
+
             if (pick) {
                 if (pick.id) {
                     self.app.eventCenter.dispatchEvent({

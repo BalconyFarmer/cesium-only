@@ -36,7 +36,6 @@ export default class CesiumApp {
      */
     initMap () {
         initFlowMatetial()
-        this.switchLayer('3D模式')
         this.option = {
             animation: false, // 如果设置为false,则不会创建'动画'小部件。
             contextOptions: {
@@ -67,6 +66,7 @@ export default class CesiumApp {
         this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
         this.event = new Event(this)
         this.switchViewMode('3D模式')
+        this.switchLayer('ArcGis实景图层')
         this.addTerrain()
         this.firstCallBack()
         window.viewer = this.viewer
@@ -241,6 +241,16 @@ export default class CesiumApp {
                 break
         }
         this.Imagery = Imagery
+    }
+
+    /**
+     * 更新地图图层亮度
+     * @param data
+     */
+    updateLyerLight (alpha, brightness) {
+        this.viewer.imageryLayers._layers[0].alpha = alpha//透明度
+        this.viewer.imageryLayers._layers[0].brightness = brightness//亮度
+        console.log(this.viewer.imageryLayers, '++++++++++++++++++++')
     }
 
     /**

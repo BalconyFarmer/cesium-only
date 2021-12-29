@@ -12,6 +12,8 @@ export default class ChengDu {
 
         this.app.closeAll()
         this.app.switchLayer('ArcGis实景图层')
+        this.app.updateLyerLight(0.5, 0.5)
+
         this.app.cesium3DTileset.addTiles()
         const aim = {
             x: -1332091.1947445858,
@@ -66,7 +68,6 @@ export default class ChengDu {
             1000,
         ]
         self.app.part.addFlowLine(points)
-
 
     }
 }
