@@ -82,22 +82,28 @@
             <el-tree :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
         </div>
         <div class="rightPart">
-            MATH
             <div>
-                log,lat,height
+                MATH
+            </div>
+            <br>
+
+            <div>
+                <div class="title">log,lat,height</div>
                 <div>{{clickPosition[0]|| 0}},</div>
                 <div>{{clickPosition[1]|| 0}},</div>
                 <div>{{clickPosition[2]|| 0}},</div>
             </div>
+
+            <br>
             <div>
-                camera
-                log,lat,height
+                <div class="title">camera</div>
+                <div class="title">log,lat,height</div>
                 <div>{{cameraPosition[0]|| 0}}</div>
-                heading
+                <div class="title">heading</div>
                 <div>{{cameraPosition[1]|| 0}}</div>
-                pitch
+                <div class="title">pitch</div>
                 <div>{{cameraPosition[2]|| 0}}</div>
-                roll
+                <div class="title">roll</div>
                 <div>{{cameraPosition[3]|| 0}}</div>
             </div>
         </div>
@@ -302,6 +308,15 @@
         overflow-y: hidden;
     }
 
+    .title {
+        font-weight: bold;
+        color: #87939A;
+    }
+
+    .el-tree-node__content:hover {
+        background-color: rgba(43, 43, 43, 0.9);
+    }
+
     /*定义滚动条高宽及背景
     高宽分别对应横竖滚动条的尺寸*/
     ::-webkit-scrollbar {
@@ -360,7 +375,7 @@
             top: 10%;
             z-index: 999;
             overflow-y: auto;
-            background-color: #2B2B2B;
+            background-color: rgba(43, 43, 43, .5);
             color: white;
         }
 
@@ -373,7 +388,7 @@
             z-index: 999;
             overflow-y: auto;
             color: white;
-            background-color: #2B2B2B;
+            background-color: rgba(43, 43, 43, .5);
         }
 
         .bottomCenter {
@@ -382,7 +397,7 @@
             position: absolute;
             left: 15%;
             bottom: 0%;
-            background-color: #2B2B2B;
+            background-color: rgba(43, 43, 43, .5);
             z-index: 999;
             color: white;
 
@@ -396,7 +411,7 @@
     .el-tree {
         position: relative;
         cursor: default;
-        background: #2B2B2B;
+        background-color: rgba(43, 43, 43, .0);
         color: #ffffff;
     }
 
