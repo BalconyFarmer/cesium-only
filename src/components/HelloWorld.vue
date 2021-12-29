@@ -346,6 +346,14 @@
         visibility: hidden !important;
     }
 
+    .el-menu {
+        background-color: #3C3F41;
+    }
+
+    .el-menu.el-menu--horizontal {
+        border-bottom: solid 1px #3C3F41;
+    }
+
     #cesiumContainer {
         width: 100%;
         height: 100%;
@@ -364,7 +372,7 @@
             left: 0;
             top: 0;
             z-index: 999;
-            background-color: #FFFFFF;
+            background-color: #3C3F41;
         }
 
         .leftTree {
