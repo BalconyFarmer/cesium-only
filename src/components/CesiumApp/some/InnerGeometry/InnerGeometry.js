@@ -42,21 +42,31 @@ export default class InnerGeometry {
     /**
      * 加载bilbord
      */
-    addIcon () {
-        this.app.viewer.entities.add({
-            position: Cesium.Cartesian3.fromDegrees(
+    addIcon (point,text) {
+        let _p = null
+        if (point) {
+            _p = Cesium.Cartesian3.fromDegrees(
+                point[0],
+                point[1],
+                point[2],
+            )
+        } else {
+            _p = Cesium.Cartesian3.fromDegrees(
                 102.65401175390049,
                 24.90222947105644,
-                1856.4496713384267,),
+                2856.4496713384267,)
+        }
+        this.app.viewer.entities.add({
+            position: _p,
             // 点
             point: {
-                color: Cesium.Color.RED, // 点位颜色
+                color: Cesium.Color.YELLOW, // 点位颜色
                 pixelSize: 10 // 像素点大小
             },
             // 文字
             label: {
                 // 文本。支持显式换行符“ \ n”
-                text: '1号房',
+                text: (text || '1号房'),
                 // 字体样式,以CSS语法指定字体
                 font: '14pt Source Han Sans CN',
                 // 字体颜色
@@ -64,7 +74,7 @@ export default class InnerGeometry {
                 // 背景颜色
                 backgroundColor: Cesium.Color.AQUA,
                 // 是否显示背景颜色
-                showBackground: true,
+                showBackground: false,
                 // 字体边框
                 outline: true,
                 // 字体边框颜色
