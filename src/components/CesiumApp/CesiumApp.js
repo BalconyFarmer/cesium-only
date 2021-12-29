@@ -303,7 +303,7 @@ export default class CesiumApp {
 
         let startTime = Cesium.JulianDate.fromDate(new Date())
 
-        let stopTime = Cesium.JulianDate.addSeconds(startTime, 3, new Cesium.JulianDate())
+        let stopTime = Cesium.JulianDate.addSeconds(startTime, options.duration, new Cesium.JulianDate())
 
         this.viewer.clock.startTime = startTime.clone()  // 开始时间
         viewer.clock.stopTime = stopTime.clone()     // 结速时间

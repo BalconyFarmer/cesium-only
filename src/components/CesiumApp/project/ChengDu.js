@@ -15,16 +15,6 @@ export default class ChengDu {
         this.app.updateLyerLight(0.5, 0.5)
 
         this.app.cesium3DTileset.addTiles()
-        const aim = {
-            x: -1332091.1947445858,
-            y: 5327715.718829383,
-            z: 3241250.700497874,
-            heading: 2.7068407153634686,
-            pitch: -0.5225413080629986,
-            roll: 6.2830076707588995,
-            duration: 3,
-        }
-        this.app.cameraFlyToCartesian3(aim)
 
         const aim1 = {
             x: -1335650.7543657143,
@@ -33,16 +23,13 @@ export default class ChengDu {
             heading: 2.464077977287265,
             pitch: -0.38924437417452307,
             roll: 0.00001352269589993682,
-            duration: 3,
+            duration: 10,
         }
+        self.app.cameraAutoRoll(aim1)
 
         setTimeout(function () {
             self.app.cameraFlyToCartesian3(aim1)
-        }, 6000)
-
-        setTimeout(function () {
-            self.app.cameraAutoRoll(aim1)
-        }, 9000)
+        }, 10000)
 
         const option = {
             lon: 104.08867088908544,
@@ -74,14 +61,21 @@ export default class ChengDu {
             30.644404672369557,
             100,
         ]
-        self.app.innerGeometry.addIcon(pointsText,"东城区")
+        self.app.innerGeometry.addIcon(pointsText, '东城区')
         const pointsText1 = [
             104.06950857297834,
             30.635728818649884,
             100,
         ]
-        self.app.innerGeometry.addIcon(pointsText1,"西城区")
+        self.app.innerGeometry.addIcon(pointsText1, '西城区')
 
+        let center = {lon: 104.05696940937665, lat: 30.640501148524567}
+
+        let cities = [
+            {'lon': 104.07180146590125, 'lat': 30.62297101822975,},
+            {'lon': 104.04901932448976, 'lat': 30.616076052494645,},
+        ]
+        this.app.part.addFlyLine3D(center, cities)
 
     }
 }

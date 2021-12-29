@@ -97,4 +97,16 @@ export default class InnerGeometry {
         })
     }
 
+    addPoint () {
+        // for (let i = 0; i < cities.length; i++) {
+        //     viewer.entities.add({
+        //         position: Cesium.Cartesian3.fromDegrees(cities[i].lon, cities[i].lat, 1),
+        //         point: {
+        //             pixelSize: 10,
+        //             color: Cesium.Color.YELLOW
+        //         }
+        //     })
+        // }
+    }
+
 }

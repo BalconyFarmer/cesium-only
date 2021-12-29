@@ -75,7 +75,7 @@ export default class CustomStyle {
     /**
      * 添加flyline
      */
-    addFlyLine3D () {
+    addFlyLine3D (centerP, citiesP) {
         /*
           流纹纹理线
           color 颜色
@@ -111,7 +111,7 @@ export default class CustomStyle {
                 result = {}
             }
             result.color = Cesium.Property.getValueOrClonedDefault(this._color, time, Cesium.Color.WHITE, result.color)
-            result.image = Cesium.Material.PolylineTrailLinkImage
+            result.image = Cesium.Material.vvImg
             result.time = (((new Date()).getTime() - this._time) % this.duration) / this.duration
             return result
         }
@@ -121,9 +121,10 @@ export default class CustomStyle {
                     Cesium.Property.equals(this._color, other._color))
         }
         Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty
+
         Cesium.Material.PolylineTrailLinkType = 'PolylineTrailLink'
-        Cesium.Material.PolylineTrailLinkImage = 'http://localhost:1111/3Dstatic/loadData/flowNumber/11.png'
-        Cesium.Material.PolylineTrailLinkSource = 'czm_material czm_getMaterial(czm_materialInput materialInput)\n\
+        Cesium.Material.vvImg = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
+        let fuck = 'czm_material czm_getMaterial(czm_materialInput materialInput)\n\
                                                       {\n\
                                                            czm_material material = czm_getDefaultMaterial(materialInput);\n\
                                                            vec2 st = materialInput.st;\n\
@@ -137,21 +138,22 @@ export default class CustomStyle {
                 type: Cesium.Material.PolylineTrailLinkType,
                 uniforms: {
                     color: new Cesium.Color(1.0, 0.0, 0.0, 0.5),
-                    image: Cesium.Material.PolylineTrailLinkImage,
+                    image: Cesium.Material.vvImg,
                     time: 0
                 },
-                source: Cesium.Material.PolylineTrailLinkSource
+                source: fuck
             },
             translucent: function (material) {
                 return true
             }
         })
 
+        // 抛物线 相等
         function parabolaEquation (options, resultOut) {
             //方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
-            let h = options.height && options.height > 5000 ? options.height : 5000
+            let h = options.height
             let L = Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat) ? Math.abs(options.pt1.lon - options.pt2.lon) : Math.abs(options.pt1.lat - options.pt2.lat)
-            let num = options.num && options.num > 50 ? options.num : 50
+            let num = options.num
             let result = []
             let dlt = L / num
             if (Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat)) {//以lon为基准
@@ -183,18 +185,22 @@ export default class CustomStyle {
             return result
         }
 
-        let material = null
         let center = {lon: 102.6527445274038, lat: 24.902615750602656}
+        if (centerP) {
+            center = centerP
+        }
         let cities = [
-            {'lon': 102.65487540422131, 'lat': 24.903678928793752},
+            {'lon': 106.29811132257352, 'lat': 23.737538875216853,},
             {'lon': 110.795000473, 'lat': 32.638540762},
         ]
-        if (material != null) {
-        } else {
-            material = new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 1000)
+        if (citiesP) {
+            cities = citiesP
         }
+
+        let material = new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 10000)
+
         for (let j = 0; j < cities.length; j++) {
-            let points = parabolaEquation({pt1: center, pt2: cities[j], height: 50000, num: 100})
+            let points = parabolaEquation({pt1: center, pt2: cities[j], height: 500, num: 100})
             let pointArr = []
             for (let i = 0; i < points.length; i++) {
                 pointArr.push(points[i][0], points[i][1], points[i][2])
@@ -209,22 +215,6 @@ export default class CustomStyle {
             })
         }
 
-        viewer.entities.add({
-            position: Cesium.Cartesian3.fromDegrees(center.lon, center.lat, 1),
-            point: {
-                pixelSize: 10,
-                color: Cesium.Color.BLUE
-            }
-        })
-        for (let i = 0; i < cities.length; i++) {
-            viewer.entities.add({
-                position: Cesium.Cartesian3.fromDegrees(cities[i].lon, cities[i].lat, 1),
-                point: {
-                    pixelSize: 10,
-                    color: Cesium.Color.YELLOW
-                }
-            })
-        }
     }
 
     /**
