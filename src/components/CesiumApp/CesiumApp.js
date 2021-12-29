@@ -86,6 +86,7 @@ export default class CesiumApp {
         this.part.addFlyLine3D()
         this.getViewerEntitys()
         this.particleSystems = new ParticleSystems(this) // 粒子系统
+        this.particleSystems.init()
         this.customShaderTest = new CustomShaderTest(this) // 自定义着色器
     }
 

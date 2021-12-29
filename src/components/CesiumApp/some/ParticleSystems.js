@@ -9,26 +9,30 @@ import * as widget from 'cesium/Widgets/widgets.css'
 export default class ParticleSystems {
     constructor (app) {
         this.app = app
-        this.init()
     }
 
-    init () {
+    init (position) {
         let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
             Cesium.Cartesian3.fromDegrees(102.65429951325757, 24.902681903918705, 1856.1428287336178)
         )
+        if (position) {
+            modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
+                Cesium.Cartesian3.fromDegrees(position[0], position[1], position[2])
+            )
+        }
         let particleSystem = this.app.viewer.scene.primitives.add(new Cesium.ParticleSystem({
-            emitter : new Cesium.CircleEmitter(1.1),    // 发射器类型
-            image : 'http://localhost:1111/3Dstatic/loadData/fire.png',
-            imageSize : new Cesium.Cartesian2(1, 1), // 图片大小
-            emissionRate : 10.0, // 发射率
+            emitter: new Cesium.CircleEmitter(1.1),    // 发射器类型
+            image: 'http://localhost:1111/3Dstatic/loadData/fire.png',
+            imageSize: new Cesium.Cartesian2(1, 1), // 图片大小
+            emissionRate: 10.0, // 发射率
             gravity: 0.0, // 万有引力
-            startScale : 100.0, // 开始放大率
-            endScale : 1.0, // 结束放大率
-            particleLife : 2.0,
-            lifetime : 16.0,
-            modelMatrix : modelMatrix, //
-            minimumImageSize : new Cesium.Cartesian2(1, 1), // 随机图片最小
-            maximumImageSize : new Cesium.Cartesian2(11, 11), // 随机图片最大
+            startScale: 100.0, // 开始放大率
+            endScale: 1.0, // 结束放大率
+            particleLife: 2.0,
+            lifetime: 16.0,
+            modelMatrix: modelMatrix, //
+            minimumImageSize: new Cesium.Cartesian2(1, 1), // 随机图片最小
+            maximumImageSize: new Cesium.Cartesian2(11, 11), // 随机图片最大
             minimumSpeed: 5.0, // 最小速度
             maximumSpeed: 10.0, // 最大速度
             minimumParticleLife: 1, // 最小生命
@@ -53,7 +57,7 @@ export default class ParticleSystems {
             //         maximum: 300,
             //     }),
             // ],
-        }));
+        }))
     }
 
 }
