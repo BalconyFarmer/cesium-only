@@ -128,6 +128,12 @@
             <div class="normal p" @mousedown="mouseDown('点')" @mouseup="mouseUp()">
                 点
             </div>
+            <div class="normal p" @mousedown="mouseDown('Box')" @mouseup="mouseUp()">
+                Box
+            </div>
+            <div class="normal p" @mousedown="mouseDown('addEllipse')" @mouseup="mouseUp()">
+                addEllipse
+            </div>
             <div class="normal y" @mousedown="mouseDown('圆柱体')" @mouseup="mouseUp()">
                 圆柱体
             </div>
@@ -247,7 +253,12 @@
                         case 'bilbord':
                             this.cApp.innerGeometry.addIcon(this.geoPositionCartesian2, '默认')
                             break
-
+                        case 'Box':
+                            this.cApp.innerGeometry.addBox(this.geoPositionCartesian2)
+                            break
+                        case 'addEllipse':
+                            this.cApp.innerGeometry.addEllipse(this.geoPositionCartesian2)
+                            break
                     }
                 }
                 this.addGeoFlag = false
@@ -453,6 +464,7 @@
             -moz-user-select: none;
             -khtml-user-select: none;
             user-select: none;
+
             .normal {
                 width: 50px;
                 height: 50px;

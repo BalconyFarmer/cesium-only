@@ -13,8 +13,6 @@ export default class InnerGeometry {
         this.TooltipCesium = TooltipCesium
     }
 
-
-
     /**
      * 加载bilbord
      */
@@ -100,4 +98,29 @@ export default class InnerGeometry {
 
     }
 
+    addBox (Cartesian3) {
+        var redBox = this.app.viewer.entities.add({
+            name: 'Red box with black outline',
+            position: Cartesian3,
+            box: {
+                dimensions: new Cesium.Cartesian3(400000.0, 300000.0, 500000.0),
+                material: Cesium.Color.RED,
+                outline: true, //显示轮廓
+                outlineColor: Cesium.Color.BLACK
+            }
+        })
+    }
+
+    addEllipse (Cartesian3) {
+        var greenCircle = this.app.viewer.entities.add({
+            position: Cartesian3,
+            name: 'Green circle at height',
+            ellipse: {
+                semiMinorAxis: 300000.0,
+                semiMajorAxis: 300000.0,
+                height: 200000.0, //浮空
+                material: Cesium.Color.GREEN
+            }
+        })
+    }
 }
