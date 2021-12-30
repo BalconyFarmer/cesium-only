@@ -111,6 +111,10 @@ export default class InnerGeometry {
         })
     }
 
+    /**
+     * 圆面
+     * @param Cartesian3
+     */
     addEllipse (Cartesian3) {
         var greenCircle = this.app.viewer.entities.add({
             position: Cartesian3,
@@ -122,5 +126,41 @@ export default class InnerGeometry {
                 material: Cesium.Color.GREEN
             }
         })
+    }
+
+    /**
+     * 椭圆面
+     * @param Cartesian3
+     */
+    addEllipseTuo (Cartesian3) {
+        var redEllipse = this.app.viewer.entities.add({
+            //不带高度
+            position: Cartesian3,
+            name: 'Red ellipse on surface with outline',
+            ellipse: {
+                semiMinorAxis: 250000.0,
+                semiMajorAxis: 400000.0,
+                material: Cesium.Color.RED.withAlpha(0.5),
+                outline: true,
+                outlineColor: Cesium.Color.RED
+            }
+        })
+
+    }
+
+    addEllipseTuoWW (Cartesian3) {
+        var blueEllipseWW = this.app.viewer.entities.add({
+            position: Cartesian3,
+            name: 'Blue translucent, rotated, and extruded ellipse',
+            ellipse: {
+                semiMinorAxis: 150000.0,
+                semiMajorAxis: 300000.0,
+                extrudedHeight: 200000.0,  //拉伸
+                rotation: Cesium.Math.toRadians(45), //旋转
+                material: Cesium.Color.BLUE.withAlpha(0.7),
+                outline: true
+            }
+        })
+
     }
 }

@@ -134,6 +134,12 @@
             <div class="normal p" @mousedown="mouseDown('addEllipse')" @mouseup="mouseUp()">
                 addEllipse
             </div>
+            <div class="normal p" @mousedown="mouseDown('addEllipseTuo')" @mouseup="mouseUp()">
+                addEllipseTuo
+            </div>
+            <div class="normal p" @mousedown="mouseDown('addEllipseTuoWW')" @mouseup="mouseUp()">
+                addEllipseTuoWW
+            </div>
             <div class="normal y" @mousedown="mouseDown('圆柱体')" @mouseup="mouseUp()">
                 圆柱体
             </div>
@@ -258,6 +264,12 @@
                             break
                         case 'addEllipse':
                             this.cApp.innerGeometry.addEllipse(this.geoPositionCartesian2)
+                            break
+                        case 'addEllipseTuo':
+                            this.cApp.innerGeometry.addEllipseTuo(this.geoPositionCartesian2)
+                            break
+                        case 'addEllipseTuoWW':
+                            this.cApp.innerGeometry.addEllipseTuoWW(this.geoPositionCartesian2)
                             break
                     }
                 }
