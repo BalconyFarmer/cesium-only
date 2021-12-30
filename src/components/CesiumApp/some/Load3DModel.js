@@ -92,6 +92,7 @@ export default class Load3DModel {
      * 带动画
      */
     loadGLB () {
+        const self = this
         const position = Cesium.Cartesian3.fromDegrees(104.08110110247405, 30.645619203470826, 100)
         const _orientation = new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)
 
@@ -107,14 +108,17 @@ export default class Load3DModel {
             }
         })
 
-
+        let airplane = null
+        const entitiesList = self.app.viewer.entities.values
+        entitiesList.forEach(item => {
+            if (item.name === '飞机') {
+                airplane = item
+            }
+        })
 
         // 循环执行函数
-        const self = this
         let index = 0.00001
         function run () {
-            const entitiesList = self.app.viewer.entities.values
-            const airplane = entitiesList[5]
             airplane.position = new Cesium.CallbackProperty(function () {
                 return Cesium.Cartesian3.fromDegrees(
                     104.08110110247405 + index,
