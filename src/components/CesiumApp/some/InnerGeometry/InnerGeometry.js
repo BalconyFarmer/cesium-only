@@ -33,7 +33,6 @@ export default class InnerGeometry {
                 outline: true,//轮廓
                 outlineColor: Cesium.Color.DARK_GREEN,//轮廓颜色深绿色
                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
-
             }
         })
 
@@ -42,7 +41,7 @@ export default class InnerGeometry {
     /**
      * 加载bilbord
      */
-    addIcon (point,text) {
+    addIcon (point, text) {
         let _p = null
         if (point) {
             _p = Cesium.Cartesian3.fromDegrees(
@@ -97,16 +96,17 @@ export default class InnerGeometry {
         })
     }
 
-    addPoint () {
-        // for (let i = 0; i < cities.length; i++) {
-        //     viewer.entities.add({
-        //         position: Cesium.Cartesian3.fromDegrees(cities[i].lon, cities[i].lat, 1),
-        //         point: {
-        //             pixelSize: 10,
-        //             color: Cesium.Color.YELLOW
-        //         }
-        //     })
-        // }
+    addPoint (Cartesian3) {
+        if (Cartesian3) {
+            this.app.viewer.entities.add({
+                position: Cartesian3,
+                point: {
+                    pixelSize: 10,
+                    color: Cesium.Color.YELLOW
+                }
+            })
+        }
+
     }
 
 }

@@ -55,6 +55,8 @@ export default class Event {
 
         }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
+        this.mouseMoveEvent()
+
     }
 
     /**
@@ -126,6 +128,30 @@ export default class Event {
                 self.app.innerGeometry.TooltipCesium.setVisible(false)
             }
         }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
+    }
+
+    /**
+     * 手动添加模型坐标返回
+     */
+    mouseMoveEvent () {
+        const self = this
+        let test = function (movement) {
+            let cartesian = self.app.viewer.camera.pickEllipsoid(movement.endPosition, self.app.viewer.scene.globe.ellipsoid)
+            if (cartesian) {
+                let cartesian = self.app.viewer.scene.camera.pickEllipsoid(
+                    movement.endPosition,
+                    self.app.viewer.scene.globe.ellipsoid
+                )
+                self.app.eventCenter.dispatchEvent({
+                    type: 'geoPosition',
+                    message: {position: cartesian}
+                })
+            } else {
+            }
+        }
+
+        let handler = new Cesium.ScreenSpaceEventHandler(this.app.viewer.scene.canvas)
+        handler.setInputAction(test, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
     }
 
 }

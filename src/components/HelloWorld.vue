@@ -108,6 +108,9 @@
             </div>
         </div>
         <div class="bottomCenter">
+            <div @mousedown="mouseDown('点')" @mouseup="mouseUp('点')">
+                添加点
+            </div>
             <div>name: {{currentEntities? currentEntities.name: '暂无数据'}}</div>
             <div>Cartesian3: {{currentEntities? currentEntities.position._value: '暂无数据'}}</div>
             <div class="inpu">
@@ -123,8 +126,9 @@
                 <el-button @click="rotateEntity">rotate</el-button>
             </div>
 
+
         </div>
-        <div id="cesiumContainer"></div>
+        <div id="cesiumContainer" @mouseup="mouseUp('点')"></div>
 
     </div>
 </template>
@@ -168,6 +172,8 @@
 
         data () {
             return {
+                addGeoFlag: false,
+                geoPositionCartesian2: null,
                 brightness: 1,
                 terrainFlag: true,
                 moveToolFlag: false,
@@ -217,6 +223,16 @@
             }
         },
         methods: {
+            mouseDown (ev) {
+                this.addGeoFlag = true
+            },
+            mouseUp (ev) {
+                if (this.addGeoFlag) {
+                    this.cApp.innerGeometry.addPoint(this.geoPositionCartesian2)
+                }
+                this.addGeoFlag = false
+            },
+
             terrainChange () {
                 if (this.terrainFlag) {
                     this.cApp.addTerrain()
@@ -276,6 +292,9 @@
                 })
                 this.cApp.eventCenter.addEventListener('pickEntity', function (data) {
                     self.currentEntities = data.message.position
+                })
+                this.cApp.eventCenter.addEventListener('geoPosition', function (data) {
+                    self.geoPositionCartesian2 = data.message.position
                 })
 
             })
