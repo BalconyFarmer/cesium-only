@@ -16,15 +16,11 @@ export default class InnerGeometry {
     /**
      * 原生geometry
      */
-    addGeometry () {
+    addGeometry (Cartesian3) {
         //圆柱体
         this.app.viewer.entities.add({
             name: '圆柱体',
-            position: Cesium.Cartesian3.fromDegrees(
-                102.65396035468552,
-                24.902486377790712,
-                1856.388665600861
-            ),
+            position: Cartesian3,
             cylinder: {
                 length: 10.0,//圆柱体高度
                 topRadius: 2,//圆柱体的顶部半径。
@@ -97,16 +93,13 @@ export default class InnerGeometry {
     }
 
     addPoint (Cartesian3) {
-        if (Cartesian3) {
-            this.app.viewer.entities.add({
-                position: Cartesian3,
-                point: {
-                    pixelSize: 10,
-                    color: Cesium.Color.YELLOW
-                }
-            })
-        }
-
+        this.app.viewer.entities.add({
+            position: Cartesian3,
+            point: {
+                pixelSize: 10,
+                color: Cesium.Color.YELLOW
+            }
+        })
     }
 
 }

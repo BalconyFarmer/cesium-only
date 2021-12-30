@@ -80,7 +80,6 @@ export default class CesiumApp {
         this.load3DModel.addModel()
         this.load3DModel.loadGLB()
         this.innerGeometry.addIcon()
-        this.innerGeometry.addGeometry()
         this.part.addFlowLine()
         this.part.addCircleScan()
         this.part.addRadarScan()

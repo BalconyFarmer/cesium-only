@@ -108,8 +108,11 @@
             </div>
         </div>
         <div class="bottomCenter">
-            <div @mousedown="mouseDown('点')" @mouseup="mouseUp('点')">
-                添加点
+            <div @mousedown="mouseDown('点')" @mouseup="mouseUp()">
+                点
+            </div>
+            <div @mousedown="mouseDown('圆柱体')" @mouseup="mouseUp()">
+                圆柱体
             </div>
             <div>name: {{currentEntities? currentEntities.name: '暂无数据'}}</div>
             <div>Cartesian3: {{currentEntities? currentEntities.position._value: '暂无数据'}}</div>
@@ -128,7 +131,7 @@
 
 
         </div>
-        <div id="cesiumContainer" @mouseup="mouseUp('点')"></div>
+        <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
     </div>
 </template>
@@ -174,6 +177,7 @@
             return {
                 addGeoFlag: false,
                 geoPositionCartesian2: null,
+                currentGeoType: null,
                 brightness: 1,
                 terrainFlag: true,
                 moveToolFlag: false,
@@ -224,11 +228,19 @@
         },
         methods: {
             mouseDown (ev) {
+                this.currentGeoType = ev
                 this.addGeoFlag = true
             },
             mouseUp (ev) {
                 if (this.addGeoFlag) {
-                    this.cApp.innerGeometry.addPoint(this.geoPositionCartesian2)
+                    switch (this.currentGeoType) {
+                        case '点':
+                            this.cApp.innerGeometry.addPoint(this.geoPositionCartesian2)
+                            break
+                        case '圆柱体':
+                            this.cApp.innerGeometry.addGeometry(this.geoPositionCartesian2)
+                            break
+                    }
                 }
                 this.addGeoFlag = false
             },
