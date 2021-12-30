@@ -106,14 +106,8 @@
                 <div class="title">roll</div>
                 <div>{{cameraPosition[3]|| 0}}</div>
             </div>
-        </div>
-        <div class="bottomCenter">
-            <div @mousedown="mouseDown('点')" @mouseup="mouseUp()">
-                点
-            </div>
-            <div @mousedown="mouseDown('圆柱体')" @mouseup="mouseUp()">
-                圆柱体
-            </div>
+            <br>
+
             <div>name: {{currentEntities? currentEntities.name: '暂无数据'}}</div>
             <div>Cartesian3: {{currentEntities? currentEntities.position._value: '暂无数据'}}</div>
             <div class="inpu">
@@ -128,8 +122,18 @@
             <div class="inpu">
                 <el-button @click="rotateEntity">rotate</el-button>
             </div>
+        </div>
 
-
+        <div class="bottomCenter">
+            <div @mousedown="mouseDown('点')" @mouseup="mouseUp()">
+                点
+            </div>
+            <div @mousedown="mouseDown('圆柱体')" @mouseup="mouseUp()">
+                圆柱体
+            </div>
+            <div @mousedown="mouseDown('bilbord')" @mouseup="mouseUp()">
+                bilbord
+            </div>
         </div>
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
@@ -240,6 +244,10 @@
                         case '圆柱体':
                             this.cApp.innerGeometry.addGeometry(this.geoPositionCartesian2)
                             break
+                        case 'bilbord':
+                            this.cApp.innerGeometry.addIcon(this.geoPositionCartesian2,"默认")
+                            break
+
                     }
                 }
                 this.addGeoFlag = false

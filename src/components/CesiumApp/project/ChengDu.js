@@ -1,4 +1,6 @@
 import ParticleSystems from '../some/ParticleSystems'
+import * as Cesium from 'cesium/Cesium'
+import * as widget from 'cesium/Widgets/widgets.css'
 
 /**
  * 成都展示项目
@@ -58,17 +60,10 @@ export default class ChengDu {
         ]
         self.app.part.addFlowLine(points)
 
-        const pointsText = [
-            104.07721790813571,
-            30.644404672369557,
-            100,
-        ]
+        const pointsText = Cesium.Cartesian3.fromDegrees(104.07721790813571, 30.644404672369557, 100)
         self.app.innerGeometry.addIcon(pointsText, '东城区')
-        const pointsText1 = [
-            104.06950857297834,
-            30.635728818649884,
-            100,
-        ]
+
+        const pointsText1 = Cesium.Cartesian3.fromDegrees(104.06950857297834, 30.635728818649884, 100)
         self.app.innerGeometry.addIcon(pointsText1, '西城区')
 
         let center = {lon: 104.05696940937665, lat: 30.640501148524567}

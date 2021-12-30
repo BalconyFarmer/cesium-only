@@ -13,26 +13,7 @@ export default class InnerGeometry {
         this.TooltipCesium = TooltipCesium
     }
 
-    /**
-     * 原生geometry
-     */
-    addGeometry (Cartesian3) {
-        //圆柱体
-        this.app.viewer.entities.add({
-            name: '圆柱体',
-            position: Cartesian3,
-            cylinder: {
-                length: 10.0,//圆柱体高度
-                topRadius: 2,//圆柱体的顶部半径。
-                bottomRadius: 2,//    圆柱体底部的半径。
-                material: Cesium.Color.GREEN.withAlpha(0.5),//绿色半透明
-                outline: true,//轮廓
-                outlineColor: Cesium.Color.DARK_GREEN,//轮廓颜色深绿色
-                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
-            }
-        })
 
-    }
 
     /**
      * 加载bilbord
@@ -40,11 +21,7 @@ export default class InnerGeometry {
     addIcon (point, text) {
         let _p = null
         if (point) {
-            _p = Cesium.Cartesian3.fromDegrees(
-                point[0],
-                point[1],
-                point[2],
-            )
+            _p = point
         } else {
             _p = Cesium.Cartesian3.fromDegrees(
                 102.65401175390049,
@@ -96,10 +73,31 @@ export default class InnerGeometry {
         this.app.viewer.entities.add({
             position: Cartesian3,
             point: {
-                pixelSize: 10,
+                pixelSize: 50,
                 color: Cesium.Color.YELLOW
             }
         })
+    }
+
+    /**
+     * 原生geometry
+     */
+    addGeometry (Cartesian3) {
+        //圆柱体
+        this.app.viewer.entities.add({
+            name: '圆柱体',
+            position: Cartesian3,
+            cylinder: {
+                length: 10.0,//圆柱体高度
+                topRadius: 2,//圆柱体的顶部半径。
+                bottomRadius: 2,//    圆柱体底部的半径。
+                material: Cesium.Color.GREEN.withAlpha(0.5),//绿色半透明
+                outline: true,//轮廓
+                outlineColor: Cesium.Color.DARK_GREEN,//轮廓颜色深绿色
+                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+            }
+        })
+
     }
 
 }
