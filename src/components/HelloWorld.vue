@@ -125,13 +125,13 @@
         </div>
 
         <div class="bottomCenter">
-            <div @mousedown="mouseDown('点')" @mouseup="mouseUp()">
+            <div class="normal p" @mousedown="mouseDown('点')" @mouseup="mouseUp()">
                 点
             </div>
-            <div @mousedown="mouseDown('圆柱体')" @mouseup="mouseUp()">
+            <div class="normal y" @mousedown="mouseDown('圆柱体')" @mouseup="mouseUp()">
                 圆柱体
             </div>
-            <div @mousedown="mouseDown('bilbord')" @mouseup="mouseUp()">
+            <div class="normal b" @mousedown="mouseDown('bilbord')" @mouseup="mouseUp()">
                 bilbord
             </div>
         </div>
@@ -245,7 +245,7 @@
                             this.cApp.innerGeometry.addGeometry(this.geoPositionCartesian2)
                             break
                         case 'bilbord':
-                            this.cApp.innerGeometry.addIcon(this.geoPositionCartesian2,"默认")
+                            this.cApp.innerGeometry.addIcon(this.geoPositionCartesian2, '默认')
                             break
 
                     }
@@ -447,9 +447,32 @@
             background-color: rgba(43, 43, 43, .5);
             z-index: 999;
             color: white;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            user-select: none;
+            .normal {
+                width: 50px;
+                height: 50px;
+                border: 1px solid white;
+                margin: 5px;
+            }
 
-            .inpu {
-                width: 100px;
+            .p {
+                background-image: url("../assets/p.png");
+                background-size: 100% 100%;
+            }
+
+            .y {
+                background-image: url("../assets/y.png");
+                background-size: 100% 100%;
+            }
+
+            .b {
+                background-image: url("../assets/b.png");
+                background-size: 100% 100%;
             }
         }
     }
