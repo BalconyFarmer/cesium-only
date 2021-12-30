@@ -152,6 +152,15 @@
             <div class="normal b" @mousedown="mouseDown('redPolygon')" @mouseup="mouseUp()">
                 redPolygon
             </div>
+            <div class="normal b" @mousedown="mouseDown('greenPolygon')" @mouseup="mouseUp()">
+                greenPolygon
+            </div>
+            <div class="normal b" @mousedown="mouseDown('orangePolygon')" @mouseup="mouseUp()">
+                orangePolygon
+            </div>
+            <div class="normal b" @mousedown="mouseDown('bluePolygon')" @mouseup="mouseUp()">
+                bluePolygon
+            </div>
         </div>
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
@@ -282,6 +291,15 @@
                             break
                         case 'redPolygon':
                             this.cApp.innerGeometry.redPolygon(this.geoPositionCartesian2)
+                            break
+                        case 'greenPolygon':
+                            this.cApp.innerGeometry.greenPolygon(this.geoPositionCartesian2)
+                            break
+                        case 'orangePolygon':
+                            this.cApp.innerGeometry.orangePolygon(this.geoPositionCartesian2)
+                            break
+                        case 'bluePolygon':
+                            this.cApp.innerGeometry.bluePolygon(this.geoPositionCartesian2)
                             break
                     }
                 }

@@ -2,6 +2,9 @@ import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 import TooltipCesium from './Tools-01Tooltip-entity'
 
+/**
+ * https://blog.csdn.net/weixin_36617251/article/details/118366285
+ */
 export default class InnerGeometry {
     constructor (app) {
         this.app = app
@@ -191,6 +194,79 @@ export default class InnerGeometry {
                     ]
                 ),
                 material: Cesium.Color.RED
+            }
+        })
+    }
+
+    greenPolygon (Cartesian3) {
+        var greenPolygon = this.app.viewer.entities.add({
+            name: '绿色拉伸多边形',
+            polygon: {
+                hierarchy: Cesium.Cartesian3.fromDegreesArray([-108.0, 42.0,
+                    -100.0, 42.0,
+                    -104.0, 40.0]),
+                extrudedHeight: 500000.0,
+                material: Cesium.Color.GREEN
+            }
+        })
+    }
+
+    orangePolygon (Cartesian3) {
+        var orangePolygon = this.app.viewer.entities.add({
+            name: '每个顶点具有不同拉伸高度的橘色多边形',
+            polygon: {
+                hierarchy: Cesium.Cartesian3.fromDegreesArrayHeights(
+                    [-108.0, 25.0, 100000,
+                        -100.0, 25.0, 100000,
+                        -100.0, 30.0, 100000,
+                        -108.0, 30.0, 300000]),
+                extrudedHeight: 0,
+                perPositionHeight: true,
+                material: Cesium.Color.ORANGE,
+                outline: true,
+                outlineColor: Cesium.Color.BLACK
+            }
+        })
+    }
+
+    bluePolygon (Cartesian3) {
+        var bluePolygon = this.app.viewer.entities.add({
+            name: '具有挖空效果的蓝色多边形',
+            polygon: {
+                hierarchy: {
+                    positions: Cesium.Cartesian3.fromDegreesArray(
+                        [-99.0, 30.0,
+                            -85.0, 30.0,
+                            -85.0, 40.0,
+                            -99.0, 40.0]),
+                    holes: [{
+                        positions: Cesium.Cartesian3.fromDegreesArray([
+                            -97.0, 31.0,
+                            -97.0, 39.0,
+                            -87.0, 39.0,
+                            -87.0, 31.0
+                        ]),
+                        holes: [{
+                            positions: Cesium.Cartesian3.fromDegreesArray([
+                                -95.0, 33.0,
+                                -89.0, 33.0,
+                                -89.0, 37.0,
+                                -95.0, 37.0
+                            ]),
+                            holes: [{
+                                positions: Cesium.Cartesian3.fromDegreesArray([
+                                    -93.0, 34.0,
+                                    -91.0, 34.0,
+                                    -91.0, 36.0,
+                                    -93.0, 36.0
+                                ])
+                            }]
+                        }]
+                    }]
+                },
+                material: Cesium.Color.BLUE,
+                outline: true,
+                outlineColor: Cesium.Color.BLACK
             }
         })
     }
