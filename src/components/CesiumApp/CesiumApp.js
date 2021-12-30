@@ -78,6 +78,7 @@ export default class CesiumApp {
      */
     addTimeAction () {
         this.load3DModel.addModel()
+        this.load3DModel.loadGLB()
         this.innerGeometry.addIcon()
         this.innerGeometry.addGeometry()
         this.part.addFlowLine()

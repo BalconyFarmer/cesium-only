@@ -25,19 +25,6 @@ export default class Load3DModel {
             }
         })
 
-        // 飞机
-        // this.app.viewer.entities.add({
-        //     name: '飞机',
-        //     position: Cesium.Cartesian3.fromDegrees(102.65432610609486, 24.90235929942473, 1856.1161775500739),
-        //     orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65432610609486, 24.90235929942473, 1856.1161775500739), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)), // 和飞行姿态相关
-        //     model: {
-        //         uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.gltf',
-        //         // maximumScale: 20000,
-        //         // minimumPixelSize: 100, // 最小大小
-        //         heightReference: Cesium.HeightReference.CLAMP_TO_GROUND // Cesium.HeightReference.CLAMP_TO_GROUND 贴地 Cesium.HeightReference.RELATIVE_TO_GROUND//相对上方高度 Cesium.HeightReference.NONE//位置绝对
-        //     }
-        // })
-
         // 行走的人
         const movePeople = {
             name: '行走的人',
@@ -98,6 +85,51 @@ export default class Load3DModel {
         }
         this.app.cameraFlyToCartesian3(aim)
 
+    }
+
+    /**
+     * 加载glb模型
+     * 带动画
+     */
+    loadGLB () {
+        const position = Cesium.Cartesian3.fromDegrees(104.08110110247405, 30.645619203470826, 100)
+        const _orientation = new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)
+
+        // 飞机
+        this.app.viewer.entities.add({
+            name: '飞机',
+            position: position,
+            orientation: Cesium.Transforms.headingPitchRollQuaternion(position, _orientation), // 和飞行姿态相关
+            model: {
+                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.glb',
+                // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+                scale: 20.0,
+            }
+        })
+
+
+
+        // 循环执行函数
+        const self = this
+        let index = 0.00001
+        function run () {
+            const entitiesList = self.app.viewer.entities.values
+            const airplane = entitiesList[5]
+            airplane.position = new Cesium.CallbackProperty(function () {
+                return Cesium.Cartesian3.fromDegrees(
+                    104.08110110247405 + index,
+                    30.645619203470826,
+                    100
+                )
+            }, false)
+            index += 0.0001
+            if (index > 0.1) {
+                index = 0.00001
+            }
+            requestAnimationFrame(run)
+        }
+
+        run()
     }
 
 }
