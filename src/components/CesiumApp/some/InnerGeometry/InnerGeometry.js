@@ -99,7 +99,7 @@ export default class InnerGeometry {
     }
 
     addBox (Cartesian3) {
-        var redBox = this.app.viewer.entities.add({
+        let redBox = this.app.viewer.entities.add({
             name: 'Red box with black outline',
             position: Cartesian3,
             box: {
@@ -116,7 +116,7 @@ export default class InnerGeometry {
      * @param Cartesian3
      */
     addEllipse (Cartesian3) {
-        var greenCircle = this.app.viewer.entities.add({
+        let greenCircle = this.app.viewer.entities.add({
             position: Cartesian3,
             name: 'Green circle at height',
             ellipse: {
@@ -133,7 +133,7 @@ export default class InnerGeometry {
      * @param Cartesian3
      */
     addEllipseTuo (Cartesian3) {
-        var redEllipse = this.app.viewer.entities.add({
+        let redEllipse = this.app.viewer.entities.add({
             //不带高度
             position: Cartesian3,
             name: 'Red ellipse on surface with outline',
@@ -149,7 +149,7 @@ export default class InnerGeometry {
     }
 
     addEllipseTuoWW (Cartesian3) {
-        var blueEllipseWW = this.app.viewer.entities.add({
+        let blueEllipseWW = this.app.viewer.entities.add({
             position: Cartesian3,
             name: 'Blue translucent, rotated, and extruded ellipse',
             ellipse: {
@@ -162,5 +162,36 @@ export default class InnerGeometry {
             }
         })
 
+    }
+
+    redCorridor (Cartesian3) {
+        let redCone = this.app.viewer.entities.add({
+            name: 'Red cone',
+            position: Cartesian3,
+            cylinder: {//圆锥
+                length: 400000.0,
+                topRadius: 0.0,
+                bottomRadius: 200000.0,
+                material: Cesium.Color.RED
+            }
+        })
+    }
+
+    redPolygon (Cartesian3) {
+        let redPolygon = this.app.viewer.entities.add({
+            name: '贴着地表的多边形',
+            polygon: {
+                hierarchy: Cesium.Cartesian3.fromDegreesArray(
+                    [
+                        -115.0, 37.0,
+                        -115.0, 32.0,
+                        -107.0, 33.0,
+                        -102.0, 31.0,
+                        -102.0, 35.0
+                    ]
+                ),
+                material: Cesium.Color.RED
+            }
+        })
     }
 }

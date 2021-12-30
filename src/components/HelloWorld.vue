@@ -146,6 +146,12 @@
             <div class="normal b" @mousedown="mouseDown('bilbord')" @mouseup="mouseUp()">
                 bilbord
             </div>
+            <div class="normal b" @mousedown="mouseDown('redCorridor')" @mouseup="mouseUp()">
+                redCorridor
+            </div>
+            <div class="normal b" @mousedown="mouseDown('redPolygon')" @mouseup="mouseUp()">
+                redPolygon
+            </div>
         </div>
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
@@ -270,6 +276,12 @@
                             break
                         case 'addEllipseTuoWW':
                             this.cApp.innerGeometry.addEllipseTuoWW(this.geoPositionCartesian2)
+                            break
+                        case 'redCorridor':
+                            this.cApp.innerGeometry.redCorridor(this.geoPositionCartesian2)
+                            break
+                        case 'redPolygon':
+                            this.cApp.innerGeometry.redPolygon(this.geoPositionCartesian2)
                             break
                     }
                 }
