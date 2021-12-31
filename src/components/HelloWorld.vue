@@ -176,25 +176,25 @@
             <div class="normal b" @mousedown="mouseDown('redRectangle')" @mouseup="mouseUp()">
                 redRectangle
             </div>
-            <div class="normal b" @mousedown="mouseDown('greenRectangle')" @mouseup="mouseUp()">
+            <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')" @mouseup="mouseUp()">
                 greenRectangle
             </div>
-            <div class="normal b" @mousedown="mouseDown('blueEllipsoid')" @mouseup="mouseUp()">
+            <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')" @mouseup="mouseUp()">
                 blueEllipsoid
             </div>
-            <div class="normal b" @mousedown="mouseDown('redSphere')" @mouseup="mouseUp()">
+            <div class="normal redSphere" @mousedown="mouseDown('redSphere')" @mouseup="mouseUp()">
                 redSphere
             </div>
-            <div class="normal b" @mousedown="mouseDown('outlineOnly')" @mouseup="mouseUp()">
+            <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')" @mouseup="mouseUp()">
                 outlineOnly
             </div>
-            <div class="normal b" @mousedown="mouseDown('redWall')" @mouseup="mouseUp()">
+            <div class="normal redWall" @mousedown="mouseDown('redWall')" @mouseup="mouseUp()">
                 redWall
             </div>
-            <div class="normal b" @mousedown="mouseDown('greenWall')" @mouseup="mouseUp()">
+            <div class="normal greenWall" @mousedown="mouseDown('greenWall')" @mouseup="mouseUp()">
                 greenWall
             </div>
-            <div class="normal b" @mousedown="mouseDown('blueWall')" @mouseup="mouseUp()">
+            <div class="normal blueWall" @mousedown="mouseDown('blueWall')" @mouseup="mouseUp()">
                 blueWall
             </div>
         </div>
@@ -587,18 +587,53 @@
                 margin: 5px;
             }
 
+            .greenRectangle {
+                background-image: url("../assets/geometryIcons/greenRectangle.png");
+                background-size: 100% 100%;
+            }
+
+            .blueEllipsoid {
+                background-image: url("../assets/geometryIcons/blueEllipsoid.png");
+                background-size: 100% 100%;
+            }
+
+            .redSphere {
+                background-image: url("../assets/geometryIcons/redSphere.png");
+                background-size: 100% 100%;
+            }
+
+            .outlineOnly {
+                background-image: url("../assets/geometryIcons/outlineOnly.png");
+                background-size: 100% 100%;
+            }
+
+            .blueWall {
+                background-image: url("../assets/geometryIcons/blueWall.png");
+                background-size: 100% 100%;
+            }
+
+            .greenWall {
+                background-image: url("../assets/geometryIcons/greenWall.png");
+                background-size: 100% 100%;
+            }
+
+            .redWall {
+                background-image: url("../assets/geometryIcons/redWall.png");
+                background-size: 100% 100%;
+            }
+
             .p {
-                background-image: url("../assets/p.png");
+                background-image: url("../assets/geometryIcons/p.png");
                 background-size: 100% 100%;
             }
 
             .y {
-                background-image: url("../assets/y.png");
+                background-image: url("../assets/geometryIcons/y.png");
                 background-size: 100% 100%;
             }
 
             .b {
-                background-image: url("../assets/b.png");
+                background-image: url("../assets/geometryIcons/b.png");
                 background-size: 100% 100%;
             }
         }
