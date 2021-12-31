@@ -346,18 +346,92 @@ export default class InnerGeometry {
     }
 
     greenRectangle (Cartesian3) {
-    //绿色旋转、拉伸的矩形
+        //绿色旋转、拉伸的矩形
         var greenRectangle = viewer.entities.add({
-            name : 'Green translucent, rotated, and extruded rectangle',
-            rectangle : {
-                coordinates : Cesium.Rectangle.fromDegrees(-100.0, 30.0, -90.0, 40.0),
-                material : Cesium.Color.GREEN.withAlpha(0.5),
-                rotation : Cesium.Math.toRadians(45),
-                extrudedHeight : 300000.0,
-                height : 100000.0,
-                outline : true,
-                outlineColor : Cesium.Color.GREEN
+            name: 'Green translucent, rotated, and extruded rectangle',
+            rectangle: {
+                coordinates: Cesium.Rectangle.fromDegrees(-100.0, 30.0, -90.0, 40.0),
+                material: Cesium.Color.GREEN.withAlpha(0.5),
+                rotation: Cesium.Math.toRadians(45),
+                extrudedHeight: 300000.0,
+                height: 100000.0,
+                outline: true,
+                outlineColor: Cesium.Color.GREEN
             }
-        });
+        })
+    }
+
+    blueEllipsoid (Cartesian3) {
+        var blueEllipsoid = viewer.entities.add({
+            name: 'Blue ellipsoid',
+            position: Cartesian3,
+            ellipsoid: {
+                //可以指定三个轴的半径
+                radii: new Cesium.Cartesian3(200000.0, 200000.0, 300000.0),
+                material: Cesium.Color.BLUE
+            }
+        })
+    }
+
+    redSphere (Cartesian3) {
+        var redSphere = viewer.entities.add({
+            name: 'Red sphere with black outline',
+            position: Cartesian3,
+            ellipsoid: {
+                //正球体
+                radii: new Cesium.Cartesian3(300000.0, 300000.0, 300000.0),
+                material: Cesium.Color.RED,
+                outline: true,
+                outlineColor: Cesium.Color.BLACK
+            }
+        })
+    }
+
+    outlineOnly (Cartesian3) {
+        var outlineOnly = viewer.entities.add({
+            name: 'Yellow ellipsoid outline',
+            position: Cartesian3,
+            ellipsoid: {
+                radii: new Cesium.Cartesian3(200000.0, 200000.0, 300000.0),
+                fill: false,
+                outline: true,
+                outlineColor: Cesium.Color.YELLOW,
+                slicePartitions: 24, //横向切割线
+                stackPartitions: 36  //纵向切割线
+            }
+        })
+    }
+
+    redWall (Cartesian3) {
+        //东西方向的横墙
+        var redWall = viewer.entities.add({
+            name: 'Red wall at height',
+            wall: {
+                positions: Cesium.Cartesian3.fromDegreesArrayHeights(
+                    [
+                        -115.0, 44.0, 200000.0,//坐标点
+                        -90.0, 44.0, 200000.0]
+                ),
+                minimumHeights: [100000.0, 100000.0], //按坐标点的最小高度数组
+                material: Cesium.Color.RED
+            }
+        })
+    }
+
+    greenWall (Cartesian3) {
+        var greenWall = viewer.entities.add({
+            name: 'Green wall from surface with outline',
+            wall: {
+                positions: Cesium.Cartesian3.fromDegreesArrayHeights(
+                    [-107.0, 43.0, 100000.0,
+                        -97.0, 43.0, 100000.0,
+                        -97.0, 40.0, 100000.0,
+                        -107.0, 40.0, 100000.0,
+                        -107.0, 43.0, 100000.0]),
+                material: Cesium.Color.GREEN,
+                outline: true,
+                outlineColor: Cesium.Color.BLACK
+            }
+        })
     }
 }

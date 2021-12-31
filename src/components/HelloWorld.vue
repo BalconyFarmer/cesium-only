@@ -179,6 +179,21 @@
             <div class="normal b" @mousedown="mouseDown('greenRectangle')" @mouseup="mouseUp()">
                 greenRectangle
             </div>
+            <div class="normal b" @mousedown="mouseDown('blueEllipsoid')" @mouseup="mouseUp()">
+                blueEllipsoid
+            </div>
+            <div class="normal b" @mousedown="mouseDown('redSphere')" @mouseup="mouseUp()">
+                redSphere
+            </div>
+            <div class="normal b" @mousedown="mouseDown('outlineOnly')" @mouseup="mouseUp()">
+                outlineOnly
+            </div>
+            <div class="normal b" @mousedown="mouseDown('redWall')" @mouseup="mouseUp()">
+                redWall
+            </div>
+            <div class="normal b" @mousedown="mouseDown('greenWall')" @mouseup="mouseUp()">
+                greenWall
+            </div>
         </div>
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
@@ -336,6 +351,21 @@
                             break
                         case 'greenRectangle':
                             this.cApp.innerGeometry.greenRectangle(this.geoPositionCartesian2)
+                            break
+                        case 'blueEllipsoid':
+                            this.cApp.innerGeometry.blueEllipsoid(this.geoPositionCartesian2)
+                            break
+                        case 'redSphere':
+                            this.cApp.innerGeometry.redSphere(this.geoPositionCartesian2)
+                            break
+                        case 'outlineOnly':
+                            this.cApp.innerGeometry.outlineOnly(this.geoPositionCartesian2)
+                            break
+                        case 'redWall':
+                            this.cApp.innerGeometry.redWall(this.geoPositionCartesian2)
+                            break
+                        case 'greenWall':
+                            this.cApp.innerGeometry.greenWall(this.geoPositionCartesian2)
                             break
                     }
                 }
@@ -532,13 +562,14 @@
             height: 20%;
             position: absolute;
             left: 15%;
-            bottom: 0%;
+            bottom: 0;
             background-color: rgba(43, 43, 43, .5);
             z-index: 999;
             color: white;
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
+            flex-wrap: wrap;
             -moz-user-select: none;
             -khtml-user-select: none;
             user-select: none;
