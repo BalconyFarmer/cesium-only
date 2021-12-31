@@ -434,4 +434,35 @@ export default class InnerGeometry {
             }
         })
     }
+
+    blueWall (Cartesian3) {
+        //曲折的墙
+        var blueWall = viewer.entities.add({
+            name: 'Blue wall with sawtooth heights and outline',
+            wall: {
+                //坐标点，不指定高度
+                positions: Cesium.Cartesian3.fromDegreesArray(
+                    [-115.0, 50.0,
+                        -112.5, 50.0,
+                        -110.0, 50.0,
+                        -107.5, 50.0,
+                        -105.0, 50.0,
+                        -102.5, 50.0,
+                        -100.0, 50.0,
+                        -97.5, 50.0,
+                        -95.0, 50.0,
+                        -92.5, 50.0,
+                        -90.0, 50.0]),
+                maximumHeights: [ //上高
+                    100000, 200000, 100000, 200000, 100000, 200000,
+                    100000, 200000, 100000, 200000, 100000],
+                minimumHeights: [  //下高
+                    0, 100000, 0, 100000, 0, 100000, 0, 100000, 0,
+                    100000, 0],
+                material: Cesium.Color.BLUE,
+                outline: true,
+                outlineColor: Cesium.Color.BLACK
+            }
+        })
+    }
 }
