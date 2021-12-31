@@ -197,9 +197,7 @@
             <div class="normal blueWall" @mousedown="mouseDown('blueWall')" @mouseup="mouseUp()">
                 blueWall
             </div>
-            <div class="normal blueWall" @mousedown="mouseDown('LIGHT')" @mouseup="mouseUp()">
-                LIGHT
-            </div>
+
         </div>
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
@@ -376,9 +374,7 @@
                         case 'blueWall':
                             this.cApp.innerGeometry.blueWall(this.geoPositionCartesian2)
                             break
-                        case 'LIGHT':
-                            this.cApp.innerGeometry.addLight(this.geoPositionCartesian2)
-                            break
+
                     }
                 }
                 this.addGeoFlag = false

@@ -488,26 +488,4 @@ export default class InnerGeometry {
 
     }
 
-    addLight (Cartesian3) {
-        this.app.scene.sun.show = false
-        this.app.scene.lightSource.ambientLightColor = new Cesium.Color(0, 0, 0, 1)
-
-        // 新增直射光-整个环境
-        let dirLightOptions = {
-            targetPosition: Cartesian3,
-            color: new Cesium.Color(0.01, 0.01, 0.3, 1.0),
-            intensity: 0.1
-        }
-        let directionalLight_v = new Cesium.DirectionalLight(position, dirLightOptions)
-        this.app.scene.addLightSource(directionalLight_v)
-        // 新增点光源-整个环境
-        let pointLightPos3 = new Cesium.Cartesian3.fromDegrees(116.46477932175468, 39.905807158839266, 220.0)
-        let pointLightOptions3 = {
-            cutoffDistance: 2000,
-            color: new Cesium.Color(0.04, 0.18, 0.43, 1.0),
-            intensity: 0.001
-        }
-        let pointLight3 = new Cesium.PointLight(pointLightPos3, pointLightOptions3)
-        this.app.scene.addLightSource(pointLight3)
-    }
 }
