@@ -164,16 +164,16 @@
             <div class="normal b" @mousedown="mouseDown('redLine')" @mouseup="mouseUp()">
                 redLine
             </div>
-            <div class="normal b" @mousedown="mouseDown('glowingLine')" @mouseup="mouseUp()">
+            <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')" @mouseup="mouseUp()">
                 glowingLine
             </div>
-            <div class="normal b" @mousedown="mouseDown('orangeOutlined')" @mouseup="mouseUp()">
+            <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')" @mouseup="mouseUp()">
                 orangeOutlined
             </div>
-            <div class="normal b" @mousedown="mouseDown('yellowLine')" @mouseup="mouseUp()">
+            <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')" @mouseup="mouseUp()">
                 yellowLine
             </div>
-            <div class="normal b" @mousedown="mouseDown('redRectangle')" @mouseup="mouseUp()">
+            <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')" @mouseup="mouseUp()">
                 redRectangle
             </div>
             <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')" @mouseup="mouseUp()">
@@ -585,6 +585,18 @@
                 height: 50px;
                 border: 1px solid white;
                 margin: 5px;
+            }
+            .glowingLine {
+                background-image: url("../assets/geometryIcons/glowingLine.png");
+                background-size: 100% 100%;
+            }
+            .yellowLine {
+                background-image: url("../assets/geometryIcons/yellowLine.png");
+                background-size: 100% 100%;
+            }
+            .redRectangle {
+                background-image: url("../assets/geometryIcons/redRectangle.png");
+                background-size: 100% 100%;
             }
 
             .greenRectangle {
