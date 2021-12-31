@@ -35,7 +35,6 @@ export default class CesiumApp {
      * 初始化3D基础场景
      */
     initMap () {
-        initFlowMatetial()
         this.option = {
             animation: false, // 如果设置为false,则不会创建'动画'小部件。
             contextOptions: {
@@ -194,8 +193,10 @@ export default class CesiumApp {
     switchLight () {
         if (this.viewer.scene.globe.enableLighting) {
             this.viewer.scene.globe.enableLighting = false // 初始化光照
+            this.viewer.shadows = false
         } else {
             this.viewer.scene.globe.enableLighting = true // 初始化光照
+            this.viewer.shadows = true
         }
     }
 

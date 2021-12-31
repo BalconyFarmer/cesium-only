@@ -1,7 +1,7 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 
-function initFlowMatetial () {
+function initFlowMatetial (imgUrl) {
     /*
         流动纹理线
          color 颜色
@@ -43,11 +43,11 @@ function initFlowMatetial () {
     PolylineTrailLinkMaterialProperty.prototype.equals = function (other) {
         return this === other ||
             (other instanceof PolylineTrailLinkMaterialProperty &&
-                Property.equals(this._color, other._color))
+                Cesium.Property.equals(this._color, other._color))
     }
     Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty;
     Cesium.Material.PolylineTrailLinkType = 'PolylineTrailLink';
-    Cesium.Material.PolylineTrailLinkImage = "http://localhost:1111/3Dstatic/loadData/flowNumber/11.png";//colors
+    Cesium.Material.PolylineTrailLinkImage = imgUrl;//colors
     Cesium.Material.PolylineTrailLinkSource = "czm_material czm_getMaterial(czm_materialInput materialInput)\n\
                                                       {\n\
                                                            czm_material material = czm_getDefaultMaterial(materialInput);\n\

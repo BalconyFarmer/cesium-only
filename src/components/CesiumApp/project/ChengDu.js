@@ -73,6 +73,7 @@ export default class ChengDu {
             {'lon': 104.04901932448976, 'lat': 30.616076052494645,},
         ]
         this.app.part.addFlyLine3D(center, cities)
+
         let fireP = [104.08179081232309, 30.645729442770694, -0.0020558347525613716,]
         let pF = new ParticleSystems(this.app) // 粒子系统
         pF.init(fireP)

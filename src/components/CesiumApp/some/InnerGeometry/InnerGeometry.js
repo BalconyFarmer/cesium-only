@@ -80,27 +80,6 @@ export default class InnerGeometry {
         })
     }
 
-    /**
-     * 原生geometry
-     */
-    addGeometry (Cartesian3) {
-        //圆柱体
-        this.app.viewer.entities.add({
-            name: '圆柱体',
-            position: Cartesian3,
-            cylinder: {
-                length: 10.0,//圆柱体高度
-                topRadius: 2,//圆柱体的顶部半径。
-                bottomRadius: 2,//    圆柱体底部的半径。
-                material: Cesium.Color.GREEN.withAlpha(0.5),//绿色半透明
-                outline: true,//轮廓
-                outlineColor: Cesium.Color.DARK_GREEN,//轮廓颜色深绿色
-                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
-            }
-        })
-
-    }
-
     addBox (Cartesian3) {
         let redBox = this.app.viewer.entities.add({
             name: 'Red box with black outline',
@@ -199,7 +178,7 @@ export default class InnerGeometry {
     }
 
     greenPolygon (Cartesian3) {
-        var greenPolygon = this.app.viewer.entities.add({
+        let greenPolygon = this.app.viewer.entities.add({
             name: '绿色拉伸多边形',
             polygon: {
                 hierarchy: Cesium.Cartesian3.fromDegreesArray([-108.0, 42.0,
@@ -212,7 +191,7 @@ export default class InnerGeometry {
     }
 
     orangePolygon (Cartesian3) {
-        var orangePolygon = this.app.viewer.entities.add({
+        let orangePolygon = this.app.viewer.entities.add({
             name: '每个顶点具有不同拉伸高度的橘色多边形',
             polygon: {
                 hierarchy: Cesium.Cartesian3.fromDegreesArrayHeights(
@@ -230,7 +209,7 @@ export default class InnerGeometry {
     }
 
     bluePolygon (Cartesian3) {
-        var bluePolygon = this.app.viewer.entities.add({
+        let bluePolygon = this.app.viewer.entities.add({
             name: '具有挖空效果的蓝色多边形',
             polygon: {
                 hierarchy: {
@@ -272,7 +251,7 @@ export default class InnerGeometry {
     }
 
     redLine (Cartesian3) {
-        var redLine = this.app.viewer.entities.add({
+        let redLine = this.app.viewer.entities.add({
             name: '沿着地球表面的红线',
             polyline: {
                 positions: Cesium.Cartesian3.fromDegreesArray(
@@ -286,7 +265,7 @@ export default class InnerGeometry {
     }
 
     glowingLine (Cartesian3) {
-        var glowingLine = this.app.viewer.entities.add({
+        let glowingLine = this.app.viewer.entities.add({
             name: '具有发光效果的线',
             polyline: {
                 positions: Cesium.Cartesian3.fromDegreesArray(
@@ -302,7 +281,7 @@ export default class InnerGeometry {
     }
 
     orangeOutlined (Cartesian3) {
-        var orangeOutlined = this.app.viewer.entities.add({
+        let orangeOutlined = this.app.viewer.entities.add({
             name: '具有一定高度的线',
             polyline: {
                 positions: Cesium.Cartesian3.fromDegreesArrayHeights(
@@ -319,7 +298,7 @@ export default class InnerGeometry {
     }
 
     yellowLine (Cartesian3) {
-        var yellowLine = this.app.viewer.entities.add({
+        let yellowLine = this.app.viewer.entities.add({
             name: '不贴着地表的线',
             polyline: {
                 positions: Cesium.Cartesian3.fromDegreesArrayHeights(
@@ -334,7 +313,7 @@ export default class InnerGeometry {
 
     redRectangle (Cartesian3) {
         //红色矩形
-        var redRectangle = viewer.entities.add({
+        let redRectangle = viewer.entities.add({
             name: 'Red translucent rectangle with outline',
             rectangle: {
                 coordinates: Cesium.Rectangle.fromDegrees(-110.0, 20.0, -80.0, 25.0),
@@ -347,7 +326,7 @@ export default class InnerGeometry {
 
     greenRectangle (Cartesian3) {
         //绿色旋转、拉伸的矩形
-        var greenRectangle = viewer.entities.add({
+        let greenRectangle = viewer.entities.add({
             name: 'Green translucent, rotated, and extruded rectangle',
             rectangle: {
                 coordinates: Cesium.Rectangle.fromDegrees(-100.0, 30.0, -90.0, 40.0),
@@ -362,7 +341,7 @@ export default class InnerGeometry {
     }
 
     blueEllipsoid (Cartesian3) {
-        var blueEllipsoid = viewer.entities.add({
+        let blueEllipsoid = viewer.entities.add({
             name: 'Blue ellipsoid',
             position: Cartesian3,
             ellipsoid: {
@@ -374,7 +353,7 @@ export default class InnerGeometry {
     }
 
     redSphere (Cartesian3) {
-        var redSphere = viewer.entities.add({
+        let redSphere = viewer.entities.add({
             name: 'Red sphere with black outline',
             position: Cartesian3,
             ellipsoid: {
@@ -388,7 +367,7 @@ export default class InnerGeometry {
     }
 
     outlineOnly (Cartesian3) {
-        var outlineOnly = viewer.entities.add({
+        let outlineOnly = viewer.entities.add({
             name: 'Yellow ellipsoid outline',
             position: Cartesian3,
             ellipsoid: {
@@ -404,7 +383,7 @@ export default class InnerGeometry {
 
     redWall (Cartesian3) {
         //东西方向的横墙
-        var redWall = viewer.entities.add({
+        let redWall = viewer.entities.add({
             name: 'Red wall at height',
             wall: {
                 positions: Cesium.Cartesian3.fromDegreesArrayHeights(
@@ -419,17 +398,33 @@ export default class InnerGeometry {
     }
 
     greenWall (Cartesian3) {
-        var greenWall = viewer.entities.add({
+        let greenWall = viewer.entities.add({
             name: 'Green wall from surface with outline',
             wall: {
                 positions: Cesium.Cartesian3.fromDegreesArrayHeights(
-                    [-107.0, 43.0, 100000.0,
-                        -97.0, 43.0, 100000.0,
-                        -97.0, 40.0, 100000.0,
-                        -107.0, 40.0, 100000.0,
-                        -107.0, 43.0, 100000.0]),
-                material: Cesium.Color.GREEN,
-                outline: true,
+                    [
+                        104.08076896875812,
+                        30.645621985119146, 100.0,
+
+                        104.08181949416934,
+                        30.6491778217173, 100.0,
+
+                        104.07449474385395,
+                        30.653122884388093, 100.0,
+
+                        104.07256970305284,
+                        30.64867564461773, 100.0,
+
+                        104.08076896875812,
+                        30.645621985119146, 100.0,
+                    ]
+                ),
+                // material: Cesium.Color.GREEN,
+                material: new Cesium.PolylineGlowMaterialProperty({
+                    glowPower: 0.2,
+                    color: Cesium.Color.BLUE.withAlpha(0.5),
+                }),
+                outline: false,
                 outlineColor: Cesium.Color.BLACK
             }
         })
@@ -437,7 +432,7 @@ export default class InnerGeometry {
 
     blueWall (Cartesian3) {
         //曲折的墙
-        var blueWall = viewer.entities.add({
+        let blueWall = viewer.entities.add({
             name: 'Blue wall with sawtooth heights and outline',
             wall: {
                 //坐标点，不指定高度
@@ -459,10 +454,60 @@ export default class InnerGeometry {
                 minimumHeights: [  //下高
                     0, 100000, 0, 100000, 0, 100000, 0, 100000, 0,
                     100000, 0],
-                material: Cesium.Color.BLUE,
+                material: new Cesium.PolylineGlowMaterialProperty({
+                    glowPower: 0.3,
+                    color: Cesium.Color.BLUE.withAlpha(0.7),
+                }),
                 outline: true,
                 outlineColor: Cesium.Color.BLACK
             }
         })
+    }
+
+    /**
+     * 原生geometry
+     */
+    addGeometry (Cartesian3) {
+        //圆柱体
+        this.app.viewer.entities.add({
+            name: '圆柱体',
+            position: Cartesian3,
+            cylinder: {
+                length: 10.0,//圆柱体高度
+                topRadius: 2,//圆柱体的顶部半径。
+                bottomRadius: 2,//    圆柱体底部的半径。
+                material: new Cesium.PolylineGlowMaterialProperty({
+                    glowPower: 0.2,
+                    color: Cesium.Color.BLUE.withAlpha(0.5),
+                }),
+                outline: true,//轮廓
+                outlineColor: Cesium.Color.DARK_GREEN,//轮廓颜色深绿色
+                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+            }
+        })
+
+    }
+
+    addLight (Cartesian3) {
+        this.app.scene.sun.show = false
+        this.app.scene.lightSource.ambientLightColor = new Cesium.Color(0, 0, 0, 1)
+
+        // 新增直射光-整个环境
+        let dirLightOptions = {
+            targetPosition: Cartesian3,
+            color: new Cesium.Color(0.01, 0.01, 0.3, 1.0),
+            intensity: 0.1
+        }
+        let directionalLight_v = new Cesium.DirectionalLight(position, dirLightOptions)
+        this.app.scene.addLightSource(directionalLight_v)
+        // 新增点光源-整个环境
+        let pointLightPos3 = new Cesium.Cartesian3.fromDegrees(116.46477932175468, 39.905807158839266, 220.0)
+        let pointLightOptions3 = {
+            cutoffDistance: 2000,
+            color: new Cesium.Color(0.04, 0.18, 0.43, 1.0),
+            intensity: 0.001
+        }
+        let pointLight3 = new Cesium.PointLight(pointLightPos3, pointLightOptions3)
+        this.app.scene.addLightSource(pointLight3)
     }
 }
