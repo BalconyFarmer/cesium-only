@@ -173,6 +173,12 @@
             <div class="normal b" @mousedown="mouseDown('yellowLine')" @mouseup="mouseUp()">
                 yellowLine
             </div>
+            <div class="normal b" @mousedown="mouseDown('redRectangle')" @mouseup="mouseUp()">
+                redRectangle
+            </div>
+            <div class="normal b" @mousedown="mouseDown('greenRectangle')" @mouseup="mouseUp()">
+                greenRectangle
+            </div>
         </div>
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
@@ -324,6 +330,12 @@
                             break
                         case 'yellowLine':
                             this.cApp.innerGeometry.yellowLine(this.geoPositionCartesian2)
+                            break
+                        case 'redRectangle':
+                            this.cApp.innerGeometry.redRectangle(this.geoPositionCartesian2)
+                            break
+                        case 'greenRectangle':
+                            this.cApp.innerGeometry.greenRectangle(this.geoPositionCartesian2)
                             break
                     }
                 }
