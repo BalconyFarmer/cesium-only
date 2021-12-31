@@ -161,6 +161,18 @@
             <div class="normal b" @mousedown="mouseDown('bluePolygon')" @mouseup="mouseUp()">
                 bluePolygon
             </div>
+            <div class="normal b" @mousedown="mouseDown('redLine')" @mouseup="mouseUp()">
+                redLine
+            </div>
+            <div class="normal b" @mousedown="mouseDown('glowingLine')" @mouseup="mouseUp()">
+                glowingLine
+            </div>
+            <div class="normal b" @mousedown="mouseDown('orangeOutlined')" @mouseup="mouseUp()">
+                orangeOutlined
+            </div>
+            <div class="normal b" @mousedown="mouseDown('yellowLine')" @mouseup="mouseUp()">
+                yellowLine
+            </div>
         </div>
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
@@ -300,6 +312,18 @@
                             break
                         case 'bluePolygon':
                             this.cApp.innerGeometry.bluePolygon(this.geoPositionCartesian2)
+                            break
+                        case 'redLine':
+                            this.cApp.innerGeometry.redLine(this.geoPositionCartesian2)
+                            break
+                        case 'glowingLine':
+                            this.cApp.innerGeometry.glowingLine(this.geoPositionCartesian2)
+                            break
+                        case 'orangeOutlined':
+                            this.cApp.innerGeometry.orangeOutlined(this.geoPositionCartesian2)
+                            break
+                        case 'yellowLine':
+                            this.cApp.innerGeometry.yellowLine(this.geoPositionCartesian2)
                             break
                     }
                 }

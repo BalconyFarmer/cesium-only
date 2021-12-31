@@ -270,4 +270,65 @@ export default class InnerGeometry {
             }
         })
     }
+
+    redLine (Cartesian3) {
+        var redLine = this.app.viewer.entities.add({
+            name: '沿着地球表面的红线',
+            polyline: {
+                positions: Cesium.Cartesian3.fromDegreesArray(
+                    [
+                        -75, 35, -125, 35
+                    ]),
+                width: 5,
+                material: Cesium.Color.RED
+            }
+        })
+    }
+
+    glowingLine (Cartesian3) {
+        var glowingLine = this.app.viewer.entities.add({
+            name: '具有发光效果的线',
+            polyline: {
+                positions: Cesium.Cartesian3.fromDegreesArray(
+                    [-75, 37, -125, 37]
+                ),
+                width: 10,
+                material: new Cesium.PolylineGlowMaterialProperty({
+                    glowPower: 0.2,
+                    color: Cesium.Color.BLUE
+                })
+            }
+        })
+    }
+
+    orangeOutlined (Cartesian3) {
+        var orangeOutlined = this.app.viewer.entities.add({
+            name: '具有一定高度的线',
+            polyline: {
+                positions: Cesium.Cartesian3.fromDegreesArrayHeights(
+                    [-75, 39, 250000, -125, 39, 250000]
+                ),
+                width: 5,
+                material: new Cesium.PolylineOutlineMaterialProperty({
+                    color: Cesium.Color.ORANGE,
+                    outlineWidth: 2,
+                    outlineColor: Cesium.Color.BLACK
+                })
+            }
+        })
+    }
+
+    yellowLine (Cartesian3) {
+        var yellowLine = this.app.viewer.entities.add({
+            name : '不贴着地表的线',
+            polyline : {
+                positions : Cesium.Cartesian3.fromDegreesArrayHeights(
+                    [-75, 43, 500000,-125, 43, 500000]
+                ),
+                width : 3,
+                followSurface : false,  //是否贴着地表
+                material : Cesium.Color.PURPLE
+            }
+        });
+    }
 }
