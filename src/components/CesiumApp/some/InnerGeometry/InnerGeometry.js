@@ -541,7 +541,6 @@ export default class InnerGeometry {
 
 
 
-
     }
 
     /**

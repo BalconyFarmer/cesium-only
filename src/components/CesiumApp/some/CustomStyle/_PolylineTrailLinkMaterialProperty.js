@@ -1,12 +1,13 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 
+/*
+    流动纹理线
+     color 颜色
+     duration 持续时间 毫秒
+ */
 function initFlowMatetial (imgUrl) {
-    /*
-        流动纹理线
-         color 颜色
-         duration 持续时间 毫秒
-     */
+
     function PolylineTrailLinkMaterialProperty(color, duration) {
         this._definitionChanged = new Cesium.Event();
         this._color = undefined;
@@ -15,6 +16,7 @@ function initFlowMatetial (imgUrl) {
         this.duration = duration;
         this._time = (new Date()).getTime();
     }
+
     Object.defineProperties(PolylineTrailLinkMaterialProperty.prototype, {
         isConstant: {
             get: function () {
@@ -28,6 +30,7 @@ function initFlowMatetial (imgUrl) {
         },
         color: Cesium.createPropertyDescriptor('color')
     });
+
     PolylineTrailLinkMaterialProperty.prototype.getType = function (time) {
         return 'PolylineTrailLink';
     }
@@ -36,7 +39,7 @@ function initFlowMatetial (imgUrl) {
             result = {};
         }
         result.color = Cesium.Property.getValueOrClonedDefault(this._color, time, Cesium.Color.WHITE, result.color);
-        result.image = Cesium.Material.PolylineTrailLinkImage;
+        result.image = imgUrl;
         result.time = (((new Date()).getTime() - this._time) % this.duration) / this.duration;
         return result;
     }
@@ -45,10 +48,8 @@ function initFlowMatetial (imgUrl) {
             (other instanceof PolylineTrailLinkMaterialProperty &&
                 Cesium.Property.equals(this._color, other._color))
     }
-    Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty;
-    Cesium.Material.PolylineTrailLinkType = 'PolylineTrailLink';
-    Cesium.Material.PolylineTrailLinkImage = imgUrl;//colors
-    Cesium.Material.PolylineTrailLinkSource = "czm_material czm_getMaterial(czm_materialInput materialInput)\n\
+
+    let PolylineTrailLinkSource = "czm_material czm_getMaterial(czm_materialInput materialInput)\n\
                                                       {\n\
                                                            czm_material material = czm_getDefaultMaterial(materialInput);\n\
                                                            vec2 st = materialInput.st;\n\
@@ -57,20 +58,21 @@ function initFlowMatetial (imgUrl) {
                                                            material.diffuse = (colorImage.rgb+color.rgb)/2.0;\n\
                                                            return material;\n\
                                                        }";
-    Cesium.Material._materialCache.addMaterial(Cesium.Material.PolylineTrailLinkType, {
+    Cesium.Material._materialCache.addMaterial('PolylineTrailLink', {
         fabric: {
-            type: Cesium.Material.PolylineTrailLinkType,
+            type: 'PolylineTrailLink',
             uniforms: {
                 color: new Cesium.Color(1.0, 0.0, 0.0, 0.5),
-                image: Cesium.Material.PolylineTrailLinkImage,
+                image: imgUrl,
                 time: 0
             },
-            source: Cesium.Material.PolylineTrailLinkSource
+            source: PolylineTrailLinkSource
         },
         translucent: function (material) {
             return true;
         }
     });
+    Cesium.PolylineTrailLinkMaterialProperty = PolylineTrailLinkMaterialProperty;
 
 }
 
