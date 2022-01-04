@@ -69,16 +69,15 @@ export default class CesiumApp {
         this.addTerrain()
         this.firstCallBack()
         window.viewer = this.viewer
-        this.viewer.scene.postProcessStages.fxaa.enabled = false;//去锯齿 是文字清晰
-
+        this.viewer.scene.postProcessStages.fxaa.enabled = false//去锯齿 是文字清晰
     }
 
-    addLight() {
+    addLight () {
         let flashlight = new Cesium.DirectionalLight({
-            direction : this.viewer.scene.camera.directionWC // Updated every frame
-        });
-        this.viewer.scene.light = flashlight;
-        this.viewer.scene.globe.dynamicAtmosphereLighting = false;
+            direction: this.viewer.scene.camera.directionWC // Updated every frame
+        })
+        this.viewer.scene.light = flashlight
+        this.viewer.scene.globe.dynamicAtmosphereLighting = false
     }
 
     /**
@@ -106,16 +105,19 @@ export default class CesiumApp {
 
     /**
      * 添加发光效果
+     * http://www.manongjc.com/detail/23-lscvlmahlgssbba.html
+     *
      */
-    addBloom() {
-        var bloom = viewer.scene.postProcessStages.bloom;
-        bloom.enabled = true;
-        bloom.uniforms.glowOnly = false;
-        bloom.uniforms.contrast = 128;
-        bloom.uniforms.brightness = -0.3;
-        bloom.uniforms.delta = 1;
-        bloom.uniforms.sigma = 2;
-        bloom.uniforms.stepSize = 1;
+    addBloom () {
+
+        let bloom = viewer.scene.postProcessStages.bloom
+        bloom.enabled = true
+        bloom.uniforms.glowOnly = false
+        bloom.uniforms.contrast = 128
+        bloom.uniforms.brightness = -0.3
+        bloom.uniforms.delta = 1
+        bloom.uniforms.sigma = 2
+        bloom.uniforms.stepSize = 1
     }
 
     /**
@@ -233,8 +235,6 @@ export default class CesiumApp {
         this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({}) // 清除地形
 
     }
-
-
 
     switchLayer (data) {
         // t3fbd4010a8d2c73901a21c42efe3d2c0 天地图key

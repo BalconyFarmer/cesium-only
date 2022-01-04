@@ -200,13 +200,14 @@
             <div class="normal blueWall" @mousedown="mouseDown('blueWall')" @mouseup="mouseUp()">
                 blueWall
             </div>
-
+            <div class="normal addMaterial" @mousedown="mouseDown('addMaterial')" @mouseup="mouseUp()">
+                MMM
+            </div>
         </div>
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
     </div>
 </template>
-
 <script>
     import * as Cesium from 'cesium/Cesium'
     import * as widget from 'cesium/Widgets/widgets.css'
@@ -378,7 +379,9 @@
                         case 'blueWall':
                             this.cApp.innerGeometry.blueWall(this.geoPositionCartesian2)
                             break
-
+                        case 'addMaterial':
+                            this.cApp.innerGeometry.addMaterial(this.geoPositionCartesian2)
+                            break
                     }
                 }
                 this.addGeoFlag = false
@@ -425,29 +428,29 @@
                     this.cApp.addTimeAction()
                 } else if (key == 14) {
                     this.cApp.closeAll()
-                }else if (key == "光照系统") {
+                } else if (key == '光照系统') {
                     this.cApp.addLight()
-                }
-                else if (key == "addBloom") {
+                } else if (key == 'addBloom') {
                     this.cApp.addBloom()
-                }
-                else if (key == "addOutline") {
+                } else if (key == 'addOutline') {
                     this.cApp.addOutline()
                 }
             },
             startScriptLoader () {
                 const self = this
                 scriptLoader('http://zhangticcc.gitee.io/d3kit/d3kit.js').then(res => {
-                    const see = Cesium.d3kit
-                    console.clear()
-                    console.log(see)
-                    debugger
+                    setTimeout(function () {
+                        const see = Cesium.D3Kit
+                        console.clear()
+                        console.log(see)
+                        // debugger
+                    }, 1000)
                 })
             }
 
         },
         mounted () {
-            // this.startScriptLoader()
+            this.startScriptLoader()
             const self = this
             this.$nextTick(() => {
                 this.cApp = new CesiumApp()
@@ -609,6 +612,11 @@
                 height: 50px;
                 border: 1px solid white;
                 margin: 5px;
+            }
+
+            .addMaterial {
+                background-image: url("../assets/geometryIcons/material.png");
+                background-size: 100% 100%;
             }
 
             .glowingLine {

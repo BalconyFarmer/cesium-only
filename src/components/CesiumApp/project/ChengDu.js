@@ -12,6 +12,7 @@ export default class ChengDu {
     }
 
     init () {
+        const timeLine = [1,1]
         const self = this
 
         this.app.closeAll()
@@ -27,13 +28,13 @@ export default class ChengDu {
             heading: 2.464077977287265,
             pitch: -0.38924437417452307,
             roll: 0.00001352269589993682,
-            duration: 10,
+            duration: timeLine[0],
         }
         self.app.cameraAutoRoll(aim1)
 
         setTimeout(function () {
             self.app.cameraFlyToCartesian3(aim1)
-        }, 10000)
+        }, timeLine[1])
 
         const option = {
             lon: 104.08867088908544,
