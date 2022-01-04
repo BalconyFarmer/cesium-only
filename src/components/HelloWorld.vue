@@ -208,6 +208,7 @@
     import * as Cesium from 'cesium/Cesium'
     import * as widget from 'cesium/Widgets/widgets.css'
     import CesiumApp from './CesiumApp/CesiumApp'
+    import {scriptLoader} from '../utils/index'
 
     export default {
         name: 'hoting',
@@ -422,10 +423,20 @@
                 } else if (key == 14) {
                     this.cApp.closeAll()
                 }
+            },
+            startScriptLoader () {
+                const self = this
+                scriptLoader('http://zhangticcc.gitee.io/d3kit/d3kit.js').then(res => {
+                    const see = Cesium.d3kit
+                    console.clear()
+                    console.log(see)
+                    debugger
+                })
             }
 
         },
         mounted () {
+            // this.startScriptLoader()
             const self = this
             this.$nextTick(() => {
                 this.cApp = new CesiumApp()
@@ -588,14 +599,17 @@
                 border: 1px solid white;
                 margin: 5px;
             }
+
             .glowingLine {
                 background-image: url("../assets/geometryIcons/glowingLine.png");
                 background-size: 100% 100%;
             }
+
             .yellowLine {
                 background-image: url("../assets/geometryIcons/yellowLine.png");
                 background-size: 100% 100%;
             }
+
             .redRectangle {
                 background-image: url("../assets/geometryIcons/redRectangle.png");
                 background-size: 100% 100%;
