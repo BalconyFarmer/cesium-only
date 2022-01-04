@@ -14,7 +14,10 @@
             <div>
                 <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 
-                    <el-menu-item index="9">光照系统</el-menu-item>
+                    <el-menu-item index="9">全球光照系统</el-menu-item>
+                    <el-menu-item index="光照系统">光照系统</el-menu-item>
+                    <el-menu-item index="addBloom">addBloom</el-menu-item>
+                    <el-menu-item index="addOutline">addOutline</el-menu-item>
                     <el-menu-item index="14">关闭冗余</el-menu-item>
                     <el-menu-item index="">
                         <span>drag</span>
@@ -422,6 +425,14 @@
                     this.cApp.addTimeAction()
                 } else if (key == 14) {
                     this.cApp.closeAll()
+                }else if (key == "光照系统") {
+                    this.cApp.addLight()
+                }
+                else if (key == "addBloom") {
+                    this.cApp.addBloom()
+                }
+                else if (key == "addOutline") {
+                    this.cApp.addOutline()
                 }
             },
             startScriptLoader () {

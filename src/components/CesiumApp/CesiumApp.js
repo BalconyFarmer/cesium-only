@@ -69,6 +69,53 @@ export default class CesiumApp {
         this.addTerrain()
         this.firstCallBack()
         window.viewer = this.viewer
+        this.viewer.scene.postProcessStages.fxaa.enabled = false;//去锯齿 是文字清晰
+
+    }
+
+    addLight() {
+        let flashlight = new Cesium.DirectionalLight({
+            direction : this.viewer.scene.camera.directionWC // Updated every frame
+        });
+        this.viewer.scene.light = flashlight;
+        this.viewer.scene.globe.dynamicAtmosphereLighting = false;
+    }
+
+    /**
+     * 开启关闭全球光照系统
+     */
+    switchLight () {
+        if (this.viewer.scene.globe.enableLighting) {
+            this.viewer.scene.globe.enableLighting = false // 初始化光照
+            this.viewer.shadows = false
+        } else {
+            this.viewer.scene.globe.enableLighting = true // 初始化光照
+            this.viewer.shadows = true
+        }
+    }
+
+    /**
+     * 添加物体描边效果
+     */
+    addOutline () {
+        let collection = viewer.scene.postProcessStages
+        let silhouette = collection.add(Cesium.PostProcessStageLibrary.createSilhouetteStage())
+        silhouette.enabled = true
+        silhouette.uniforms.color = Cesium.Color.YELLOW
+    }
+
+    /**
+     * 添加发光效果
+     */
+    addBloom() {
+        var bloom = viewer.scene.postProcessStages.bloom;
+        bloom.enabled = true;
+        bloom.uniforms.glowOnly = false;
+        bloom.uniforms.contrast = 128;
+        bloom.uniforms.brightness = -0.3;
+        bloom.uniforms.delta = 1;
+        bloom.uniforms.sigma = 2;
+        bloom.uniforms.stepSize = 1;
     }
 
     /**
@@ -187,18 +234,7 @@ export default class CesiumApp {
 
     }
 
-    /**
-     * 开启关闭全球光照系统
-     */
-    switchLight () {
-        if (this.viewer.scene.globe.enableLighting) {
-            this.viewer.scene.globe.enableLighting = false // 初始化光照
-            this.viewer.shadows = false
-        } else {
-            this.viewer.scene.globe.enableLighting = true // 初始化光照
-            this.viewer.shadows = true
-        }
-    }
+
 
     switchLayer (data) {
         // t3fbd4010a8d2c73901a21c42efe3d2c0 天地图key
