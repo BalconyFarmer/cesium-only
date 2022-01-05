@@ -1,19 +1,5 @@
 <template>
     <div class="all">
-        <div class="env">
-            <div class="normal addMaterial" @mousedown="mouseDown('addDarckNessEff')">
-                addDarckNessEff
-            </div>
-            <div class="normal addMaterial" @mousedown="mouseDown('addRain')">
-                addRain
-            </div>
-            <div class="normal addMaterial" @mousedown="mouseDown('addSnow')">
-                addSnow
-            </div>
-            <div class="normal addMaterial" @mousedown="mouseDown('addFrog')">
-                addFrog
-            </div>
-        </div>
         <div class="geo">
             <div class="normal p" @mousedown="mouseDown('点')">
                 点
@@ -90,28 +76,38 @@
         </div>
         <div class="material">
             <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">
-                发光线条
+                0
             </div>
             <div class="normal addColor" @mousedown="mouseDown('addColor')">
-                addColor
+                0
             </div>
             <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')">
-                addImgMaterial
+                0
             </div>
             <div class="normal addCheckerboardMaterialProperty"
-                 @mousedown="mouseDown('addCheckerboardMaterialProperty')"
-            >
-                addCheckerboardMaterialProperty
+                 @mousedown="mouseDown('addCheckerboardMaterialProperty')">
+                0
             </div>
-            <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')"
-            >
-                addStripeMaterialProperty
+            <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">
+                0
             </div>
-            <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')"
-            >
-                addGridMaterialProperty
+            <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">
+                0
             </div>
-
+        </div>
+        <div class="env">
+            <div class="normal addMaterial" @mousedown="mouseDown('addDarckNessEff')">
+                Night
+            </div>
+            <div class="normal addMaterial" @mousedown="mouseDown('addRain')">
+                Rain
+            </div>
+            <div class="normal addMaterial" @mousedown="mouseDown('addSnow')">
+                Snow
+            </div>
+            <div class="normal addMaterial" @mousedown="mouseDown('addFrog')">
+                Frog
+            </div>
         </div>
     </div>
 </template>
