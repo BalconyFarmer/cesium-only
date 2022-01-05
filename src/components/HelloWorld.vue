@@ -218,22 +218,24 @@
             </div>
 
             <div class="material">
-                <div class="normal addMaterial" @mousedown="mouseDown('addMaterial')" @mouseup="mouseUp()">
+                <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')" @mouseup="mouseUp()">
                     发光线条
                 </div>
-                <div class="normal addMaterial" @mousedown="mouseDown('addColor')" @mouseup="mouseUp()">
+                <div class="normal addColor" @mousedown="mouseDown('addColor')" @mouseup="mouseUp()">
                     addColor
                 </div>
-                <div class="normal addMaterial" @mousedown="mouseDown('addImgMaterial')" @mouseup="mouseUp()">
+                <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')" @mouseup="mouseUp()">
                     addImgMaterial
                 </div>
-                <div class="normal addMaterial" @mousedown="mouseDown('addCheckerboardMaterialProperty')" @mouseup="mouseUp()">
+                <div class="normal addCheckerboardMaterialProperty" @mousedown="mouseDown('addCheckerboardMaterialProperty')"
+                     @mouseup="mouseUp()">
                     addCheckerboardMaterialProperty
                 </div>
-                <div class="normal addMaterial" @mousedown="mouseDown('addStripeMaterialProperty')" @mouseup="mouseUp()">
+                <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')"
+                     @mouseup="mouseUp()">
                     addStripeMaterialProperty
                 </div>
-                <div class="normal addMaterial" @mousedown="mouseDown('addGridMaterialProperty')" @mouseup="mouseUp()">
+                <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')" @mouseup="mouseUp()">
                     addGridMaterialProperty
                 </div>
 
@@ -711,6 +713,32 @@
                 height: 50px;
                 border: 1px solid white;
                 margin: 5px;
+            }
+
+            .addGridMaterialProperty {
+                background-image: url("../assets/geometryIcons/material/addGridMaterialProperty.png");
+                background-size: 100% 100%;
+            }
+            .addStripeMaterialProperty {
+                background-image: url("../assets/geometryIcons/material/addStripeMaterialProperty.png");
+                background-size: 100% 100%;
+            }
+            .addCheckerboardMaterialProperty {
+                background-image: url("../assets/geometryIcons/material/addCheckerboardMaterialProperty.png");
+                background-size: 100% 100%;
+            }
+            .addImgMaterial {
+                background-image: url("../assets/geometryIcons/material/addImgMaterial.png");
+                background-size: 100% 100%;
+            }
+            .addColor {
+                background-image: url("../assets/geometryIcons/material/addColor.png");
+                background-size: 100% 100%;
+            }
+
+            .addMaterialLightLine {
+                background-image: url("../assets/geometryIcons/material/发光线条.png");
+                background-size: 100% 100%;
             }
 
             .addMaterial {

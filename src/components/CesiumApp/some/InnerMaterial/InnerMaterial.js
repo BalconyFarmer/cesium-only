@@ -170,7 +170,7 @@ export default class InnerMaterial {
                 topRadius: 2,//圆柱体的顶部半径。
                 bottomRadius: 2,//    圆柱体底部的半径。
                 material: metarial,
-                outline: true,//轮廓
+                outline: false,//轮廓
                 outlineColor: Cesium.Color.DARK_GREEN,//轮廓颜色深绿色
                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
                 semiMinorAxis: 2000.0,
