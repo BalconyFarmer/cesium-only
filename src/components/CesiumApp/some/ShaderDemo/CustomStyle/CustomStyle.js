@@ -19,15 +19,28 @@ export default class CustomStyle {
      * 加载流动墙效果
      */
     addFlowWall () {
+        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/11.png'
+        initFlowMatetial(url) // 注册流动线材质
 
         const flowWall = {
             name: 'WallTrail',
             wall: {
-                positions: Cesium.Cartesian3.fromDegreesArrayHeights([-90.0, 43.0, 100000.0,
-                    -87.5, 45.0, 100000.0,
-                    -85.0, 43.0, 100000.0,
-                    -87.5, 41.0, 100000.0,
-                    -90.0, 43.0, 100000.0]),
+                positions: Cesium.Cartesian3.fromDegreesArrayHeights([
+                    104.06429362988506,
+                    30.622540575608895, 100.0,
+
+                    104.0640639063899,
+                    30.636054786069653, 100.0,
+
+                    104.07352732198669,
+                    30.636178372029853, 100.0,
+
+                    104.07430688964342,
+                    30.622716145373985, 100.0,
+
+                    104.06429362988506,
+                    30.622540575608895, 100.0,
+                ]),
                 material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
             }
         }
@@ -40,7 +53,7 @@ export default class CustomStyle {
      * 添加流动线条
      */
     addFlowLine (points) {
-        const url = "http://localhost:1111/3Dstatic/loadData/flowNumber/11.png"
+        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/11.png'
         initFlowMatetial(url) // 注册流动线材质
 
         let _p = null
@@ -82,7 +95,7 @@ export default class CustomStyle {
      * 添加flyline
      */
     addFlyLine3D (centerP, citiesP) {
-        const url = "http://localhost:1111/3Dstatic/loadData/flowNumber/11.png"
+        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/11.png'
         initFlowMatetial(url) // 注册流动线材质
 
         // 抛物线 相等

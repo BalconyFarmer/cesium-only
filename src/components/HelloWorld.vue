@@ -4,11 +4,10 @@
             <div>
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="13">run</el-menu-item>
+                    <el-menu-item index="11">成都tiles</el-menu-item>
                     <el-menu-item index="2">云南JSON</el-menu-item>
                     <el-menu-item index="3">纽约tiles</el-menu-item>
-                    <el-menu-item index="11">成都tiles</el-menu-item>
                     <el-menu-item index="12">倾斜摄影</el-menu-item>
-                    <el-menu-item index="6">addFlowWall</el-menu-item>
                 </el-menu>
             </div>
             <div>
@@ -267,8 +266,6 @@
                     this.cApp.loadJson.loadJsonData()
                 } else if (key == 3) {
                     this.cApp.cesium3DTileset.toYN()
-                } else if (key == 6) {
-                    this.cApp.part.addFlowWall()
                 } else if (key == 9) {
                     this.cApp.switchLight()
                 } else if (key == 11) {

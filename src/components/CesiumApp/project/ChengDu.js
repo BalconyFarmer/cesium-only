@@ -43,6 +43,8 @@ export default class ChengDu {
         }
         self.app.part.addRadarScan(option)
 
+        self.app.part.addFlowWall()
+
         const option1 = {
             lon: 104.08077683485338,
             lat: 30.635968171376696,
