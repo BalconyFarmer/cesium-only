@@ -221,7 +221,12 @@
                 <div class="normal addMaterial" @mousedown="mouseDown('addMaterial')" @mouseup="mouseUp()">
                     发光线条
                 </div>
-
+                <div class="normal addMaterial" @mousedown="mouseDown('addColor')" @mouseup="mouseUp()">
+                    addColor
+                </div>
+                <div class="normal addMaterial" @mousedown="mouseDown('addImgMaterial')" @mouseup="mouseUp()">
+                    addImgMaterial
+                </div>
             </div>
 
         </div>
@@ -414,6 +419,12 @@
                             break
                         case 'addFrog':
                             this.cApp.environment.addFrog(this.geoPositionCartesian2)
+                            break
+                        case 'addColor':
+                            this.cApp.innerMaterial.addColor(this.geoPositionCartesian2)
+                            break
+                        case 'addImgMaterial':
+                            this.cApp.innerMaterial.addImgMaterial(this.geoPositionCartesian2)
                             break
                     }
                 }
