@@ -127,122 +127,8 @@
             </div>
         </div>
 
-        <div class="bottomCenter">
-            <div class="env">
-                <div class="normal addMaterial" @mousedown="mouseDown('addDarckNessEff')" @mouseup="mouseUp()">
-                    addDarckNessEff
-                </div>
-                <div class="normal addMaterial" @mousedown="mouseDown('addRain')" @mouseup="mouseUp()">
-                    addRain
-                </div>
-                <div class="normal addMaterial" @mousedown="mouseDown('addSnow')" @mouseup="mouseUp()">
-                    addSnow
-                </div>
-                <div class="normal addMaterial" @mousedown="mouseDown('addFrog')" @mouseup="mouseUp()">
-                    addFrog
-                </div>
-            </div>
-            <div class="geo">
-                <div class="normal p" @mousedown="mouseDown('点')" @mouseup="mouseUp()">
-                    点
-                </div>
-                <div class="normal p" @mousedown="mouseDown('Box')" @mouseup="mouseUp()">
-                    Box
-                </div>
-                <div class="normal p" @mousedown="mouseDown('addEllipse')" @mouseup="mouseUp()">
-                    addEllipse
-                </div>
-                <div class="normal p" @mousedown="mouseDown('addEllipseTuo')" @mouseup="mouseUp()">
-                    addEllipseTuo
-                </div>
-                <div class="normal p" @mousedown="mouseDown('addEllipseTuoWW')" @mouseup="mouseUp()">
-                    addEllipseTuoWW
-                </div>
-                <div class="normal y" @mousedown="mouseDown('圆柱体')" @mouseup="mouseUp()">
-                    圆柱体
-                </div>
-                <div class="normal b" @mousedown="mouseDown('bilbord')" @mouseup="mouseUp()">
-                    bilbord
-                </div>
-                <div class="normal b" @mousedown="mouseDown('redCorridor')" @mouseup="mouseUp()">
-                    redCorridor
-                </div>
-                <div class="normal b" @mousedown="mouseDown('redPolygon')" @mouseup="mouseUp()">
-                    redPolygon
-                </div>
-                <div class="normal b" @mousedown="mouseDown('greenPolygon')" @mouseup="mouseUp()">
-                    greenPolygon
-                </div>
-                <div class="normal b" @mousedown="mouseDown('orangePolygon')" @mouseup="mouseUp()">
-                    orangePolygon
-                </div>
-                <div class="normal b" @mousedown="mouseDown('bluePolygon')" @mouseup="mouseUp()">
-                    bluePolygon
-                </div>
-                <div class="normal b" @mousedown="mouseDown('redLine')" @mouseup="mouseUp()">
-                    redLine
-                </div>
-                <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')" @mouseup="mouseUp()">
-                    glowingLine
-                </div>
-                <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')" @mouseup="mouseUp()">
-                    orangeOutlined
-                </div>
-                <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')" @mouseup="mouseUp()">
-                    yellowLine
-                </div>
-                <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')" @mouseup="mouseUp()">
-                    redRectangle
-                </div>
-                <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')" @mouseup="mouseUp()">
-                    greenRectangle
-                </div>
-                <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')" @mouseup="mouseUp()">
-                    blueEllipsoid
-                </div>
-                <div class="normal redSphere" @mousedown="mouseDown('redSphere')" @mouseup="mouseUp()">
-                    redSphere
-                </div>
-                <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')" @mouseup="mouseUp()">
-                    outlineOnly
-                </div>
-                <div class="normal redWall" @mousedown="mouseDown('redWall')" @mouseup="mouseUp()">
-                    redWall
-                </div>
-                <div class="normal greenWall" @mousedown="mouseDown('greenWall')" @mouseup="mouseUp()">
-                    greenWall
-                </div>
-                <div class="normal blueWall" @mousedown="mouseDown('blueWall')" @mouseup="mouseUp()">
-                    blueWall
-                </div>
-            </div>
-
-            <div class="material">
-                <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')" @mouseup="mouseUp()">
-                    发光线条
-                </div>
-                <div class="normal addColor" @mousedown="mouseDown('addColor')" @mouseup="mouseUp()">
-                    addColor
-                </div>
-                <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')" @mouseup="mouseUp()">
-                    addImgMaterial
-                </div>
-                <div class="normal addCheckerboardMaterialProperty"
-                     @mousedown="mouseDown('addCheckerboardMaterialProperty')"
-                     @mouseup="mouseUp()">
-                    addCheckerboardMaterialProperty
-                </div>
-                <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')"
-                     @mouseup="mouseUp()">
-                    addStripeMaterialProperty
-                </div>
-                <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')"
-                     @mouseup="mouseUp()">
-                    addGridMaterialProperty
-                </div>
-
-            </div>
-
+        <div class="bottomCenter" v-if="showPanel">
+            <HelloWorldBottom :cApp="this.cApp" ref="mychild"></HelloWorldBottom>
         </div>
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
@@ -253,9 +139,13 @@
     import * as widget from 'cesium/Widgets/widgets.css'
     import CesiumApp from './CesiumApp/CesiumApp'
     import {scriptLoader} from '../utils/index'
+    import HelloWorldBottom from './HelloWorldBottom'
 
     export default {
         name: 'hoting',
+        components: {
+            HelloWorldBottom
+        },
         watch: {
             brightness: {
                 handler (newValue) {
@@ -288,13 +178,13 @@
 
         data () {
             return {
+                showPanel: false,
                 addGeoFlag: false,
-                geoPositionCartesian2: null,
                 currentGeoType: null,
                 brightness: 1,
                 terrainFlag: true,
                 moveToolFlag: false,
-                value: '2.5D模式',
+                value: '地球模式',
                 options: [{
                     value: '3D模式',
                     label: '3D模式'
@@ -345,113 +235,7 @@
                 this.addGeoFlag = true
             },
             mouseUp (ev) {
-                if (this.addGeoFlag) {
-                    switch (this.currentGeoType) {
-                        case '点':
-                            this.cApp.innerGeometry.addPoint(this.geoPositionCartesian2)
-                            break
-                        case '圆柱体':
-                            this.cApp.innerGeometry.addGeometry(this.geoPositionCartesian2)
-                            break
-                        case 'bilbord':
-                            this.cApp.innerGeometry.addIcon(this.geoPositionCartesian2, '默认')
-                            break
-                        case 'Box':
-                            this.cApp.innerGeometry.addBox(this.geoPositionCartesian2)
-                            break
-                        case 'addEllipse':
-                            this.cApp.innerGeometry.addEllipse(this.geoPositionCartesian2)
-                            break
-                        case 'addEllipseTuo':
-                            this.cApp.innerGeometry.addEllipseTuo(this.geoPositionCartesian2)
-                            break
-                        case 'addEllipseTuoWW':
-                            this.cApp.innerGeometry.addEllipseTuoWW(this.geoPositionCartesian2)
-                            break
-                        case 'redCorridor':
-                            this.cApp.innerGeometry.redCorridor(this.geoPositionCartesian2)
-                            break
-                        case 'redPolygon':
-                            this.cApp.innerGeometry.redPolygon(this.geoPositionCartesian2)
-                            break
-                        case 'greenPolygon':
-                            this.cApp.innerGeometry.greenPolygon(this.geoPositionCartesian2)
-                            break
-                        case 'orangePolygon':
-                            this.cApp.innerGeometry.orangePolygon(this.geoPositionCartesian2)
-                            break
-                        case 'bluePolygon':
-                            this.cApp.innerGeometry.bluePolygon(this.geoPositionCartesian2)
-                            break
-                        case 'redLine':
-                            this.cApp.innerGeometry.redLine(this.geoPositionCartesian2)
-                            break
-                        case 'glowingLine':
-                            this.cApp.innerGeometry.glowingLine(this.geoPositionCartesian2)
-                            break
-                        case 'orangeOutlined':
-                            this.cApp.innerGeometry.orangeOutlined(this.geoPositionCartesian2)
-                            break
-                        case 'yellowLine':
-                            this.cApp.innerGeometry.yellowLine(this.geoPositionCartesian2)
-                            break
-                        case 'redRectangle':
-                            this.cApp.innerGeometry.redRectangle(this.geoPositionCartesian2)
-                            break
-                        case 'greenRectangle':
-                            this.cApp.innerGeometry.greenRectangle(this.geoPositionCartesian2)
-                            break
-                        case 'blueEllipsoid':
-                            this.cApp.innerGeometry.blueEllipsoid(this.geoPositionCartesian2)
-                            break
-                        case 'redSphere':
-                            this.cApp.innerGeometry.redSphere(this.geoPositionCartesian2)
-                            break
-                        case 'outlineOnly':
-                            this.cApp.innerGeometry.outlineOnly(this.geoPositionCartesian2)
-                            break
-                        case 'redWall':
-                            this.cApp.innerGeometry.redWall(this.geoPositionCartesian2)
-                            break
-                        case 'greenWall':
-                            this.cApp.innerGeometry.greenWall(this.geoPositionCartesian2)
-                            break
-                        case 'blueWall':
-                            this.cApp.innerGeometry.blueWall(this.geoPositionCartesian2)
-                            break
-                        case 'addMaterial':
-                            this.cApp.innerMaterial.addMaterial(this.geoPositionCartesian2)
-                            break
-                        case 'addDarckNessEff':
-                            this.cApp.environment.addDarckNessEff(this.geoPositionCartesian2)
-                            break
-                        case 'addRain':
-                            this.cApp.environment.addRain(this.geoPositionCartesian2)
-                            break
-                        case 'addSnow':
-                            this.cApp.environment.addSnow(this.geoPositionCartesian2)
-                            break
-                        case 'addFrog':
-                            this.cApp.environment.addFrog(this.geoPositionCartesian2)
-                            break
-                        case 'addColor':
-                            this.cApp.innerMaterial.addColor(this.geoPositionCartesian2)
-                            break
-                        case 'addImgMaterial':
-                            this.cApp.innerMaterial.addImgMaterial(this.geoPositionCartesian2)
-                            break
-                        case 'addCheckerboardMaterialProperty':
-                            this.cApp.innerMaterial.addCheckerboardMaterialProperty(this.geoPositionCartesian2)
-                            break
-                        case 'addStripeMaterialProperty':
-                            this.cApp.innerMaterial.addStripeMaterialProperty(this.geoPositionCartesian2)
-                            break
-                        case 'addGridMaterialProperty':
-                            this.cApp.innerMaterial.addGridMaterialProperty(this.geoPositionCartesian2)
-                            break
-                    }
-                }
-                this.addGeoFlag = false
+                this.$refs.mychild.mouseUp()
             },
 
             terrainChange () {
@@ -532,10 +316,8 @@
                 this.cApp.eventCenter.addEventListener('pickEntity', function (data) {
                     self.currentEntities = data.message.position
                 })
-                this.cApp.eventCenter.addEventListener('geoPosition', function (data) {
-                    self.geoPositionCartesian2 = data.message.position
-                })
 
+                this.showPanel = true
             })
 
             setInterval(function () {
@@ -625,148 +407,7 @@
             position: absolute;
             left: 10%;
             bottom: 0;
-            background-color: rgba(43, 43, 43, .5);
             z-index: 999;
-            color: white;
-
-            .env {
-                width: 100%;
-                height: 30%;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                overflow-x: auto;
-            }
-
-            .geo {
-                width: 100%;
-                height: 30%;
-
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                overflow-x: auto;
-            }
-
-            .material {
-                width: 100%;
-                height: 30%;
-
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                flex-wrap: wrap;
-                overflow-x: auto;
-            }
-
-            .normal {
-                width: 50px;
-                height: 50px;
-                border: 1px solid white;
-                margin: 5px;
-            }
-
-            .addGridMaterialProperty {
-                background-image: url("../assets/geometryIcons/material/addGridMaterialProperty.png");
-                background-size: 100% 100%;
-            }
-
-            .addStripeMaterialProperty {
-                background-image: url("../assets/geometryIcons/material/addStripeMaterialProperty.png");
-                background-size: 100% 100%;
-            }
-
-            .addCheckerboardMaterialProperty {
-                background-image: url("../assets/geometryIcons/material/addCheckerboardMaterialProperty.png");
-                background-size: 100% 100%;
-            }
-
-            .addImgMaterial {
-                background-image: url("../assets/geometryIcons/material/addImgMaterial.png");
-                background-size: 100% 100%;
-            }
-
-            .addColor {
-                background-image: url("../assets/geometryIcons/material/addColor.png");
-                background-size: 100% 100%;
-            }
-
-            .addMaterialLightLine {
-                background-image: url("../assets/geometryIcons/material/发光线条.png");
-                background-size: 100% 100%;
-            }
-
-            .addMaterial {
-                background-image: url("../assets/geometryIcons/material.png");
-                background-size: 100% 100%;
-            }
-
-            .glowingLine {
-                background-image: url("../assets/geometryIcons/glowingLine.png");
-                background-size: 100% 100%;
-            }
-
-            .yellowLine {
-                background-image: url("../assets/geometryIcons/yellowLine.png");
-                background-size: 100% 100%;
-            }
-
-            .redRectangle {
-                background-image: url("../assets/geometryIcons/redRectangle.png");
-                background-size: 100% 100%;
-            }
-
-            .greenRectangle {
-                background-image: url("../assets/geometryIcons/greenRectangle.png");
-                background-size: 100% 100%;
-            }
-
-            .blueEllipsoid {
-                background-image: url("../assets/geometryIcons/blueEllipsoid.png");
-                background-size: 100% 100%;
-            }
-
-            .redSphere {
-                background-image: url("../assets/geometryIcons/redSphere.png");
-                background-size: 100% 100%;
-            }
-
-            .outlineOnly {
-                background-image: url("../assets/geometryIcons/outlineOnly.png");
-                background-size: 100% 100%;
-            }
-
-            .blueWall {
-                background-image: url("../assets/geometryIcons/blueWall.png");
-                background-size: 100% 100%;
-            }
-
-            .greenWall {
-                background-image: url("../assets/geometryIcons/greenWall.png");
-                background-size: 100% 100%;
-            }
-
-            .redWall {
-                background-image: url("../assets/geometryIcons/redWall.png");
-                background-size: 100% 100%;
-            }
-
-            .p {
-                background-image: url("../assets/geometryIcons/p.png");
-                background-size: 100% 100%;
-            }
-
-            .y {
-                background-image: url("../assets/geometryIcons/y.png");
-                background-size: 100% 100%;
-            }
-
-            .b {
-                background-image: url("../assets/geometryIcons/b.png");
-                background-size: 100% 100%;
-            }
         }
     }
 
