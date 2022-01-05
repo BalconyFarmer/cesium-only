@@ -227,7 +227,8 @@
                 <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')" @mouseup="mouseUp()">
                     addImgMaterial
                 </div>
-                <div class="normal addCheckerboardMaterialProperty" @mousedown="mouseDown('addCheckerboardMaterialProperty')"
+                <div class="normal addCheckerboardMaterialProperty"
+                     @mousedown="mouseDown('addCheckerboardMaterialProperty')"
                      @mouseup="mouseUp()">
                     addCheckerboardMaterialProperty
                 </div>
@@ -235,7 +236,8 @@
                      @mouseup="mouseUp()">
                     addStripeMaterialProperty
                 </div>
-                <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')" @mouseup="mouseUp()">
+                <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')"
+                     @mouseup="mouseUp()">
                     addGridMaterialProperty
                 </div>
 
@@ -558,10 +560,13 @@
 </script>
 
 <style lang="scss">
-    body {
-        display: block;
-        margin: 0px;
-        overflow-y: hidden;
+    @import "../style/reset.scss";
+    //引入方式
+    @import "../style/ele.scss"; //引入方式
+
+    #cesiumContainer {
+        width: 100%;
+        height: 100%;
     }
 
     .title {
@@ -569,57 +574,9 @@
         color: #87939A;
     }
 
-    .el-tree-node__content:hover {
-        background-color: rgba(43, 43, 43, 0.9);
-    }
-
-    /*定义滚动条高宽及背景
-    高宽分别对应横竖滚动条的尺寸*/
-    ::-webkit-scrollbar {
-        width: 5px;
-        height: 16px;
-        background-color: #F5F5F5;
-    }
-
-    /*定义滚动条轨道
-     内阴影+圆角*/
-    ::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        border-radius: 10px;
-        background-color: #F5F5F5;
-    }
-
-    /*定义滑块
-     内阴影+圆角*/
-    ::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-        background-color: #555;
-    }
-
     .cesium-viewer-bottom {
         display: none !important;
         visibility: hidden !important;
-    }
-
-    .el-menu {
-        background-color: #3C3F41;
-    }
-
-    .el-menu.el-menu--horizontal {
-        border-bottom: solid 1px #3C3F41;
-    }
-
-    .el-menu-item {
-        font-size: 10px;
-        color: #303133;
-        padding: 0 10px;
-        cursor: pointer;
-    }
-
-    #cesiumContainer {
-        width: 100%;
-        height: 100%;
     }
 
     .all {
@@ -672,10 +629,6 @@
             z-index: 999;
             color: white;
 
-            -moz-user-select: none;
-            -khtml-user-select: none;
-            user-select: none;
-
             .env {
                 width: 100%;
                 height: 30%;
@@ -719,18 +672,22 @@
                 background-image: url("../assets/geometryIcons/material/addGridMaterialProperty.png");
                 background-size: 100% 100%;
             }
+
             .addStripeMaterialProperty {
                 background-image: url("../assets/geometryIcons/material/addStripeMaterialProperty.png");
                 background-size: 100% 100%;
             }
+
             .addCheckerboardMaterialProperty {
                 background-image: url("../assets/geometryIcons/material/addCheckerboardMaterialProperty.png");
                 background-size: 100% 100%;
             }
+
             .addImgMaterial {
                 background-image: url("../assets/geometryIcons/material/addImgMaterial.png");
                 background-size: 100% 100%;
             }
+
             .addColor {
                 background-image: url("../assets/geometryIcons/material/addColor.png");
                 background-size: 100% 100%;
@@ -811,14 +768,6 @@
                 background-size: 100% 100%;
             }
         }
-    }
-
-
-    .el-tree {
-        position: relative;
-        cursor: default;
-        background-color: rgba(43, 43, 43, .0);
-        color: #ffffff;
     }
 
 </style>
