@@ -227,6 +227,16 @@
                 <div class="normal addMaterial" @mousedown="mouseDown('addImgMaterial')" @mouseup="mouseUp()">
                     addImgMaterial
                 </div>
+                <div class="normal addMaterial" @mousedown="mouseDown('addCheckerboardMaterialProperty')" @mouseup="mouseUp()">
+                    addCheckerboardMaterialProperty
+                </div>
+                <div class="normal addMaterial" @mousedown="mouseDown('addStripeMaterialProperty')" @mouseup="mouseUp()">
+                    addStripeMaterialProperty
+                </div>
+                <div class="normal addMaterial" @mousedown="mouseDown('addGridMaterialProperty')" @mouseup="mouseUp()">
+                    addGridMaterialProperty
+                </div>
+
             </div>
 
         </div>
@@ -425,6 +435,15 @@
                             break
                         case 'addImgMaterial':
                             this.cApp.innerMaterial.addImgMaterial(this.geoPositionCartesian2)
+                            break
+                        case 'addCheckerboardMaterialProperty':
+                            this.cApp.innerMaterial.addCheckerboardMaterialProperty(this.geoPositionCartesian2)
+                            break
+                        case 'addStripeMaterialProperty':
+                            this.cApp.innerMaterial.addStripeMaterialProperty(this.geoPositionCartesian2)
+                            break
+                        case 'addGridMaterialProperty':
+                            this.cApp.innerMaterial.addGridMaterialProperty(this.geoPositionCartesian2)
                             break
                     }
                 }
