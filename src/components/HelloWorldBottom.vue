@@ -1,44 +1,26 @@
 <template>
     <div class="all">
         <div class="geo">
+            <div class="normal b" @mousedown="mouseDown('bilbord')">
+                bilbord
+            </div>
             <div class="normal p" @mousedown="mouseDown('点')">
                 点
             </div>
-            <div class="normal p" @mousedown="mouseDown('Box')">
+            <div class="normal Box" @mousedown="mouseDown('Box')">
                 Box
             </div>
-            <div class="normal p" @mousedown="mouseDown('addEllipse')">
+            <div class="normal addEllipse" @mousedown="mouseDown('addEllipse')">
                 addEllipse
             </div>
-            <div class="normal p" @mousedown="mouseDown('addEllipseTuo')">
+            <div class="normal addEllipseTuo" @mousedown="mouseDown('addEllipseTuo')">
                 addEllipseTuo
             </div>
-            <div class="normal p" @mousedown="mouseDown('addEllipseTuoWW')">
+            <div class="normal addEllipseTuoWW" @mousedown="mouseDown('addEllipseTuoWW')">
                 addEllipseTuoWW
             </div>
             <div class="normal y" @mousedown="mouseDown('圆柱体')">
                 圆柱体
-            </div>
-            <div class="normal b" @mousedown="mouseDown('bilbord')">
-                bilbord
-            </div>
-            <div class="normal b" @mousedown="mouseDown('redCorridor')">
-                redCorridor
-            </div>
-            <div class="normal b" @mousedown="mouseDown('redPolygon')">
-                redPolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('greenPolygon')">
-                greenPolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('orangePolygon')">
-                orangePolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('bluePolygon')">
-                bluePolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('redLine')">
-                redLine
             </div>
             <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')">
                 glowingLine
@@ -72,6 +54,24 @@
             </div>
             <div class="normal blueWall" @mousedown="mouseDown('blueWall')">
                 blueWall
+            </div>
+            <div class="normal b" @mousedown="mouseDown('redCorridor')">
+                redCorridor
+            </div>
+            <div class="normal b" @mousedown="mouseDown('redPolygon')">
+                redPolygon
+            </div>
+            <div class="normal b" @mousedown="mouseDown('greenPolygon')">
+                greenPolygon
+            </div>
+            <div class="normal b" @mousedown="mouseDown('orangePolygon')">
+                orangePolygon
+            </div>
+            <div class="normal b" @mousedown="mouseDown('bluePolygon')">
+                bluePolygon
+            </div>
+            <div class="normal b" @mousedown="mouseDown('redLine')">
+                redLine
             </div>
         </div>
         <div class="material">
@@ -295,6 +295,22 @@
             margin: 5px;
         }
 
+        .addEllipseTuoWW {
+            background-image: url("../assets/geometryIcons/addEllipseTuoWW.png");
+            background-size: 100% 100%;
+        }
+        .addEllipseTuo {
+            background-image: url("../assets/geometryIcons/addEllipseTuo.png");
+            background-size: 100% 100%;
+        }
+        .addEllipse {
+            background-image: url("../assets/geometryIcons/addEllipse.png");
+            background-size: 100% 100%;
+        }
+        .Box {
+            background-image: url("../assets/geometryIcons/Box.png");
+            background-size: 100% 100%;
+        }
         .addGridMaterialProperty {
             background-image: url("../assets/geometryIcons/material/addGridMaterialProperty.png");
             background-size: 100% 100%;
