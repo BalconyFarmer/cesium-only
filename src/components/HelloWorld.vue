@@ -128,6 +128,20 @@
         </div>
 
         <div class="bottomCenter">
+            <div class="env">
+                <div class="normal addMaterial" @mousedown="mouseDown('addDarckNessEff')" @mouseup="mouseUp()">
+                    addDarckNessEff
+                </div>
+                <div class="normal addMaterial" @mousedown="mouseDown('addRain')" @mouseup="mouseUp()">
+                    addRain
+                </div>
+                <div class="normal addMaterial" @mousedown="mouseDown('addSnow')" @mouseup="mouseUp()">
+                    addSnow
+                </div>
+                <div class="normal addMaterial" @mousedown="mouseDown('addFrog')" @mouseup="mouseUp()">
+                    addFrog
+                </div>
+            </div>
             <div class="geo">
                 <div class="normal p" @mousedown="mouseDown('点')" @mouseup="mouseUp()">
                     点
@@ -207,6 +221,7 @@
                 <div class="normal addMaterial" @mousedown="mouseDown('addMaterial')" @mouseup="mouseUp()">
                     MMM
                 </div>
+
             </div>
 
         </div>
@@ -387,6 +402,18 @@
                             break
                         case 'addMaterial':
                             this.cApp.innerMaterial.addMaterial(this.geoPositionCartesian2)
+                            break
+                        case 'addDarckNessEff':
+                            this.cApp.environment.addDarckNessEff(this.geoPositionCartesian2)
+                            break
+                        case 'addRain':
+                            this.cApp.environment.addRain(this.geoPositionCartesian2)
+                            break
+                        case 'addSnow':
+                            this.cApp.environment.addSnow(this.geoPositionCartesian2)
+                            break
+                        case 'addFrog':
+                            this.cApp.environment.addFrog(this.geoPositionCartesian2)
                             break
                     }
                 }
@@ -617,9 +644,20 @@
             -khtml-user-select: none;
             user-select: none;
 
+            .env {
+                width: 100%;
+                height: 30%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                overflow-x: auto;
+            }
+
             .geo {
                 width: 100%;
-                height: 45%;
+                height: 30%;
+
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
@@ -629,7 +667,8 @@
 
             .material {
                 width: 100%;
-                height: 45%;
+                height: 30%;
+
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
