@@ -14,10 +14,10 @@
             <div>
                 <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 
-                    <el-menu-item index="9">全球光照系统</el-menu-item>
-                    <el-menu-item index="光照系统">光照系统</el-menu-item>
-                    <el-menu-item index="addBloom">addBloom</el-menu-item>
-                    <el-menu-item index="addOutline">addOutline</el-menu-item>
+                    <el-menu-item index="9">全球光照</el-menu-item>
+                    <el-menu-item index="光照系统">光照</el-menu-item>
+                    <el-menu-item index="addBloom">Bloom</el-menu-item>
+                    <el-menu-item index="addOutline">Outline</el-menu-item>
                     <el-menu-item index="14">关闭冗余</el-menu-item>
                     <el-menu-item index="">
                         <span>drag</span>
@@ -72,9 +72,9 @@
                             </el-option>
                         </el-select>
                     </el-menu-item>
-                    <el-menu-item>
-                        <span class="demonstration">亮度</span>
-                        <el-slider :max="1" :step="0.1" v-model="brightness"></el-slider>
+                    <el-menu-item style="width: 100px">
+                        <el-slider :max="2" :step="0.1" v-model="brightness">
+                        </el-slider>
                     </el-menu-item>
                 </el-menu>
             </div>
@@ -128,81 +128,87 @@
         </div>
 
         <div class="bottomCenter">
-            <div class="normal p" @mousedown="mouseDown('点')" @mouseup="mouseUp()">
-                点
+            <div class="geo">
+                <div class="normal p" @mousedown="mouseDown('点')" @mouseup="mouseUp()">
+                    点
+                </div>
+                <div class="normal p" @mousedown="mouseDown('Box')" @mouseup="mouseUp()">
+                    Box
+                </div>
+                <div class="normal p" @mousedown="mouseDown('addEllipse')" @mouseup="mouseUp()">
+                    addEllipse
+                </div>
+                <div class="normal p" @mousedown="mouseDown('addEllipseTuo')" @mouseup="mouseUp()">
+                    addEllipseTuo
+                </div>
+                <div class="normal p" @mousedown="mouseDown('addEllipseTuoWW')" @mouseup="mouseUp()">
+                    addEllipseTuoWW
+                </div>
+                <div class="normal y" @mousedown="mouseDown('圆柱体')" @mouseup="mouseUp()">
+                    圆柱体
+                </div>
+                <div class="normal b" @mousedown="mouseDown('bilbord')" @mouseup="mouseUp()">
+                    bilbord
+                </div>
+                <div class="normal b" @mousedown="mouseDown('redCorridor')" @mouseup="mouseUp()">
+                    redCorridor
+                </div>
+                <div class="normal b" @mousedown="mouseDown('redPolygon')" @mouseup="mouseUp()">
+                    redPolygon
+                </div>
+                <div class="normal b" @mousedown="mouseDown('greenPolygon')" @mouseup="mouseUp()">
+                    greenPolygon
+                </div>
+                <div class="normal b" @mousedown="mouseDown('orangePolygon')" @mouseup="mouseUp()">
+                    orangePolygon
+                </div>
+                <div class="normal b" @mousedown="mouseDown('bluePolygon')" @mouseup="mouseUp()">
+                    bluePolygon
+                </div>
+                <div class="normal b" @mousedown="mouseDown('redLine')" @mouseup="mouseUp()">
+                    redLine
+                </div>
+                <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')" @mouseup="mouseUp()">
+                    glowingLine
+                </div>
+                <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')" @mouseup="mouseUp()">
+                    orangeOutlined
+                </div>
+                <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')" @mouseup="mouseUp()">
+                    yellowLine
+                </div>
+                <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')" @mouseup="mouseUp()">
+                    redRectangle
+                </div>
+                <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')" @mouseup="mouseUp()">
+                    greenRectangle
+                </div>
+                <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')" @mouseup="mouseUp()">
+                    blueEllipsoid
+                </div>
+                <div class="normal redSphere" @mousedown="mouseDown('redSphere')" @mouseup="mouseUp()">
+                    redSphere
+                </div>
+                <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')" @mouseup="mouseUp()">
+                    outlineOnly
+                </div>
+                <div class="normal redWall" @mousedown="mouseDown('redWall')" @mouseup="mouseUp()">
+                    redWall
+                </div>
+                <div class="normal greenWall" @mousedown="mouseDown('greenWall')" @mouseup="mouseUp()">
+                    greenWall
+                </div>
+                <div class="normal blueWall" @mousedown="mouseDown('blueWall')" @mouseup="mouseUp()">
+                    blueWall
+                </div>
             </div>
-            <div class="normal p" @mousedown="mouseDown('Box')" @mouseup="mouseUp()">
-                Box
+
+            <div class="material">
+                <div class="normal addMaterial" @mousedown="mouseDown('addMaterial')" @mouseup="mouseUp()">
+                    MMM
+                </div>
             </div>
-            <div class="normal p" @mousedown="mouseDown('addEllipse')" @mouseup="mouseUp()">
-                addEllipse
-            </div>
-            <div class="normal p" @mousedown="mouseDown('addEllipseTuo')" @mouseup="mouseUp()">
-                addEllipseTuo
-            </div>
-            <div class="normal p" @mousedown="mouseDown('addEllipseTuoWW')" @mouseup="mouseUp()">
-                addEllipseTuoWW
-            </div>
-            <div class="normal y" @mousedown="mouseDown('圆柱体')" @mouseup="mouseUp()">
-                圆柱体
-            </div>
-            <div class="normal b" @mousedown="mouseDown('bilbord')" @mouseup="mouseUp()">
-                bilbord
-            </div>
-            <div class="normal b" @mousedown="mouseDown('redCorridor')" @mouseup="mouseUp()">
-                redCorridor
-            </div>
-            <div class="normal b" @mousedown="mouseDown('redPolygon')" @mouseup="mouseUp()">
-                redPolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('greenPolygon')" @mouseup="mouseUp()">
-                greenPolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('orangePolygon')" @mouseup="mouseUp()">
-                orangePolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('bluePolygon')" @mouseup="mouseUp()">
-                bluePolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('redLine')" @mouseup="mouseUp()">
-                redLine
-            </div>
-            <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')" @mouseup="mouseUp()">
-                glowingLine
-            </div>
-            <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')" @mouseup="mouseUp()">
-                orangeOutlined
-            </div>
-            <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')" @mouseup="mouseUp()">
-                yellowLine
-            </div>
-            <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')" @mouseup="mouseUp()">
-                redRectangle
-            </div>
-            <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')" @mouseup="mouseUp()">
-                greenRectangle
-            </div>
-            <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')" @mouseup="mouseUp()">
-                blueEllipsoid
-            </div>
-            <div class="normal redSphere" @mousedown="mouseDown('redSphere')" @mouseup="mouseUp()">
-                redSphere
-            </div>
-            <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')" @mouseup="mouseUp()">
-                outlineOnly
-            </div>
-            <div class="normal redWall" @mousedown="mouseDown('redWall')" @mouseup="mouseUp()">
-                redWall
-            </div>
-            <div class="normal greenWall" @mousedown="mouseDown('greenWall')" @mouseup="mouseUp()">
-                greenWall
-            </div>
-            <div class="normal blueWall" @mousedown="mouseDown('blueWall')" @mouseup="mouseUp()">
-                blueWall
-            </div>
-            <div class="normal addMaterial" @mousedown="mouseDown('addMaterial')" @mouseup="mouseUp()">
-                MMM
-            </div>
+
         </div>
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
@@ -380,7 +386,7 @@
                             this.cApp.innerGeometry.blueWall(this.geoPositionCartesian2)
                             break
                         case 'addMaterial':
-                            this.cApp.innerGeometry.addMaterial(this.geoPositionCartesian2)
+                            this.cApp.innerMaterial.addMaterial(this.geoPositionCartesian2)
                             break
                     }
                 }
@@ -545,6 +551,13 @@
         border-bottom: solid 1px #3C3F41;
     }
 
+    .el-menu-item {
+        font-size: 10px;
+        color: #303133;
+        padding: 0 10px;
+        cursor: pointer;
+    }
+
     #cesiumContainer {
         width: 100%;
         height: 100%;
@@ -591,21 +604,38 @@
         }
 
         .bottomCenter {
-            width: 70%;
+            width: 80%;
             height: 20%;
             position: absolute;
-            left: 15%;
+            left: 10%;
             bottom: 0;
             background-color: rgba(43, 43, 43, .5);
             z-index: 999;
             color: white;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            flex-wrap: wrap;
+
             -moz-user-select: none;
             -khtml-user-select: none;
             user-select: none;
+
+            .geo {
+                width: 100%;
+                height: 45%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                overflow-x: auto;
+            }
+
+            .material {
+                width: 100%;
+                height: 45%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                overflow-x: auto;
+            }
 
             .normal {
                 width: 50px;

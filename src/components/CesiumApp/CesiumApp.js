@@ -12,6 +12,7 @@ import Event from './some/Event'
 import ParticleSystems from './some/ParticleSystems'
 import CustomShaderTest from './some/CustomStyle/CustomShaderTest'
 import ChengDu from './project/ChengDu'
+import InnerMaterial from './some/InnerMaterial/InnerMaterial'
 
 export default class CesiumApp {
     constructor () {
@@ -25,6 +26,7 @@ export default class CesiumApp {
         this.loadJson = new LoadJson(this)
         this.load3DModel = new Load3DModel(this)
         this.innerGeometry = new InnerGeometry(this)
+        this.innerMaterial = new InnerMaterial(this)
         this.eventCenter = new THREE.EventDispatcher() // 3D事件中心
         this.event = null
         this.particleSystems = null
