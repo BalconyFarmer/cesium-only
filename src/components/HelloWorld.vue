@@ -219,7 +219,7 @@
 
             <div class="material">
                 <div class="normal addMaterial" @mousedown="mouseDown('addMaterial')" @mouseup="mouseUp()">
-                    MMM
+                    发光线条
                 </div>
 
             </div>
