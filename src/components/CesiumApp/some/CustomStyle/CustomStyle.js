@@ -6,6 +6,9 @@ import {initFlowMatetial} from './_PolylineTrailLinkMaterialProperty'
 
 /**
  * 自定义着色器样式类
+ * PostProcess + GLSL 后期处理
+ * Fabric + GLSL 自定义材质
+ * 23种现成的Material类型
  */
 export default class CustomStyle {
     constructor (app) {
@@ -153,6 +156,7 @@ export default class CustomStyle {
 
     /**
      * 添加原型扫描
+     * 代码注释:https://blog.csdn.net/A873054267/article/details/105365862
      */
     addCircleScan (option) {
         /*
@@ -238,9 +242,11 @@ export default class CustomStyle {
             let ScanPostStage = new Cesium.PostProcessStage({
                 fragmentShader: ScanSegmentShader,
                 uniforms: {
+                    // 扫描中心
                     u_scanCenterEC: function () {
                         return Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center, _scratchCartesian4Center)
                     },
+                    // 扫描平面法向量
                     u_scanPlaneNormalEC: function () {
                         let temp = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center, _scratchCartesian4Center)
                         let temp1 = Cesium.Matrix4.multiplyByVector(viewer.camera._viewMatrix, _Cartesian4Center1, _scratchCartesian4Center1)
@@ -251,9 +257,11 @@ export default class CustomStyle {
                         Cesium.Cartesian3.normalize(_scratchCartesian3Normal, _scratchCartesian3Normal)
                         return _scratchCartesian3Normal
                     },
+                    // 扫描半径
                     u_radius: function () {
                         return maxRadius * (((new Date()).getTime() - _time) % duration) / duration
                     },
+                    // 扫描颜色
                     u_scanColor: scanColor
                 }
             })
@@ -271,6 +279,7 @@ export default class CustomStyle {
         }
         let CartographicCenter = new Cesium.Cartographic(Cesium.Math.toRadians(lon), Cesium.Math.toRadians(lat), 0)
         let scanColor = new Cesium.Color.fromCssColorString('rgba(85, 66, 225, 1)')
+
         AddCircleScanPostStage(this.app.viewer, CartographicCenter, radius, scanColor, 4000)
     }
 
