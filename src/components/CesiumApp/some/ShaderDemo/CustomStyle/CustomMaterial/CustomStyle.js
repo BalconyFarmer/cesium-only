@@ -19,30 +19,15 @@ export default class CustomStyle {
     /**
      * 加载流动墙效果
      */
-    addFlowWall () {
+    addFlowWall (positions) {
         const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
         initFlowMatetial1(url) // 注册流动线材质
 
         const flowWall = {
             name: 'WallTrail',
             wall: {
-                positions: Cesium.Cartesian3.fromDegreesArrayHeights([
-                    104.06429362988506,
-                    30.622540575608895, 100.0,
-
-                    104.0640639063899,
-                    30.636054786069653, 100.0,
-
-                    104.07352732198669,
-                    30.636178372029853, 100.0,
-
-                    104.07430688964342,
-                    30.622716145373985, 100.0,
-
-                    104.06429362988506,
-                    30.622540575608895, 100.0,
-                ]),
-                material: new Cesium.PolylineTrailLinkMaterialProperty1(Cesium.Color.ORANGE, 9000)
+                positions: positions,
+                material: new Cesium.PolylineTrailLinkMaterialProperty1(Cesium.Color.WHITESMOKE, 9000)
             }
         }
         this.app.viewer.entities.add(flowWall)
@@ -61,32 +46,14 @@ export default class CustomStyle {
         if (points) {
             _p = Cesium.Cartesian3.fromDegreesArrayHeights(points)
         } else {
-            _p = Cesium.Cartesian3.fromDegreesArrayHeights(
-                [
-                    102.65350192582177,
-                    24.90245912637886,
-                    1856.801867224477,
-
-                    102.65398695287782,
-                    24.90242237510545,
-                    1856.801867224477,
-
-                    102.65392975708504,
-                    24.90199492576048,
-                    1856.801867224477,
-
-                    102.65341015592861,
-                    24.9019991170425,
-                    1856.801867224477,
-
-                ])
+            console.log("fuck")
         }
 
         this.app.viewer.entities.add({
             name: 'PolylineTrail',
             polyline: {
                 positions: _p,
-                width: 20,
+                width: 10,
                 material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.YELLOW, 9000)
             }
         })

@@ -34,18 +34,15 @@ export default class ChengDu {
         self.app.cameraAutoRoll(aim1)
 
         setTimeout(function () {
-            console.log(1111)
             self.app.cameraFlyToCartesian3(aim1)
         }, timeLine[1])
 
         const option = {
-            lon: 104.08867088908544,
-            lat: 30.649448026709173,
-            radius: 500
+            lon: 104.08518355581377,
+            lat: 30.632540812118847,
+            radius: 200
         }
         self.app.part.addRadarScan(option)
-
-        self.app.part.addFlowWall()
 
         const option1 = {
             lon: 104.08077683485338,
@@ -54,28 +51,48 @@ export default class ChengDu {
         }
         self.app.part.addCircleScan(option1)
 
+        const postis = Cesium.Cartesian3.fromDegreesArrayHeights([
+            104.08910823719758,
+            30.62842929898083, 10.0,
+
+            104.08814901806453,
+            30.62608460511913, 10.0,
+
+            104.08463898581485,
+            30.626111794674216, 10.0,
+
+            104.08476936742238,
+            30.628519360788516, 10.0,
+
+            104.08910823719758,
+            30.62842929898083, 10.0,
+        ])
+        self.app.part.addFlowWall(postis)
+
         const points = [
-            104.08055789083461,
-            30.642949020712404,
+            104.09228987915748,
+            30.631370714909295,
             -0.00416811510864983,
 
-            104.08055789083461,
-            30.642949020712404,
-            1000,
+            104.09228987915748,
+            30.631370714909295,
+            500,
         ]
         self.app.part.addFlowLine(points)
 
-        const pointsText = Cesium.Cartesian3.fromDegrees(104.07721790813571, 30.644404672369557, 100)
+        const pointsText = Cesium.Cartesian3.fromDegrees(104.08712967931928,
+            30.63687154105514, 100)
         self.app.innerGeometry.addIcon(pointsText, '东城区')
 
-        const pointsText1 = Cesium.Cartesian3.fromDegrees(104.06950857297834, 30.635728818649884, 100)
+        const pointsText1 = Cesium.Cartesian3.fromDegrees(104.08996739118568,
+            30.643222273024914, 100)
         self.app.innerGeometry.addIcon(pointsText1, '西城区')
 
-        let center = {lon: 104.05696940937665, lat: 30.640501148524567}
+        let center = {lon: 104.07842873842652, lat: 30.63258965135834,}
 
         let cities = [
-            {'lon': 104.07180146590125, 'lat': 30.62297101822975,},
-            {'lon': 104.04901932448976, 'lat': 30.616076052494645,},
+            {'lon': 104.07445200121597, 'lat': 30.623338996273173,},
+            {'lon': 104.08148794273148, 'lat': 30.623739056793006,},
         ]
         this.app.part.addFlyLine3D(center, cities)
 
