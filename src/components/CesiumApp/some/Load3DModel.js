@@ -7,14 +7,14 @@ export default class Load3DModel {
     }
 
     //  工厂 entities
-    loadGlb (po) {
+    loadGlb (po, htr) {
         const result = {
             name: '工厂',
             position: po,
             orientation:
                 Cesium.Transforms.headingPitchRollQuaternion(
                     po,
-                    new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)
+                    new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(htr[0]), htr[1], htr[2])
                 ),
             model: {
                 uri: 'http://localhost:1111/3Dstatic/loadData/tt/11.glb',
@@ -29,9 +29,10 @@ export default class Load3DModel {
      * 加载glb模型 entities
      * 带动画
      */
-    loadGLB () {
+    loadGLB (poAirPlane) {
         const self = this
-        const position = Cesium.Cartesian3.fromDegrees(104.08110110247405, 30.645619203470826, 100)
+        const position = Cesium.Cartesian3.fromDegrees(poAirPlane[0],
+            poAirPlane[1], poAirPlane[2])
         const _orientation = new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)
 
         // 飞机
@@ -60,9 +61,7 @@ export default class Load3DModel {
         function run () {
             airplane.position = new Cesium.CallbackProperty(function () {
                 return Cesium.Cartesian3.fromDegrees(
-                    104.08110110247405 + index,
-                    30.645619203470826,
-                    100
+                    poAirPlane[0] + index, poAirPlane[1], poAirPlane[2]
                 )
             }, false)
             index += 0.0001
@@ -75,8 +74,7 @@ export default class Load3DModel {
         run()
     }
 
-    loadGlbPrimitives () {
-        let data = [104.08778836700905, 30.64323059083177, -0.002239088567849463,]
+    loadGlbPrimitives (data) {
         // .glb  二进制GLTF格式 车车车
         let car = null
         let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
@@ -111,10 +109,10 @@ export default class Load3DModel {
     }
 
     // 行走的人
-    loadGltf () {
+    loadGltf (poPer) {
         const movePeople = {
             name: '行走的人',
-            position: Cesium.Cartesian3.fromDegrees(104.08678098554245, 30.643225185555856, 0),
+            position: poPer,
             orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65429606224855, 24.902824697751598, 1856.176763177826), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
             model: {
                 uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',

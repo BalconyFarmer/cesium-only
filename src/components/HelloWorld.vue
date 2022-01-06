@@ -250,6 +250,7 @@
             rotateEntity () {
                 const self = this
                 self.cApp.rotateEntity(parseInt(self.rotationgPatams.Heading), parseInt(self.rotationgPatams.Pitch), parseInt(self.rotationgPatams.Roll), self.currentEntities)
+
             },
             dragChange () {
                 if (this.switchValue) {
