@@ -12,6 +12,7 @@ export default class ChengDu {
     }
 
     init () {
+        // const timeLine = [10,10000]
         const timeLine = [1,1]
         const self = this
 
@@ -33,6 +34,7 @@ export default class ChengDu {
         self.app.cameraAutoRoll(aim1)
 
         setTimeout(function () {
+            console.log(1111)
             self.app.cameraFlyToCartesian3(aim1)
         }, timeLine[1])
 
@@ -77,11 +79,10 @@ export default class ChengDu {
         ]
         this.app.part.addFlyLine3D(center, cities)
 
-        // let fireP = [104.08179081232309, 30.645729442770694, -0.0020558347525613716,]
-        // this.app.particleSystems.init(fireP)
-
         // 飞机
         this.app.load3DModel.loadGLB()
+
+        this.app.addBloom()
 
     }
 }
