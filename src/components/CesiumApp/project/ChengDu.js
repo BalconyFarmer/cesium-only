@@ -12,30 +12,11 @@ export default class ChengDu {
     }
 
     init () {
-        // const timeLine = [10, 10000]
-        const timeLine = [1, 1]
         const self = this
-
         this.app.closeAll()
         this.app.switchLayer('ArcGis实景图层')
         this.app.updateLyerLight(0.5, 0.5)
-
         this.app.cesium3DTileset.addTiles()
-
-        const aim1 = {
-            x: -1335650.7543657143,
-            y: 5327186.609873566,
-            z: 3232969.4880313054,
-            heading: 2.464077977287265,
-            pitch: -0.38924437417452307,
-            roll: 0.00001352269589993682,
-            duration: timeLine[0],
-        }
-        self.app.cameraAutoRoll(aim1)
-
-        setTimeout(function () {
-            self.app.cameraFlyToCartesian3(aim1)
-        }, timeLine[1])
 
         const option = {
             lon: 104.08518355581377,
@@ -113,5 +94,21 @@ export default class ChengDu {
         // 飞机
         const poAirPlane = [104.0884625472979, 30.629946234239107, 100]
         this.app.load3DModel.loadGLB(poAirPlane)
+
+        const timeLine = [10, 10000]
+        // const timeLine = [1, 1]
+        const aim1 = {
+            x: -1337465.8008031724,
+            y: 5328401.815246379,
+            z: 3230061.9980081106,
+            heading: 5.7977479212520215,
+            pitch: -0.39876678765253337,
+            roll: 0.000022821565860198234,
+            duration: timeLine[0],
+        }
+        self.app.cameraAutoRoll(aim1)
+        setTimeout(function () {
+            self.app.cameraFlyToCartesian3(aim1)
+        }, timeLine[1])
     }
 }
