@@ -17,7 +17,7 @@ export default class ParticleSystems {
         )
         if (position) {
             modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
-                Cesium.Cartesian3.fromDegrees(position[0], position[1], position[2])
+                position
             )
         }
         let particleSystem = this.app.viewer.scene.primitives.add(new Cesium.ParticleSystem({

@@ -4,6 +4,9 @@
             <div class="normal b" @mousedown="mouseDown('bilbord')">
                 bilbord
             </div>
+            <div class="normal b" @mousedown="mouseDown('ParticalSys')">
+                ParticalSys
+            </div>
             <div class="normal p" @mousedown="mouseDown('点')">
                 点
             </div>
@@ -233,6 +236,9 @@
                             break
                         case 'addGridMaterialProperty':
                             this.cApp.innerMaterial.addGridMaterialProperty(this.geoPositionCartesian2)
+                            break
+                        case 'ParticalSys':
+                            this.cApp.particleSystems.init(this.geoPositionCartesian2)
                             break
                     }
                 }

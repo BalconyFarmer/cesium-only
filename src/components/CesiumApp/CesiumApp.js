@@ -72,6 +72,8 @@ export default class CesiumApp {
         this.switchLayer('ArcGis实景图层')
         this.addTerrain()
         this.firstCallBack()
+        this.particleSystems = new ParticleSystems(this) // 粒子系统
+
         window.viewer = this.viewer
         this.viewer.scene.postProcessStages.fxaa.enabled = false//去锯齿 是文字清晰
     }
@@ -136,7 +138,6 @@ export default class CesiumApp {
         this.part.addRadarScan()
         this.part.addFlyLine3D()
         this.getViewerEntitys()
-        this.particleSystems = new ParticleSystems(this) // 粒子系统
         this.particleSystems.init()
         this.customShaderTest = new CustomShaderTest(this) // 自定义着色器
     }

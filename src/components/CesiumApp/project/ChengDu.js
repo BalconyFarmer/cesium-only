@@ -77,9 +77,8 @@ export default class ChengDu {
         ]
         this.app.part.addFlyLine3D(center, cities)
 
-        let fireP = [104.08179081232309, 30.645729442770694, -0.0020558347525613716,]
-        let pF = new ParticleSystems(this.app) // 粒子系统
-        pF.init(fireP)
+        // let fireP = [104.08179081232309, 30.645729442770694, -0.0020558347525613716,]
+        // this.app.particleSystems.init(fireP)
 
         // 飞机
         this.app.load3DModel.loadGLB()
