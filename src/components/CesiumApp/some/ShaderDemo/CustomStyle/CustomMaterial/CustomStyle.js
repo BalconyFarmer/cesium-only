@@ -1,8 +1,9 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 
-// import {PolylineTrailLinkMaterialProperty} from './PolylineTrailLinkMaterialProperty'
 import {initFlowMatetial} from './_PolylineTrailLinkMaterialProperty'
+import {initFlowMatetial1} from './_PolylineTrailLinkMaterialProperty1'
+import {initFlowMatetial2} from './_PolylineTrailLinkMaterialProperty2'
 
 /**
  * 自定义着色器样式类
@@ -19,8 +20,8 @@ export default class CustomStyle {
      * 加载流动墙效果
      */
     addFlowWall () {
-        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/11.png'
-        initFlowMatetial(url) // 注册流动线材质
+        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
+        initFlowMatetial1(url) // 注册流动线材质
 
         const flowWall = {
             name: 'WallTrail',
@@ -41,7 +42,7 @@ export default class CustomStyle {
                     104.06429362988506,
                     30.622540575608895, 100.0,
                 ]),
-                material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 9000)
+                material: new Cesium.PolylineTrailLinkMaterialProperty1(Cesium.Color.ORANGE, 9000)
             }
         }
         this.app.viewer.entities.add(flowWall)
@@ -95,8 +96,8 @@ export default class CustomStyle {
      * 添加flyline
      */
     addFlyLine3D (centerP, citiesP) {
-        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/11.png'
-        initFlowMatetial(url) // 注册流动线材质
+        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/Trail.png'
+        initFlowMatetial2(url) // 注册流动线材质
 
         // 抛物线 相等
         function parabolaEquation (options, resultOut) {
@@ -147,7 +148,7 @@ export default class CustomStyle {
             cities = citiesP
         }
 
-        let material = new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.ORANGE, 10000)
+        let material = new Cesium.PolylineTrailLinkMaterialProperty2(Cesium.Color.ORANGE, 1000)
 
         for (let j = 0; j < cities.length; j++) {
             let points = parabolaEquation({pt1: center, pt2: cities[j], height: 500, num: 100})
@@ -159,7 +160,7 @@ export default class CustomStyle {
                 name: 'PolylineTrailLink' + j,
                 polyline: {
                     positions: Cesium.Cartesian3.fromDegreesArrayHeights(pointArr),
-                    width: 10,
+                    width: 5,
                     material: material
                 }
             })
