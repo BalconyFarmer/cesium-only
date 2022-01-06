@@ -78,6 +78,25 @@ export default class CesiumApp {
         this.viewer.scene.postProcessStages.fxaa.enabled = false//去锯齿 是文字清晰
     }
 
+    /**
+     * run
+     * 效果演示时间线
+     */
+    addTimeAction () {
+        this.customShaderTest = new CustomShaderTest(this) // 完全自定义着色器
+
+        const aim = {
+            x: -1268889.5819769907,
+            y: 5649559.131514993,
+            z: 2670092.8417171706,
+            heading: 4.589028797595305,
+            pitch: -0.09566515321336477,
+            roll: 0.000004374750088409485,
+            duration: 1,
+        }
+        this.cameraFlyToCartesian3(aim)
+    }
+
     addLight () {
         let flashlight = new Cesium.DirectionalLight({
             direction: this.viewer.scene.camera.directionWC // Updated every frame
@@ -124,22 +143,6 @@ export default class CesiumApp {
         bloom.uniforms.delta = 1
         bloom.uniforms.sigma = 2
         bloom.uniforms.stepSize = 1
-    }
-
-    /**
-     * run
-     * 效果演示时间线
-     */
-    addTimeAction () {
-        this.load3DModel.addModel()
-        this.load3DModel.loadGLB()
-        this.part.addFlowLine()
-        this.part.addCircleScan()
-        this.part.addRadarScan()
-        this.part.addFlyLine3D()
-        this.getViewerEntitys()
-        this.particleSystems.init()
-        this.customShaderTest = new CustomShaderTest(this) // 自定义着色器
     }
 
     /**

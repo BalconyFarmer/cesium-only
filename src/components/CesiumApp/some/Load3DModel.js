@@ -6,89 +6,27 @@ export default class Load3DModel {
         this.app = app
     }
 
-    /**
-     * 加载3D模型
-     */
-    addModel () {
-        //  工厂
-        this.app.viewer.entities.add({
+    //  工厂 entities
+    loadGlb (po) {
+        const result = {
             name: '工厂',
-            position: new Cesium.Cartesian3(-1268030.5434272639, 5647967.610935615, 2669301.76723298),
-            orientation: Cesium.Transforms.headingPitchRollQuaternion(
-                new Cesium.Cartesian3(-1268030.5434272639, 5647967.610935615, 2669301.76723298),
-                new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(7), 0, 0)
-            ),
+            position: po,
+            orientation:
+                Cesium.Transforms.headingPitchRollQuaternion(
+                    po,
+                    new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)
+                ),
             model: {
                 uri: 'http://localhost:1111/3Dstatic/loadData/tt/11.glb',
                 // minimumPixelSize: 100, // 最小大小
                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
             }
-        })
-
-        // 行走的人
-        const movePeople = {
-            name: '行走的人',
-            position: Cesium.Cartesian3.fromDegrees(102.65429606224855, 24.902824697751598, 1856.176763177826),
-            orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65429606224855, 24.902824697751598, 1856.176763177826), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
-            model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',
-                // minimumPixelSize: 100,
-                // maximumScale: 100000,
-                scale: 2.0,
-                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
-            }
         }
-
-        this.app.viewer.entities.add(movePeople)
-
-        // .glb  二进制GLTF格式 车车车
-        let car = null
-        let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
-            Cesium.Cartesian3.fromDegrees(102.65429951325757, 24.902681903918705, 1856.1428287336178)
-        )
-        car = Cesium.Model.fromGltf(
-            {
-                url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
-                modelMatrix: modelMatrix,
-                scale: 1.0,
-            }
-        )
-        car.name = '车车车' // 失效
-
-        this.app.viewer.scene.primitives.add(car)
-        // 循环执行函数
-        const self = this
-        let index = 0.00001
-
-        function run () {
-            car.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
-                Cesium.Cartesian3.fromDegrees(102.65429951325757 + index, 24.902681903918705, 1856.1428287336178)
-            )
-            index += 0.00001
-            if (index > 0.001) {
-                index = 0.00001
-            }
-            requestAnimationFrame(run)
-        }
-
-        run()
-
-        // this.app.cameraFlyTo(102.65400663464233, 24.90300286288314, 1856.4620764260865, 4.583496596296543, -0.11011623452653185)
-        const aim = {
-            x: -1268889.5819769907,
-            y: 5649559.131514993,
-            z: 2670092.8417171706,
-            heading: 4.589028797595305,
-            pitch: -0.09566515321336477,
-            roll: 0.000004374750088409485,
-            duration: 1,
-        }
-        this.app.cameraFlyToCartesian3(aim)
-
+        return result
     }
 
     /**
-     * 加载glb模型
+     * 加载glb模型 entities
      * 带动画
      */
     loadGLB () {
@@ -118,6 +56,7 @@ export default class Load3DModel {
 
         // 循环执行函数
         let index = 0.00001
+
         function run () {
             airplane.position = new Cesium.CallbackProperty(function () {
                 return Cesium.Cartesian3.fromDegrees(
@@ -134,6 +73,58 @@ export default class Load3DModel {
         }
 
         run()
+    }
+
+    loadGlbPrimitives () {
+        let data = [104.08778836700905, 30.64323059083177, -0.002239088567849463,]
+        // .glb  二进制GLTF格式 车车车
+        let car = null
+        let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
+            Cesium.Cartesian3.fromDegrees(data[0], data[1], data[2])
+        )
+        car = Cesium.Model.fromGltf(
+            {
+                url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
+                modelMatrix: modelMatrix,
+                scale: 1.0,
+            }
+        )
+        car.name = '车车车' // 失效
+
+        this.app.viewer.scene.primitives.add(car)
+        // 循环执行函数
+        const self = this
+        let index = 0.00001
+
+        function run () {
+            car.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
+                Cesium.Cartesian3.fromDegrees(data[0] + index, data[1], data[2])
+            )
+            index += 0.00001
+            if (index > 0.001) {
+                index = 0.00001
+            }
+            requestAnimationFrame(run)
+        }
+
+        run()
+    }
+
+    // 行走的人
+    loadGltf () {
+        const movePeople = {
+            name: '行走的人',
+            position: Cesium.Cartesian3.fromDegrees(104.08678098554245, 30.643225185555856, 0),
+            orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65429606224855, 24.902824697751598, 1856.176763177826), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
+            model: {
+                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',
+                // minimumPixelSize: 100,
+                // maximumScale: 100000,
+                scale: 10.0,
+                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+            }
+        }
+        return movePeople
     }
 
 }

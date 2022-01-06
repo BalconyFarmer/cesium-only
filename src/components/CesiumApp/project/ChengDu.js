@@ -12,8 +12,8 @@ export default class ChengDu {
     }
 
     init () {
-        // const timeLine = [10,10000]
-        const timeLine = [1,1]
+        const timeLine = [10, 10000]
+        // const timeLine = [1, 1]
         const self = this
 
         this.app.closeAll()
@@ -79,10 +79,18 @@ export default class ChengDu {
         ]
         this.app.part.addFlyLine3D(center, cities)
 
-        // 飞机
-        this.app.load3DModel.loadGLB()
-
         this.app.addBloom()
 
+        // 主体大楼
+        let po = Cesium.Cartesian3.fromDegrees(104.08707815970327, 30.645382797453376, 0)
+        const mo = this.app.load3DModel.loadGlb(po)
+        this.app.viewer.entities.add(mo)
+        // 原地踏步人
+        const movePeople = this.app.load3DModel.loadGltf()
+        this.app.viewer.entities.add(movePeople)
+        // 移动小车
+        this.app.load3DModel.loadGlbPrimitives()
+        // 飞机
+        this.app.load3DModel.loadGLB()
     }
 }
