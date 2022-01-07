@@ -70,6 +70,68 @@ export default class InnerGeometry {
         })
     }
 
+    addIconBackground (point, text,type) {
+        let img = null
+        switch (type) {
+            case 1:
+                img = 'http://localhost:1111/3Dstatic/loadData/billboard/linePoi.png'
+                break
+            case 2:
+                img = 'http://localhost:1111/3Dstatic/loadData/billboard/linePoi0.png'
+                break
+            case 3:
+                img = 'http://localhost:1111/3Dstatic/loadData/billboard/bp.png'
+                break
+            case 4:
+                img = 'http://localhost:1111/3Dstatic/loadData/billboard/bp2.png'
+                break
+            case 5:
+                img = 'http://localhost:1111/3Dstatic/loadData/billboard/warn.png'
+                break
+        }
+        this.app.viewer.entities.add({
+            position: point,
+            billboard: {
+                image: img, // default: undefined
+                // width: 92,
+                // height: 230,
+                scale: 0.5,
+                pixelOffset: new Cesium.Cartesian2(0, 0),
+            },
+            // 文字
+            label: {
+                // 文本。支持显式换行符“ \ n”
+                text: (text || '1号房'),
+                // 字体样式,以CSS语法指定字体
+                font: '14pt Source Han Sans CN',
+                // 字体颜色
+                fillColor: Cesium.Color.BLACK,
+                // 背景颜色
+                backgroundColor: Cesium.Color.AQUA,
+                // 是否显示背景颜色
+                showBackground: false,
+                // 字体边框
+                outline: true,
+                // 字体边框颜色
+                outlineColor: Cesium.Color.WHITE,
+                // 字体边框尺寸
+                outlineWidth: 10,
+                // 应用于图像的统一比例。比例大于会1.0放大标签,而比例小于会1.0缩小标签。
+                scale: 1.0,
+                // 设置样式：FILL：填写标签的文本,但不要勾勒轮廓；OUTLINE：概述标签的文本,但不要填写；FILL_AND_OUTLINE：填写并概述标签文本。
+                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                // 相对于坐标的水平位置
+                verticalOrigin: Cesium.VerticalOrigin.CENTER,
+                // 相对于坐标的水平位置
+                horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+                // 该属性指定标签在屏幕空间中距此标签原点的像素偏移量
+                pixelOffset: new Cesium.Cartesian2(10, 0),
+                // 是否显示
+                show: true
+            }
+        })
+    }
+
     addPoint (Cartesian3) {
         this.app.viewer.entities.add({
             position: Cartesian3,

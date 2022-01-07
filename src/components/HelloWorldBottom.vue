@@ -4,6 +4,9 @@
             <div class="normal b" @mousedown="mouseDown('bilbord')">
                 bilbord
             </div>
+            <div class="normal b" @mousedown="mouseDown('addIconBackground')">
+                addIconBackground
+            </div>
             <div class="normal b" @mousedown="mouseDown('ParticalSys')">
                 ParticalSys
             </div>
@@ -135,6 +138,9 @@
 
                 if (this.addGeoFlag) {
                     switch (this.currentGeoType) {
+                        case 'addIconBackground':
+                            this.cApp.innerGeometry.addIconBackground(this.geoPositionCartesian2, '默认',2)
+                            break
                         case '点':
                             this.cApp.innerGeometry.addPoint(this.geoPositionCartesian2)
                             break

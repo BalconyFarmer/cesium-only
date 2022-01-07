@@ -62,26 +62,34 @@ export default class ChengDu {
         self.app.part.addFlowLine(points)
 
         const points1 = [
-            104.084743544073,
-            30.623366899372833,
-            0,
-            104.0846970250775,
-            30.626044142858916,
-            0,
-            104.08262372727359,
-            30.626102701157787,
-            0,
-            104.08297383134855,
-            30.623378574154177,
-            0,
-            104.08548120775534,
-            30.623419951654256,
-            0,
-            104.08798935222994,
-            30.62603421548433,
-            0,
+            104.07467185705768,
+            30.616055917995904,
+            -0.007629316102345219,
+            104.07430138967433,
+            30.622748646480712,
+            -0.005523915179473804,
+            104.09266729143657,
+            30.623561610378665,
+            -0.005830162188858496,
+            104.09708344165846,
+            30.629093781029326,
+            -0.004778831731137613,
+            104.09256817183005,
+            30.631735359048665,
+            -0.002083572838517207,
         ]
         self.app.part.addRoad(points1)
+
+        const p1 = Cesium.Cartesian3.fromDegrees(points1[0], points1[1], points1[2])
+        self.app.innerGeometry.addIconBackground(p1, '东城区',1)
+        const p2 = Cesium.Cartesian3.fromDegrees(points1[3], points1[4], points1[5])
+        self.app.innerGeometry.addIconBackground(p2, '东城区',2)
+        const p3 = Cesium.Cartesian3.fromDegrees(points1[6], points1[7], points1[8])
+        self.app.innerGeometry.addIconBackground(p3, '东城区',3)
+        const p4 = Cesium.Cartesian3.fromDegrees(points1[9], points1[10], points1[11])
+        self.app.innerGeometry.addIconBackground(p4, '东城区',4)
+        const p5 = Cesium.Cartesian3.fromDegrees(points1[12], points1[13], points1[14])
+        self.app.innerGeometry.addIconBackground(p5, '东城区',5)
 
         const pointsText = Cesium.Cartesian3.fromDegrees(104.08712967931928,
             30.63687154105514, 100)
