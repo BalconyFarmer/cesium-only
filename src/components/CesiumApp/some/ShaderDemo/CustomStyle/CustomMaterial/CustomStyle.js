@@ -1,9 +1,10 @@
 import * as Cesium from 'cesium/Cesium'
 import * as widget from 'cesium/Widgets/widgets.css'
 
-import {initFlowMatetial} from './_PolylineTrailLinkMaterialProperty'
-import {initFlowMatetial1} from './_PolylineTrailLinkMaterialProperty1'
-import {initFlowMatetial2} from './_PolylineTrailLinkMaterialProperty2'
+import {initFlowMatetial} from './flowLinesMaterial/_PolylineTrailLinkMaterialProperty'
+import {initFlowMatetial1} from './flowLinesMaterial/_PolylineTrailLinkMaterialProperty1'
+import {initFlowMatetial2} from './flowLinesMaterial/_PolylineTrailLinkMaterialProperty2'
+import {initFlowMatetial3} from './flowLinesMaterial/_PolylineTrailLinkMaterialProperty3'
 
 /**
  * 自定义着色器样式类
@@ -14,6 +15,30 @@ import {initFlowMatetial2} from './_PolylineTrailLinkMaterialProperty2'
 export default class CustomStyle {
     constructor (app) {
         this.app = app
+    }
+
+    /**
+     * 发光道路
+     */
+    addRoad (points) {
+        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/lightray_yellow.png'
+        initFlowMatetial3(url) // 注册流动线材质
+
+        let _p = null
+        if (points) {
+            _p = Cesium.Cartesian3.fromDegreesArrayHeights(points)
+        } else {
+            console.log("fuck")
+        }
+
+        this.app.viewer.entities.add({
+            name: 'PolylineTrail',
+            polyline: {
+                positions: _p,
+                width: 5,
+                material: new Cesium.PolylineTrailLinkMaterialProperty3(Cesium.Color.YELLOW, 900)
+            }
+        })
     }
 
     /**

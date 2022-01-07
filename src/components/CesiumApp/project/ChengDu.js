@@ -61,6 +61,28 @@ export default class ChengDu {
         ]
         self.app.part.addFlowLine(points)
 
+        const points1 = [
+            104.084743544073,
+            30.623366899372833,
+            0,
+            104.0846970250775,
+            30.626044142858916,
+            0,
+            104.08262372727359,
+            30.626102701157787,
+            0,
+            104.08297383134855,
+            30.623378574154177,
+            0,
+            104.08548120775534,
+            30.623419951654256,
+            0,
+            104.08798935222994,
+            30.62603421548433,
+            0,
+        ]
+        self.app.part.addRoad(points1)
+
         const pointsText = Cesium.Cartesian3.fromDegrees(104.08712967931928,
             30.63687154105514, 100)
         self.app.innerGeometry.addIcon(pointsText, '东城区')
