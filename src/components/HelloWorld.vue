@@ -276,6 +276,7 @@
             },
             handleNodeClick (data) {
                 console.log(data)
+                this.cApp.lookAtByName(data.label)
             },
             handleSelect (key, keyPath) {
                 if (key == 2) {

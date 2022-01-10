@@ -430,4 +430,15 @@ export default class CesiumApp {
         console.log(cartesian3, 'cartesian3cartesian3cartesian3cartesian3')
         return cartesian3
     }
+
+    /**
+     * 定位查看模型
+     */
+    lookAtByName (name) {
+        const see = this.viewer.entities.values.forEach(item => {
+            if (item.name == name) {
+                this.viewer.zoomTo(item)
+            }
+        })
+    }
 }
