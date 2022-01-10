@@ -125,6 +125,11 @@ export default class ChengDu {
         const poAirPlane = [104.0884625472979, 30.629946234239107, 100]
         this.app.load3DModel.loadGLB(poAirPlane)
 
+        this.playAction()
+    }
+
+    playAction() {
+        const self = this
         const timeLine = [10, 10000]
         // const timeLine = [1, 1]
         const aim1 = {

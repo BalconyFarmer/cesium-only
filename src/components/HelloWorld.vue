@@ -1,6 +1,6 @@
 <template>
     <div class="all">
-        <div class="header">
+        <div v-if="!fakeBoard" class="header">
             <div>
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="13">run</el-menu-item>
@@ -78,12 +78,11 @@
                 </el-menu>
             </div>
         </div>
-
-        <div class="leftTree">
+        <div v-if="!fakeBoard" class="leftTree">
             <div>ENTITIES</div>
             <el-tree :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
         </div>
-        <div class="rightPart">
+        <div v-if="!fakeBoard" class="rightPart">
             <div>
                 MATH
             </div>
@@ -125,11 +124,26 @@
                 <el-button @click="rotateEntity">rotate</el-button>
             </div>
         </div>
-
-        <div class="bottomCenter" v-if="showPanel">
+        <div v-if="!fakeBoard && showPanel" class="bottomCenter">
             <HelloWorldBottom :cApp="this.cApp" ref="mychild"></HelloWorldBottom>
         </div>
+
+        <div v-if="fakeBoard" class="fakeTop">1</div>
+        <div v-if="fakeBoard" class="fakeL">1</div>
+        <div v-if="fakeBoard" class="fakeR">1</div>
+
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
+
+        <div class="modeChange">
+            <span>开发模式</span>
+            <el-switch
+                    @change=""
+                    v-model="fakeBoard"
+                    active-color="#13ce66"
+                    inactive-color="#ff4949">
+            </el-switch>
+        </div>
+
 
     </div>
 </template>
@@ -177,6 +191,7 @@
 
         data () {
             return {
+                fakeBoard: false,
                 showPanel: false,
                 addGeoFlag: false,
                 currentGeoType: null,
@@ -271,6 +286,7 @@
                     this.cApp.switchLight()
                 } else if (key == 11) {
                     this.cApp.runChengDu()
+                    this.fakeBoard = true
                 } else if (key == 12) {
                     this.cApp.obliquePhotography.addOblique()
                 } else if (key == 13) {
@@ -343,6 +359,46 @@
     @import "../style/reset.scss";
     //引入方式
     @import "../style/ele.scss"; //引入方式
+    .modeChange {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        z-index: 99999;
+    }
+
+    .fakeTop {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 10%;
+        background-image: url("./img/TOP.png");
+        z-index: 99999;
+        background-color: rgba(255, 255, 255, 0.1);
+
+    }
+
+    .fakeL {
+        position: absolute;
+        left: 0;
+        top: 10%;
+        width: 20%;
+        height: 90%;
+        background-image: url("./img/LEFT.png");
+        z-index: 99999;
+        background-size: 100% 100%;
+    }
+
+    .fakeR {
+        position: absolute;
+        right: 0;
+        top: 10%;
+        width: 20%;
+        height: 90%;
+        background-image: url("./img/RIGHT.png");
+        z-index: 99999;
+        background-size: 100% 100%;
+    }
 
     #cesiumContainer {
         width: 100%;

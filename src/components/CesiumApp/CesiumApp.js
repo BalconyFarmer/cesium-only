@@ -149,7 +149,11 @@ export default class CesiumApp {
      * 成都项目时间线
      */
     runChengDu () {
-        new ChengDu(this)
+        if (this.chengduOBJ) {
+            this.chengduOBJ.playAction()
+        } else {
+            this.chengduOBJ = new ChengDu(this)
+        }
     }
 
     /**
@@ -244,8 +248,8 @@ export default class CesiumApp {
     }
 
     // 清除Entitys
-    clearEntities() {
-        this.viewer.entities.removeAll();
+    clearEntities () {
+        this.viewer.entities.removeAll()
     }
 
     switchLayer (data) {
