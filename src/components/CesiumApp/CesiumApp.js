@@ -98,6 +98,7 @@ export default class CesiumApp {
     }
 
     addLight () {
+        // 只是添加了个方向
         let flashlight = new Cesium.DirectionalLight({
             direction: this.viewer.scene.camera.directionWC // Updated every frame
         })
@@ -116,7 +117,7 @@ export default class CesiumApp {
         }
     }
 
-    changeShadow() {
+    changeShadow () {
         this.viewer.shadows = !this.viewer.shadows
     }
 
@@ -125,9 +126,12 @@ export default class CesiumApp {
      */
     addOutline () {
         let collection = viewer.scene.postProcessStages
+        console.log(collection,1)
         let silhouette = collection.add(Cesium.PostProcessStageLibrary.createSilhouetteStage())
+        console.log(collection,2)
         silhouette.enabled = true
         silhouette.uniforms.color = Cesium.Color.YELLOW
+        console.log(collection,3)
     }
 
     /**
@@ -136,15 +140,18 @@ export default class CesiumApp {
      *
      */
     addBloom () {
-
         let bloom = viewer.scene.postProcessStages.bloom
-        bloom.enabled = true
-        bloom.uniforms.glowOnly = false
-        bloom.uniforms.contrast = 128
-        bloom.uniforms.brightness = -0.3
-        bloom.uniforms.delta = 1
-        bloom.uniforms.sigma = 2
-        bloom.uniforms.stepSize = 1
+        if (bloom.enabled) {
+            bloom.enabled = false
+        } else {
+            bloom.enabled = true
+            bloom.uniforms.glowOnly = false
+            bloom.uniforms.contrast = 128
+            bloom.uniforms.brightness = -0.3
+            bloom.uniforms.delta = 1
+            bloom.uniforms.sigma = 2
+            bloom.uniforms.stepSize = 1
+        }
     }
 
     /**
