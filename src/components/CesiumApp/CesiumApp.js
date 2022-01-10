@@ -111,11 +111,13 @@ export default class CesiumApp {
     switchLight () {
         if (this.viewer.scene.globe.enableLighting) {
             this.viewer.scene.globe.enableLighting = false // 初始化光照
-            this.viewer.shadows = false
         } else {
             this.viewer.scene.globe.enableLighting = true // 初始化光照
-            this.viewer.shadows = true
         }
+    }
+
+    changeShadow() {
+        this.viewer.shadows = !this.viewer.shadows
     }
 
     /**

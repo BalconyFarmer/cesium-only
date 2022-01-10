@@ -10,25 +10,45 @@
                     <el-menu-item index="12">倾斜摄影</el-menu-item>
                 </el-menu>
             </div>
-            <div>g
+            <div>
                 <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-
-                    <el-menu-item index="9">全球光照</el-menu-item>
-                    <el-menu-item index="光照系统">光照</el-menu-item>
-                    <el-menu-item index="addBloom">Bloom</el-menu-item>
-                    <el-menu-item index="addOutline">Outline</el-menu-item>
-                    <el-menu-item index="14">关闭冗余</el-menu-item>
                     <el-menu-item index="">
-                        <span>drag</span>
-                        <el-tooltip :content="'拖拽模型'" placement="top">
+                        <span>全球光照</span>
+                        <el-tooltip :content="'moveToolTips'" placement="top">
                             <el-switch
-                                    @change="dragChange"
-                                    v-model="switchValue"
+                                    @change="changeGlobleLight"
+                                    v-model="changeGlobleLightFlag"
                                     active-color="#13ce66"
-                                    inactive-color="#ff4949">
+                                    inactive-color="#2B2B2B">
                             </el-switch>
                         </el-tooltip>
                     </el-menu-item>
+                    <el-menu-item index="">
+                        <span>光照系统</span>
+                        <el-tooltip :content="'moveToolTips'" placement="top">
+                            <el-switch
+                                    @change="changeLight"
+                                    v-model="changeLightFlag"
+                                    active-color="#13ce66"
+                                    inactive-color="#2B2B2B">
+                            </el-switch>
+                        </el-tooltip>
+                    </el-menu-item>
+                    <el-menu-item index="">
+                        <span>shadow</span>
+                        <el-tooltip :content="'moveToolTips'" placement="top">
+                            <el-switch
+                                    @change="changeShadow"
+                                    v-model="changeShadowFlag"
+                                    active-color="#13ce66"
+                                    inactive-color="#2B2B2B">
+                            </el-switch>
+                        </el-tooltip>
+                    </el-menu-item>
+                    <el-menu-item index="addBloom">Bloom</el-menu-item>
+                    <el-menu-item index="addOutline">Outline</el-menu-item>
+                    <el-menu-item index="14">关闭冗余</el-menu-item>
+
                     <el-menu-item index="">
                         <span>moveTip</span>
                         <el-tooltip :content="'moveToolTips'" placement="top">
@@ -36,7 +56,7 @@
                                     @change="moveToolTipsChange"
                                     v-model="moveToolFlag"
                                     active-color="#13ce66"
-                                    inactive-color="#ff4949">
+                                    inactive-color="#2B2B2B">
                             </el-switch>
                         </el-tooltip>
                     </el-menu-item>
@@ -47,7 +67,7 @@
                                     @change="terrainChange"
                                     v-model="terrainFlag"
                                     active-color="#13ce66"
-                                    inactive-color="#ff4949">
+                                    inactive-color="#2B2B2B">
                             </el-switch>
                         </el-tooltip>
                     </el-menu-item>
@@ -123,6 +143,16 @@
             <div class="inpu">
                 <el-button @click="rotateEntity">rotate</el-button>
             </div>
+            <div class="inpu">
+                <span>drag</span>
+                <el-switch
+                        @change="dragChange"
+                        v-model="switchValue"
+                        active-color="#13ce66"
+                        inactive-color="#2B2B2B">
+                </el-switch>
+            </div>
+
         </div>
         <div v-if="!fakeBoard && showPanel" class="bottomCenter">
             <HelloWorldBottom :cApp="this.cApp" ref="mychild"></HelloWorldBottom>
@@ -140,7 +170,7 @@
                     @change=""
                     v-model="fakeBoard"
                     active-color="#13ce66"
-                    inactive-color="#ff4949">
+                    inactive-color="#2B2B2B">
             </el-switch>
         </div>
 
@@ -191,6 +221,9 @@
 
         data () {
             return {
+                changeShadowFlag: false,
+                changeLightFlag: false,
+                changeGlobleLightFlag: false,
                 fakeBoard: false,
                 showPanel: false,
                 addGeoFlag: false,
@@ -283,8 +316,6 @@
                     this.cApp.loadJson.loadJsonData()
                 } else if (key == 3) {
                     this.cApp.cesium3DTileset.toYN()
-                } else if (key == 9) {
-                    this.cApp.switchLight()
                 } else if (key == 11) {
                     this.cApp.runChengDu()
                     this.fakeBoard = true
@@ -294,13 +325,20 @@
                     this.cApp.addTimeAction()
                 } else if (key == 14) {
                     this.cApp.closeAll()
-                } else if (key == '光照系统') {
-                    this.cApp.addLight()
-                } else if (key == 'addBloom') {
+                }  else if (key == 'addBloom') {
                     this.cApp.addBloom()
                 } else if (key == 'addOutline') {
                     this.cApp.addOutline()
                 }
+            },
+            changeGlobleLight() {
+                this.cApp.switchLight()
+            },
+            changeLight() {
+                this.cApp.addLight()
+            },
+            changeShadow() {
+                this.cApp.changeShadow()
             },
             startScriptLoader () {
                 const self = this
