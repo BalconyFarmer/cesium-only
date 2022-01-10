@@ -241,7 +241,11 @@ export default class CesiumApp {
         this.viewer.scene.skyAtmosphere.show = false // 关闭大气效果
         this.viewer.scene.skyBox.show = false // 关闭大气效果
         this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({}) // 清除地形
+    }
 
+    // 清除Entitys
+    clearEntities() {
+        this.viewer.entities.removeAll();
     }
 
     switchLayer (data) {

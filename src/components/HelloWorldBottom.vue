@@ -1,120 +1,128 @@
 <template>
     <div class="all">
-        <div class="geo">
-            <div class="normal b" @mousedown="mouseDown('bilbord')">
-                bilbord
-            </div>
-            <div class="normal b" @mousedown="mouseDown('addIconBackground')">
-                addIconBackground
-            </div>
-            <div class="normal b" @mousedown="mouseDown('ParticalSys')">
-                ParticalSys
-            </div>
-            <div class="normal p" @mousedown="mouseDown('点')">
-                点
-            </div>
-            <div class="normal Box" @mousedown="mouseDown('Box')">
-                Box
-            </div>
-            <div class="normal addEllipse" @mousedown="mouseDown('addEllipse')">
-                addEllipse
-            </div>
-            <div class="normal addEllipseTuo" @mousedown="mouseDown('addEllipseTuo')">
-                addEllipseTuo
-            </div>
-            <div class="normal addEllipseTuoWW" @mousedown="mouseDown('addEllipseTuoWW')">
-                addEllipseTuoWW
-            </div>
-            <div class="normal y" @mousedown="mouseDown('圆柱体')">
-                圆柱体
-            </div>
-            <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')">
-                glowingLine
-            </div>
-            <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')">
-                orangeOutlined
-            </div>
-            <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')">
-                yellowLine
-            </div>
-            <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')">
-                redRectangle
-            </div>
-            <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')">
-                greenRectangle
-            </div>
-            <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')">
-                blueEllipsoid
-            </div>
-            <div class="normal redSphere" @mousedown="mouseDown('redSphere')">
-                redSphere
-            </div>
-            <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')">
-                outlineOnly
-            </div>
-            <div class="normal redWall" @mousedown="mouseDown('redWall')">
-                redWall
-            </div>
-            <div class="normal greenWall" @mousedown="mouseDown('greenWall')">
-                greenWall
-            </div>
-            <div class="normal blueWall" @mousedown="mouseDown('blueWall')">
-                blueWall
-            </div>
-            <div class="normal b" @mousedown="mouseDown('redCorridor')">
-                redCorridor
-            </div>
-            <div class="normal b" @mousedown="mouseDown('redPolygon')">
-                redPolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('greenPolygon')">
-                greenPolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('orangePolygon')">
-                orangePolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('bluePolygon')">
-                bluePolygon
-            </div>
-            <div class="normal b" @mousedown="mouseDown('redLine')">
-                redLine
-            </div>
-        </div>
-        <div class="material">
-            <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">
-                0
-            </div>
-            <div class="normal addColor" @mousedown="mouseDown('addColor')">
-                0
-            </div>
-            <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')">
-                0
-            </div>
-            <div class="normal addCheckerboardMaterialProperty"
-                 @mousedown="mouseDown('addCheckerboardMaterialProperty')">
-                0
-            </div>
-            <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">
-                0
-            </div>
-            <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">
-                0
-            </div>
-        </div>
-        <div class="env">
-            <div class="normal addMaterial" @mousedown="mouseDown('addDarckNessEff')">
-                Night
-            </div>
-            <div class="normal addMaterial" @mousedown="mouseDown('addRain')">
-                Rain
-            </div>
-            <div class="normal addMaterial" @mousedown="mouseDown('addSnow')">
-                Snow
-            </div>
-            <div class="normal addMaterial" @mousedown="mouseDown('addFrog')">
-                Frog
-            </div>
-        </div>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="ModelInner管理" name="first">
+                <div class="geo">
+                    <div class="normal b" @mousedown="mouseDown('bilbord')">
+                        bilbord
+                    </div>
+                    <div class="normal b" @mousedown="mouseDown('addIconBackground')">
+                        addIconBackground
+                    </div>
+                    <div class="normal b" @mousedown="mouseDown('ParticalSys')">
+                        ParticalSys
+                    </div>
+                    <div class="normal p" @mousedown="mouseDown('点')">
+                        点
+                    </div>
+                    <div class="normal Box" @mousedown="mouseDown('Box')">
+                        Box
+                    </div>
+                    <div class="normal addEllipse" @mousedown="mouseDown('addEllipse')">
+                        addEllipse
+                    </div>
+                    <div class="normal addEllipseTuo" @mousedown="mouseDown('addEllipseTuo')">
+                        addEllipseTuo
+                    </div>
+                    <div class="normal addEllipseTuoWW" @mousedown="mouseDown('addEllipseTuoWW')">
+                        addEllipseTuoWW
+                    </div>
+                    <div class="normal y" @mousedown="mouseDown('圆柱体')">
+                        圆柱体
+                    </div>
+                    <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')">
+                        glowingLine
+                    </div>
+                    <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')">
+                        orangeOutlined
+                    </div>
+                    <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')">
+                        yellowLine
+                    </div>
+                    <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')">
+                        redRectangle
+                    </div>
+                    <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')">
+                        greenRectangle
+                    </div>
+                    <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')">
+                        blueEllipsoid
+                    </div>
+                    <div class="normal redSphere" @mousedown="mouseDown('redSphere')">
+                        redSphere
+                    </div>
+                    <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')">
+                        outlineOnly
+                    </div>
+                    <div class="normal redWall" @mousedown="mouseDown('redWall')">
+                        redWall
+                    </div>
+                    <div class="normal greenWall" @mousedown="mouseDown('greenWall')">
+                        greenWall
+                    </div>
+                    <div class="normal blueWall" @mousedown="mouseDown('blueWall')">
+                        blueWall
+                    </div>
+                    <div class="normal b" @mousedown="mouseDown('redCorridor')">
+                        redCorridor
+                    </div>
+                    <div class="normal b" @mousedown="mouseDown('redPolygon')">
+                        redPolygon
+                    </div>
+                    <div class="normal b" @mousedown="mouseDown('greenPolygon')">
+                        greenPolygon
+                    </div>
+                    <div class="normal b" @mousedown="mouseDown('orangePolygon')">
+                        orangePolygon
+                    </div>
+                    <div class="normal b" @mousedown="mouseDown('bluePolygon')">
+                        bluePolygon
+                    </div>
+                    <div class="normal b" @mousedown="mouseDown('redLine')">
+                        redLine
+                    </div>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="material管理" name="second">
+                <div class="material">
+                    <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">
+                        0
+                    </div>
+                    <div class="normal addColor" @mousedown="mouseDown('addColor')">
+                        0
+                    </div>
+                    <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')">
+                        0
+                    </div>
+                    <div class="normal addCheckerboardMaterialProperty"
+                         @mousedown="mouseDown('addCheckerboardMaterialProperty')">
+                        0
+                    </div>
+                    <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">
+                        0
+                    </div>
+                    <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">
+                        0
+                    </div>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="环境管理" name="third">
+                <div class="env">
+                    <div class="normal addMaterial" @mousedown="mouseDown('addDarckNessEff')">
+                        Night
+                    </div>
+                    <div class="normal addMaterial" @mousedown="mouseDown('addRain')">
+                        Rain
+                    </div>
+                    <div class="normal addMaterial" @mousedown="mouseDown('addSnow')">
+                        Snow
+                    </div>
+                    <div class="normal addMaterial" @mousedown="mouseDown('addFrog')">
+                        Frog
+                    </div>
+                </div>
+            </el-tab-pane>
+        </el-tabs>
     </div>
 </template>
 
@@ -124,12 +132,16 @@
         props: ['cApp'],
         data () {
             return {
+                activeName: 'first',
                 addGeoFlag: false,
                 currentGeoType: null,
                 geoPositionCartesian2: null
             }
         },
         methods: {
+            handleClick (tab, event) {
+                console.log(tab, event)
+            },
             mouseDown (ev) {
                 this.currentGeoType = ev
                 this.addGeoFlag = true
@@ -139,7 +151,7 @@
                 if (this.addGeoFlag) {
                     switch (this.currentGeoType) {
                         case 'addIconBackground':
-                            this.cApp.innerGeometry.addIconBackground(this.geoPositionCartesian2, '默认',2)
+                            this.cApp.innerGeometry.addIconBackground(this.geoPositionCartesian2, '默认', 2)
                             break
                         case '点':
                             this.cApp.innerGeometry.addPoint(this.geoPositionCartesian2)
@@ -148,6 +160,8 @@
                             this.cApp.innerGeometry.addGeometry(this.geoPositionCartesian2)
                             break
                         case 'bilbord':
+                            let _z = this.geoPositionCartesian2.z
+                            this.geoPositionCartesian2.z = _z + 10
                             this.cApp.innerGeometry.addIcon(this.geoPositionCartesian2, '默认')
                             break
                         case 'Box':
@@ -315,18 +329,22 @@
             background-image: url("../assets/geometryIcons/addEllipseTuoWW.png");
             background-size: 100% 100%;
         }
+
         .addEllipseTuo {
             background-image: url("../assets/geometryIcons/addEllipseTuo.png");
             background-size: 100% 100%;
         }
+
         .addEllipse {
             background-image: url("../assets/geometryIcons/addEllipse.png");
             background-size: 100% 100%;
         }
+
         .Box {
             background-image: url("../assets/geometryIcons/Box.png");
             background-size: 100% 100%;
         }
+
         .addGridMaterialProperty {
             background-image: url("../assets/geometryIcons/material/addGridMaterialProperty.png");
             background-size: 100% 100%;

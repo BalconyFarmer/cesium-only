@@ -10,7 +10,7 @@
                     <el-menu-item index="12">倾斜摄影</el-menu-item>
                 </el-menu>
             </div>
-            <div>
+            <div>g
                 <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 
                     <el-menu-item index="9">全球光照</el-menu-item>
