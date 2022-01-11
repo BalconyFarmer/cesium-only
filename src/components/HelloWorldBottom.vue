@@ -88,6 +88,9 @@
                     <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">
                         0
                     </div>
+                    <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">
+                        0
+                    </div>
                     <div class="normal addColor" @mousedown="mouseDown('addColor')">
                         0
                     </div>
@@ -99,9 +102,6 @@
                         0
                     </div>
                     <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">
-                        0
-                    </div>
-                    <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">
                         0
                     </div>
                 </div>

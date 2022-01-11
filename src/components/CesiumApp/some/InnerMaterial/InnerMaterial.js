@@ -58,7 +58,7 @@ export default class InnerMaterial {
         }, false))
 
         const _entity = {
-            name: '圆柱体',
+            name: '发光线条',
             position: Cartesian3,
             cylinder: {
                 length: 10.0,//圆柱体高度
@@ -75,6 +75,10 @@ export default class InnerMaterial {
         //圆柱体
         const result = this.app.viewer.entities.add(_entity)
         this.app.lookLast()
+        const self = this
+        setTimeout(function () {
+            self.app.animation.rollEntity(result, 100)
+        },1000)
     }
 
     addImgMaterial (Cartesian3) {
@@ -142,7 +146,7 @@ export default class InnerMaterial {
             orientation: Cesium.StripeOrientation.VERTICAL
         })
 
-        this.app.viewer.entities.add({
+        let en = {
             name: '圆柱体',
             position: Cartesian3,
             cylinder: {
@@ -156,9 +160,10 @@ export default class InnerMaterial {
                 semiMinorAxis: 2000.0,
                 semiMajorAxis: 2000.0,
             }
-        })
+        }
+        let _en = this.app.viewer.entities.add(en)
         this.app.lookLast()
-
+x
     }
 
     /**
@@ -177,15 +182,15 @@ export default class InnerMaterial {
             name: '圆柱体',
             position: Cartesian3,
             cylinder: {
-                length: 1000.0,//圆柱体高度
-                topRadius: 200,//圆柱体的顶部半径。
-                bottomRadius: 2,//    圆柱体底部的半径。
+                length: 20.0,//圆柱体高度
+                topRadius: 10,//圆柱体的顶部半径。
+                bottomRadius: 1,//    圆柱体底部的半径。
                 material: metarial,
                 outline: false,//轮廓
                 outlineColor: Cesium.Color.DARK_GREEN,//轮廓颜色深绿色
                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
-                semiMinorAxis: 2000.0,
-                semiMajorAxis: 2000.0,
+                // semiMinorAxis: 2000.0,
+                // semiMajorAxis: 2000.0,
             }
         })
         this.app.lookLast()

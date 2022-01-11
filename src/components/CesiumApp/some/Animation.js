@@ -37,7 +37,7 @@ export default class Animation {
         setInterval(function () {
             self.app.rotateEntity(index, 0, 0, en)
             index += 1
-        },500)
+        },100)
     }
 
     /**
