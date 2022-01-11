@@ -11,6 +11,7 @@ export default class Event {
         this.init()
         this.startDrag()
         this.dragFlag = false
+        this.moveToolTipFlag = false
     }
 
     init () {
@@ -118,14 +119,17 @@ export default class Event {
     }
 
     addMoveToolTip () {
+        this.moveToolTipFlag = !this.moveToolTipFlag
         const self = this
         let handler = new Cesium.ScreenSpaceEventHandler(this.app.viewer.scene.canvas)
         handler.setInputAction(function (movement) {
-            let cartesian = self.app.viewer.camera.pickEllipsoid(movement.endPosition, self.app.viewer.scene.globe.ellipsoid)
-            if (cartesian) {
-                self.app.innerGeometry.TooltipCesium.showAt(movement.endPosition, 'MOUSE_MOVE')
-            } else {
-                self.app.innerGeometry.TooltipCesium.setVisible(false)
+            if (self.moveToolTipFlag) {
+                let cartesian = self.app.viewer.camera.pickEllipsoid(movement.endPosition, self.app.viewer.scene.globe.ellipsoid)
+                if (cartesian) {
+                    self.app.innerGeometry.TooltipCesium.showAt(movement.endPosition, 'MOUSE_MOVE')
+                } else {
+                    self.app.innerGeometry.TooltipCesium.setVisible(false)
+                }
             }
         }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
     }
