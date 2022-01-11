@@ -6,80 +6,80 @@
                     <div class="normal b" @mousedown="mouseDown('bilbord')">
                         bilbord
                     </div>
-                    <div class="normal b" @mousedown="mouseDown('addIconBackground')">
-                        addIconBackground
+                    <div class="normal addIconBackground" @mousedown="mouseDown('addIconBackground')">
+                        bilbordBG
                     </div>
-                    <div class="normal b" @mousedown="mouseDown('ParticalSys')">
-                        ParticalSys
+                    <div class="normal ParticalSys" @mousedown="mouseDown('ParticalSys')">
+                        TT
                     </div>
                     <div class="normal p" @mousedown="mouseDown('点')">
-                        点
+                        TT
                     </div>
                     <div class="normal Box" @mousedown="mouseDown('Box')">
-                        Box
+                        TT
                     </div>
                     <div class="normal addEllipse" @mousedown="mouseDown('addEllipse')">
-                        addEllipse
+                        TT
                     </div>
                     <div class="normal addEllipseTuo" @mousedown="mouseDown('addEllipseTuo')">
-                        addEllipseTuo
+                        TT
                     </div>
                     <div class="normal addEllipseTuoWW" @mousedown="mouseDown('addEllipseTuoWW')">
-                        addEllipseTuoWW
+                        TT
                     </div>
                     <div class="normal y" @mousedown="mouseDown('圆柱体')">
-                        圆柱体
+                        TT
                     </div>
                     <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')">
-                        glowingLine
+                        TT
                     </div>
                     <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')">
-                        orangeOutlined
+                        TT
                     </div>
                     <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')">
-                        yellowLine
+                        TT
                     </div>
                     <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')">
-                        redRectangle
+                        TT
                     </div>
                     <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')">
-                        greenRectangle
+                        TT
                     </div>
                     <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')">
-                        blueEllipsoid
+                        TT
                     </div>
                     <div class="normal redSphere" @mousedown="mouseDown('redSphere')">
-                        redSphere
+                        TT
                     </div>
                     <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')">
-                        outlineOnly
+                        TT
                     </div>
                     <div class="normal redWall" @mousedown="mouseDown('redWall')">
-                        redWall
+                        TT
                     </div>
                     <div class="normal greenWall" @mousedown="mouseDown('greenWall')">
-                        greenWall
+                        TT
                     </div>
                     <div class="normal blueWall" @mousedown="mouseDown('blueWall')">
-                        blueWall
+                        TT
                     </div>
-                    <div class="normal b" @mousedown="mouseDown('redCorridor')">
-                        redCorridor
+                    <div class="normal redCorridor" @mousedown="mouseDown('redCorridor')">
+                        TT
                     </div>
-                    <div class="normal b" @mousedown="mouseDown('redPolygon')">
-                        redPolygon
+                    <div class="normal redPolygon" @mousedown="mouseDown('redPolygon')">
+                        TT
                     </div>
-                    <div class="normal b" @mousedown="mouseDown('greenPolygon')">
-                        greenPolygon
+                    <div class="normal greenPolygon" @mousedown="mouseDown('greenPolygon')">
+                        TT
                     </div>
-                    <div class="normal b" @mousedown="mouseDown('orangePolygon')">
-                        orangePolygon
+                    <div class="normal orangePolygon" @mousedown="mouseDown('orangePolygon')">
+                        TT
                     </div>
-                    <div class="normal b" @mousedown="mouseDown('bluePolygon')">
-                        bluePolygon
+                    <div class="normal bluePolygon" @mousedown="mouseDown('bluePolygon')">
+                        TT
                     </div>
-                    <div class="normal b" @mousedown="mouseDown('redLine')">
-                        redLine
+                    <div class="normal redLine" @mousedown="mouseDown('redLine')">
+                        TT
                     </div>
                 </div>
             </el-tab-pane>
@@ -459,6 +459,42 @@
             background-image: url("../assets/geometryIcons/b.png");
             background-size: 100% 100%;
         }
+
+        .addIconBackground {
+            background-image: url("../assets/geometryIcons/addIconBackground.png");
+            background-size: 100% 100%;
+        }
+        .ParticalSys {
+            background-image: url("../assets/geometryIcons/ParticalSys.png");
+            background-size: 100% 100%;
+        }
+        .redCorridor {
+            background-image: url("../assets/geometryIcons/redCorridor.png");
+            background-size: 100% 100%;
+        }
+
+        .redPolygon {
+            background-image: url("../assets/geometryIcons/redPolygon.png");
+            background-size: 100% 100%;
+        }
+        .greenPolygon {
+            background-image: url("../assets/geometryIcons/greenPolygon.png");
+            background-size: 100% 100%;
+        }
+        .orangePolygon {
+            background-image: url("../assets/geometryIcons/orangePolygon.png");
+            background-size: 100% 100%;
+        }
+        .bluePolygon {
+            background-image: url("../assets/geometryIcons/bluePolygon.png");
+            background-size: 100% 100%;
+        }
+        .redLine {
+            background-image: url("../assets/geometryIcons/redLine.png");
+            background-size: 100% 100%;
+        }
+
+
     }
 
 </style>

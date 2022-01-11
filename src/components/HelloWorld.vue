@@ -10,7 +10,9 @@
                     <el-menu-item index="12">倾斜摄影</el-menu-item>
                 </el-menu>
             </div>
-            <div>LpTech</div>
+            <div style="color: white;font-weight: bold;display: flex;flex-direction: column;justify-content: center">
+                <span>LpTech</span>
+            </div>
             <div>
                 <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="">
