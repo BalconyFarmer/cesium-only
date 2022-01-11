@@ -14,6 +14,7 @@ import CustomShaderTest from './some/ShaderDemo/CustomStyle/CustomMaterial/Custo
 import ChengDu from './project/ChengDu'
 import InnerMaterial from './some/InnerMaterial/InnerMaterial'
 import Environment from './some/ShaderDemo/Environment'
+import Animation from './some/Animation'
 
 export default class CesiumApp {
     constructor () {
@@ -33,6 +34,7 @@ export default class CesiumApp {
         this.event = null
         this.particleSystems = null
         this.customShaderTest = null
+        this.animation = null
     }
 
     /**
@@ -76,6 +78,7 @@ export default class CesiumApp {
 
         window.viewer = this.viewer
         this.viewer.scene.postProcessStages.fxaa.enabled = false//去锯齿 是文字清晰
+        this.animation = new Animation(this)
     }
 
     /**
@@ -457,4 +460,6 @@ export default class CesiumApp {
             this.viewer.zoomTo(this.viewer.entities.values[index - 1])
         }
     }
+
+
 }

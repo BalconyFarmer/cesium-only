@@ -173,7 +173,7 @@ export default class InnerMaterial {
             lineThickness: new Cesium.Cartesian2(2.0, 2.0)
         })
 
-        this.app.viewer.entities.add({
+        const _en = this.app.viewer.entities.add({
             name: '圆柱体',
             position: Cartesian3,
             cylinder: {
@@ -189,6 +189,10 @@ export default class InnerMaterial {
             }
         })
         this.app.lookLast()
+        const self = this
+        setTimeout(function () {
+            self.app.animation.rollEntity(_en, 100)
+        },1000)
 
     }
 }
