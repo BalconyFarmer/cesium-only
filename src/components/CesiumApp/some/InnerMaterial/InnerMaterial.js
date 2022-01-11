@@ -36,7 +36,7 @@ export default class InnerMaterial {
         }
         //圆柱体
         const entity = this.app.viewer.entities.add(_entity)
-        this.app.viewer.zoomTo(entity)
+        this.app.lookLast()
 
     }
 
@@ -74,7 +74,7 @@ export default class InnerMaterial {
         }
         //圆柱体
         const result = this.app.viewer.entities.add(_entity)
-        this.app.viewer.zoomTo(result)
+        this.app.lookLast()
     }
 
     addImgMaterial (Cartesian3) {
@@ -99,6 +99,8 @@ export default class InnerMaterial {
                 semiMajorAxis: 2000.0,
             }
         })
+        this.app.lookLast()
+
     }
 
     addCheckerboardMaterialProperty (Cartesian3) {
@@ -123,6 +125,8 @@ export default class InnerMaterial {
                 semiMajorAxis: 2000.0,
             }
         })
+        this.app.lookLast()
+
     }
 
     /**
@@ -153,6 +157,8 @@ export default class InnerMaterial {
                 semiMajorAxis: 2000.0,
             }
         })
+        this.app.lookLast()
+
     }
 
     /**
@@ -163,7 +169,7 @@ export default class InnerMaterial {
         const metarial = new Cesium.GridMaterialProperty({
             color: Cesium.Color.YELLOW,
             cellAlpha: 0.2,
-            lineCount: new Cesium.Cartesian2(8, 8),
+            lineCount: new Cesium.Cartesian2(4, 4),
             lineThickness: new Cesium.Cartesian2(2.0, 2.0)
         })
 
@@ -182,5 +188,7 @@ export default class InnerMaterial {
                 semiMajorAxis: 2000.0,
             }
         })
+        this.app.lookLast()
+
     }
 }

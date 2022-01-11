@@ -126,12 +126,12 @@ export default class CesiumApp {
      */
     addOutline () {
         let collection = viewer.scene.postProcessStages
-        console.log(collection,1)
+        console.log(collection, 1)
         let silhouette = collection.add(Cesium.PostProcessStageLibrary.createSilhouetteStage())
-        console.log(collection,2)
+        console.log(collection, 2)
         silhouette.enabled = true
         silhouette.uniforms.color = Cesium.Color.YELLOW
-        console.log(collection,3)
+        console.log(collection, 3)
     }
 
     /**
@@ -449,5 +449,12 @@ export default class CesiumApp {
                 this.viewer.zoomTo(item)
             }
         })
+    }
+
+    lookLast () {
+        const index = this.viewer.entities.values.length
+        if (index > 0) {
+            this.viewer.zoomTo(this.viewer.entities.values[index - 1])
+        }
     }
 }
