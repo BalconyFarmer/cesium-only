@@ -97,7 +97,8 @@
             </div>
             <br>
 
-            <div>
+            <div class="getPosition">
+                <div class="title">选取位置:</div>
                 <div class="title">log,lat,height</div>
                 <div>{{clickPosition[0]|| 0}},</div>
                 <div>{{clickPosition[1]|| 0}},</div>
@@ -105,7 +106,7 @@
             </div>
 
             <br>
-            <div>
+            <div class="getPosition">
                 <div class="title">camera</div>
                 <div class="title">log,lat,height</div>
                 <div>{{cameraPosition[0]|| 0}}</div>
@@ -118,28 +119,30 @@
             </div>
             <br>
 
-            <div>name: {{currentEntities? currentEntities.name: '暂无数据'}}</div>
-            <div>Cartesian3: {{currentEntities? currentEntities.position._value: '暂无数据'}}</div>
-            <div class="inpu">
-                <el-input size="small" v-model="rotationgPatams.Heading" placeholder="Heading"></el-input>
-            </div>
-            <div class="inpu">
-                <el-input size="small" v-model="rotationgPatams.Pitch" placeholder="Pitch"></el-input>
-            </div>
-            <div class="inpu">
-                <el-input size="small" v-model="rotationgPatams.Roll" placeholder="Roll"></el-input>
-            </div>
-            <div class="inpu">
-                <el-button @click="rotateEntity">rotate</el-button>
-            </div>
-            <div class="inpu">
-                <span>drag</span>
-                <el-switch
-                        @change="dragChange"
-                        v-model="switchValue"
-                        active-color="#13ce66"
-                        inactive-color="#2B2B2B">
-                </el-switch>
+            <div class="getPosition">
+                <div>name: {{currentEntities? currentEntities.name: '暂无数据'}}</div>
+                <div>Cartesian3: {{currentEntities? currentEntities.position._value: '暂无数据'}}</div>
+                <div class="inpu">
+                    <el-input size="small" v-model="rotationgPatams.Heading" placeholder="Heading"></el-input>
+                </div>
+                <div class="inpu">
+                    <el-input size="small" v-model="rotationgPatams.Pitch" placeholder="Pitch"></el-input>
+                </div>
+                <div class="inpu">
+                    <el-input size="small" v-model="rotationgPatams.Roll" placeholder="Roll"></el-input>
+                </div>
+                <div class="inpu">
+                    <el-button @click="rotateEntity">rotate</el-button>
+                </div>
+                <div class="inpu">
+                    <span>drag</span>
+                    <el-switch
+                            @change="dragChange"
+                            v-model="switchValue"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                    </el-switch>
+                </div>
             </div>
 
         </div>
@@ -479,6 +482,9 @@
             overflow-y: auto;
             color: white;
             background-color: rgba(43, 43, 43, .5);
+            .getPosition {
+                border: 1px solid gray;
+            }
         }
 
         .bottomCenter {
