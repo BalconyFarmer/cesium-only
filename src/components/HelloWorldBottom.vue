@@ -122,6 +122,17 @@
                     </div>
                 </div>
             </el-tab-pane>
+            <el-tab-pane label="其他" name="four">
+                <div class="env">
+                    <span>moveTip</span>
+                    <el-switch
+                            @change="moveToolTipsChange"
+                            v-model="moveToolFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                    </el-switch>
+                </div>
+            </el-tab-pane>
         </el-tabs>
     </div>
 </template>
@@ -135,10 +146,14 @@
                 activeName: 'first',
                 addGeoFlag: false,
                 currentGeoType: null,
-                geoPositionCartesian2: null
+                geoPositionCartesian2: null,
+                moveToolFlag: false
             }
         },
         methods: {
+            moveToolTipsChange () {
+                this.cApp.startMoveTips()
+            },
             handleClick (tab, event) {
                 console.log(tab, event)
             },

@@ -48,18 +48,6 @@
                     <el-menu-item index="addBloom">Bloom</el-menu-item>
                     <el-menu-item index="addOutline">Outline</el-menu-item>
                     <el-menu-item index="14">关闭冗余</el-menu-item>
-
-                    <el-menu-item index="">
-                        <span>moveTip</span>
-                        <el-tooltip :content="'moveToolTips'" placement="top">
-                            <el-switch
-                                    @change="moveToolTipsChange"
-                                    v-model="moveToolFlag"
-                                    active-color="#13ce66"
-                                    inactive-color="#2B2B2B">
-                            </el-switch>
-                        </el-tooltip>
-                    </el-menu-item>
                     <el-menu-item index="">
                         <span>地形</span>
                         <el-tooltip :content="'关闭地形'" placement="top">
@@ -292,9 +280,7 @@
                     this.cApp.removeTerrain()
                 }
             },
-            moveToolTipsChange () {
-                this.cApp.startMoveTips()
-            },
+
             rotateEntity () {
                 const self = this
                 self.cApp.rotateEntity(parseInt(self.rotationgPatams.Heading), parseInt(self.rotationgPatams.Pitch), parseInt(self.rotationgPatams.Roll), self.currentEntities)
