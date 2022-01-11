@@ -130,7 +130,7 @@ export default class ChengDu {
 
     playAction() {
         const self = this
-        const timeLine = [10, 10000]
+        const timeLine = [5, 5000]
         // const timeLine = [1, 1]
         const aim1 = {
             x: -1337465.8008031724,

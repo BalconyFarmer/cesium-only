@@ -10,6 +10,7 @@
                     <el-menu-item index="12">倾斜摄影</el-menu-item>
                 </el-menu>
             </div>
+            <div>LpTech</div>
             <div>
                 <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
                     <el-menu-item index="">
@@ -442,7 +443,7 @@
 
     .all {
         width: 100%;
-        height: 50%;
+        height: 1080px;
 
         .header {
             width: 100%;
