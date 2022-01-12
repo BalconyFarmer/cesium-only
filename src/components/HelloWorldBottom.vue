@@ -150,7 +150,7 @@
                             {{ uploading ? 'Uploading' : '发布' }}
                         </a-button>
                     </div>
-                    <div>
+                    <div class="dddList">
                         <div v-for="item in D3FileList">{{item.name}}</div>
                     </div>
                 </div>
@@ -209,29 +209,12 @@
                     this.$message.success(response.statusText)
                     this.uploading = false
                     this.fileList = []
-                    this.resData = response.data
-                    this.$emit('callback', '')
-                    this.$store.commit('setSendShow', 1)
                     this.updata3DList()
                 })
             },
             // 上传至页面
             beforeUpload (file) {
-                if (this.fileList.length != 0) {
-                    this.fileList = []
-                }
-
-                if (file.type == 'image/jpeg' || file.type == 'image/png') {
-                    this.fileList = [...this.fileList, file]
-                    this.type = 'pic'
-                    return false
-                } else if (file.type == 'video/mp4') {
-                    this.fileList = [...this.fileList, file]
-                    this.type = 'video'
-                    return false
-                } else {
-                    this.$message.success(file.type, 'image/jpeg')
-                }
+                this.fileList = [...this.fileList, file]
             },
             // 删除待上传文件
             handleRemove (file) {
@@ -372,6 +355,7 @@
                 let re = await this.get3DFilesAll()
                 this.D3FileList = re.data
                 this.$forceUpdate()
+                console.log(this.D3FileList,"++++++++++")
             }
         },
         async mounted () {
@@ -410,6 +394,11 @@
             width: 100px;
             height: 100px;
             border: 4px solid yellow;
+        }
+        .dddList {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
         }
 
         .geo {
