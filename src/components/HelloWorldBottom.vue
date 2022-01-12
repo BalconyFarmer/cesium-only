@@ -124,30 +124,35 @@
             </el-tab-pane>
             <el-tab-pane label="其他" name="four">
                 <div class="env">
-                    <span>moveTip</span>
-                    <el-switch
-                            @change="moveToolTipsChange"
-                            v-model="moveToolFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B">
-                    </el-switch>
-                </div>
-                <div class="btnss">
-                    <a-upload class="b1" :file-list="fileList" :remove="handleRemove" :before-upload="beforeUpload">
-                        <a-button>
-                            <a-icon type="upload"/>
-                        </a-button>
-                    </a-upload>
+                    <div>
+                        <span>moveTip</span>
+                        <el-switch
+                                @change="moveToolTipsChange"
+                                v-model="moveToolFlag"
+                                active-color="#13ce66"
+                                inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div class="btnss">
+                        <a-upload class="b1" :file-list="fileList" :remove="handleRemove" :before-upload="beforeUpload">
+                            <a-button>
+                                <a-icon type="upload"/>
+                            </a-button>
+                        </a-upload>
 
-                    <a-button
-                            class="b2"
-                            type="primary"
-                            :disabled="fileList.length === 0"
-                            :loading="uploading"
-                            @click="handleUpload"
-                    >
-                        {{ uploading ? 'Uploading' : '发布' }}
-                    </a-button>
+                        <a-button
+                                class="b2"
+                                type="primary"
+                                :disabled="fileList.length === 0"
+                                :loading="uploading"
+                                @click="handleUpload"
+                        >
+                            {{ uploading ? 'Uploading' : '发布' }}
+                        </a-button>
+                    </div>
+                    <div>
+                        <div v-for="item in D3FileList">{{item.name}}</div>
+                    </div>
                 </div>
             </el-tab-pane>
         </el-tabs>
@@ -155,7 +160,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import axios from 'axios'
 
     export default {
         name: 'HelloWorldBottom',
@@ -169,14 +174,22 @@
                 moveToolFlag: false,
                 fileList: [],
                 uploading: false,
-
+                D3FileList: []
             }
         },
         methods: {
-            saveVideo(formData) {
+            get3DFilesAll () {
                 return axios({
-                    method: "post",
-                    url: "http://localhost:1111" + '/saveVideo',
+                    method: 'post',
+                    url: 'http://localhost:1111' + '/get3DFilesAll',
+                    data: '',
+                    withCredentials: true
+                })
+            },
+            saveVideo (formData) {
+                return axios({
+                    method: 'post',
+                    url: 'http://localhost:1111' + '/saveVideo',
                     data: formData,
                     withCredentials: true
                 })
@@ -199,6 +212,7 @@
                     this.resData = response.data
                     this.$emit('callback', '')
                     this.$store.commit('setSendShow', 1)
+                    this.updata3DList()
                 })
             },
             // 上传至页面
@@ -354,12 +368,18 @@
                 }
                 this.addGeoFlag = false
             },
+            async updata3DList () {
+                let re = await this.get3DFilesAll()
+                this.D3FileList = re.data
+                this.$forceUpdate()
+            }
         },
-        mounted () {
+        async mounted () {
             const self = this
             this.cApp.eventCenter.addEventListener('geoPosition', function (data) {
                 self.geoPositionCartesian2 = data.message.position
             })
+            await this.updata3DList()
         }
     }
 </script>

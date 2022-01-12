@@ -55,6 +55,16 @@ class initSquelize {
         return result
     }
 
+    async get3DFilesAll() {
+        const result = await this.VideoModel.findAll(
+            {
+                'order': [['timestamp', 'DESC']]
+            }
+        )
+        return result
+    }
+
+
 }
 
 module.exports = {initSquelize}
