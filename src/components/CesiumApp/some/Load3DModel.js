@@ -23,6 +23,7 @@ export default class Load3DModel {
             }
         }
         this.app.viewer.entities.add(result)
+        this.app.lookLast()
         return result
     }
 
