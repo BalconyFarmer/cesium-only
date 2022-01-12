@@ -30,7 +30,7 @@ function initStaticFile(app) {
 
                 // 最终要保存到的文件夹目录
                 const dirName = getUploadDirName();
-                const dir = path.join(__dirname, `${staticPath}/uploadDefault/${dirName}`);
+                const dir = path.join(__dirname, `${staticPath}/3Dstatic/uploadDefault/${dirName}`);
 
                 // 检查文件夹是否存在如果不存在则新建文件夹
                 checkDirExist(dir);

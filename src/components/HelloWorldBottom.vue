@@ -122,17 +122,8 @@
                     </div>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="其他" name="four">
+            <el-tab-pane label="预览模型" name="four">
                 <div class="env">
-                    <div>
-                        <span>moveTip</span>
-                        <el-switch
-                                @change="moveToolTipsChange"
-                                v-model="moveToolFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B">
-                        </el-switch>
-                    </div>
                     <div class="btnss">
                         <a-upload class="b1" :file-list="fileList" :remove="handleRemove" :before-upload="beforeUpload">
                             <a-button>
@@ -150,11 +141,27 @@
                             {{ uploading ? 'Uploading' : '发布' }}
                         </a-button>
                     </div>
-                    <div class="dddList">
-                        <div v-for="item in D3FileList">{{item.name}}</div>
+                    <div class="normal addMaterial" v-for="item in D3FileList">
+                        <div @mousedown="mouseDown(item)">
+                            {{item.name}}
+                        </div>
                     </div>
                 </div>
             </el-tab-pane>
+            <el-tab-pane label="其他" name="five">
+                <div class="env">
+                    <div>
+                        <span>moveTip</span>
+                        <el-switch
+                                @change="moveToolTipsChange"
+                                v-model="moveToolFlag"
+                                active-color="#13ce66"
+                                inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                </div>
+            </el-tab-pane>
+
         </el-tabs>
     </div>
 </template>
@@ -347,6 +354,10 @@
                         case 'ParticalSys':
                             this.cApp.particleSystems.init(this.geoPositionCartesian2)
                             break
+                        default:
+                            let po = this.geoPositionCartesian2
+                            let url = 'http://localhost:1111/3Dstatic' + this.currentGeoType.path
+                            this.cApp.load3DModel.loadGlbByURL(po, url)
                     }
                 }
                 this.addGeoFlag = false
@@ -355,7 +366,6 @@
                 let re = await this.get3DFilesAll()
                 this.D3FileList = re.data
                 this.$forceUpdate()
-                console.log(this.D3FileList,"++++++++++")
             }
         },
         async mounted () {
@@ -392,13 +402,17 @@
 
         .btnss {
             width: 100px;
-            height: 100px;
-            border: 4px solid yellow;
+            height: 50px;
+            border: 4px solid gray;
         }
+
         .dddList {
+            width: calc(100vw - 100px);
             display: flex;
             flex-direction: row;
             justify-content: flex-start;
+            overflow-x: scroll;
+            border: 4px solid yellow;
         }
 
         .geo {

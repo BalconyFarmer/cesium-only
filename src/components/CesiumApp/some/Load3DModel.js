@@ -5,6 +5,27 @@ export default class Load3DModel {
     constructor (app) {
         this.app = app
     }
+    //
+    loadGlbByURL (po, URL) {
+        // const see = URL
+        // debugger
+        const result = {
+            name: '工厂',
+            position: po,
+            orientation:
+                Cesium.Transforms.headingPitchRollQuaternion(
+                    po,
+                    new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)
+                ),
+            model: {
+                uri: URL,
+                // minimumPixelSize: 100, // 最小大小
+                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+            }
+        }
+        this.app.viewer.entities.add(result)
+        return result
+    }
 
     //  工厂 entities
     loadGlb (po, htr) {
