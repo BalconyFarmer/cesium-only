@@ -7,7 +7,7 @@ const config = {
     sqlAdress: '101.34.131.94',
     USERNAME: "username1",
     PASSWORD: "password",
-    DATABASE: 'db_behance',
+    DATABASE: 'LP_3DFiles',
 
 }
 

@@ -132,12 +132,31 @@
                             inactive-color="#2B2B2B">
                     </el-switch>
                 </div>
+                <div class="btnss">
+                    <a-upload class="b1" :file-list="fileList" :remove="handleRemove" :before-upload="beforeUpload">
+                        <a-button>
+                            <a-icon type="upload"/>
+                        </a-button>
+                    </a-upload>
+
+                    <a-button
+                            class="b2"
+                            type="primary"
+                            :disabled="fileList.length === 0"
+                            :loading="uploading"
+                            @click="handleUpload"
+                    >
+                        {{ uploading ? 'Uploading' : '发布' }}
+                    </a-button>
+                </div>
             </el-tab-pane>
         </el-tabs>
     </div>
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         name: 'HelloWorldBottom',
         props: ['cApp'],
@@ -147,10 +166,66 @@
                 addGeoFlag: false,
                 currentGeoType: null,
                 geoPositionCartesian2: null,
-                moveToolFlag: false
+                moveToolFlag: false,
+                fileList: [],
+                uploading: false,
+
             }
         },
         methods: {
+            saveVideo(formData) {
+                return axios({
+                    method: "post",
+                    url: "http://localhost:1111" + '/saveVideo',
+                    data: formData,
+                    withCredentials: true
+                })
+            },
+            // 上传服务器
+            handleUpload () {
+                const formData = new FormData()
+                this.fileList.forEach(file => {
+                    formData.append('files[]', file)
+                })
+
+                formData.append('videoIntroduce', '默认')
+
+                this.uploading = true
+
+                this.saveVideo(formData).then(response => {
+                    this.$message.success(response.statusText)
+                    this.uploading = false
+                    this.fileList = []
+                    this.resData = response.data
+                    this.$emit('callback', '')
+                    this.$store.commit('setSendShow', 1)
+                })
+            },
+            // 上传至页面
+            beforeUpload (file) {
+                if (this.fileList.length != 0) {
+                    this.fileList = []
+                }
+
+                if (file.type == 'image/jpeg' || file.type == 'image/png') {
+                    this.fileList = [...this.fileList, file]
+                    this.type = 'pic'
+                    return false
+                } else if (file.type == 'video/mp4') {
+                    this.fileList = [...this.fileList, file]
+                    this.type = 'video'
+                    return false
+                } else {
+                    this.$message.success(file.type, 'image/jpeg')
+                }
+            },
+            // 删除待上传文件
+            handleRemove (file) {
+                const index = this.fileList.indexOf(file)
+                const newFileList = this.fileList.slice()
+                newFileList.splice(index, 1)
+                this.fileList = newFileList
+            },
             moveToolTipsChange () {
                 this.cApp.startMoveTips()
             },
@@ -311,6 +386,12 @@
             overflow-x: auto;
         }
 
+        .btnss {
+            width: 100px;
+            height: 100px;
+            border: 4px solid yellow;
+        }
+
         .geo {
             width: 100%;
             height: 30%;
@@ -464,10 +545,12 @@
             background-image: url("../assets/geometryIcons/addIconBackground.png");
             background-size: 100% 100%;
         }
+
         .ParticalSys {
             background-image: url("../assets/geometryIcons/ParticalSys.png");
             background-size: 100% 100%;
         }
+
         .redCorridor {
             background-image: url("../assets/geometryIcons/redCorridor.png");
             background-size: 100% 100%;
@@ -477,18 +560,22 @@
             background-image: url("../assets/geometryIcons/redPolygon.png");
             background-size: 100% 100%;
         }
+
         .greenPolygon {
             background-image: url("../assets/geometryIcons/greenPolygon.png");
             background-size: 100% 100%;
         }
+
         .orangePolygon {
             background-image: url("../assets/geometryIcons/orangePolygon.png");
             background-size: 100% 100%;
         }
+
         .bluePolygon {
             background-image: url("../assets/geometryIcons/bluePolygon.png");
             background-size: 100% 100%;
         }
+
         .redLine {
             background-image: url("../assets/geometryIcons/redLine.png");
             background-size: 100% 100%;

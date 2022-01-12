@@ -37,9 +37,12 @@ function initStaticFile(app) {
 
                 // 获取文件名称
                 const fileName = getUploadFileName(ext);
+                // console.log(fileName,"midle")
 
                 // 重新覆盖 file.path 属性
                 file.path = `${dir}/${fileName}`;
+                file.fuckPath = `/uploadDefault/${dirName}/`
+                file.fuckName = fileName
                 app.context.uploadpath = app.context.uploadpath ? app.context.uploadpath : {};
                 app.context.uploadpath[name] = `${dirName}/${fileName}`;
             },
