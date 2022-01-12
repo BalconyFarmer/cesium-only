@@ -7,8 +7,7 @@ export default class Load3DModel {
     }
     //
     loadGlbByURL (po, URL) {
-        // const see = URL
-        // debugger
+        console.log("当前加载模型地址:",URL)
         const result = {
             name: '工厂',
             position: po,
