@@ -145,9 +145,9 @@ export default class ChengDu {
             x: -1337126.1635365186,
             y: 5328767.971408051,
             z: 3230869.2133927033,
-            heading: 5.7977479212520215,
-            pitch: -0.39876678765253337,
-            roll: 0.000022821565860198234,
+            heading: 5.775718978187101,
+            pitch: -0.8876621716896604,
+            roll: 0.00006925544464131406,
             duration: timeLine[0],
         }
         self.app.cameraAutoRoll(roll)
