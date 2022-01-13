@@ -4,7 +4,20 @@ import * as widget from 'cesium/Widgets/widgets.css'
 export default class Load3DModel {
     constructor (app) {
         this.app = app
+        // this.loadP0Clound()
     }
+
+    //  点云
+    loadP0Clound () {
+        const arr = this.app.viewer.scene.primitives.add(
+            new Cesium.Cesium3DTileset({
+                url: "http://localhost:1111/3Dstatic/loadData/pointClouds/Paris.las",//文件的路径
+            })
+        );
+        //定位过去
+        this.app.viewer.zoomTo(arr);
+    }
+
     //
     loadGlbByURL (po, URL) {
         console.log("当前加载模型地址:",URL)
