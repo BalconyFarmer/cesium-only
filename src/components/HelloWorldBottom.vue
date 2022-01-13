@@ -160,6 +160,12 @@
                         </el-switch>
                     </div>
                 </div>
+                <div class="env">
+                    <div>
+                        <input id="copyVal" type="text" value="Copy Content"/>
+                        <el-button @click="handleClick11">Copy</el-button>
+                    </div>
+                </div>
             </el-tab-pane>
 
         </el-tabs>
@@ -185,6 +191,11 @@
             }
         },
         methods: {
+            handleClick11() {
+                let copyVal = document.getElementById("copyVal");
+                copyVal.select();
+                document.execCommand('copy')
+            },
             get3DFilesAll () {
                 return axios({
                     method: 'post',
@@ -374,6 +385,8 @@
                 self.geoPositionCartesian2 = data.message.position
             })
             await this.updata3DList()
+
+
         }
     }
 </script>

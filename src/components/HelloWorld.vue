@@ -102,22 +102,16 @@
             <div class="getPosition">
                 <div class="title">选取位置:</div>
                 <div class="title">log,lat,height</div>
-                <div>{{clickPosition[0]|| 0}},</div>
-                <div>{{clickPosition[1]|| 0}},</div>
-                <div>{{clickPosition[2]|| 0}},</div>
+                <input id="copyValID" type="text" :value="clickPosition"/>
+                <el-button @click="handleClick1('copyValID')">Copy</el-button>
             </div>
 
             <br>
             <div class="getPosition">
                 <div class="title">camera</div>
                 <div class="title">log,lat,height</div>
-                <div>{{cameraPosition[0]|| 0}}</div>
-                <div class="title">heading</div>
-                <div>{{cameraPosition[1]|| 0}}</div>
-                <div class="title">pitch</div>
-                <div>{{cameraPosition[2]|| 0}}</div>
-                <div class="title">roll</div>
-                <div>{{cameraPosition[3]|| 0}}</div>
+                <input id="copyValID1" type="text" :value="cameraPosition"/>
+                <el-button @click="handleClick1('copyValID1')">Copy</el-button>
             </div>
             <br>
 
@@ -271,6 +265,11 @@
             }
         },
         methods: {
+            handleClick1(ID) {
+                let copyVal = document.getElementById(ID);
+                copyVal.select();
+                document.execCommand('copy')
+            },
             mouseDown (ev) {
                 this.currentGeoType = ev
                 this.addGeoFlag = true

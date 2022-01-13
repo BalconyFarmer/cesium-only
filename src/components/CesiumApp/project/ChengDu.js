@@ -133,15 +133,24 @@ export default class ChengDu {
         const timeLine = [5, 5000]
         // const timeLine = [1, 1]
         const aim1 = {
-            x: -1337465.8008031724,
-            y: 5328401.815246379,
-            z: 3230061.9980081106,
+            x: -1338321.7464392497,
+            y: 5329474.532445264,
+            z: 3229041.9376813835,
             heading: 5.7977479212520215,
             pitch: -0.39876678765253337,
             roll: 0.000022821565860198234,
             duration: timeLine[0],
         }
-        self.app.cameraAutoRoll(aim1)
+        const roll = {
+            x: -1337126.1635365186,
+            y: 5328767.971408051,
+            z: 3230869.2133927033,
+            heading: 5.7977479212520215,
+            pitch: -0.39876678765253337,
+            roll: 0.000022821565860198234,
+            duration: timeLine[0],
+        }
+        self.app.cameraAutoRoll(roll)
         setTimeout(function () {
             self.app.cameraFlyToCartesian3(aim1)
         }, timeLine[1])
