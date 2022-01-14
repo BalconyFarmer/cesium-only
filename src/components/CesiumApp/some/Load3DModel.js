@@ -9,12 +9,14 @@ export default class Load3DModel {
 
     //  点云
     loadP0Clound () {
-        const arr = this.app.viewer.scene.primitives.add(
+        const pointCloud = this.app.viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
-                url: "http://localhost:1111/3Dstatic/loadData/pointClouds/Paris.las",//文件的路径
+                url: "http://localhost:1111/3Dstatic/loadData/pointClouds/table.las",//文件的路径
+                modelMatrix: modelMatrix,
+                scale: 10.0,
             })
         );
-        //定位过去
+        console.log(pointCloud,"未开发pointCloudpointCloudpointCloudpointCloudpointCloudpointCloudpointCloud")
         this.app.viewer.zoomTo(arr);
     }
 
@@ -114,6 +116,9 @@ export default class Load3DModel {
         let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
             Cesium.Cartesian3.fromDegrees(data[0], data[1], data[2])
         )
+
+
+
         car = Cesium.Model.fromGltf(
             {
                 url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
