@@ -252,11 +252,12 @@ export default class CesiumApp {
      * 关闭次要效果
      */
     closeAll () {
-        this.viewer.imageryLayers.get(0).show = false//不显示底图
-        this.viewer.scene.globe.baseColor = Cesium.Color.GRAY//设置地球颜色
-        this.viewer.scene.skyAtmosphere.show = false // 关闭大气效果
-        this.viewer.scene.skyBox.show = false // 关闭大气效果
+        this.viewer.scene.skyAtmosphere.show = false  // 关闭大气效果
+        this.viewer.scene.skyBox.show = false  // 关闭天空和
         this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({}) // 清除地形
+        if (this.viewer.imageryLayers.get(0)) {
+            this.viewer.imageryLayers.get(0).show = false  //不显示底图
+        }
     }
 
     // 清除Entitys
@@ -285,24 +286,33 @@ export default class CesiumApp {
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
-            case '文字图层':
-                Imagery = new Cesium.UrlTemplateImageryProvider({
-                    url: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-                    credit: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.'
+            case 'geoq智图黑':
+                // Imagery = new Cesium.UrlTemplateImageryProvider({
+                //     url: 'https://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}',
+                // })
+                Imagery = new Cesium.ArcGisMapServerImageryProvider({
+                    url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
-            case 'note':
-                Imagery = new Cesium.WebMapTileServiceImageryProvider({
-                    url: 'http://t0.tianditu.gov.cn/cia_w/wmts?service=wmts&request=GetTile&version=1.0.0&LAYER=cia&tileMatrixSet=w&TileMatrix={TileMatrix}&TileRow={TileRow}&TileCol={TileCol}&style=default&format=tiles&tk=837264f46e683ec982d452e78d71052e',
-                    layer: 'tdtBasicLayer',
-                    style: 'default',
-                    maximumLevel: 20,
-                    format: 'image/png',
-                    tileMatrixSetID: 'GoogleMapsCompatible',
-                    show: true
+            case '高德卫星':
+                Imagery = new Cesium.UrlTemplateImageryProvider({
+                    url: 'https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
+                    minimumLevel: 3,
+                    maximumLevel: 18
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
+                break
+            case '高德文字':
+                Imagery = new Cesium.UrlTemplateImageryProvider({
+                    url: 'http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8',
+                    minimumLevel: 3,
+                    maximumLevel: 18
+                })
+                this.viewer.imageryLayers.addImageryProvider(Imagery)
+                break
+            case '纯黑':
+                this.viewer.scene.globe.baseColor = Cesium.Color.BLACK  //设置地球颜色
                 break
         }
         this.Imagery = Imagery
@@ -460,6 +470,5 @@ export default class CesiumApp {
             this.viewer.zoomTo(this.viewer.entities.values[index - 1])
         }
     }
-
 
 }

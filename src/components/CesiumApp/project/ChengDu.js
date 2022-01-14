@@ -14,8 +14,8 @@ export default class ChengDu {
     init () {
         const self = this
         this.app.closeAll()
-        this.app.switchLayer('ArcGis实景图层')
-        this.app.updateLyerLight(0.5, 0.5)
+        this.app.switchLayer('geoq智图黑')
+        // this.app.updateLyerLight(0.5, 0.5)
         this.app.cesium3DTileset.addTiles()
 
         const option = {
@@ -130,8 +130,8 @@ export default class ChengDu {
 
     playAction() {
         const self = this
-        const timeLine = [5, 5000]
-        // const timeLine = [1, 1]
+        // const timeLine = [5, 5000]
+        const timeLine = [1, 1]
         const aim1 = {
             x: -1338321.7464392497,
             y: 5329474.532445264,

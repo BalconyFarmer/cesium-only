@@ -233,17 +233,23 @@
                 },],
                 optionsLayersIndex: null,
                 optionsLayers: [{
-                    value: '文字图层',
-                    label: '文字图层'
-                }, {
                     value: 'google实景图层',
                     label: 'google实景图层'
                 }, {
                     value: 'ArcGis实景图层',
                     label: 'ArcGis实景图层'
                 }, {
-                    value: 'note',
-                    label: 'note'
+                    value: 'geoq智图黑',
+                    label: 'geoq智图黑'
+                },{
+                    value: '高德卫星',
+                    label: '高德卫星'
+                }, {
+                    value: '高德文字',
+                    label: '高德文字'
+                }, {
+                    value: '纯黑',
+                    label: '纯黑'
                 },],
                 activeIndex: '1',
                 activeIndex2: '1',
@@ -266,9 +272,9 @@
             }
         },
         methods: {
-            handleClick1(ID) {
-                let copyVal = document.getElementById(ID);
-                copyVal.select();
+            handleClick1 (ID) {
+                let copyVal = document.getElementById(ID)
+                copyVal.select()
                 document.execCommand('copy')
             },
             mouseDown (ev) {
@@ -317,21 +323,21 @@
                     this.cApp.addTimeAction()
                 } else if (key == 14) {
                     this.cApp.closeAll()
-                }  else if (key == 'addBloom') {
+                } else if (key == 'addBloom') {
                     this.cApp.addBloom()
                 } else if (key == 'addOutline') {
                     this.cApp.addOutline()
-                }else if (key == '点云') {
+                } else if (key == '点云') {
                     this.cApp.load3DModel.loadP0Clound()
                 }
             },
-            changeGlobleLight() {
+            changeGlobleLight () {
                 this.cApp.switchLight()
             },
-            changeLight() {
+            changeLight () {
                 this.cApp.addLight()
             },
-            changeShadow() {
+            changeShadow () {
                 this.cApp.changeShadow()
             },
             startScriptLoader () {
@@ -339,7 +345,6 @@
                 scriptLoader('http://zhangticcc.gitee.io/d3kit/d3kit.js').then(res => {
                     setTimeout(function () {
                         const see = Cesium.D3Kit
-                        console.clear()
                         console.log(see)
                         // debugger
                     }, 1000)
@@ -486,6 +491,7 @@
             overflow-y: auto;
             color: white;
             background-color: rgba(43, 43, 43, .5);
+
             .getPosition {
                 border: 1px solid gray;
             }
