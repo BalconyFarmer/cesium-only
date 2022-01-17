@@ -34,10 +34,11 @@ export default class Animation {
         //
         // run()
 
-        setInterval(function () {
-            self.app.rotateEntity(index, 0, 0, en)
-            index += 1
-        },100)
+        // setInterval(function () {
+        //     self.app.rotateEntity(index, 0, 0, en)
+        //     index += 1
+        // },100)
+
     }
 
     /**
