@@ -82,6 +82,13 @@ export default class CesiumApp {
     }
 
     /**
+     * 视场角
+     */
+    updataFov (data) {
+        this.viewer.camera.frustum.fov = data ;//Cesium.Math.PI_OVER_TWO;
+    }
+
+    /**
      * run
      * 效果演示时间线
      */

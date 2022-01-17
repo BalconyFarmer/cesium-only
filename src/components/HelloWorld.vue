@@ -87,6 +87,10 @@
                         <el-slider :max="2" :step="0.1" v-model="brightness">
                         </el-slider>
                     </el-menu-item>
+                    <el-menu-item style="width: 100px">
+                        <el-slider :max="2" :step="0.1" v-model="fov">
+                        </el-slider>
+                    </el-menu-item>
                 </el-menu>
             </div>
         </div>
@@ -206,10 +210,20 @@
                 deep: true,
                 immediate: false
             },
+            fov: {
+                handler (newValue) {
+                    if (this.cApp) {
+                        this.cApp.updataFov(this.fov)
+                    }
+                },
+                deep: true,
+                immediate: false
+            },
         },
 
         data () {
             return {
+                fov:1,
                 changeShadowFlag: false,
                 changeLightFlag: false,
                 changeGlobleLightFlag: false,
