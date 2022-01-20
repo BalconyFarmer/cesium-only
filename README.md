@@ -1,5 +1,10 @@
 # cesium_demo
 
+// node_modules 报错修改
+node_modules/@open-wc/webpack-import-meta-loader/webpack-import-meta-loader    // this.context.indexOf(this.rootContext) + this.rootContext.length + 1,
+
+![微信截图_20220120105943](I:\1工作区\工作区2022联鹏科技\cesium\cesium_demo\config\微信截图_20220120105943.png)
+
 > A Vue.js project
 
 ## Build Setup
@@ -26,5 +31,3 @@ npm test
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-// node_modules 报错修改
-node_modules/@open-wc/webpack-import-meta-loader/webpack-import-meta-loader    // this.context.indexOf(this.rootContext) + this.rootContext.length + 1,
