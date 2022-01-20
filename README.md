@@ -5,8 +5,6 @@ node_modules/@open-wc/webpack-import-meta-loader/webpack-import-meta-loader    /
 
 ![Image text](https://gitee.com/wangkewei1993/cesium-only/raw/main/config/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220120105943.png)
 
-![微信截图_20220120105943](I:\1工作区\工作区2022联鹏科技\cesium\cesium_demo\config\微信截图_20220120105943.png)
-
 > A Vue.js project
 
 ## Build Setup
