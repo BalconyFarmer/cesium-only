@@ -446,7 +446,6 @@ export default class CesiumApp {
         let lng = Cesium.Math.toDegrees(cartographic.longitude)
         let alt = cartographic.height
         return [lat, lng, alt]
-        console.log('onCheckonCheckonCheckonCheck', lat, lng, alt)
     }
 
     /**

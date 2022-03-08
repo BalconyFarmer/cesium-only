@@ -367,7 +367,7 @@
 
         },
         mounted () {
-            this.startScriptLoader()
+            // this.startScriptLoader()
             const self = this
             this.$nextTick(() => {
                 this.cApp = new CesiumApp()

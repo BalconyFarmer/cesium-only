@@ -70,7 +70,7 @@ export default class InnerGeometry {
         })
     }
 
-    addIconBackground (point, text,type) {
+    addIconBackground (point, text, type) {
         let img = null
         switch (type) {
             case 1:
@@ -340,6 +340,7 @@ export default class InnerGeometry {
                 })
             }
         })
+
     }
 
     orangeOutlined (Cartesian3) {
@@ -347,14 +348,15 @@ export default class InnerGeometry {
             name: '具有一定高度的线',
             polyline: {
                 positions: Cesium.Cartesian3.fromDegreesArrayHeights(
-                    [-75, 39, 250000, -125, 39, 250000]
+                    [-75, 39, 0, -125, 39, 350000]
                 ),
                 width: 5,
-                material: new Cesium.PolylineOutlineMaterialProperty({
-                    color: Cesium.Color.ORANGE,
-                    outlineWidth: 2,
-                    outlineColor: Cesium.Color.BLACK
-                })
+                // material: new Cesium.PolylineOutlineMaterialProperty({
+                //     color: Cesium.Color.ORANGE,
+                //     outlineWidth: 2,
+                //     outlineColor: Cesium.Color.BLACK
+                // })
+                material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.BLUE)
             }
         })
     }
@@ -673,43 +675,43 @@ export default class InnerGeometry {
     /**
      * 大雾
      */
-    addFrog() {
+    addFrog () {
         var fs =
-            "float getDistance(sampler2D depthTexture, vec2 texCoords) \n" +
-            "{ \n" +
-            "    float depth = czm_unpackDepth(texture2D(depthTexture, texCoords)); \n" +
-            "    if (depth == 0.0) { \n" +
-            "        return czm_infinity; \n" +
-            "    } \n" +
-            "    vec4 eyeCoordinate = czm_windowToEyeCoordinates(gl_FragCoord.xy, depth); \n" +
-            "    return -eyeCoordinate.z / eyeCoordinate.w; \n" +
-            "} \n" +
-            "float interpolateByDistance(vec4 nearFarScalar, float distance) \n" +
-            "{ \n" +
-            "    float startDistance = nearFarScalar.x; \n" +
-            "    float startValue = nearFarScalar.y; \n" +
-            "    float endDistance = nearFarScalar.z; \n" +
-            "    float endValue = nearFarScalar.w; \n" +
-            "    float t = clamp((distance - startDistance) / (endDistance - startDistance), 0.0, 1.0); \n" +
-            "    return mix(startValue, endValue, t); \n" +
-            "} \n" +
-            "vec4 alphaBlend(vec4 sourceColor, vec4 destinationColor) \n" +
-            "{ \n" +
-            "    return sourceColor * vec4(sourceColor.aaa, 1.0) + destinationColor * (1.0 - sourceColor.a); \n" +
-            "} \n" +
-            "uniform sampler2D colorTexture; \n" +
-            "uniform sampler2D depthTexture; \n" +
-            "uniform vec4 fogByDistance; \n" +
-            "uniform vec4 fogColor; \n" +
-            "varying vec2 v_textureCoordinates; \n" +
-            "void main(void) \n" +
-            "{ \n" +
-            "    float distance = getDistance(depthTexture, v_textureCoordinates); \n" +
-            "    vec4 sceneColor = texture2D(colorTexture, v_textureCoordinates); \n" +
-            "    float blendAmount = interpolateByDistance(fogByDistance, distance); \n" +
-            "    vec4 finalFogColor = vec4(fogColor.rgb, fogColor.a * blendAmount); \n" +
-            "    gl_FragColor = alphaBlend(finalFogColor, sceneColor); \n" +
-            "} \n";
+            'float getDistance(sampler2D depthTexture, vec2 texCoords) \n' +
+            '{ \n' +
+            '    float depth = czm_unpackDepth(texture2D(depthTexture, texCoords)); \n' +
+            '    if (depth == 0.0) { \n' +
+            '        return czm_infinity; \n' +
+            '    } \n' +
+            '    vec4 eyeCoordinate = czm_windowToEyeCoordinates(gl_FragCoord.xy, depth); \n' +
+            '    return -eyeCoordinate.z / eyeCoordinate.w; \n' +
+            '} \n' +
+            'float interpolateByDistance(vec4 nearFarScalar, float distance) \n' +
+            '{ \n' +
+            '    float startDistance = nearFarScalar.x; \n' +
+            '    float startValue = nearFarScalar.y; \n' +
+            '    float endDistance = nearFarScalar.z; \n' +
+            '    float endValue = nearFarScalar.w; \n' +
+            '    float t = clamp((distance - startDistance) / (endDistance - startDistance), 0.0, 1.0); \n' +
+            '    return mix(startValue, endValue, t); \n' +
+            '} \n' +
+            'vec4 alphaBlend(vec4 sourceColor, vec4 destinationColor) \n' +
+            '{ \n' +
+            '    return sourceColor * vec4(sourceColor.aaa, 1.0) + destinationColor * (1.0 - sourceColor.a); \n' +
+            '} \n' +
+            'uniform sampler2D colorTexture; \n' +
+            'uniform sampler2D depthTexture; \n' +
+            'uniform vec4 fogByDistance; \n' +
+            'uniform vec4 fogColor; \n' +
+            'varying vec2 v_textureCoordinates; \n' +
+            'void main(void) \n' +
+            '{ \n' +
+            '    float distance = getDistance(depthTexture, v_textureCoordinates); \n' +
+            '    vec4 sceneColor = texture2D(colorTexture, v_textureCoordinates); \n' +
+            '    float blendAmount = interpolateByDistance(fogByDistance, distance); \n' +
+            '    vec4 finalFogColor = vec4(fogColor.rgb, fogColor.a * blendAmount); \n' +
+            '    gl_FragColor = alphaBlend(finalFogColor, sceneColor); \n' +
+            '} \n'
 
         this.app.viewer.scene.postProcessStages.add(
             new Cesium.PostProcessStage({
@@ -719,7 +721,7 @@ export default class InnerGeometry {
                     fogColor: Cesium.Color.GRAY,
                 },
             })
-        );
+        )
     }
 
 }
