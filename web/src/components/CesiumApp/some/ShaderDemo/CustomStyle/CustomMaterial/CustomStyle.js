@@ -13,14 +13,14 @@ import {initFlowMatetial3} from './flowLinesMaterial/_PolylineTrailLinkMaterialP
  * 23种现成的Material类型
  */
 export default class CustomStyle {
-    constructor (app) {
+    constructor(app) {
         this.app = app
     }
 
     /**
      * 发光道路
      */
-    addRoad (points) {
+    addRoad(points) {
         const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/lightray_yellow.png'
         initFlowMatetial3(url) // 注册流动线材质
 
@@ -28,7 +28,7 @@ export default class CustomStyle {
         if (points) {
             _p = Cesium.Cartesian3.fromDegreesArrayHeights(points)
         } else {
-            console.log("fuck")
+            console.log('fuck')
         }
 
         this.app.viewer.entities.add({
@@ -44,7 +44,7 @@ export default class CustomStyle {
     /**
      * 加载流动墙效果
      */
-    addFlowWall (positions) {
+    addFlowWall(positions) {
         const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
         initFlowMatetial1(url) // 注册流动线材质
 
@@ -57,13 +57,12 @@ export default class CustomStyle {
         }
         this.app.viewer.entities.add(flowWall)
         this.app.viewer.zoomTo(this.app.viewer.entities)
-
     }
 
     /**
      * 添加流动线条
      */
-    addFlowLine (points) {
+    addFlowLine(points) {
         const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/11.png'
         initFlowMatetial(url) // 注册流动线材质
 
@@ -71,7 +70,7 @@ export default class CustomStyle {
         if (points) {
             _p = Cesium.Cartesian3.fromDegreesArrayHeights(points)
         } else {
-            console.log("fuck")
+            console.log('fuck')
         }
 
         this.app.viewer.entities.add({
@@ -87,19 +86,19 @@ export default class CustomStyle {
     /**
      * 添加flyline
      */
-    addFlyLine3D (centerP, citiesP) {
+    addFlyLine3D(centerP, citiesP) {
         const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/Trail.png'
         initFlowMatetial2(url) // 注册流动线材质
 
         // 抛物线 相等
-        function parabolaEquation (options, resultOut) {
-            //方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
+        function parabolaEquation(options, resultOut) {
+            // 方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
             let h = options.height
             let L = Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat) ? Math.abs(options.pt1.lon - options.pt2.lon) : Math.abs(options.pt1.lat - options.pt2.lat)
             let num = options.num
             let result = []
             let dlt = L / num
-            if (Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat)) {//以lon为基准
+            if (Math.abs(options.pt1.lon - options.pt2.lon) > Math.abs(options.pt1.lat - options.pt2.lat)) { // 以lon为基准
                 let delLat = (options.pt2.lat - options.pt1.lat) / num
                 if (options.pt1.lon - options.pt2.lon > 0) {
                     dlt = -dlt
@@ -110,7 +109,7 @@ export default class CustomStyle {
                     let lat = options.pt1.lat + delLat * i
                     result.push([lon, lat, tempH])
                 }
-            } else {//以lat为基准
+            } else { // 以lat为基准
                 let delLon = (options.pt2.lon - options.pt1.lon) / num
                 if (options.pt1.lat - options.pt2.lat > 0) {
                     dlt = -dlt
@@ -133,8 +132,8 @@ export default class CustomStyle {
             center = centerP
         }
         let cities = [
-            {'lon': 106.29811132257352, 'lat': 23.737538875216853,},
-            {'lon': 110.795000473, 'lat': 32.638540762},
+            {'lon': 106.29811132257352, 'lat': 23.737538875216853},
+            {'lon': 110.795000473, 'lat': 32.638540762}
         ]
         if (citiesP) {
             cities = citiesP
@@ -157,33 +156,32 @@ export default class CustomStyle {
                 }
             })
         }
-
     }
 
     /**
      * 添加原型扫描
      * 代码注释:https://blog.csdn.net/A873054267/article/details/105365862
      */
-    addCircleScan (option) {
+    addCircleScan(option) {
         /*
-        添加扫描线 depth关闭   lon:-74.01296152309055 lat:40.70524201566827 height:129.14366696393927
-        viewer
-        cartographicCenter 扫描中心
-        maxRadius 最大半径 米
-        scanColor 扫描颜色
-        duration 持续时间 毫秒
-        */
+                添加扫描线 depth关闭   lon:-74.01296152309055 lat:40.70524201566827 height:129.14366696393927
+                viewer
+                cartographicCenter 扫描中心
+                maxRadius 最大半径 米
+                scanColor 扫描颜色
+                duration 持续时间 毫秒
+                */
         this.app.viewer.scene.globe.depthTestAgainstTerrain = true // 必须开启,否则
 
         /*
-        添加扫描线 depth关闭   lon:-74.01296152309055 lat:40.70524201566827 height:129.14366696393927
-        viewer
-        cartographicCenter 扫描中心
-        maxRadius 最大半径 米
-        scanColor 扫描颜色
-        duration 持续时间 毫秒
-        */
-        function AddCircleScanPostStage (viewer, cartographicCenter, maxRadius, scanColor, duration) {
+                添加扫描线 depth关闭   lon:-74.01296152309055 lat:40.70524201566827 height:129.14366696393927
+                viewer
+                cartographicCenter 扫描中心
+                maxRadius 最大半径 米
+                scanColor 扫描颜色
+                duration 持续时间 毫秒
+                */
+        function AddCircleScanPostStage(viewer, cartographicCenter, maxRadius, scanColor, duration) {
             let ScanSegmentShader =
                 'uniform sampler2D colorTexture;\n' +
                 'uniform sampler2D depthTexture;\n' +
@@ -292,18 +290,18 @@ export default class CustomStyle {
     /**
      * 添加雷达原型扫描
      */
-    addRadarScan (option) {
+    addRadarScan(option) {
         /*
-          添加雷达扫描线 地形遮挡开启   lon:-74.01296152309055 lat:40.70524201566827 height:129.14366696393927
-          viewer
-          cartographicCenter 扫描中心
-          radius  半径 米
-          scanColor 扫描颜色
-          duration 持续时间 毫秒
-        */
+                  添加雷达扫描线 地形遮挡开启   lon:-74.01296152309055 lat:40.70524201566827 height:129.14366696393927
+                  viewer
+                  cartographicCenter 扫描中心
+                  radius  半径 米
+                  scanColor 扫描颜色
+                  duration 持续时间 毫秒
+                */
         this.app.viewer.scene.globe.depthTestAgainstTerrain = true // 必须开启,否则
 
-        function AddRadarScanPostStage (viewer, cartographicCenter, radius, scanColor, duration) {
+        function AddRadarScanPostStage(viewer, cartographicCenter, radius, scanColor, duration) {
             let ScanSegmentShader =
                 'uniform sampler2D colorTexture;\n' +
                 'uniform sampler2D depthTexture;\n' +
@@ -457,5 +455,4 @@ export default class CustomStyle {
         let scanColor = new Cesium.Color.fromCssColorString('rgba(254, 129, 6, 0.75)')
         AddRadarScanPostStage(this.app.viewer, CartographicCenter, radius, scanColor, 4000)
     }
-
 }
