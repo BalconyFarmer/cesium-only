@@ -21,5 +21,5 @@ new Vue({
 import * as Cesium from 'cesium/Cesium'
 import * as widget from "cesium/Widgets/widgets.css";
 
-
+Vue.config.silent = true
 Vue.prototype.Cesium=Cesium;

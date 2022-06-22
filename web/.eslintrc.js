@@ -1,6 +1,6 @@
 // https://eslint.org/docs/user-guide/configuring
 
-module.exports = {
+/*module.exports = {
   root: true,
   parserOptions: {
     parser: 'babel-eslint'
@@ -26,4 +26,4 @@ module.exports = {
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
-}
+}*/

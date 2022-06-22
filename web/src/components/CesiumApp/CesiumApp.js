@@ -6,7 +6,9 @@ import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
 import Cesium3DTileset from './some/Cesium3DTileset/Cesium3DTileset'
 import LoadJson from './some/LoadJson'
 import Load3DModel from './some/Load3DModel'
-import {initFlowMatetial} from './some/ShaderDemo/CustomStyle/CustomMaterial/flowLinesMaterial/_PolylineTrailLinkMaterialProperty'
+import {
+    initFlowMatetial
+} from './some/ShaderDemo/CustomStyle/CustomMaterial/flowLinesMaterial/_PolylineTrailLinkMaterialProperty'
 import InnerGeometry from './some/InnerGeometry/InnerGeometry'
 import Event from './some/Event'
 import ParticleSystems from './some/ParticleSystems'
@@ -17,7 +19,7 @@ import Environment from './some/ShaderDemo/Environment'
 import Animation from './some/Animation'
 
 export default class CesiumApp {
-    constructor () {
+    constructor() {
         this.staticServerAdress = 'http://localhost:1111/3Dstatic/loadData'
         this.viewer = null
         this.option = null
@@ -40,7 +42,7 @@ export default class CesiumApp {
     /**
      * 初始化3D基础场景
      */
-    initMap () {
+    initMap() {
         this.option = {
             animation: false, // 如果设置为false,则不会创建'动画'小部件。
             contextOptions: {
@@ -60,7 +62,7 @@ export default class CesiumApp {
             navigationHelpButton: false, //
             imageryProvider: this.Imagery, //  影像图层
             // terrainProvider: terrainProvider, // 地形图层,
-            shouldAnimate: true, //动画播放
+            shouldAnimate: true, // 动画播放
             // skyBox: false, // 关闭天空
             // skyAtmosphere: false, // 关闭大气
             SceneModePicker: '2D'
@@ -71,28 +73,28 @@ export default class CesiumApp {
         this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
         this.event = new Event(this)
         this.switchViewMode('3D模式')
-        this.switchLayer('ArcGis实景图层')
+        this.switchLayer('geoq智图黑')
         this.addTerrain()
         this.firstCallBack()
         this.particleSystems = new ParticleSystems(this) // 粒子系统
 
         window.viewer = this.viewer
-        this.viewer.scene.postProcessStages.fxaa.enabled = false//去锯齿 是文字清晰
+        this.viewer.scene.postProcessStages.fxaa.enabled = false// 去锯齿 是文字清晰
         this.animation = new Animation(this)
     }
 
     /**
      * 视场角
      */
-    updataFov (data) {
-        this.viewer.camera.frustum.fov = data ;//Cesium.Math.PI_OVER_TWO;
+    updataFov(data) {
+        this.viewer.camera.frustum.fov = data// Cesium.Math.PI_OVER_TWO;
     }
 
     /**
      * run
      * 效果演示时间线
      */
-    addTimeAction () {
+    addTimeAction() {
         this.customShaderTest = new CustomShaderTest(this) // 完全自定义着色器
 
         const aim = {
@@ -102,12 +104,12 @@ export default class CesiumApp {
             heading: 4.589028797595305,
             pitch: -0.09566515321336477,
             roll: 0.000004374750088409485,
-            duration: 1,
+            duration: 1
         }
         this.cameraFlyToCartesian3(aim)
     }
 
-    addLight () {
+    addLight() {
         // 只是添加了个方向
         let flashlight = new Cesium.DirectionalLight({
             direction: this.viewer.scene.camera.directionWC // Updated every frame
@@ -119,7 +121,7 @@ export default class CesiumApp {
     /**
      * 开启关闭全球光照系统
      */
-    switchLight () {
+    switchLight() {
         if (this.viewer.scene.globe.enableLighting) {
             this.viewer.scene.globe.enableLighting = false // 初始化光照
         } else {
@@ -127,14 +129,14 @@ export default class CesiumApp {
         }
     }
 
-    changeShadow () {
+    changeShadow() {
         this.viewer.shadows = !this.viewer.shadows
     }
 
     /**
      * 添加物体描边效果
      */
-    addOutline () {
+    addOutline() {
         let collection = viewer.scene.postProcessStages
         console.log(collection, 1)
         let silhouette = collection.add(Cesium.PostProcessStageLibrary.createSilhouetteStage())
@@ -149,7 +151,7 @@ export default class CesiumApp {
      * http://www.manongjc.com/detail/23-lscvlmahlgssbba.html
      *
      */
-    addBloom () {
+    addBloom() {
         let bloom = viewer.scene.postProcessStages.bloom
         if (bloom.enabled) {
             bloom.enabled = false
@@ -167,7 +169,7 @@ export default class CesiumApp {
     /**
      * 成都项目时间线
      */
-    runChengDu () {
+    runChengDu() {
         if (this.chengduOBJ) {
             this.chengduOBJ.playAction()
         } else {
@@ -178,7 +180,7 @@ export default class CesiumApp {
     /**
      * 首次加载完成回调
      */
-    firstCallBack () {
+    firstCallBack() {
         const self = this
         const helper = new this.Cesium.EventHelper()
         helper.add(this.viewer.scene.globe.tileLoadProgressEvent, (number) => {
@@ -199,23 +201,23 @@ export default class CesiumApp {
      * 调整亮度
      * @param data
      */
-    updateBrightness (value) {
+    updateBrightness(value) {
         let stages = this.viewer.scene.postProcessStages
         this.viewer.scene.brightness = this.viewer.scene.brightness || stages.add(Cesium.PostProcessStageLibrary.createBrightnessStage())
         this.viewer.scene.brightness.enabled = true
         this.viewer.scene.brightness.uniforms.brightness = Number(value)
     }
 
-    switchViewMode (data) {
+    switchViewMode(data) {
         switch (data) {
             case '2.5D模式':
-                this.viewer.scene.mode = Cesium.SceneMode.COLUMBUS_VIEW //哥伦布视图
+                this.viewer.scene.mode = Cesium.SceneMode.COLUMBUS_VIEW // 哥伦布视图
                 break
             case '3D模式':
-                this.viewer.scene.mode = Cesium.SceneMode.SCENE3D//3维模式
+                this.viewer.scene.mode = Cesium.SceneMode.SCENE3D// 3维模式
                 break
             case '2D模式':
-                this.viewer.scene.mode = Cesium.SceneMode.SCENE2D//2维模式
+                this.viewer.scene.mode = Cesium.SceneMode.SCENE2D// 2维模式
                 break
         }
     }
@@ -223,7 +225,7 @@ export default class CesiumApp {
     /**
      * 添加地形
      */
-    addTerrain () {
+    addTerrain() {
         // let terrainProvider = new Cesium.CesiumTerrainProvider({
         //     url : 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles',
         //     //请求水波纹效果
@@ -243,14 +245,14 @@ export default class CesiumApp {
     /**
      * 移除地形
      */
-    removeTerrain () {
+    removeTerrain() {
         this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({})
     }
 
     /**
      * 开启moveToolTips
      */
-    startMoveTips () {
+    startMoveTips() {
         this.innerGeometry.initMoveToolTips()
         this.event.addMoveToolTip()
     }
@@ -258,21 +260,21 @@ export default class CesiumApp {
     /**
      * 关闭次要效果
      */
-    closeAll () {
-        this.viewer.scene.skyAtmosphere.show = false  // 关闭大气效果
-        this.viewer.scene.skyBox.show = false  // 关闭天空和
+    closeAll() {
+        this.viewer.scene.skyAtmosphere.show = false // 关闭大气效果
+        this.viewer.scene.skyBox.show = false // 关闭天空和
         this.viewer.scene.terrainProvider = new Cesium.EllipsoidTerrainProvider({}) // 清除地形
         if (this.viewer.imageryLayers.get(0)) {
-            this.viewer.imageryLayers.get(0).show = false  //不显示底图
+            this.viewer.imageryLayers.get(0).show = false // 不显示底图
         }
     }
 
     // 清除Entitys
-    clearEntities () {
+    clearEntities() {
         this.viewer.entities.removeAll()
     }
 
-    switchLayer (data) {
+    switchLayer(data) {
         // t3fbd4010a8d2c73901a21c42efe3d2c0 天地图key
 
         if (this.viewer) {
@@ -298,7 +300,7 @@ export default class CesiumApp {
                 //     url: 'https://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}',
                 // })
                 Imagery = new Cesium.ArcGisMapServerImageryProvider({
-                    url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
+                    url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer'
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
@@ -319,7 +321,7 @@ export default class CesiumApp {
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
             case '纯黑':
-                this.viewer.scene.globe.baseColor = Cesium.Color.BLACK  //设置地球颜色
+                this.viewer.scene.globe.baseColor = Cesium.Color.BLACK // 设置地球颜色
                 break
         }
         this.Imagery = Imagery
@@ -329,9 +331,9 @@ export default class CesiumApp {
      * 更新地图图层亮度
      * @param data
      */
-    updateLyerLight (alpha, brightness) {
-        this.viewer.imageryLayers._layers[0].alpha = alpha//透明度
-        this.viewer.imageryLayers._layers[0].brightness = brightness//亮度
+    updateLyerLight(alpha, brightness) {
+        this.viewer.imageryLayers._layers[0].alpha = alpha// 透明度
+        this.viewer.imageryLayers._layers[0].brightness = brightness// 亮度
         console.log(this.viewer.imageryLayers, '++++++++++++++++++++')
     }
 
@@ -341,7 +343,7 @@ export default class CesiumApp {
      * @param y
      * @param z
      */
-    cameraFlyTo (x, y, z, heading, pitch) {
+    cameraFlyTo(x, y, z, heading, pitch) {
         this.viewer.camera.flyTo({// 设置视角
             destination: this.Cesium.Cartesian3.fromDegrees(x, y, (z + 10)),
             orientation: {
@@ -350,10 +352,9 @@ export default class CesiumApp {
                 roll: 0.0 // default value
             }
         })
-
     }
 
-    cameraFlyToCartesian3 (aim) {
+    cameraFlyToCartesian3(aim) {
         let cartesian3 = new Cesium.Cartesian3(aim.x, aim.y, aim.z)
         this.viewer.camera.flyTo({
             destination: cartesian3,
@@ -362,14 +363,14 @@ export default class CesiumApp {
                 pitch: aim.pitch, // default value (looking down) 上下摆头 -90俯视 0 平视
                 roll: aim.roll // default value
             },
-            duration: aim.duration, // 飞行时长
+            duration: aim.duration // 飞行时长
         })
     }
 
     /**
      * 相机绕点自动旋转
      */
-    cameraAutoRoll (options) {
+    cameraAutoRoll(options) {
         const self = this
 
         let position = new Cesium.Cartesian3(options.x, options.y, options.z)
@@ -387,14 +388,14 @@ export default class CesiumApp {
 
         let stopTime = Cesium.JulianDate.addSeconds(startTime, options.duration, new Cesium.JulianDate())
 
-        this.viewer.clock.startTime = startTime.clone()  // 开始时间
-        viewer.clock.stopTime = stopTime.clone()     // 结速时间
+        this.viewer.clock.startTime = startTime.clone() // 开始时间
+        viewer.clock.stopTime = stopTime.clone() // 结速时间
         this.viewer.clock.currentTime = startTime.clone() // 当前时间
         this.viewer.clock.clockRange = Cesium.ClockRange.CLAMPED // 行为方式
         this.viewer.clock.clockStep = Cesium.ClockStep.SYSTEM_CLOCK // 时钟设置为当前系统时间; 忽略所有其他设置。
         // 相机的当前heading
         let initialHeading = this.viewer.camera.heading
-        let Exection = function TimeExecution () {
+        let Exection = function TimeExecution() {
             // 当前已经过去的时间，单位s
             let delTime = Cesium.JulianDate.secondsDifference(self.viewer.clock.currentTime, self.viewer.clock.startTime)
             let heading = Cesium.Math.toRadians(delTime * angle) + initialHeading
@@ -402,7 +403,7 @@ export default class CesiumApp {
                 destination: position, // 点的坐标
                 orientation: {
                     heading: heading,
-                    pitch: pitch,
+                    pitch: pitch
 
                 }
             })
@@ -416,7 +417,7 @@ export default class CesiumApp {
         this.viewer.clock.onTick.addEventListener(Exection)
     }
 
-    getViewerEntitys () {
+    getViewerEntitys() {
         return this.viewer.entities.values
     }
 
@@ -427,7 +428,7 @@ export default class CesiumApp {
      * @param Roll
      * @param entity
      */
-    rotateEntity (Heading, Pitch, Roll, entity) {
+    rotateEntity(Heading, Pitch, Roll, entity) {
         const newOrirentation = Cesium.Transforms.headingPitchRollQuaternion(
             entity.position._value,
             new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(Heading), Pitch, Roll)
@@ -438,7 +439,7 @@ export default class CesiumApp {
     /**
      * 经纬度转世界坐标
      */
-    cartesian3ToLong (x, y, z) {
+    cartesian3ToLong(x, y, z) {
         let ellipsoid = this.cApp.viewer.scene.globe.ellipsoid
         let cartesian3 = new Cesium.Cartesian3(x, y, z)
         let cartographic = ellipsoid.cartesianToCartographic(cartesian3)
@@ -451,7 +452,7 @@ export default class CesiumApp {
     /**
      * 经纬度转世界坐标
      */
-    longToC3 (longitude, latitude, height) {
+    longToC3(longitude, latitude, height) {
         let ellipsoid = this.cApp.viewer.scene.globe.ellipsoid
         let cartographic = Cesium.Cartographic.fromDegrees(longitude, latitude, height)
         let cartesian3 = ellipsoid.cartographicToCartesian(cartographic)
@@ -462,7 +463,7 @@ export default class CesiumApp {
     /**
      * 定位查看模型
      */
-    lookAtByName (name) {
+    lookAtByName(name) {
         const see = this.viewer.entities.values.forEach(item => {
             if (item.name == name) {
                 this.viewer.zoomTo(item)
@@ -470,11 +471,10 @@ export default class CesiumApp {
         })
     }
 
-    lookLast () {
+    lookLast() {
         const index = this.viewer.entities.values.length
         if (index > 0) {
             this.viewer.zoomTo(this.viewer.entities.values[index - 1])
         }
     }
-
 }
