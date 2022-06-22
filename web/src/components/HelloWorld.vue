@@ -8,7 +8,6 @@
                     <el-menu-item index="2">云南JSON</el-menu-item>
                     <el-menu-item index="3">纽约tiles</el-menu-item>
                     <el-menu-item index="12">倾斜摄影</el-menu-item>
-                    <el-menu-item index="点云">点云</el-menu-item>
                 </el-menu>
             </div>
             <div style="color: white;font-weight: bold;display: flex;flex-direction: column;justify-content: center">
@@ -341,8 +340,6 @@ export default {
                 this.cApp.addBloom()
             } else if (key == 'addOutline') {
                 this.cApp.addOutline()
-            } else if (key == '点云') {
-                this.cApp.load3DModel.loadP0Clound()
             }
         },
         changeGlobleLight() {

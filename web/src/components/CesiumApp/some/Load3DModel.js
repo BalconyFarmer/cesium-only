@@ -7,19 +7,6 @@ export default class Load3DModel {
         // this.loadP0Clound()
     }
 
-    //  点云
-    loadP0Clound () {
-        const pointCloud = this.app.viewer.scene.primitives.add(
-            new Cesium.Cesium3DTileset({
-                url: "http://localhost:1111/3Dstatic/loadData/pointClouds/table.las",//文件的路径
-                modelMatrix: modelMatrix,
-                scale: 10.0,
-            })
-        );
-        console.log(pointCloud,"未开发pointCloudpointCloudpointCloudpointCloudpointCloudpointCloudpointCloud")
-        this.app.viewer.zoomTo(arr);
-    }
-
     //
     loadGlbByURL (po, URL) {
         console.log("当前加载模型地址:",URL)
