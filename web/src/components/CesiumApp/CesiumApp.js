@@ -60,7 +60,6 @@ export default class CesiumApp {
             selectionIndicator: false, //
             timeline: false, //
             navigationHelpButton: false, //
-            imageryProvider: this.Imagery, //  影像图层
             shouldAnimate: true, // 动画播放
             // skyBox: false, // 关闭天空
             // skyAtmosphere: false, // 关闭大气
@@ -112,18 +111,18 @@ export default class CesiumApp {
         }
         this.cameraFlyToCartesian3(aim)
 
-        let line1 = Cesium.GeoJsonDataSource.load(
-            'http://localhost:1111/3Dstatic/loadData/xsbn.json', {
-                //修改线性对象的颜色
-                stroke: Cesium.Color.BLUE,
-                //修改线性的宽度
-                strokeWidth: 30,
-                fill: Cesium.Color.MEDIUMAQUAMARINE.withAlpha(0.5),
-                //是否贴地
-                clampToGround: true,
-            }
-        )
-        viewer.dataSources.add(line1);
+        // let line1 = Cesium.GeoJsonDataSource.load(
+        //     'http://localhost:1111/3Dstatic/loadData/xsbn.json', {
+        //         //修改线性对象的颜色
+        //         stroke: Cesium.Color.BLUE,
+        //         //修改线性的宽度
+        //         strokeWidth: 30,
+        //         fill: Cesium.Color.MEDIUMAQUAMARINE.withAlpha(0.5),
+        //         //是否贴地
+        //         clampToGround: true,
+        //     }
+        // )
+        // viewer.dataSources.add(line1);
 
     }
 
@@ -292,14 +291,24 @@ export default class CesiumApp {
             this.viewer.imageryLayers.removeAll() // 清除所有图层
         }
         let Imagery = null
+
         switch (data) {
             case 'google实景图层':
+                /**
+                 * 需要开启全局VPN
+                 * 和高德文字不匹配
+                 * @type {Cesium.UrlTemplateImageryProvider}
+                 */
                 Imagery = new Cesium.UrlTemplateImageryProvider({
                     url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali'
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
             case 'ArcGis实景图层':
+                /**
+                 * 和高德文字不匹配
+                 * @type {Cesium.ArcGisMapServerImageryProvider}
+                 */
                 Imagery = new Cesium.ArcGisMapServerImageryProvider({
                     url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
                     enablePickFeatures: false
@@ -307,9 +316,6 @@ export default class CesiumApp {
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
             case 'geoq智图黑':
-                // Imagery = new Cesium.UrlTemplateImageryProvider({
-                //     url: 'https://map.geoq.cn/arcgis/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}',
-                // })
                 Imagery = new Cesium.ArcGisMapServerImageryProvider({
                     url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer'
                 })
@@ -335,7 +341,13 @@ export default class CesiumApp {
                 this.viewer.scene.globe.baseColor = Cesium.Color.BLACK // 设置地球颜色
                 break
         }
-        this.Imagery = Imagery
+
+        Imagery = new Cesium.UrlTemplateImageryProvider({
+            url: 'http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8',
+            minimumLevel: 3,
+            maximumLevel: 18
+        })
+        this.viewer.imageryLayers.addImageryProvider(Imagery)
     }
 
     /**
