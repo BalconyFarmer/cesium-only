@@ -85,7 +85,9 @@ module.exports = {
             {
                 test: /\.js$/,
                 include: path.resolve(__dirname, 'node_modules/cesium/Source'),
-                loader: '@open-wc/webpack-import-meta-loader'
+                use:     {
+                    loader: '@open-wc/webpack-import-meta-loader',
+                },
             },
         ],
         unknownContextCritical: false,

@@ -3,7 +3,7 @@
         <div v-if="!fakeBoard" class="header">
             <div>
                 <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                    <el-menu-item index="13">run</el-menu-item>
+                    <el-menu-item index="13">西双版纳</el-menu-item>
                     <el-menu-item index="11">成都tiles</el-menu-item>
                     <el-menu-item index="2">云南JSON</el-menu-item>
                     <el-menu-item index="3">纽约tiles</el-menu-item>
@@ -299,6 +299,8 @@ export default {
         },
 
         terrainChange() {
+            // this.cApp.addTerrain()
+
             if (this.terrainFlag) {
                 this.cApp.addTerrain()
             } else {

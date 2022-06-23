@@ -43,6 +43,9 @@ export default class CesiumApp {
      * 初始化3D基础场景
      */
     initMap() {
+        // 地形401报错,必须开启全局VPN
+        Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmZTg5MmNlOS0yZGZiLTRjNGMtOTZkMC0xNTdkOGY1YWNhN2MiLCJpZCI6OTg3NDQsImlhdCI6MTY1NTk3MjU0OH0.p3G2BpxU3AApFg8XTP_B7cFTsyF_g75rWQBqmi5k_IA";
+
         this.option = {
             animation: false, // 如果设置为false,则不会创建'动画'小部件。
             contextOptions: {
@@ -110,19 +113,6 @@ export default class CesiumApp {
             duration: 1
         }
         this.cameraFlyToCartesian3(aim)
-
-        // let line1 = Cesium.GeoJsonDataSource.load(
-        //     'http://localhost:1111/3Dstatic/loadData/xsbn.json', {
-        //         //修改线性对象的颜色
-        //         stroke: Cesium.Color.BLUE,
-        //         //修改线性的宽度
-        //         strokeWidth: 30,
-        //         fill: Cesium.Color.MEDIUMAQUAMARINE.withAlpha(0.5),
-        //         //是否贴地
-        //         clampToGround: true,
-        //     }
-        // )
-        // viewer.dataSources.add(line1);
 
     }
 
@@ -245,11 +235,12 @@ export default class CesiumApp {
     addTerrain() {
         let terrainProvider = this.Cesium.createWorldTerrain(
             {
-                requestWaterMask: true,
-                requestVertexNormals: true
+                requestWaterMask: false,
+                requestVertexNormals: false
             }
         )
         this.viewer.terrainProvider = terrainProvider
+
     }
 
     /**
