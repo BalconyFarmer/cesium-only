@@ -235,11 +235,17 @@ export default class CesiumApp {
     addTerrain() {
         let terrainProvider = this.Cesium.createWorldTerrain(
             {
-                requestWaterMask: false,
-                requestVertexNormals: false
+                requestWaterMask: true, // 请求水面参数
+                requestVertexNormals: true
             }
         )
         this.viewer.terrainProvider = terrainProvider
+
+        // 我得数据仓库
+        // this.viewer.terrainProvider = new Cesium.CesiumTerrainProvider({
+        //     url: Cesium.IonResource.fromAssetId(1),
+        // })
+
 
     }
 

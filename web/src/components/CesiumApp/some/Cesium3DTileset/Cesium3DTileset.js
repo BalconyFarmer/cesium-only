@@ -22,22 +22,20 @@ export default class Cesium3DTileset {
         })
 
         // 添加瓦片数据 (纽约)
-        let city = this.app.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({url: Cesium.IonResource.fromAssetId(3839)}))
+        let city = this.app.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({url: Cesium.IonResource.fromAssetId(75343)}))
         let cityStyle = new Cesium.Cesium3DTileStyle({
             color: 'color(\'blue\',0.2)',
             show: true
         })
-        // let cityStyle = new Cesium.Cesium3DTileStyle({
-        //   color: {
-        //     conditions: [
-        //       [`${Height} >= 100`, `color("purple", 0.5)`],
-        //       [`${Height} >= 50`, `color("red")`],
-        //       [`true`, `color("blue")`]
-        //     ]
-        //   },
-        //   show: `${Height} > 0`
-        // })
         city.style = cityStyle
+
+
+        const tileset = new Cesium.Cesium3DTileset({
+            url: Cesium.IonResource.fromAssetId(40866),
+        });
+
+        viewer.scene.primitives.add(tileset);
+        viewer.zoomTo(tileset);
     }
 
     /**
