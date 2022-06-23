@@ -61,11 +61,11 @@ export default class CesiumApp {
             timeline: false, //
             navigationHelpButton: false, //
             imageryProvider: this.Imagery, //  影像图层
-            // terrainProvider: terrainProvider, // 地形图层,
             shouldAnimate: true, // 动画播放
             // skyBox: false, // 关闭天空
             // skyAtmosphere: false, // 关闭大气
-            SceneModePicker: '2D'
+            SceneModePicker: '2D',
+            terrainProvider: this.Cesium.createWorldTerrain()
         }
         this.viewer = new this.Cesium.Viewer('cesiumContainer', this.option)
         this.viewer.scene.globe.enableLighting = false // 初始化光照
@@ -73,14 +73,17 @@ export default class CesiumApp {
         this.viewer.scene.debugShowFramesPerSecond = true // 帧率显示框
         this.event = new Event(this)
         this.switchViewMode('3D模式')
-        this.switchLayer('geoq智图黑')
-        this.addTerrain()
+
         this.firstCallBack()
         this.particleSystems = new ParticleSystems(this) // 粒子系统
-
-        window.viewer = this.viewer
         this.viewer.scene.postProcessStages.fxaa.enabled = false// 去锯齿 是文字清晰
         this.animation = new Animation(this)
+
+        this.closeAll()
+        this.switchLayer('ArcGis实景图层')
+        // this.addTerrain()
+        window.viewer = this.viewer
+
     }
 
     /**
@@ -95,18 +98,33 @@ export default class CesiumApp {
      * 效果演示时间线
      */
     addTimeAction() {
-        this.customShaderTest = new CustomShaderTest(this) // 完全自定义着色器
+        this.customShaderTest = new CustomShaderTest(this) // 完全自定义着色器 小方块
 
+        // 西双版纳坐标
         const aim = {
-            x: -1268889.5819769907,
-            y: 5649559.131514993,
-            z: 2670092.8417171706,
+            x: -1108281.835411032,
+            y: 5811468.900741933,
+            z: 2375378.146113624,
             heading: 4.589028797595305,
             pitch: -0.09566515321336477,
             roll: 0.000004374750088409485,
             duration: 1
         }
         this.cameraFlyToCartesian3(aim)
+
+        let line1 = Cesium.GeoJsonDataSource.load(
+            'http://localhost:1111/3Dstatic/loadData/xsbn.json', {
+                //修改线性对象的颜色
+                stroke: Cesium.Color.BLUE,
+                //修改线性的宽度
+                strokeWidth: 30,
+                fill: Cesium.Color.MEDIUMAQUAMARINE.withAlpha(0.5),
+                //是否贴地
+                clampToGround: true,
+            }
+        )
+        viewer.dataSources.add(line1);
+
     }
 
     addLight() {
@@ -226,13 +244,6 @@ export default class CesiumApp {
      * 添加地形
      */
     addTerrain() {
-        // let terrainProvider = new Cesium.CesiumTerrainProvider({
-        //     url : 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles',
-        //     //请求水波纹效果
-        //     requestWaterMask: true
-        // });
-
-        // 加载地形数据
         let terrainProvider = this.Cesium.createWorldTerrain(
             {
                 requestWaterMask: true,
