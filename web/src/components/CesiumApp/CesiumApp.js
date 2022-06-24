@@ -100,7 +100,7 @@ export default class CesiumApp {
      * 效果演示时间线
      */
     addTimeAction() {
-        this.customShaderTest = new CustomShaderTest(this) // 完全自定义着色器 小方块
+/*        this.customShaderTest = new CustomShaderTest(this) // 完全自定义着色器 小方块
 
         // 西双版纳坐标
         const aim = {
@@ -112,9 +112,56 @@ export default class CesiumApp {
             roll: 0.000004374750088409485,
             duration: 1
         }
-        this.cameraFlyToCartesian3(aim)
+        this.cameraFlyToCartesian3(aim)*/
+
+        // Grant CesiumJS access to your ion assets
+        Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmZTg5MmNlOS0yZGZiLTRjNGMtOTZkMC0xNTdkOGY1YWNhN2MiLCJpZCI6OTg3NDQsImlhdCI6MTY1NTk3MjU0OH0.p3G2BpxU3AApFg8XTP_B7cFTsyF_g75rWQBqmi5k_IA";
+
+        let viewer = this.viewer
+        const tileset = viewer.scene.primitives.add(
+            new Cesium.Cesium3DTileset({
+                url: Cesium.IonResource.fromAssetId(354759),
+            })
+        );
+
+
+        (async () => {
+            try {
+                await viewer.zoomTo(tileset);
+
+                // Apply the default style if it exists
+                // var extras = tileset.asset.extras;
+                // if (
+                //     Cesium.defined(extras) &&
+                //     Cesium.defined(extras.ion) &&
+                //     Cesium.defined(extras.ion.defaultStyle)
+                // ) {
+                //     tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
+                // }
+            } catch (error) {
+                console.log(error);
+            }
+        })();
 
     }
+
+    huashengdunImg() {
+        const aim = {
+            x: 1159794.7520092668,
+            y: -4867433.937560928,
+            z: 3985926.8156707617,
+            heading: 5.208131298872175,
+            pitch: -0.6519400365870229,
+            roll: 6.283171427164341,
+        }
+        this.cameraFlyToCartesian3(aim)
+        // 哥伦比亚特区的 3 英寸/0.08 米像素分辨率图像，覆盖约 69 平方英里
+        const layer = viewer.imageryLayers.addImageryProvider(
+            new Cesium.IonImageryProvider({ assetId: 3827 })
+        );
+
+    }
+
 
     addLight() {
         // 只是添加了个方向

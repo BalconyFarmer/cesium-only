@@ -8,6 +8,7 @@
                     <el-menu-item index="2">云南JSON</el-menu-item>
                     <el-menu-item index="3">纽约tiles</el-menu-item>
                     <el-menu-item index="12">倾斜摄影</el-menu-item>
+                    <el-menu-item index="华盛顿IMG">华盛顿IMG</el-menu-item>
                 </el-menu>
             </div>
             <div style="color: white;font-weight: bold;display: flex;flex-direction: column;justify-content: center">
@@ -113,7 +114,7 @@
             <br>
             <div class="getPosition">
                 <div class="title">camera</div>
-                <div class="title">log,lat,height</div>
+                <div class="title">log,lat,height,x,y,z</div>
                 <input id="copyValID1" type="text" :value="cameraPosition"/>
                 <el-button @click="handleClick1('copyValID1')">Copy</el-button>
             </div>
@@ -231,7 +232,7 @@ export default {
             addGeoFlag: false,
             currentGeoType: null,
             brightness: 1,
-            terrainFlag: true,
+            terrainFlag: false,
             moveToolFlag: false,
             value: '地球模式',
             options: [{
@@ -340,6 +341,8 @@ export default {
                 this.cApp.addBloom()
             } else if (key == 'addOutline') {
                 this.cApp.addOutline()
+            } else if (key == '华盛顿IMG') {
+                this.cApp.huashengdunImg()
             }
         },
         changeGlobleLight() {
