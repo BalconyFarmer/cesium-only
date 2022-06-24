@@ -10,7 +10,7 @@ export default class Cesium3DTileset {
      * 加载纽约Tiles数据
      */
     toYN () {
-        // 设置camera
+/*        // 设置camera
         // 1. Set position with a top-down view
         this.app.viewer.camera.flyTo({
             destination: Cesium.Cartesian3.fromDegrees(-73.940159, 40.800621, 2000.0),
@@ -27,16 +27,18 @@ export default class Cesium3DTileset {
             color: 'color(\'blue\',0.2)',
             show: true
         })
-        city.style = cityStyle
+        city.style = cityStyle*/
 
 
-/*        const tileset = this.app.viewer.scene.primitives.add(
+        const tileset = this.app.viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
                 url: Cesium.IonResource.fromAssetId(75343),
             })
         );
 
-        this.app.viewer.zoomTo(tileset)*/
+        this.app.viewer.zoomTo(tileset)
+
+        alert("跨域错误!!")
     }
 
     /**

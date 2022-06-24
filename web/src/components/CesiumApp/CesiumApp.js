@@ -100,7 +100,7 @@ export default class CesiumApp {
      * 效果演示时间线
      */
     addTimeAction() {
-/*        this.customShaderTest = new CustomShaderTest(this) // 完全自定义着色器 小方块
+        this.customShaderTest = new CustomShaderTest(this) // 完全自定义着色器 小方块
 
         // 西双版纳坐标
         const aim = {
@@ -112,37 +112,7 @@ export default class CesiumApp {
             roll: 0.000004374750088409485,
             duration: 1
         }
-        this.cameraFlyToCartesian3(aim)*/
-
-        // Grant CesiumJS access to your ion assets
-        Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmZTg5MmNlOS0yZGZiLTRjNGMtOTZkMC0xNTdkOGY1YWNhN2MiLCJpZCI6OTg3NDQsImlhdCI6MTY1NTk3MjU0OH0.p3G2BpxU3AApFg8XTP_B7cFTsyF_g75rWQBqmi5k_IA";
-
-        let viewer = this.viewer
-        const tileset = viewer.scene.primitives.add(
-            new Cesium.Cesium3DTileset({
-                url: Cesium.IonResource.fromAssetId(354759),
-            })
-        );
-
-
-        (async () => {
-            try {
-                await viewer.zoomTo(tileset);
-
-                // Apply the default style if it exists
-                // var extras = tileset.asset.extras;
-                // if (
-                //     Cesium.defined(extras) &&
-                //     Cesium.defined(extras.ion) &&
-                //     Cesium.defined(extras.ion.defaultStyle)
-                // ) {
-                //     tileset.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle);
-                // }
-            } catch (error) {
-                console.log(error);
-            }
-        })();
-
+        this.cameraFlyToCartesian3(aim)
     }
 
     huashengdunImg() {
