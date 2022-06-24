@@ -30,12 +30,13 @@ export default class Cesium3DTileset {
         city.style = cityStyle
 
 
-        const tileset = new Cesium.Cesium3DTileset({
-            url: Cesium.IonResource.fromAssetId(40866),
-        });
+/*        const tileset = this.app.viewer.scene.primitives.add(
+            new Cesium.Cesium3DTileset({
+                url: Cesium.IonResource.fromAssetId(75343),
+            })
+        );
 
-        viewer.scene.primitives.add(tileset);
-        viewer.zoomTo(tileset);
+        this.app.viewer.zoomTo(tileset)*/
     }
 
     /**

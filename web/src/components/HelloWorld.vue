@@ -9,6 +9,7 @@
                     <el-menu-item index="3">纽约tiles</el-menu-item>
                     <el-menu-item index="12">倾斜摄影</el-menu-item>
                     <el-menu-item index="华盛顿IMG">华盛顿IMG</el-menu-item>
+                    <el-menu-item index="OSM建筑">OSM建筑</el-menu-item>
                 </el-menu>
             </div>
             <div style="color: white;font-weight: bold;display: flex;flex-direction: column;justify-content: center">
@@ -343,6 +344,8 @@ export default {
                 this.cApp.addOutline()
             } else if (key == '华盛顿IMG') {
                 this.cApp.huashengdunImg()
+            } else if (key == 'OSM建筑') {
+                this.cApp.addOSMBuilding()
             }
         },
         changeGlobleLight() {

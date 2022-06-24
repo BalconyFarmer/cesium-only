@@ -163,6 +163,8 @@ export default class CesiumApp {
     }
 
 
+
+
     addLight() {
         // 只是添加了个方向
         let flashlight = new Cesium.DirectionalLight({
@@ -292,10 +294,14 @@ export default class CesiumApp {
         // this.viewer.terrainProvider = new Cesium.CesiumTerrainProvider({
         //     url: Cesium.IonResource.fromAssetId(1),
         // })
+    }
 
-
-
-
+    addOSMBuilding () {
+        const tileset = viewer.scene.primitives.add(
+            new Cesium.Cesium3DTileset({
+                url: Cesium.IonResource.fromAssetId(96188),
+            })
+        );
     }
 
     /**
