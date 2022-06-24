@@ -292,6 +292,10 @@ export default class CesiumApp {
         // this.viewer.terrainProvider = new Cesium.CesiumTerrainProvider({
         //     url: Cesium.IonResource.fromAssetId(1),
         // })
+
+
+
+
     }
 
     /**
