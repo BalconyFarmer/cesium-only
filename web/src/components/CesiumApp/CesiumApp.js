@@ -241,12 +241,10 @@ export default class CesiumApp {
         )
         this.viewer.terrainProvider = terrainProvider
 
-        // 我得数据仓库
+        // 我得数据仓库 - 地形
         // this.viewer.terrainProvider = new Cesium.CesiumTerrainProvider({
         //     url: Cesium.IonResource.fromAssetId(1),
         // })
-
-
     }
 
     /**

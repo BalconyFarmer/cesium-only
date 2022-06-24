@@ -299,8 +299,6 @@ export default {
         },
 
         terrainChange() {
-            // this.cApp.addTerrain()
-
             if (this.terrainFlag) {
                 this.cApp.addTerrain()
             } else {
