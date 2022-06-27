@@ -21,7 +21,7 @@ export default class CustomStyle {
      * 发光道路
      */
     addRoad(points) {
-        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/lightray_yellow.png'
+        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
         initFlowMatetial3(url) // 注册流动线材质
 
         let _p = null
@@ -63,7 +63,7 @@ export default class CustomStyle {
      * 添加流动线条
      */
     addFlowLine(points) {
-        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/11.png'
+        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
         initFlowMatetial(url) // 注册流动线材质
 
         let _p = null
@@ -87,7 +87,7 @@ export default class CustomStyle {
      * 添加flyline
      */
     addFlyLine3D(centerP, citiesP) {
-        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/Trail.png'
+        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
         initFlowMatetial2(url) // 注册流动线材质
 
         // 抛物线 相等
