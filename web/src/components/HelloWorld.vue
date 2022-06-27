@@ -110,12 +110,16 @@
                 <div class="title">log,lat,height</div>
                 <input id="copyValID" type="text" :value="clickPosition"/>
                 <el-button @click="handleClick1('copyValID')">Copy</el-button>
+                <div class="title">cartographic-log,cartographic-lat,cartographic-height</div>
+                <input id="" type="text" :value="clickPositionCartographic"/>
+                <div class="title">Cartesian</div>
+                <input id="" type="text" :value="clickPositionCartesian"/>
             </div>
 
             <br>
             <div class="getPosition">
                 <div class="title">camera</div>
-                <div class="title">log,lat,height,x,y,z</div>
+                <div class="title">x,y,z,heading,pitch,roll</div>
                 <input id="copyValID1" type="text" :value="cameraPosition"/>
                 <el-button @click="handleClick1('copyValID1')">Copy</el-button>
             </div>
@@ -275,6 +279,8 @@ export default {
                 label: 'label'
             },
             clickPosition: [],
+            clickPositionCartographic: null,
+            clickPositionCartesian: null,
             cameraPosition: [],
             switchValue: false,
             currentEntities: null,
@@ -378,6 +384,8 @@ export default {
             this.entitysList = this.cApp.getViewerEntitys()
             this.cApp.eventCenter.addEventListener('clickPosition', function (data) {
                 self.clickPosition = data.message.position
+                self.clickPositionCartographic = data.message.positionCartogtaphic
+                self.clickPositionCartesian = data.message.cartesian
             })
             this.cApp.eventCenter.addEventListener('cameraPosition', function (data) {
                 self.cameraPosition = data.message.position

@@ -160,12 +160,6 @@
                         </el-switch>
                     </div>
                 </div>
-                <div class="env">
-                    <div>
-                        <input id="copyVal" type="text" value="Copy Content"/>
-                        <el-button @click="handleClick11">Copy</el-button>
-                    </div>
-                </div>
             </el-tab-pane>
 
         </el-tabs>

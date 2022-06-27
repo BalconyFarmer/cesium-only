@@ -6,7 +6,7 @@ import * as widget from 'cesium/Widgets/widgets.css'
  * 拖拽entities事件
  */
 export default class Event {
-    constructor (app) {
+    constructor(app) {
         this.app = app
         this.init()
         this.startDrag()
@@ -14,7 +14,7 @@ export default class Event {
         this.moveToolTipFlag = false
     }
 
-    init () {
+    init() {
         const self = this
 
         // 取消双击事件
@@ -26,7 +26,6 @@ export default class Event {
             // 屏幕坐标转世界坐标——关键点
             let ray = self.app.viewer.camera.getPickRay(event.position)
             let cartesian = self.app.viewer.scene.globe.pick(ray, self.app.viewer.scene)
-
             // //将笛卡尔坐标转换为地理坐标
             let cartographic = Cesium.Cartographic.fromCartesian(cartesian)
             // //将弧度转为度的十进制度表示
@@ -35,7 +34,13 @@ export default class Event {
             // // 获取海拔高度
             let height1 = self.app.viewer.scene.globe.getHeight(cartographic)
 
-            self.app.eventCenter.dispatchEvent({type: 'clickPosition', message: {position: [lon, lat, height1]}})
+            self.app.eventCenter.dispatchEvent({type: 'clickPosition',
+                message: {
+                    position: [lon, lat, height1],
+                    positionCartogtaphic: [cartographic.longitude, cartographic.latitude, height1],
+                    cartesian: cartesian
+                }
+            })
             self.app.eventCenter.dispatchEvent({
                 type: 'cameraPosition',
                 message: {position: [self.app.viewer.camera.position, self.app.viewer.camera.heading, self.app.viewer.camera.pitch, self.app.viewer.camera.roll]}
@@ -63,14 +68,14 @@ export default class Event {
     /**
      * 开启拖拽模式
      */
-    startDrag () {
+    startDrag() {
         const self = this
 
         let leftDownFlag = false // 鼠标左键是否按下
         let pickedEntity = null //被选中的Entity
 
         // 拖拽模型-左键按下
-        function leftDownAction (e) {
+        function leftDownAction(e) {
             leftDownFlag = true
             let picked = self.app.viewer.scene.pick(e.position)
             if (picked) {
@@ -84,7 +89,7 @@ export default class Event {
         }
 
         // 拖拽模型-鼠标移动
-        function mouseMoveAction (e) {
+        function mouseMoveAction(e) {
             if (leftDownFlag && pickedEntity && self.dragFlag) {
                 // let ray = viewer.camera.getPickRay(e.endPosition);
                 // let cartesian = viewer.scene.globe.pick(ray, viewer.scene);
@@ -97,7 +102,7 @@ export default class Event {
         }
 
         // 拖拽模型-左键抬起
-        function leftUpAction (e) {
+        function leftUpAction(e) {
             document.body.style.cursor = 'default'
             leftDownFlag = false
             pickedEntity = null
@@ -118,7 +123,7 @@ export default class Event {
         }, Cesium.ScreenSpaceEventType.LEFT_UP)
     }
 
-    addMoveToolTip () {
+    addMoveToolTip() {
         this.moveToolTipFlag = !this.moveToolTipFlag
         const self = this
         let handler = new Cesium.ScreenSpaceEventHandler(this.app.viewer.scene.canvas)
@@ -137,7 +142,7 @@ export default class Event {
     /**
      * 手动添加模型坐标返回
      */
-    mouseMoveEvent () {
+    mouseMoveEvent() {
         const self = this
         let test = function (movement) {
             let cartesian = self.app.viewer.camera.pickEllipsoid(movement.endPosition, self.app.viewer.scene.globe.ellipsoid)
