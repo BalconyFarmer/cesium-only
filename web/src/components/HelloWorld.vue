@@ -100,8 +100,16 @@
             </div>
         </div>
         <div v-if="!fakeBoard" class="leftTree">
-            <div>ENTITIES</div>
-            <el-tree :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+            <div class="leftTreeMenu">
+                <div @click="currentLeft = '图层'">图层</div>
+                <div @click="currentLeft = '实体'">实体</div>
+            </div>
+
+            <el-tree v-if="currentLeft == '实体'" :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+            <div v-if="currentLeft == '图层'">
+                <div v-for="item in layersData"> {{item._imageryProvider.name}}</div>
+            </div>
+
         </div>
         <div v-if="!fakeBoard" class="rightPart">
             <div>
@@ -266,11 +274,11 @@ export default {
                 label: 'geoq智图黑'
             }, {
                 value: '高德卫星',
-                label: '高德卫星'
+                label: '高德卫星 + 高德文字'
             }, {
-                value: '高德文字',
-                label: '高德文字'
-            }, {
+                value: 'BING',
+                label: 'BING卫星 + BING文字'
+            },{
                 value: '纯黑',
                 label: '纯黑'
             },],
@@ -292,7 +300,9 @@ export default {
                 Heading: 0,
                 Pitch: 0,
                 Roll: 0
-            }
+            },
+            currentLeft: "实体",
+            layersData: [],
 
         }
     },
@@ -415,6 +425,10 @@ export default {
                 }
 
             })
+            if (self.cApp) {
+                self.layersData = self.cApp.viewer.imageryLayers._layers
+            }
+
         }, 10000)
 
     }
@@ -508,6 +522,12 @@ export default {
         overflow-y: auto;
         background-color: rgba(43, 43, 43, .5);
         color: white;
+        .leftTreeMenu {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+        }
     }
 
     .rightPart {

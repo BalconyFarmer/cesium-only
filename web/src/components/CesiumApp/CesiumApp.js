@@ -78,12 +78,11 @@ export default class CesiumApp {
 
         this.firstCallBack()
         this.particleSystems = new ParticleSystems(this) // 粒子系统
-        this.viewer.scene.postProcessStages.fxaa.enabled = false// 去锯齿 是文字清晰
+        this.viewer.scene.postProcessStages.fxaa.enabled = true// 去锯齿 是文字清晰
         this.animation = new Animation(this)
 
         this.closeAll()
-        this.switchLayer('ArcGis实景图层')
-        // this.addTerrain()
+        this.switchLayer('高德卫星')
         window.viewer = this.viewer
 
     }
@@ -126,13 +125,13 @@ export default class CesiumApp {
         }
         this.cameraFlyToCartesian3(aim)
         // 哥伦比亚特区的 3 英寸/0.08 米像素分辨率图像，覆盖约 69 平方英里
+        let _a = new Cesium.IonImageryProvider({assetId: 3827})
+        _a.name = "华盛顿"
         const layer = viewer.imageryLayers.addImageryProvider(
-            new Cesium.IonImageryProvider({ assetId: 3827 })
+            _a
         );
 
     }
-
-
 
 
     addLight() {
@@ -266,7 +265,7 @@ export default class CesiumApp {
         // })
     }
 
-    addOSMBuilding () {
+    addOSMBuilding() {
         const tileset = viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
                 url: Cesium.IonResource.fromAssetId(96188),
@@ -307,12 +306,11 @@ export default class CesiumApp {
     }
 
     switchLayer(data) {
-        // t3fbd4010a8d2c73901a21c42efe3d2c0 天地图key
+        let Imagery = null
 
         if (this.viewer) {
             this.viewer.imageryLayers.removeAll() // 清除所有图层
         }
-        let Imagery = null
 
         switch (data) {
             case 'google实景图层':
@@ -322,7 +320,7 @@ export default class CesiumApp {
                  * @type {Cesium.UrlTemplateImageryProvider}
                  */
                 Imagery = new Cesium.UrlTemplateImageryProvider({
-                    url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali'
+                    url: 'http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&x={x}&y={y}&z={z}&s=Gali',
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
@@ -333,43 +331,49 @@ export default class CesiumApp {
                  */
                 Imagery = new Cesium.ArcGisMapServerImageryProvider({
                     url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
-                    enablePickFeatures: false
+                    enablePickFeatures: false,
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
             case 'geoq智图黑':
                 Imagery = new Cesium.ArcGisMapServerImageryProvider({
-                    url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer'
+                    url: 'https://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
+            /**
+             * 无国外影像,国内部分无数据
+             */
             case '高德卫星':
                 Imagery = new Cesium.UrlTemplateImageryProvider({
                     url: 'https://webst02.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
                     minimumLevel: 3,
-                    maximumLevel: 18
+                    maximumLevel: 18,
                 })
+                Imagery.name = "高德卫星"
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
-                break
-            case '高德文字':
+
                 Imagery = new Cesium.UrlTemplateImageryProvider({
                     url: 'http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8',
                     minimumLevel: 3,
-                    maximumLevel: 18
+                    maximumLevel: 18,
                 })
+                Imagery.name = "高德文字"
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 break
+
             case '纯黑':
                 this.viewer.scene.globe.baseColor = Cesium.Color.BLACK // 设置地球颜色
                 break
+
+            case 'BING':
+                const layer = this.viewer.imageryLayers.addImageryProvider(
+                    new Cesium.IonImageryProvider({ assetId: 3 })
+                );
+                break
+
         }
 
-        Imagery = new Cesium.UrlTemplateImageryProvider({
-            url: 'http://webst02.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=8',
-            minimumLevel: 3,
-            maximumLevel: 18
-        })
-        this.viewer.imageryLayers.addImageryProvider(Imagery)
     }
 
     /**
