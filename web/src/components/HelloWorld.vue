@@ -85,12 +85,16 @@
                         </el-select>
                     </el-menu-item>
                     <el-menu-item style="width: 100px">
-                        <el-slider :max="2" :step="0.1" v-model="brightness">
-                        </el-slider>
+                        <el-tooltip :content="'整体亮度'" placement="top">
+                            <el-slider :max="2" :step="0.1" v-model="brightness">
+                            </el-slider>
+                        </el-tooltip>
                     </el-menu-item>
                     <el-menu-item style="width: 100px">
-                        <el-slider :max="2" :step="0.1" v-model="fov">
-                        </el-slider>
+                        <el-tooltip :content="'视角大小'" placement="top">
+                            <el-slider :max="2" :step="0.1" v-model="fov">
+                            </el-slider>
+                        </el-tooltip>
                     </el-menu-item>
                 </el-menu>
             </div>
