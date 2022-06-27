@@ -367,8 +367,10 @@ export default class CesiumApp {
                 break
 
             case 'BING':
+                let _a = new Cesium.IonImageryProvider({ assetId: 3 })
+                _a.name = "BING"
                 const layer = this.viewer.imageryLayers.addImageryProvider(
-                    new Cesium.IonImageryProvider({ assetId: 3 })
+                    _a
                 );
                 break
 
