@@ -11,20 +11,21 @@ import * as widget from 'cesium/Widgets/widgets.css'
 export default class Points {
     constructor(app) {
         this.app = app
-        this.init()
+        this.kmlDataSource = null
     }
 
-    init() {
+    addKml() {
         const viewer = this.app.viewer;
         const options = {
             camera: viewer.scene.camera,
             canvas: viewer.scene.canvas,
         };
+        this.kmlDataSource = Cesium.KmlDataSource.load(
+            'http://localhost:1111/3Dstatic/loadData/kml/facilities.kml',
+            options
+        )
         const dataSourcePromise = viewer.dataSources.add(
-            Cesium.KmlDataSource.load(
-                'http://localhost:1111/3Dstatic/loadData/kml/facilities.kml',
-                options
-            )
+            this.kmlDataSource
         );
         dataSourcePromise.then(function (dataSource) {
             const pixelRange = 15;
@@ -121,32 +122,13 @@ export default class Points {
             subscribeParameter("pixelRange");
             subscribeParameter("minimumClusterSize");
 
-            // Sandcastle.addToggleButton("Enabled", true, function (checked) {
-            //     dataSource.clustering.enabled = checked;
-            // });
-            //
-            // Sandcastle.addToggleButton("Custom Styling", true, function (
-            //     checked
-            // ) {
-            //     customStyle();
-            // });
-
-            // const handler = new Cesium.ScreenSpaceEventHandler(
-            //     viewer.scene.canvas
-            // );
-            // handler.setInputAction(function (movement) {
-            //     const pickedLabel = viewer.scene.pick(movement.position);
-            //     if (Cesium.defined(pickedLabel)) {
-            //         const ids = pickedLabel.id;
-            //         if (Array.isArray(ids)) {
-            //             for (let i = 0; i < ids.length; ++i) {
-            //                 ids[i].billboard.color = Cesium.Color.RED;
-            //             }
-            //         }
-            //     }
-            // }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
         });
 
+    }
+
+    removeKml() {
+        const viewer = this.app.viewer;
+        viewer.dataSources.removeAll()
     }
 
 }
