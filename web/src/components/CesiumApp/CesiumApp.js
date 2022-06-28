@@ -17,6 +17,7 @@ import ChengDu from './project/ChengDu'
 import InnerMaterial from './some/InnerMaterial/InnerMaterial'
 import Environment from './some/ShaderDemo/Environment'
 import Animation from './some/Animation'
+import Points from "./some/Points/Points";
 
 export default class CesiumApp {
     constructor() {
@@ -84,6 +85,7 @@ export default class CesiumApp {
         this.closeAll()
         this.switchLayer('高德卫星')
         window.viewer = this.viewer
+        this.points = new Points(this)
 
     }
 

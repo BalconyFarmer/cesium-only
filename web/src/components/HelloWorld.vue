@@ -54,7 +54,7 @@
                     <el-menu-item index="addOutline">Outline</el-menu-item>
                     <el-menu-item index="14">关闭冗余</el-menu-item>
                     <el-menu-item index="">
-                        <span>地形</span>
+                        <span>地形叠加</span>
                         <el-tooltip :content="'关闭地形'" placement="top">
                             <el-switch
                                 @change="terrainChange"
