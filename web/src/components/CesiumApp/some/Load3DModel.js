@@ -40,7 +40,7 @@ export default class Load3DModel {
                     new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(htr[0]), htr[1], htr[2])
                 ),
             model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/tt/11.glb',
+                uri: 'http://localhost:1111/3Dstatic/loadData/tt/SimLab_2022-06-27-17-15-58.gltf',
                 // minimumPixelSize: 100, // 最小大小
                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
             }

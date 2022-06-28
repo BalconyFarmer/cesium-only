@@ -112,6 +112,9 @@ export default class CesiumApp {
             duration: 1
         }
         this.cameraFlyToCartesian3(aim)
+
+        this.loadJson.loadJsonData("/geoJson/xsbn.json")
+
     }
 
     huashengdunImg() {

@@ -75,7 +75,7 @@
                         </el-select>
                     </el-menu-item>
                     <el-menu-item>
-                        <el-select v-model="optionsLayersIndex" placeholder="图层切换">
+                        <el-select v-model="optionsLayersIndex" placeholder="基础底图">
                             <el-option
                                 v-for="item in optionsLayers"
                                 :key="item.value"
@@ -346,7 +346,7 @@ export default {
         },
         handleSelect(key, keyPath) {
             if (key == 2) {
-                this.cApp.loadJson.loadJsonData()
+                this.cApp.loadJson.loadJsonData("/geoJson/云南省.json")
             } else if (key == 3) {
                 this.cApp.cesium3DTileset.toYN()
             } else if (key == 11) {

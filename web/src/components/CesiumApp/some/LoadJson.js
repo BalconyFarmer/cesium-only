@@ -10,14 +10,14 @@ export default class LoadJson {
     /**
      * 加载云南JSON
      */
-    loadJsonData () {
+    loadJsonData (URL) {
         if (this.traceLayer) {
             this.removeJson()
             this.traceLayer = null
         } else {
             const self = this
             // 还在geoJson数据 ()
-            Cesium.GeoJsonDataSource.load(this.app.staticServerAdress + '/geoJson/云南省.json').then(function (dataSource) {
+            Cesium.GeoJsonDataSource.load(this.app.staticServerAdress + URL).then(function (dataSource) {
                 self.app.viewer.dataSources.add(dataSource).then(res => {
                     const test = res
                     test.name = '测试'
