@@ -2,6 +2,7 @@ import * as turf from '@turf/turf'
 
 /**
  * 普通聚合点
+ * dataSource
  */
 export default class PointsCluster {
     constructor(app) {

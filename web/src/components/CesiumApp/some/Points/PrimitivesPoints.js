@@ -2,6 +2,7 @@ import * as turf from '@turf/turf'
 
 /**
  * Primitives 大量点
+ * primitives
  */
 export default class PrimitivesPoints {
     constructor(app) {
