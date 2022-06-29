@@ -37,8 +37,8 @@ export default class NormalPoints {
         })
     }
 
-    removeKml() {
-
+    removeBlinkPoint() {
+        this.app.viewer.entities.removeAll()
     }
 
 }

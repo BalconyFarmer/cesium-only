@@ -190,6 +190,15 @@
                             inactive-color="#2B2B2B">
                         </el-switch>
                     </div>
+                    <div>
+                        <span>闪烁billboard</span>
+                        <el-switch
+                            @change="BlinkPointChange"
+                            v-model="BlinkPointFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
                 </div>
             </el-tab-pane>
 
@@ -215,7 +224,8 @@ export default {
             D3FileList: [],
             kmlFlag: false,
             normalPointsClusterChangeFlag: false,
-            primitiveFlag: false
+            primitiveFlag: false,
+            BlinkPointFlag: false
 
         }
     },
@@ -239,6 +249,13 @@ export default {
                 this.cApp.primitivePoints.addManyPoint()
             } else {
                 this.cApp.primitivePoints.removePoint()
+            }
+        },
+        BlinkPointChange() {
+            if (this.BlinkPointFlag) {
+                this.cApp.normalPoints.addBlinkPoint()
+            } else {
+                this.cApp.normalPoints.removeBlinkPoint()
             }
         },
         handleClick11() {
