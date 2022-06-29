@@ -1,6 +1,5 @@
 import ParticleSystems from '../some/ParticleSystems'
-import * as Cesium from 'cesium/Cesium'
-import * as widget from 'cesium/Widgets/widgets.css'
+
 
 /**
  * 成都展示项目
@@ -16,7 +15,7 @@ export default class ChengDu {
         this.app.closeAll()
         this.app.switchLayer('geoq智图黑')
         // this.app.updateLyerLight(0.5, 0.5)
-        this.app.cesium3DTileset.addTiles()
+        // this.app.cesium3DTileset.addTiles()
 
         const option = {
             lon: 104.08518355581377,

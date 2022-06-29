@@ -1,6 +1,5 @@
 import * as THREE from 'three'
-import * as Cesium from 'cesium/Cesium'
-import * as widget from 'cesium/Widgets/widgets.css'
+
 import CustomStyle from './some/ShaderDemo/CustomStyle/CustomMaterial/CustomStyle'
 import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
 import Cesium3DTileset from './some/Cesium3DTileset/Cesium3DTileset'

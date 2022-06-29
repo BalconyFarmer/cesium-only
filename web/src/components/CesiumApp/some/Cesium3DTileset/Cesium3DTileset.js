@@ -1,5 +1,4 @@
-import * as Cesium from 'cesium/Cesium'
-import * as widget from 'cesium/Widgets/widgets.css'
+
 
 export default class Cesium3DTileset {
     constructor (app) {
@@ -37,8 +36,6 @@ export default class Cesium3DTileset {
         );
 
         this.app.viewer.zoomTo(tileset)
-
-        alert("跨域错误!!")
     }
 
     /**
