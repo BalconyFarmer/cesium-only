@@ -1,3 +1,5 @@
+import * as turf from '@turf/turf'
+
 /**
  * 普通聚合点
  */
@@ -40,23 +42,39 @@ export default class PointsCluster {
      * 添加警员图标
      */
     addIcon1() {
-        const _po =  new Cesium.Cartesian3 (-1105278.8189427508, 5813492.798393301, 2371578.8509780252)
-        const result = this.dataSource.entities.add({
-            type: "默认",
-            name: "+++++++++++",
-            allData: "allData",
-            position: _po,
-            billboard: {
-                image: require("./icon/摄像头.png"),
-                width: 60,
-                height: 60,
-                scale: 0.5,
-                verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND, //CLAMP_TO_GROUND   RELATIVE_TO_GROUND
-                clampToGround: true,
-            },
-        })
-        debugger
+        let points = turf.randomPoint(10000, {bbox: [-180, -90, 180, 90]});
+        let features = points.features;
+        let feature, geom, coordinates, position;
+
+        for (let i = 0; i < features.length; i++) {
+            feature = features[i];
+            geom = feature.geometry;
+            coordinates = geom.coordinates;
+            position = Cesium.Cartesian3.fromDegrees(
+                coordinates[0],
+                coordinates[1],
+                0
+            );
+
+            const _po =  position
+            const result = this.dataSource.entities.add({
+                type: "默认",
+                name: "+++++++++++",
+                allData: "allData",
+                position: _po,
+                billboard: {
+                    image: require("./icon/摄像头.png"),
+                    width: 60,
+                    height: 60,
+                    scale: 0.5,
+                    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+                    heightReference: Cesium.HeightReference.CLAMP_TO_GROUND, //CLAMP_TO_GROUND   RELATIVE_TO_GROUND
+                    clampToGround: true,
+                },
+            })
+        }
+
+
     }
 
 

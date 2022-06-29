@@ -7,6 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@turf/turf": "^6.5.0",
+    "ant-design-vue": "^1.7.8",
     "axios": "^0.27.2",
     "cesium": "^1.94.3",
     "core-js": "^2.6.5",
@@ -14,8 +16,7 @@
     "three": "^0.141.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
-    "vuex": "^3.0.1",
-    "ant-design-vue": "^1.7.8"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
