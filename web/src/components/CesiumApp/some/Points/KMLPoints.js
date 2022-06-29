@@ -1,13 +1,7 @@
-
-
 /**
- * 点对象
- * 聚合点
- * 闪烁点
- * Primitives大量点
- * 跳动点
+ * KML聚合点
  */
-export default class Points {
+export default class KMLPoints {
     constructor(app) {
         this.app = app
         this.kmlDataSource = null

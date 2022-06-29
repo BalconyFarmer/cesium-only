@@ -13,7 +13,7 @@
                 </el-menu>
             </div>
             <div style="color: white;font-weight: bold;display: flex;flex-direction: column;justify-content: center">
-                <span>LpTech</span>
+                <span>联鹏科技</span>
             </div>
             <div>
                 <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
@@ -65,7 +65,7 @@
                         </el-tooltip>
                     </el-menu-item>
                     <el-menu-item>
-                        <el-select v-model="value" placeholder="请选择">
+                        <el-select size="mini" v-model="value" placeholder="请选择">
                             <el-option
                                 v-for="item in options"
                                 :key="item.value"
@@ -75,7 +75,7 @@
                         </el-select>
                     </el-menu-item>
                     <el-menu-item>
-                        <el-select v-model="optionsLayersIndex" placeholder="基础底图">
+                        <el-select size="mini" v-model="optionsLayersIndex" placeholder="基础底图">
                             <el-option
                                 v-for="item in optionsLayers"
                                 :key="item.value"

@@ -172,6 +172,15 @@
                             inactive-color="#2B2B2B">
                         </el-switch>
                     </div>
+                    <div>
+                        <span>通用点聚合</span>
+                        <el-switch
+                            @change="normalPointsClusterChange"
+                            v-model="normalPointsClusterChangeFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
                 </div>
             </el-tab-pane>
 
@@ -196,7 +205,7 @@ export default {
             uploading: false,
             D3FileList: [],
             kmlFlag: false,
-
+            normalPointsClusterChangeFlag: false
         }
     },
     methods: {
@@ -205,6 +214,12 @@ export default {
                 this.cApp.points.addKml()
             } else {
                 this.cApp.points.removeKml()
+            }
+        },
+        normalPointsClusterChange() {
+            if (this.normalPointsClusterChangeFlag) {
+                this.cApp.pointsCluster.addIcon1()
+            } else {
             }
         },
         handleClick11() {
