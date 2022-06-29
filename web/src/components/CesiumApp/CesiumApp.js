@@ -92,6 +92,7 @@ export default class CesiumApp {
         this.pointsCluster = new PointsCluster(this)
         this.primitivePoints = new PrimitivesPoints(this)
         this.normalPoints = new NormalPoints(this)
+        this.normalPoints.addBillCanvas()
     }
 
 
