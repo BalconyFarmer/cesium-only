@@ -220,6 +220,7 @@ export default {
             if (this.normalPointsClusterChangeFlag) {
                 this.cApp.pointsCluster.addIcon1()
             } else {
+                this.cApp.pointsCluster.removePoint()
             }
         },
         handleClick11() {

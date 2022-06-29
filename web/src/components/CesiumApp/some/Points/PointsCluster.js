@@ -56,7 +56,7 @@ export default class PointsCluster {
                 0
             );
 
-            const _po =  position
+            const _po = position
             const result = this.dataSource.entities.add({
                 type: "默认",
                 name: "+++++++++++",
@@ -76,7 +76,7 @@ export default class PointsCluster {
     }
 
     removePoint() {
-
+        const see = this.dataSource.entities.removeAll()
     }
 
 }
