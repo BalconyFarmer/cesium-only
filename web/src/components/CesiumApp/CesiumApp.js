@@ -19,6 +19,7 @@ import Animation from './some/Animation'
 import Points from "./some/Points/KMLPoints";
 import KMLPoints from "@/components/CesiumApp/some/Points/KMLPoints";
 import PointsCluster from "@/components/CesiumApp/some/Points/PointsCluster";
+import PrimitivesPoints from "@/components/CesiumApp/some/Points/PrimitivesPoints";
 
 export default class CesiumApp {
     constructor() {
@@ -88,7 +89,7 @@ export default class CesiumApp {
         window.viewer = this.viewer
         this.points = new KMLPoints(this)
         this.pointsCluster = new PointsCluster(this)
-
+        this.primitivePoints = new PrimitivesPoints(this)
     }
 
     /**

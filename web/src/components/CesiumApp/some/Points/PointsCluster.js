@@ -42,7 +42,6 @@ export default class PointsCluster {
      */
     addIcon1() {
         let points = turf.randomPoint(10000, {bbox: [-10, -10, 10, 10]});
-        // let points = turf.randomPoint(10000, {bbox: [-180, -90, 180, 90]});
         let features = points.features;
         let feature, geom, coordinates, position;
 

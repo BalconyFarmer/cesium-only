@@ -181,6 +181,15 @@
                             inactive-color="#2B2B2B">
                         </el-switch>
                     </div>
+                    <div>
+                        <span>原生点</span>
+                        <el-switch
+                            @change="primitiveChange"
+                            v-model="primitiveFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
                 </div>
             </el-tab-pane>
 
@@ -205,7 +214,9 @@ export default {
             uploading: false,
             D3FileList: [],
             kmlFlag: false,
-            normalPointsClusterChangeFlag: false
+            normalPointsClusterChangeFlag: false,
+            primitiveFlag: false
+
         }
     },
     methods: {
@@ -221,6 +232,12 @@ export default {
                 this.cApp.pointsCluster.addIcon1()
             } else {
                 this.cApp.pointsCluster.removePoint()
+            }
+        },
+        primitiveChange() {
+            if (this.primitiveFlag) {
+                this.cApp.primitivePoints.addManyPoint()
+            } else {
             }
         },
         handleClick11() {
