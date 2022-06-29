@@ -6,7 +6,6 @@ import * as turf from '@turf/turf'
 export default class PointsCluster {
     constructor(app) {
         this.app = app
-        this.kmlDataSource = null
         this.dataSource = null
         this.initCluster()
     }
@@ -42,7 +41,8 @@ export default class PointsCluster {
      * 添加警员图标
      */
     addIcon1() {
-        let points = turf.randomPoint(10000, {bbox: [-180, -90, 180, 90]});
+        let points = turf.randomPoint(10000, {bbox: [-10, -10, 10, 10]});
+        // let points = turf.randomPoint(10000, {bbox: [-180, -90, 180, 90]});
         let features = points.features;
         let feature, geom, coordinates, position;
 
@@ -73,14 +73,6 @@ export default class PointsCluster {
                 },
             })
         }
-
-
-    }
-
-
-    addPoint() {
-
-
     }
 
     removePoint() {
