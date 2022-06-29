@@ -1,5 +1,4 @@
-﻿import * as Cesium from 'cesium/Cesium'
-import * as widget from 'cesium/Widgets/widgets.css'
+﻿
 var TooltipCesium = (function () {
     var isInit = false
     var viewer
