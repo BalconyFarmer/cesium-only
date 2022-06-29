@@ -191,10 +191,28 @@
                         </el-switch>
                     </div>
                     <div>
-                        <span>闪烁billboard</span>
+                        <span>闪烁Point</span>
                         <el-switch
                             @change="BlinkPointChange"
                             v-model="BlinkPointFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>闪烁Billboard</span>
+                        <el-switch
+                            @change="BillboardFlagChange"
+                            v-model="BillboardFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>闪烁面</span>
+                        <el-switch
+                            @change="blinkFaceChange"
+                            v-model="blinkFaceFlag"
                             active-color="#13ce66"
                             inactive-color="#2B2B2B">
                         </el-switch>
@@ -225,7 +243,9 @@ export default {
             kmlFlag: false,
             normalPointsClusterChangeFlag: false,
             primitiveFlag: false,
-            BlinkPointFlag: false
+            BlinkPointFlag: false,
+            BillboardFlag: false,
+            blinkFaceFlag: false
 
         }
     },
@@ -253,7 +273,21 @@ export default {
         },
         BlinkPointChange() {
             if (this.BlinkPointFlag) {
+                this.cApp.normalPoints.addBlinkPointR()
+            } else {
+                this.cApp.normalPoints.removeBlinkPoint()
+            }
+        },
+        BillboardFlagChange() {
+            if (this.BillboardFlag) {
                 this.cApp.normalPoints.addBlinkPoint()
+            } else {
+                this.cApp.normalPoints.removeBlinkPoint()
+            }
+        },
+        blinkFaceChange() {
+            if (this.blinkFaceFlag) {
+                this.cApp.normalPoints.addBlinkFace()
             } else {
                 this.cApp.normalPoints.removeBlinkPoint()
             }
