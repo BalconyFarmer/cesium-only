@@ -20,6 +20,7 @@ import Points from "./some/Points/KMLPoints";
 import KMLPoints from "@/components/CesiumApp/some/Points/KMLPoints";
 import PointsCluster from "@/components/CesiumApp/some/Points/PointsCluster";
 import PrimitivesPoints from "@/components/CesiumApp/some/Points/PrimitivesPoints";
+import NormalPoints from "@/components/CesiumApp/some/Points/NormalPoints";
 
 export default class CesiumApp {
     constructor() {
@@ -90,7 +91,9 @@ export default class CesiumApp {
         this.points = new KMLPoints(this)
         this.pointsCluster = new PointsCluster(this)
         this.primitivePoints = new PrimitivesPoints(this)
+        this.normalPoints = new NormalPoints(this)
     }
+
 
     /**
      * 视场角
@@ -375,7 +378,7 @@ export default class CesiumApp {
                 break
 
             case 'BING':
-                let _a = new Cesium.IonImageryProvider({ assetId: 3 })
+                let _a = new Cesium.IonImageryProvider({assetId: 3})
                 _a.name = "BING"
                 const layer = this.viewer.imageryLayers.addImageryProvider(
                     _a
