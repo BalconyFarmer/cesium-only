@@ -60,7 +60,7 @@ export default class NormalPoints {
                             flog = true;
                         }
                     }
-                    return Cesium.Color.RED.withAlpha(x);
+                    return Cesium.Color.YELLOW.withAlpha(x);
                 }, false),
                 pixelSize: 10, // default: 1
                 outlineWidth: 0
@@ -91,7 +91,7 @@ export default class NormalPoints {
                         }
                     }
                     console.log(x)
-                    return Cesium.Color.RED.withAlpha(x);
+                    return Cesium.Color.YELLOW.withAlpha(x);
                 }, false))
             }
         });
