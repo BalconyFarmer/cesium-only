@@ -6,15 +6,18 @@ import * as turf from '@turf/turf'
 export default class PrimitivesPoints {
     constructor(app) {
         this.app = app
+        this.billboards = null
+        this.labels = null
     }
 
     addManyPoint() {
-        let billboards = this.app.viewer.scene.primitives.add(
+        const self = this
+        this.billboards = this.app.viewer.scene.primitives.add(
             new Cesium.BillboardCollection()
         );
 
         function addPrimitive(position) {
-            billboards.add({
+            self.billboards.add({
                 position: position,
                 image: require("./icon/摄像头.png"),
                 verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
@@ -38,15 +41,17 @@ export default class PrimitivesPoints {
             addPrimitive(position);
         }
 
-        let labels = this.app.viewer.scene.primitives.add(
+        this.labels = this.app.viewer.scene.primitives.add(
             new Cesium.LabelCollection()
         );
-        function addPrimitive1(position,i) {
-            labels.add({
+
+        function addPrimitive1(position, i) {
+            self.labels.add({
                 position: position,
                 text: i.toString()
             });
         }
+
         for (let i = 0; i < features.length; i++) {
             feature = features[i];
             geom = feature.geometry;
@@ -56,11 +61,13 @@ export default class PrimitivesPoints {
                 coordinates[1],
                 0
             );
-            addPrimitive1(position,i);
+            addPrimitive1(position, i);
         }
     }
 
     removePoint() {
+        this.billboards.destroy()
+        this.labels.destroy()
     }
 
 }

@@ -238,6 +238,7 @@ export default {
             if (this.primitiveFlag) {
                 this.cApp.primitivePoints.addManyPoint()
             } else {
+                this.cApp.primitivePoints.removePoint()
             }
         },
         handleClick11() {
