@@ -1,5 +1,4 @@
-import * as Cesium from 'cesium/Cesium'
-import * as widget from 'cesium/Widgets/widgets.css'
+
 
 /**
  * https://blog.csdn.net/weixin_36617251/article/details/118366285

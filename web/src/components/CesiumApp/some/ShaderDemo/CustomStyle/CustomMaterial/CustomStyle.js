@@ -1,5 +1,4 @@
-import * as Cesium from 'cesium/Cesium'
-import * as widget from 'cesium/Widgets/widgets.css'
+
 
 import {initFlowMatetial} from './flowLinesMaterial/_PolylineTrailLinkMaterialProperty'
 import {initFlowMatetial1} from './flowLinesMaterial/_PolylineTrailLinkMaterialProperty1'

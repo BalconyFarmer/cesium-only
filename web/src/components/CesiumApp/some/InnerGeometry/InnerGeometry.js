@@ -1,5 +1,4 @@
-import * as Cesium from 'cesium/Cesium'
-import * as widget from 'cesium/Widgets/widgets.css'
+
 import TooltipCesium from './Tools-01Tooltip-entity'
 
 /**

@@ -188,8 +188,7 @@
     </div>
 </template>
 <script>
-import * as Cesium from 'cesium/Cesium'
-import * as widget from 'cesium/Widgets/widgets.css'
+
 import CesiumApp from './CesiumApp/CesiumApp'
 import {scriptLoader} from '../utils/index'
 import HelloWorldBottom from './HelloWorldBottom'
@@ -377,20 +376,9 @@ export default {
         changeShadow() {
             this.cApp.changeShadow()
         },
-        startScriptLoader() {
-            const self = this
-            scriptLoader('http://zhangticcc.gitee.io/d3kit/d3kit.js').then(res => {
-                // setTimeout(function () {
-                //     const see = Cesium.D3Kit
-                //     console.log(see)
-                //     // debugger
-                // }, 1000)
-            })
-        }
 
     },
     mounted() {
-        // this.startScriptLoader()
         const self = this
         this.$nextTick(() => {
             this.cApp = new CesiumApp()
