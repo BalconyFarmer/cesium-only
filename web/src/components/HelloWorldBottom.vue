@@ -515,10 +515,6 @@ export default {
     height: 100%;
     background-color: rgba(43, 43, 43, .5);
 
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    user-select: none;
-
     .env {
         width: 100%;
         height: 30%;

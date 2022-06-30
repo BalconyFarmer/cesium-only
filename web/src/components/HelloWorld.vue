@@ -484,6 +484,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .el-menu-demo {
     height: 90%;
 }
@@ -577,7 +578,9 @@ FPS显示
 .all {
     width: 100%;
     height: 1080px;
-
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
     .header {
         width: 100%;
         height: 6%;
