@@ -1,193 +1,191 @@
 <template>
     <div class="all">
-        <div v-if="!fakeBoard" class="header">
-            <div>
-                <el-select size="mini" v-model="optionsLayersIndex" placeholder="基础底图">
-                    <el-option
-                        v-for="item in optionsLayers"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                    </el-option>
-                </el-select>
-            </div>
-
-            <div style="color: white">
-                <div>模型对象</div>
-                <el-select size="mini" v-model="modelData" placeholder="模型对象">
-                    <el-option
-                        v-for="item in modelDataList"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                    </el-option>
-                </el-select>
-            </div>
-
-            <!--            <div>-->
-            <!--                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">-->
-            <!--                    <el-menu-item index="13">西双版纳</el-menu-item>-->
-            <!--                    <el-menu-item index="11">成都tiles</el-menu-item>-->
-            <!--                    <el-menu-item index="2">云南JSON</el-menu-item>-->
-            <!--                    <el-menu-item index="3">纽约tiles</el-menu-item>-->
-            <!--                    <el-menu-item index="12">倾斜摄影</el-menu-item>-->
-            <!--                    <el-menu-item index="华盛顿IMG">华盛顿IMG</el-menu-item>-->
-            <!--                    <el-menu-item index="OSM建筑">OSM建筑</el-menu-item>-->
-            <!--                </el-menu>-->
-            <!--            </div>-->
-            <div style="color: white;font-weight: bold;display: flex;flex-direction: column;justify-content: center">
-                <span>联鹏科技</span>
-            </div>
-            <div>
-                <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                    <el-menu-item index="">
-                        <span>全球光照</span>
-                        <el-tooltip :content="'moveToolTips'" placement="top">
-                            <el-switch
-                                @change="changeGlobleLight"
-                                v-model="changeGlobleLightFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B">
-                            </el-switch>
-                        </el-tooltip>
-                    </el-menu-item>
-                    <el-menu-item index="">
-                        <span>光照系统</span>
-                        <el-tooltip :content="'moveToolTips'" placement="top">
-                            <el-switch
-                                @change="changeLight"
-                                v-model="changeLightFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B">
-                            </el-switch>
-                        </el-tooltip>
-                    </el-menu-item>
-                    <el-menu-item index="">
-                        <span>shadow</span>
-                        <el-tooltip :content="'moveToolTips'" placement="top">
-                            <el-switch
-                                @change="changeShadow"
-                                v-model="changeShadowFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B">
-                            </el-switch>
-                        </el-tooltip>
-                    </el-menu-item>
-                    <el-menu-item index="addBloom">Bloom</el-menu-item>
-                    <el-menu-item index="addOutline">Outline</el-menu-item>
-                    <el-menu-item index="14">关闭冗余</el-menu-item>
-                    <el-menu-item index="">
-                        <span>地形叠加</span>
-                        <el-tooltip :content="'关闭地形'" placement="top">
-                            <el-switch
-                                @change="terrainChange"
-                                v-model="terrainFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B">
-                            </el-switch>
-                        </el-tooltip>
-                    </el-menu-item>
-                    <el-menu-item>
-                        <el-select size="mini" v-model="value" placeholder="请选择">
-                            <el-option
-                                v-for="item in options"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </el-menu-item>
-
-                    <el-menu-item style="width: 100px">
-                        <el-tooltip :content="'整体亮度'" placement="top">
-                            <el-slider :max="2" :step="0.1" v-model="brightness">
-                            </el-slider>
-                        </el-tooltip>
-                    </el-menu-item>
-                    <el-menu-item style="width: 100px">
-                        <el-tooltip :content="'视角大小'" placement="top">
-                            <el-slider :max="2" :step="0.1" v-model="fov">
-                            </el-slider>
-                        </el-tooltip>
-                    </el-menu-item>
-                </el-menu>
-            </div>
-        </div>
-        <div v-if="!fakeBoard" class="leftTree">
-            <div class="leftTreeMenu">
-                <div @click="currentLeft = '图层'">图层</div>
-                <div @click="currentLeft = '实体'">实体</div>
-            </div>
-
-            <el-tree v-if="currentLeft == '实体'" :data="treeData" :props="defaultProps"
-                     @node-click="handleNodeClick"></el-tree>
-            <div v-if="currentLeft == '图层'">
-                <div v-for="item in layersData"> {{ item._imageryProvider.name }}</div>
-            </div>
-
-        </div>
-        <div v-if="!fakeBoard" class="rightPart">
-            <div>
-                MATH
-            </div>
-            <br>
-
-            <div class="getPosition">
-                <div class="title">选取位置:</div>
-                <div class="title">log,lat,height</div>
-                <input id="copyValID" type="text" :value="clickPosition"/>
-                <el-button @click="handleClick1('copyValID')">Copy</el-button>
-                <div class="title">cartographic-log,cartographic-lat,cartographic-height</div>
-                <input id="" type="text" :value="clickPositionCartographic"/>
-                <div class="title">Cartesian</div>
-                <input id="" type="text" :value="clickPositionCartesian"/>
-            </div>
-
-            <br>
-            <div class="getPosition">
-                <div class="title">camera</div>
-                <div class="title">x,y,z,heading,pitch,roll</div>
-                <input id="copyValID1" type="text" :value="cameraPosition"/>
-                <el-button @click="handleClick1('copyValID1')">Copy</el-button>
-            </div>
-            <br>
-
-            <div class="getPosition">
-                <div>name: {{ currentEntities ? currentEntities.name : '暂无数据' }}</div>
-                <div>Cartesian3: {{ currentEntities ? currentEntities.position._value : '暂无数据' }}</div>
-                <div class="inpu">
-                    <el-input size="small" v-model="rotationgPatams.Heading" placeholder="Heading"></el-input>
-                </div>
-                <div class="inpu">
-                    <el-input size="small" v-model="rotationgPatams.Pitch" placeholder="Pitch"></el-input>
-                </div>
-                <div class="inpu">
-                    <el-input size="small" v-model="rotationgPatams.Roll" placeholder="Roll"></el-input>
-                </div>
-                <div class="inpu">
-                    <el-button @click="rotateEntity">rotate</el-button>
-                </div>
-                <div class="inpu">
-                    <span>drag</span>
-                    <el-switch
-                        @change="dragChange"
-                        v-model="switchValue"
-                        active-color="#13ce66"
-                        inactive-color="#2B2B2B">
-                    </el-switch>
-                </div>
-            </div>
-
-        </div>
-        <div v-if="!fakeBoard && showPanel" class="bottomCenter">
-            <HelloWorldBottom :cApp="this.cApp" ref="mychild"></HelloWorldBottom>
-        </div>
-
-        <div v-if="fakeBoard" class="fakeTop">1</div>
-        <div v-if="fakeBoard" class="fakeL">1</div>
-        <div v-if="fakeBoard" class="fakeR">1</div>
-
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
+
+        <!--开发仪表盘-->
+        <div v-if="!fakeBoard && showPanel" style="width: 100%; height: 100%">
+            <div class="header">
+
+                <div style="color: white">
+                    <div>基础底图</div>
+                    <el-select size="mini" v-model="optionsLayersIndex" placeholder="基础底图">
+                        <el-option
+                            v-for="item in optionsLayers"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
+
+                <div style="color: white">
+                    <div>模型对象</div>
+                    <el-select size="mini" v-model="modelData" placeholder="模型对象">
+                        <el-option
+                            v-for="item in modelDataList"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
+
+                <div>
+                    <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal"
+                             @select="handleSelect">
+                        <el-menu-item index="">
+                            <span>全球光照</span>
+                            <el-tooltip :content="'moveToolTips'" placement="top">
+                                <el-switch
+                                    @change="changeGlobleLight"
+                                    v-model="changeGlobleLightFlag"
+                                    active-color="#13ce66"
+                                    inactive-color="#2B2B2B">
+                                </el-switch>
+                            </el-tooltip>
+                        </el-menu-item>
+                        <el-menu-item index="">
+                            <span>光照系统</span>
+                            <el-tooltip :content="'moveToolTips'" placement="top">
+                                <el-switch
+                                    @change="changeLight"
+                                    v-model="changeLightFlag"
+                                    active-color="#13ce66"
+                                    inactive-color="#2B2B2B">
+                                </el-switch>
+                            </el-tooltip>
+                        </el-menu-item>
+                        <el-menu-item index="">
+                            <span>shadow</span>
+                            <el-tooltip :content="'moveToolTips'" placement="top">
+                                <el-switch
+                                    @change="changeShadow"
+                                    v-model="changeShadowFlag"
+                                    active-color="#13ce66"
+                                    inactive-color="#2B2B2B">
+                                </el-switch>
+                            </el-tooltip>
+                        </el-menu-item>
+                        <el-menu-item index="addBloom">Bloom</el-menu-item>
+                        <el-menu-item index="addOutline">Outline</el-menu-item>
+                        <el-menu-item index="14">关闭冗余</el-menu-item>
+                        <el-menu-item index="">
+                            <span>地形叠加</span>
+                            <el-tooltip :content="'关闭地形'" placement="top">
+                                <el-switch
+                                    @change="terrainChange"
+                                    v-model="terrainFlag"
+                                    active-color="#13ce66"
+                                    inactive-color="#2B2B2B">
+                                </el-switch>
+                            </el-tooltip>
+                        </el-menu-item>
+                        <el-menu-item>
+                            <el-select size="mini" v-model="value" placeholder="请选择">
+                                <el-option
+                                    v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value">
+                                </el-option>
+                            </el-select>
+                        </el-menu-item>
+
+                        <el-menu-item style="width: 100px">
+                            <el-tooltip :content="'整体亮度'" placement="top">
+                                <el-slider :max="2" :step="0.1" v-model="brightness">
+                                </el-slider>
+                            </el-tooltip>
+                        </el-menu-item>
+                        <el-menu-item style="width: 100px">
+                            <el-tooltip :content="'视角大小'" placement="top">
+                                <el-slider :max="2" :step="0.1" v-model="fov">
+                                </el-slider>
+                            </el-tooltip>
+                        </el-menu-item>
+                    </el-menu>
+                </div>
+
+                <div class="menber">
+                    <span>联鹏科技</span>
+                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                </div>
+            </div>
+            <div class="leftTree">
+                <div class="leftTreeMenu">
+                    <div @click="currentLeft = '图层'">图层</div>
+                    <div @click="currentLeft = '实体'">实体</div>
+                </div>
+
+                <el-tree v-if="currentLeft == '实体'" :data="treeData" :props="defaultProps"
+                         @node-click="handleNodeClick"></el-tree>
+                <div v-if="currentLeft == '图层'">
+                    <div v-for="item in layersData"> {{ item._imageryProvider.name }}</div>
+                </div>
+            </div>
+            <div class="rightPart">
+                <div>
+                    MATH
+                </div>
+                <br>
+                <div class="getPosition">
+                    <div class="title">选取位置:</div>
+                    <div class="title">log,lat,height</div>
+                    <input id="copyValID" type="text" :value="clickPosition"/>
+                    <el-button @click="handleClick1('copyValID')">Copy</el-button>
+                    <div class="title">cartographic-log,cartographic-lat,cartographic-height</div>
+                    <input id="" type="text" :value="clickPositionCartographic"/>
+                    <div class="title">Cartesian</div>
+                    <input id="" type="text" :value="clickPositionCartesian"/>
+                </div>
+
+                <br>
+                <div class="getPosition">
+                    <div class="title">camera</div>
+                    <div class="title">x,y,z,heading,pitch,roll</div>
+                    <input id="copyValID1" type="text" :value="cameraPosition"/>
+                    <el-button @click="handleClick1('copyValID1')">Copy</el-button>
+                </div>
+                <br>
+
+                <div class="getPosition">
+                    <div>name: {{ currentEntities ? currentEntities.name : '暂无数据' }}</div>
+                    <div>Cartesian3: {{ currentEntities ? currentEntities.position._value : '暂无数据' }}</div>
+                    <div class="inpu">
+                        <el-input size="small" v-model="rotationgPatams.Heading" placeholder="Heading"></el-input>
+                    </div>
+                    <div class="inpu">
+                        <el-input size="small" v-model="rotationgPatams.Pitch" placeholder="Pitch"></el-input>
+                    </div>
+                    <div class="inpu">
+                        <el-input size="small" v-model="rotationgPatams.Roll" placeholder="Roll"></el-input>
+                    </div>
+                    <div class="inpu">
+                        <el-button @click="rotateEntity">rotate</el-button>
+                    </div>
+                    <div class="inpu">
+                        <span>drag</span>
+                        <el-switch
+                            @change="dragChange"
+                            v-model="switchValue"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                </div>
+
+            </div>
+            <div class="bottomCenter">
+                <HelloWorldBottom :cApp="this.cApp" ref="mychild"></HelloWorldBottom>
+            </div>
+        </div>
+
+        <!--模拟数据台-->
+        <div v-if="fakeBoard" style="width: 100%; height: 100%">
+            <div class="fakeTop">1</div>
+            <div class="fakeL">1</div>
+            <div class="fakeR">1</div>
+        </div>
 
         <div class="modeChange">
             <span>开发模式</span>
@@ -198,8 +196,6 @@
                 inactive-color="#2B2B2B">
             </el-switch>
         </div>
-
-
     </div>
 </template>
 <script>
@@ -414,21 +410,13 @@ export default {
             console.log(data)
             this.cApp.lookAtByName(data.label)
         },
-        handleSelect(key, keyPath) {
-            if (key == 2) {
-            } else if (key == 3) {
-            } else if (key == 11) {
-
-            } else if (key == 12) {
-            } else if (key == 13) {
-            } else if (key == 14) {
+        handleSelect(key) {
+            if (key == 14) {
                 this.cApp.closeAll()
             } else if (key == 'addBloom') {
                 this.cApp.addBloom()
             } else if (key == 'addOutline') {
                 this.cApp.addOutline()
-            } else if (key == '华盛顿IMG') {
-            } else if (key == 'OSM建筑') {
             }
         },
         changeGlobleLight() {
@@ -448,6 +436,7 @@ export default {
             this.cApp = new CesiumApp()
             this.cApp.initMap()
             this.entitysList = this.cApp.getViewerEntitys()
+
             this.cApp.eventCenter.addEventListener('clickPosition', function (data) {
                 self.clickPosition = data.message.position
                 self.clickPositionCartographic = data.message.positionCartogtaphic
@@ -489,6 +478,17 @@ export default {
 </script>
 
 <style lang="scss">
+
+/**
+FPS显示
+ */
+.cesium-performanceDisplay-defaultContainer {
+    position: absolute;
+    top: 6px;
+    right: 152px;
+    text-align: right;
+    z-index: 999999;
+}
 
 @import "../style/reset.scss";
 //引入方式
@@ -557,12 +557,28 @@ export default {
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-start;
         position: absolute;
         left: 0;
         top: 0;
         z-index: 9999;
         background-color: #3C3F41;
+
+        .menber {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            z-index: 99999;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            span {
+                margin-right: 5px;
+            }
+        }
     }
 
     .leftTree {
