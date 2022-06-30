@@ -30,11 +30,10 @@
                     </el-select>
                 </div>
 
-                <div>
-                    <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal"
-                             @select="handleSelect">
-                        <el-menu-item index="">
-                            <span>全球光照</span>
+                <div class="topMenus">
+                    <div class="topMenusItem">
+                        <div class="topMenusItem1">全球光照</div>
+                        <div class="topMenusItem1">
                             <el-tooltip :content="'moveToolTips'" placement="top">
                                 <el-switch
                                     @change="changeGlobleLight"
@@ -43,9 +42,12 @@
                                     inactive-color="#2B2B2B">
                                 </el-switch>
                             </el-tooltip>
-                        </el-menu-item>
-                        <el-menu-item index="">
-                            <span>光照系统</span>
+                        </div>
+                    </div>
+
+                    <div class="topMenusItem">
+                        <div class="topMenusItem1">光照系统</div>
+                        <div class="topMenusItem1">
                             <el-tooltip :content="'moveToolTips'" placement="top">
                                 <el-switch
                                     @change="changeLight"
@@ -54,9 +56,11 @@
                                     inactive-color="#2B2B2B">
                                 </el-switch>
                             </el-tooltip>
-                        </el-menu-item>
-                        <el-menu-item index="">
-                            <span>shadow</span>
+                        </div>
+                    </div>
+                    <div class="topMenusItem">
+                        <div class="topMenusItem1">shadow</div>
+                        <div class="topMenusItem1">
                             <el-tooltip :content="'moveToolTips'" placement="top">
                                 <el-switch
                                     @change="changeShadow"
@@ -65,12 +69,11 @@
                                     inactive-color="#2B2B2B">
                                 </el-switch>
                             </el-tooltip>
-                        </el-menu-item>
-                        <el-menu-item index="addBloom">Bloom</el-menu-item>
-                        <el-menu-item index="addOutline">Outline</el-menu-item>
-                        <el-menu-item index="14">关闭冗余</el-menu-item>
-                        <el-menu-item index="">
-                            <span>地形叠加</span>
+                        </div>
+                    </div>
+                    <div class="topMenusItem">
+                        <div class="topMenusItem1">地形叠加</div>
+                        <div class="topMenusItem1">
                             <el-tooltip :content="'关闭地形'" placement="top">
                                 <el-switch
                                     @change="terrainChange"
@@ -79,8 +82,10 @@
                                     inactive-color="#2B2B2B">
                                 </el-switch>
                             </el-tooltip>
-                        </el-menu-item>
-                        <el-menu-item>
+                        </div>
+                    </div>
+                    <div class="topMenusItem">
+                        <div class="topMenusItem1">
                             <el-select size="mini" v-model="value" placeholder="请选择">
                                 <el-option
                                     v-for="item in options"
@@ -89,24 +94,31 @@
                                     :value="item.value">
                                 </el-option>
                             </el-select>
-                        </el-menu-item>
-
-                        <el-menu-item style="width: 100px">
-                            <el-tooltip :content="'整体亮度'" placement="top">
-                                <el-slider :max="2" :step="0.1" v-model="brightness">
-                                </el-slider>
-                            </el-tooltip>
-                        </el-menu-item>
-                        <el-menu-item style="width: 100px">
-                            <el-tooltip :content="'视角大小'" placement="top">
-                                <el-slider :max="2" :step="0.1" v-model="fov">
-                                </el-slider>
-                            </el-tooltip>
-                        </el-menu-item>
+                        </div>
+                    </div>
+                    <div class="topMenusItem">
+                        <div class="topMenusItem1">整体亮度</div>
+                        <div class="topMenusItem1">
+                            <el-slider :max="2" :step="0.1" v-model="brightness">
+                            </el-slider>
+                        </div>
+                    </div>
+                    <div class="topMenusItem">
+                        <div class="topMenusItem1">视角大小</div>
+                        <div class="topMenusItem1">
+                            <el-slider :max="2" :step="0.1" v-model="fov">
+                            </el-slider>
+                        </div>
+                    </div>
+                    <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal"
+                             @select="handleSelect">
+                        <el-menu-item index="addBloom">Bloom</el-menu-item>
+                        <el-menu-item index="addOutline">Outline</el-menu-item>
+                        <el-menu-item index="14">关闭冗余</el-menu-item>
                     </el-menu>
                 </div>
 
-                <div class="menber">
+                <div class="member">
                     <span>联鹏科技</span>
                     <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                 </div>
@@ -478,6 +490,14 @@ export default {
 </script>
 
 <style lang="scss">
+div {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 5px;
+}
+
+.menuitem {
+    width: 100px !important;
+}
 
 /**
 FPS显示
@@ -488,6 +508,14 @@ FPS显示
     right: 152px;
     text-align: right;
     z-index: 999999;
+}
+
+.slider {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100px;
+    height: 100%;
 }
 
 @import "../style/reset.scss";
@@ -555,6 +583,7 @@ FPS显示
 
     .header {
         width: 100%;
+        height: 6%;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -564,7 +593,28 @@ FPS显示
         z-index: 9999;
         background-color: #3C3F41;
 
-        .menber {
+        .topMenus {
+            width: 80%;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            .topMenusItem {
+                width: 8%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                .topMenusItem1 {
+                    width: 100%;
+                    height: 50%;
+                }
+            }
+        }
+
+        .member {
             position: absolute;
             right: 20px;
             top: 10px;
