@@ -217,6 +217,15 @@
                             inactive-color="#2B2B2B">
                         </el-switch>
                     </div>
+                    <div>
+                        <span>CanvasBillboard</span>
+                        <el-switch
+                            @change="CanvasBillboardChange"
+                            v-model="CanvasBillboardFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
                 </div>
             </el-tab-pane>
 
@@ -245,7 +254,8 @@ export default {
             primitiveFlag: false,
             BlinkPointFlag: false,
             BillboardFlag: false,
-            blinkFaceFlag: false
+            blinkFaceFlag: false,
+            CanvasBillboardFlag: false
 
         }
     },
@@ -290,6 +300,13 @@ export default {
                 this.cApp.normalPoints.addBlinkFace()
             } else {
                 this.cApp.normalPoints.removeBlinkPoint()
+            }
+        },
+        CanvasBillboardChange() {
+            if (this.CanvasBillboardFlag) {
+                this.cApp.normalPoints.addBillCanvas()
+            } else {
+                this.cApp.normalPoints.removeBillCanvas()
             }
         },
         handleClick11() {
