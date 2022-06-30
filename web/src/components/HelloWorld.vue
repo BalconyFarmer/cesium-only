@@ -34,41 +34,35 @@
                     <div class="topMenusItem">
                         <div class="topMenusItem1">全球光照</div>
                         <div class="topMenusItem1">
-                            <el-tooltip :content="'moveToolTips'" placement="top">
-                                <el-switch
-                                    @change="changeGlobleLight"
-                                    v-model="changeGlobleLightFlag"
-                                    active-color="#13ce66"
-                                    inactive-color="#2B2B2B">
-                                </el-switch>
-                            </el-tooltip>
+                            <el-switch
+                                @change="changeGlobleLight"
+                                v-model="changeGlobleLightFlag"
+                                active-color="#13ce66"
+                                inactive-color="#2B2B2B">
+                            </el-switch>
                         </div>
                     </div>
 
                     <div class="topMenusItem">
                         <div class="topMenusItem1">光照系统</div>
                         <div class="topMenusItem1">
-                            <el-tooltip :content="'moveToolTips'" placement="top">
-                                <el-switch
-                                    @change="changeLight"
-                                    v-model="changeLightFlag"
-                                    active-color="#13ce66"
-                                    inactive-color="#2B2B2B">
-                                </el-switch>
-                            </el-tooltip>
+                            <el-switch
+                                @change="changeLight"
+                                v-model="changeLightFlag"
+                                active-color="#13ce66"
+                                inactive-color="#2B2B2B">
+                            </el-switch>
                         </div>
                     </div>
                     <div class="topMenusItem">
                         <div class="topMenusItem1">shadow</div>
                         <div class="topMenusItem1">
-                            <el-tooltip :content="'moveToolTips'" placement="top">
-                                <el-switch
-                                    @change="changeShadow"
-                                    v-model="changeShadowFlag"
-                                    active-color="#13ce66"
-                                    inactive-color="#2B2B2B">
-                                </el-switch>
-                            </el-tooltip>
+                            <el-switch
+                                @change="changeShadow"
+                                v-model="changeShadowFlag"
+                                active-color="#13ce66"
+                                inactive-color="#2B2B2B">
+                            </el-switch>
                         </div>
                     </div>
                     <div class="topMenusItem">
@@ -490,6 +484,9 @@ export default {
 </script>
 
 <style lang="scss">
+.el-menu-demo {
+    height: 90%;
+}
 div {
     color: rgba(255, 255, 255, 0.8);
     font-size: 5px;

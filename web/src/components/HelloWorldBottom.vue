@@ -513,9 +513,7 @@ export default {
 .all {
     width: 100%;
     height: 100%;
-
     background-color: rgba(43, 43, 43, .5);
-    color: white;
 
     -moz-user-select: none;
     -khtml-user-select: none;
