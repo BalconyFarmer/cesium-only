@@ -43,3 +43,8 @@
 .el-tabs__item {
   color: #859399;
 }
+
+// 基础数据地图select
+.el-select-dropdown {
+  z-index: 9999999 !important;
+}

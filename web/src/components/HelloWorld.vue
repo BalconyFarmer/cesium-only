@@ -2,16 +2,39 @@
     <div class="all">
         <div v-if="!fakeBoard" class="header">
             <div>
-                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                    <el-menu-item index="13">西双版纳</el-menu-item>
-                    <el-menu-item index="11">成都tiles</el-menu-item>
-                    <el-menu-item index="2">云南JSON</el-menu-item>
-                    <el-menu-item index="3">纽约tiles</el-menu-item>
-                    <el-menu-item index="12">倾斜摄影</el-menu-item>
-                    <el-menu-item index="华盛顿IMG">华盛顿IMG</el-menu-item>
-                    <el-menu-item index="OSM建筑">OSM建筑</el-menu-item>
-                </el-menu>
+                <el-select size="mini" v-model="optionsLayersIndex" placeholder="基础底图">
+                    <el-option
+                        v-for="item in optionsLayers"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
             </div>
+
+            <div style="color: white">
+                <div>模型对象</div>
+                <el-select size="mini" v-model="modelData" placeholder="模型对象">
+                    <el-option
+                        v-for="item in modelDataList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
+            </div>
+
+            <!--            <div>-->
+            <!--                <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">-->
+            <!--                    <el-menu-item index="13">西双版纳</el-menu-item>-->
+            <!--                    <el-menu-item index="11">成都tiles</el-menu-item>-->
+            <!--                    <el-menu-item index="2">云南JSON</el-menu-item>-->
+            <!--                    <el-menu-item index="3">纽约tiles</el-menu-item>-->
+            <!--                    <el-menu-item index="12">倾斜摄影</el-menu-item>-->
+            <!--                    <el-menu-item index="华盛顿IMG">华盛顿IMG</el-menu-item>-->
+            <!--                    <el-menu-item index="OSM建筑">OSM建筑</el-menu-item>-->
+            <!--                </el-menu>-->
+            <!--            </div>-->
             <div style="color: white;font-weight: bold;display: flex;flex-direction: column;justify-content: center">
                 <span>联鹏科技</span>
             </div>
@@ -74,16 +97,7 @@
                             </el-option>
                         </el-select>
                     </el-menu-item>
-                    <el-menu-item>
-                        <el-select size="mini" v-model="optionsLayersIndex" placeholder="基础底图">
-                            <el-option
-                                v-for="item in optionsLayers"
-                                :key="item.value"
-                                :label="item.label"
-                                :value="item.value">
-                            </el-option>
-                        </el-select>
-                    </el-menu-item>
+
                     <el-menu-item style="width: 100px">
                         <el-tooltip :content="'整体亮度'" placement="top">
                             <el-slider :max="2" :step="0.1" v-model="brightness">
@@ -105,9 +119,10 @@
                 <div @click="currentLeft = '实体'">实体</div>
             </div>
 
-            <el-tree v-if="currentLeft == '实体'" :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+            <el-tree v-if="currentLeft == '实体'" :data="treeData" :props="defaultProps"
+                     @node-click="handleNodeClick"></el-tree>
             <div v-if="currentLeft == '图层'">
-                <div v-for="item in layersData"> {{item._imageryProvider.name}}</div>
+                <div v-for="item in layersData"> {{ item._imageryProvider.name }}</div>
             </div>
 
         </div>
@@ -199,6 +214,39 @@ export default {
         HelloWorldBottom
     },
     watch: {
+
+        modelData: {
+            handler(newValue) {
+                if (this.cApp) {
+                    switch (this.modelData) {
+                        case "西双版纳":
+                            this.cApp.addTimeAction()
+                            break
+                        case "成都tiles":
+                            this.cApp.runChengDu()
+                            this.fakeBoard = true
+                            break
+                        case "云南JSON":
+                            this.cApp.loadJson.loadJsonData("/geoJson/云南省.json")
+                            break
+                        case "纽约tiles":
+                            this.cApp.cesium3DTileset.toYN()
+                            break
+                        case "倾斜摄影":
+                            this.cApp.obliquePhotography.addOblique()
+                            break
+                        case "华盛顿IMG":
+                            this.cApp.huashengdunImg()
+                            break
+                        case "OSM建筑":
+                            this.cApp.addOSMBuilding()
+                            break
+                    }
+                }
+            },
+            deep: true,
+            immediate: false
+        },
         brightness: {
             handler(newValue) {
                 if (this.cApp) {
@@ -262,6 +310,29 @@ export default {
                 label: '2D模式'
             },],
             optionsLayersIndex: null,
+            modelData: null,
+            modelDataList: [{
+                value: '西双版纳',
+                label: '西双版纳'
+            }, {
+                value: '成都tiles',
+                label: '成都tiles'
+            }, {
+                value: '云南JSON',
+                label: '云南JSON'
+            }, {
+                value: '纽约tiles',
+                label: '纽约tiles'
+            }, {
+                value: '倾斜摄影',
+                label: '倾斜摄影'
+            }, {
+                value: '华盛顿IMG',
+                label: '华盛顿IMG'
+            }, {
+                value: 'OSM建筑',
+                label: 'OSM建筑'
+            },],
             optionsLayers: [{
                 value: 'google实景图层',
                 label: 'google实景图层'
@@ -277,7 +348,7 @@ export default {
             }, {
                 value: 'BING',
                 label: 'BING卫星 + BING文字'
-            },{
+            }, {
                 value: '纯黑',
                 label: '纯黑'
             },],
@@ -345,16 +416,11 @@ export default {
         },
         handleSelect(key, keyPath) {
             if (key == 2) {
-                this.cApp.loadJson.loadJsonData("/geoJson/云南省.json")
             } else if (key == 3) {
-                this.cApp.cesium3DTileset.toYN()
             } else if (key == 11) {
-                this.cApp.runChengDu()
-                this.fakeBoard = true
+
             } else if (key == 12) {
-                this.cApp.obliquePhotography.addOblique()
             } else if (key == 13) {
-                this.cApp.addTimeAction()
             } else if (key == 14) {
                 this.cApp.closeAll()
             } else if (key == 'addBloom') {
@@ -362,9 +428,7 @@ export default {
             } else if (key == 'addOutline') {
                 this.cApp.addOutline()
             } else if (key == '华盛顿IMG') {
-                this.cApp.huashengdunImg()
             } else if (key == 'OSM建筑') {
-                this.cApp.addOSMBuilding()
             }
         },
         changeGlobleLight() {
@@ -425,6 +489,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 @import "../style/reset.scss";
 //引入方式
 @import "../style/ele.scss"; //引入方式
@@ -497,7 +562,7 @@ export default {
         left: 0;
         top: 0;
         z-index: 9999;
-        background-color: #3C3F41 ;
+        background-color: #3C3F41;
     }
 
     .leftTree {
@@ -510,6 +575,7 @@ export default {
         overflow-y: auto;
         background-color: rgba(43, 43, 43, .5);
         color: white;
+
         .leftTreeMenu {
             display: flex;
             flex-direction: row;
