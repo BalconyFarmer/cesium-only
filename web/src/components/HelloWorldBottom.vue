@@ -69,7 +69,26 @@
                 </div>
             </el-tab-pane>
             <el-tab-pane label="线状对象" name="pan7">
-
+                <div class="env">
+                    <div>
+                        <span>流动线1</span>
+                        <el-switch
+                            @change="lin1"
+                            v-model="lin1Flag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>流动线2</span>
+                        <el-switch
+                            @change="lin2"
+                            v-model="lin2Flag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                </div>
             </el-tab-pane>
             <el-tab-pane label="面状对象" name="pan8">
                 <div class="env">
@@ -88,6 +107,15 @@
                         <el-switch
                             @change="radioChange1"
                             v-model="radioFlag1"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>流动墙</span>
+                        <el-switch
+                            @change="radioChange2"
+                            v-model="radioFlag2"
                             active-color="#13ce66"
                             inactive-color="#2B2B2B">
                         </el-switch>
@@ -284,7 +312,11 @@ export default {
             blinkFaceFlag: false,
             CanvasBillboardFlag: false,
             radioFlag: false,
-            radioFlag1: false
+            radioFlag1: false,
+            radioFlag2: false,
+            lin1Flag: false,
+            lin2Flag: false
+
 
         }
     },
@@ -304,6 +336,70 @@ export default {
                 radius: 300
             }
             this.cApp.part.addCircleScan(option1)
+        },
+        radioChange2() {
+
+            const postis = Cesium.Cartesian3.fromDegreesArrayHeights([
+                104.08910823719758,
+                30.62842929898083, 10.0,
+
+                104.08814901806453,
+                30.62608460511913, 10.0,
+
+                104.08463898581485,
+                30.626111794674216, 10.0,
+
+                104.08476936742238,
+                30.628519360788516, 10.0,
+
+                104.08910823719758,
+                30.62842929898083, 10.0,
+            ])
+            this.cApp.part.addFlowWall(postis)
+
+            // 以下代码注释掉会报错
+            const points = [
+                104.09228987915748,
+                30.631370714909295,
+                -0.00416811510864983,
+
+                104.09228987915748,
+                30.631370714909295,
+                500,
+            ]
+            this.cApp.part.addFlowLine(points)
+        },
+        lin1() {
+            const points1 = [
+                104.07467185705768,
+                30.616055917995904,
+                -0.007629316102345219,
+                104.07430138967433,
+                30.622748646480712,
+                -0.005523915179473804,
+                104.09266729143657,
+                30.623561610378665,
+                -0.005830162188858496,
+                104.09708344165846,
+                30.629093781029326,
+                -0.004778831731137613,
+                104.09256817183005,
+                30.631735359048665,
+                -0.002083572838517207,
+            ]
+            this.cApp.part.addRoad(points1)
+        },
+        lin2() {
+            const points = [
+                104.09228987915748,
+                30.631370714909295,
+                -0.00416811510864983,
+
+                104.09228987915748,
+                30.631370714909295,
+                500,
+            ]
+            this.cApp.part.addFlowLine(points)
         },
         kmlChange() {
             if (this.kmlFlag) {

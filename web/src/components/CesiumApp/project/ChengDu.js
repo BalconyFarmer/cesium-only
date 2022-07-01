@@ -1,5 +1,3 @@
-import ParticleSystems from '../some/ParticleSystems'
-
 
 /**
  * 成都展示项目
