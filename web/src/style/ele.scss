@@ -1,3 +1,20 @@
+.el-input__inner {
+  background-color: rgba(43, 43, 43, 0.9) !important;
+}
+.el-button {
+  background-color: rgba(43, 43, 43, 0.9) !important;
+}
+input {
+  background-color: rgba(43, 43, 43, 0.9);
+  color: white;
+}
+
+//select背景色
+.el-input--suffix .el-input__inner {
+  padding-right: 30px;
+  background-color: rgba(43, 43, 43, 0.9);
+}
+
 .el-tree-node__content:hover {
   background-color: rgba(43, 43, 43, 0.9);
 }

@@ -138,7 +138,7 @@
                     <div class="title">选取位置:</div>
                     <div class="title">log,lat,height</div>
                     <input id="copyValID" type="text" :value="clickPosition"/>
-                    <el-button @click="handleClick1('copyValID')">Copy</el-button>
+                    <el-button size="mini" @click="handleClick1('copyValID')">Copy</el-button>
                     <div class="title">cartographic-log,cartographic-lat,cartographic-height</div>
                     <input id="" type="text" :value="clickPositionCartographic"/>
                     <div class="title">Cartesian</div>
@@ -150,7 +150,7 @@
                     <div class="title">camera</div>
                     <div class="title">x,y,z,heading,pitch,roll</div>
                     <input id="copyValID1" type="text" :value="cameraPosition"/>
-                    <el-button @click="handleClick1('copyValID1')">Copy</el-button>
+                    <el-button size="mini" @click="handleClick1('copyValID1')">Copy</el-button>
                 </div>
                 <br>
 
@@ -158,13 +158,13 @@
                     <div>name: {{ currentEntities ? currentEntities.name : '暂无数据' }}</div>
                     <div>Cartesian3: {{ currentEntities ? currentEntities.position._value : '暂无数据' }}</div>
                     <div class="inpu">
-                        <el-input size="small" v-model="rotationgPatams.Heading" placeholder="Heading"></el-input>
+                        <el-input size="mini" v-model="rotationgPatams.Heading" placeholder="Heading"></el-input>
                     </div>
                     <div class="inpu">
-                        <el-input size="small" v-model="rotationgPatams.Pitch" placeholder="Pitch"></el-input>
+                        <el-input size="mini" v-model="rotationgPatams.Pitch" placeholder="Pitch"></el-input>
                     </div>
                     <div class="inpu">
-                        <el-input size="small" v-model="rotationgPatams.Roll" placeholder="Roll"></el-input>
+                        <el-input size="mini" v-model="rotationgPatams.Roll" placeholder="Roll"></el-input>
                     </div>
                     <div class="inpu">
                         <el-button @click="rotateEntity">rotate</el-button>
@@ -663,6 +663,10 @@ FPS显示
 
         .getPosition {
             border: 1px solid gray;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
         }
     }
 
