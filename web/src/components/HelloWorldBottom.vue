@@ -88,6 +88,15 @@
                             inactive-color="#2B2B2B">
                         </el-switch>
                     </div>
+                    <div>
+                        <span>3D流动线</span>
+                        <el-switch
+                            @change="lin3"
+                            v-model="lin3Flag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
                 </div>
             </el-tab-pane>
             <el-tab-pane label="面状对象" name="pan8">
@@ -315,7 +324,8 @@ export default {
             radioFlag1: false,
             radioFlag2: false,
             lin1Flag: false,
-            lin2Flag: false
+            lin2Flag: false,
+            lin3Flag: false
 
 
         }
@@ -357,6 +367,8 @@ export default {
             ])
             this.cApp.part.addFlowWall(postis)
 
+            // 以下代码注释掉会报错
+            // 以下代码注释掉会报错
             // 以下代码注释掉会报错
             const points = [
                 104.09228987915748,
@@ -400,6 +412,15 @@ export default {
                 500,
             ]
             this.cApp.part.addFlowLine(points)
+        },
+        lin3() {
+            let center = {lon: 104.07842873842652, lat: 30.63258965135834,}
+
+            let cities = [
+                {'lon': 104.07445200121597, 'lat': 30.623338996273173,},
+                {'lon': 104.08148794273148, 'lat': 30.623739056793006,},
+            ]
+            this.cApp.part.addFlyLine3D(center, cities)
         },
         kmlChange() {
             if (this.kmlFlag) {

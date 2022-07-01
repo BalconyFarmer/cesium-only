@@ -123,6 +123,7 @@ export default class CustomStyle {
             if (resultOut != undefined) {
                 resultOut = result
             }
+
             return result
         }
 
@@ -155,6 +156,9 @@ export default class CustomStyle {
                 }
             })
         }
+
+        this.app.viewer.zoomTo(this.app.viewer.entities)
+
     }
 
     /**
