@@ -7,6 +7,7 @@
             :visible.sync="dialogVisible"
             width="30%"
             >
+            <span @click="runChengdu">0.成都</span>
             <span>1.铁路公安</span>
             <span>2.西双版纳</span>
             <span>3.滇中引水</span>
@@ -396,6 +397,11 @@ export default {
         }
     },
     methods: {
+        runChengdu() {
+            this.cApp.runChengDu()
+            this.fakeBoard = true
+            this.dialogVisible = false
+        },
         openDialog() {
             this.dialogVisible = true
         },

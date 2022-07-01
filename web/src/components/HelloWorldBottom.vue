@@ -1,7 +1,101 @@
 <template>
     <div class="all">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="ModelInner管理" name="first">
+            <el-tab-pane label="点状对象" name="pan6">
+                <div class="env">
+                    <div>
+                        <span>KML点聚合</span>
+                        <el-switch
+                            @change="kmlChange"
+                            v-model="kmlFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>通用点聚合</span>
+                        <el-switch
+                            @change="normalPointsClusterChange"
+                            v-model="normalPointsClusterChangeFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>原生点</span>
+                        <el-switch
+                            @change="primitiveChange"
+                            v-model="primitiveFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>闪烁Point</span>
+                        <el-switch
+                            @change="BlinkPointChange"
+                            v-model="BlinkPointFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>闪烁Billboard</span>
+                        <el-switch
+                            @change="BillboardFlagChange"
+                            v-model="BillboardFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>闪烁面</span>
+                        <el-switch
+                            @change="blinkFaceChange"
+                            v-model="blinkFaceFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>CanvasBillboard</span>
+                        <el-switch
+                            @change="CanvasBillboardChange"
+                            v-model="CanvasBillboardFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="线状对象" name="pan7">
+
+            </el-tab-pane>
+            <el-tab-pane label="面状对象" name="pan8">
+                <div class="env">
+
+                    <div>
+                        <span>雷达1</span>
+                        <el-switch
+                            @change="radioChange"
+                            v-model="radioFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>雷达2</span>
+                        <el-switch
+                            @change="radioChange1"
+                            v-model="radioFlag1"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                </div>
+            </el-tab-pane>
+
+            <el-tab-pane label="3D对象" name="first">
                 <div class="geo">
                     <div class="normal b" @mousedown="mouseDown('bilbord')">
                         bilbord
@@ -83,7 +177,7 @@
                     </div>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="material管理" name="second">
+            <el-tab-pane label="材质对象" name="second">
                 <div class="material">
                     <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">
                         0
@@ -106,7 +200,7 @@
                     </div>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="环境管理" name="third">
+            <el-tab-pane label="环境对象" name="third">
                 <div class="env">
                     <div class="normal addMaterial" @mousedown="mouseDown('addDarckNessEff')">
                         Night
@@ -161,73 +255,6 @@
                     </div>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="点状对象" name="pan6">
-                <div class="env">
-                    <div>
-                        <span>KML点聚合</span>
-                        <el-switch
-                            @change="kmlChange"
-                            v-model="kmlFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>通用点聚合</span>
-                        <el-switch
-                            @change="normalPointsClusterChange"
-                            v-model="normalPointsClusterChangeFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>原生点</span>
-                        <el-switch
-                            @change="primitiveChange"
-                            v-model="primitiveFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>闪烁Point</span>
-                        <el-switch
-                            @change="BlinkPointChange"
-                            v-model="BlinkPointFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>闪烁Billboard</span>
-                        <el-switch
-                            @change="BillboardFlagChange"
-                            v-model="BillboardFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>闪烁面</span>
-                        <el-switch
-                            @change="blinkFaceChange"
-                            v-model="blinkFaceFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>CanvasBillboard</span>
-                        <el-switch
-                            @change="CanvasBillboardChange"
-                            v-model="CanvasBillboardFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B">
-                        </el-switch>
-                    </div>
-                </div>
-            </el-tab-pane>
 
         </el-tabs>
     </div>
@@ -255,11 +282,29 @@ export default {
             BlinkPointFlag: false,
             BillboardFlag: false,
             blinkFaceFlag: false,
-            CanvasBillboardFlag: false
+            CanvasBillboardFlag: false,
+            radioFlag: false,
+            radioFlag1: false
 
         }
     },
     methods: {
+        radioChange() {
+            const option = {
+                lon: 104.08518355581377,
+                lat: 30.632540812118847,
+                radius: 200
+            }
+            this.cApp.part.addRadarScan(option)
+        },
+        radioChange1() {
+            const option1 = {
+                lon: 104.08077683485338,
+                lat: 30.635968171376696,
+                radius: 300
+            }
+            this.cApp.part.addCircleScan(option1)
+        },
         kmlChange() {
             if (this.kmlFlag) {
                 this.cApp.points.addKml()
