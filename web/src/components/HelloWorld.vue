@@ -2,6 +2,20 @@
     <div class="all">
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
+        <el-dialog
+            title="项目列表"
+            :visible.sync="dialogVisible"
+            width="30%"
+            >
+            <span>1.铁路公安</span>
+            <span>2.西双版纳</span>
+            <span>3.滇中引水</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
+
         <!--开发仪表盘-->
         <div v-if="!fakeBoard && showPanel" style="width: 100%; height: 100%">
             <div class="header">
@@ -29,6 +43,19 @@
                         </el-option>
                     </el-select>
                 </div>
+
+                <div style="color: white">
+                    <div>地球模式</div>
+                    <el-select size="mini" v-model="value" placeholder="请选择">
+                        <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>
+                    </el-select>
+                </div>
+
 
                 <div class="topMenus">
                     <div class="topMenusItem">
@@ -79,18 +106,6 @@
                         </div>
                     </div>
                     <div class="topMenusItem">
-                        <div class="topMenusItem1">
-                            <el-select size="mini" v-model="value" placeholder="请选择">
-                                <el-option
-                                    v-for="item in options"
-                                    :key="item.value"
-                                    :label="item.label"
-                                    :value="item.value">
-                                </el-option>
-                            </el-select>
-                        </div>
-                    </div>
-                    <div class="topMenusItem">
                         <div class="topMenusItem1">整体亮度</div>
                         <div class="topMenusItem1">
                             <el-slider :max="2" :step="0.1" v-model="brightness">
@@ -112,9 +127,10 @@
                     </el-menu>
                 </div>
 
-                <div class="member">
+                <div @click="openDialog" class="member">
                     <span>联鹏科技</span>
-                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                    <el-avatar
+                               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                 </div>
             </div>
             <div class="leftTree">
@@ -289,6 +305,7 @@ export default {
 
     data() {
         return {
+            dialogVisible: false,
             fov: 1,
             changeShadowFlag: false,
             changeLightFlag: false,
@@ -379,6 +396,12 @@ export default {
         }
     },
     methods: {
+        openDialog() {
+            this.dialogVisible = true
+        },
+        handleClose() {
+
+        },
         handleClick1(ID) {
             let copyVal = document.getElementById(ID)
             copyVal.select()
@@ -488,6 +511,7 @@ export default {
 .el-menu-demo {
     height: 90%;
 }
+
 div {
     color: rgba(255, 255, 255, 0.8);
     font-size: 5px;
@@ -581,6 +605,7 @@ FPS显示
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
+
     .header {
         width: 100%;
         height: 6%;
