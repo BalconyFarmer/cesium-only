@@ -290,6 +290,33 @@
                             inactive-color="#2B2B2B">
                         </el-switch>
                     </div>
+                    <div>
+                        <span>飞行飞机</span>
+                        <el-switch
+                            @change="fly"
+                            v-model="flyFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>移动小人</span>
+                        <el-switch
+                            @change="fly1"
+                            v-model="flyFlag1"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                    <div>
+                        <span>移动小车</span>
+                        <el-switch
+                            @change="fly2"
+                            v-model="flyFlag2"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
                 </div>
             </el-tab-pane>
 
@@ -325,8 +352,10 @@ export default {
             radioFlag2: false,
             lin1Flag: false,
             lin2Flag: false,
-            lin3Flag: false
-
+            lin3Flag: false,
+            flyFlag: false,
+            flyFlag1: false,
+            flyFlag2: false,
 
         }
     },
@@ -523,6 +552,28 @@ export default {
         },
         moveToolTipsChange() {
             this.cApp.startMoveTips()
+        },
+        fly() {
+            // 飞机
+            const poAirPlane = [104.0884625472979, 30.629946234239107, 100]
+            this.cApp.load3DModel.loadGLB(poAirPlane)
+            this.cApp.viewer.zoomTo(this.cApp.viewer.entities)
+
+        },
+        fly1() {
+            // 原地踏步人
+            const poPer = Cesium.Cartesian3.fromDegrees(104.0884177825623, 30.62721695985099, 0)
+            const movePeople = this.cApp.load3DModel.loadGltf(poPer)
+            this.cApp.viewer.entities.add(movePeople)
+            this.cApp.viewer.zoomTo(this.cApp.viewer.entities)
+
+        },
+        fly2() {
+            // 移动小车
+            let data = [104.088629853244, 30.627623370523818, -0.002239088567849463,]
+            this.cApp.load3DModel.loadGlbPrimitives(data)
+            this.cApp.viewer.zoomTo(this.cApp.viewer.entities)
+
         },
         handleClick(tab, event) {
             console.log(tab, event)

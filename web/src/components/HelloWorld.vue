@@ -6,7 +6,7 @@
             title="项目列表"
             :visible.sync="dialogVisible"
             width="30%"
-            >
+        >
             <span @click="runChengdu">0.成都</span>
             <span>1.铁路公安</span>
             <span>2.西双版纳</span>
@@ -131,7 +131,7 @@
                 <div @click="openDialog" class="member">
                     <span>联鹏科技</span>
                     <el-avatar
-                               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                 </div>
             </div>
             <div class="leftTree">
@@ -334,9 +334,6 @@ export default {
             modelDataList: [{
                 value: '西双版纳',
                 label: '西双版纳'
-            }, {
-                value: '成都tiles',
-                label: '成都tiles'
             }, {
                 value: '云南JSON',
                 label: '云南JSON'
