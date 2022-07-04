@@ -9,25 +9,6 @@ export default class Cesium3DTileset {
      * 加载纽约Tiles数据
      */
     toYN () {
-/*        // 设置camera
-        // 1. Set position with a top-down view
-        this.app.viewer.camera.flyTo({
-            destination: Cesium.Cartesian3.fromDegrees(-73.940159, 40.800621, 2000.0),
-            orientation: {
-                heading: Cesium.Math.toRadians(0), // east, default value is 0.0 (north) 左右摆头
-                pitch: Cesium.Math.toRadians(-45), // default value (looking down) 上下摆头 -90俯视 0 平视
-                roll: 0.0 // default value
-            }
-        })
-
-        // 添加瓦片数据 (纽约)
-        let city = this.app.viewer.scene.primitives.add(new Cesium.Cesium3DTileset({url: Cesium.IonResource.fromAssetId(75343)}))
-        let cityStyle = new Cesium.Cesium3DTileStyle({
-            color: 'color(\'blue\',0.2)',
-            show: true
-        })
-        city.style = cityStyle*/
-
 
         const tileset = this.app.viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
@@ -35,7 +16,18 @@ export default class Cesium3DTileset {
             })
         );
 
-        this.app.viewer.zoomTo(tileset)
+        // 纽约
+        const aim = {
+            x: 1332693.6981569321,
+            y:  -4654770.647244064,
+            z: 4139068.9734864207,
+            heading:1.9009852161261573,
+            pitch: -0.6070396640260713,
+            roll: 6.283170210880244,
+            duration: 1,
+        }
+        this.app.cameraFlyToCartesian3(aim)
+
     }
 
     /**

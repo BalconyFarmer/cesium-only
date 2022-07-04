@@ -238,7 +238,7 @@ export default {
             handler(newValue) {
                 if (this.cApp) {
                     switch (this.modelData) {
-                        case "西双版纳":
+                        case "西双版纳JSON":
                             this.cApp.addTimeAction()
                             break
                         case "成都tiles":
@@ -332,8 +332,8 @@ export default {
             optionsLayersIndex: null,
             modelData: null,
             modelDataList: [{
-                value: '西双版纳',
-                label: '西双版纳'
+                value: '西双版纳JSON',
+                label: '西双版纳JSON'
             }, {
                 value: '云南JSON',
                 label: '云南JSON'
