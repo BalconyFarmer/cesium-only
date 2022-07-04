@@ -60,7 +60,7 @@
 
                 <div class="topMenus">
                     <div class="topMenusItem">
-                        <div class="topMenusItem1">全球光照</div>
+                        <div class="topMenusItem1">SunLight光照</div>
                         <div class="topMenusItem1">
                             <el-switch
                                 @change="changeGlobleLight"

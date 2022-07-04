@@ -148,27 +148,38 @@ export default class CesiumApp {
     addLight() {
         // 只是添加了个方向
         // 阴影效果必须开启方向光
-        let flashlight = new Cesium.DirectionalLight({
-            direction: this.viewer.scene.camera.directionWC, // Updated every frame
-            color: Cesium.Color.YELLOW,
+        // let flashlight = new Cesium.DirectionalLight({
+        //     direction: this.viewer.scene.camera.directionWC, // Updated every frame
+        //     color: Cesium.Color.YELLOW,
+        //     intensity: 1
+        // })
+
+        var flashlight = new Cesium.DirectionalLight({
+            direction: new Cesium.Cartesian3(
+                0.2454278300540191,
+                0.8842635425193919,
+                0.39729481195458805
+            ),
+            color: Cesium.Color.WHITE,
             intensity: 1
-        })
+        });
+
         this.viewer.scene.light = flashlight
+
+    }
+
+    /**
+     * 启用以太阳为光源的地球照明。
+     */
+    switchLight() {
+        // 动态氛围灯
+        // 启用对大气和雾的动态照明效果。
+        // this.viewer.scene.globe.dynamicAtmosphereLighting = false
 
         // let option = {color: Cesium.Color.YELLOW, intensity: 2}
         // let sunLight = new Cesium.SunLight(option);
         // this.viewer.scene.light = sunLight
 
-        // 动态氛围灯
-        // 启用对大气和雾的动态照明效果。
-        this.viewer.scene.globe.dynamicAtmosphereLighting = false
-
-    }
-
-    /**
-     * 开启关闭全球光照系统
-     */
-    switchLight() {
         if (this.viewer.scene.globe.enableLighting) {
             this.viewer.scene.globe.enableLighting = false // 初始化光照
         } else {
