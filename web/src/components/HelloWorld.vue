@@ -7,10 +7,10 @@
             :visible.sync="dialogVisible"
             width="30%"
         >
-            <span @click="runChengdu">0.成都</span>
-            <span>1.铁路公安</span>
-            <span>2.西双版纳</span>
-            <span>3.滇中引水</span>
+            <span @click="runChengdu">0.纽约</span>
+            <span>1.xx</span>
+            <span>2.xx</span>
+            <span>3.xx</span>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="dialogVisible = false">取 消</el-button>
                 <el-button type="primary" @click="dialogVisible = false">确 定</el-button>

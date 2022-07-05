@@ -9,10 +9,12 @@ export default class ChengDu {
     }
 
     init () {
+        this.app.cesium3DTileset.toYN()
+
         const self = this
         this.app.closeAll()
         this.app.switchLayer('geoq智图黑')
-        // this.app.updateLyerLight(0.5, 0.5)
+        this.app.addTerrain()
 
         const option = {
             lon: -73.97878241014695,
@@ -29,99 +31,62 @@ export default class ChengDu {
         self.app.part.addCircleScan(option1)
 
         const postis = Cesium.Cartesian3.fromDegreesArrayHeights([
-            104.08910823719758,
-            30.62842929898083, 10.0,
+            -73.98096918694948,40.71347121404583,10,
 
-            104.08814901806453,
-            30.62608460511913, 10.0,
+            -73.98064234035269,40.710810644175126,10,
 
-            104.08463898581485,
-            30.626111794674216, 10.0,
+            -73.98376494950466,40.71060520020592,10,
 
-            104.08476936742238,
-            30.628519360788516, 10.0,
+            -73.98369206871496,40.71324709275526,10,
 
-            104.08910823719758,
-            30.62842929898083, 10.0,
+            -73.98096918694948,40.71347121404583,10,
         ])
         self.app.part.addFlowWall(postis)
 
         const points = [
-            104.09228987915748,
-            30.631370714909295,
+            -73.98096918694948,40.71347121404583,
             -0.00416811510864983,
 
-            104.09228987915748,
-            30.631370714909295,
+            -73.98096918694948,40.71347121404583,
             500,
         ]
         self.app.part.addFlowLine(points)
 
         const points1 = [
-            104.07467185705768,
-            30.616055917995904,
-            -0.007629316102345219,
-            104.07430138967433,
-            30.622748646480712,
-            -0.005523915179473804,
-            104.09266729143657,
-            30.623561610378665,
-            -0.005830162188858496,
-            104.09708344165846,
-            30.629093781029326,
-            -0.004778831731137613,
-            104.09256817183005,
-            30.631735359048665,
-            -0.002083572838517207,
+            -73.97642958554202,40.71495073374601,-0.001991019097634711,
+            -73.97911696114362,40.71575540376539,-0.0020569811427806534,
+            -73.97997043813011,40.714003701262484,-0.001932367920888469,
         ]
         self.app.part.addRoad(points1)
 
         const p1 = Cesium.Cartesian3.fromDegrees(points1[0], points1[1], points1[2])
-        self.app.innerGeometry.addIconBackground(p1, '东城区',1)
+        self.app.innerGeometry.addIconBackground(p1, 'NEW',1)
         const p2 = Cesium.Cartesian3.fromDegrees(points1[3], points1[4], points1[5])
-        self.app.innerGeometry.addIconBackground(p2, '东城区',2)
+        self.app.innerGeometry.addIconBackground(p2, 'YORK',2)
         const p3 = Cesium.Cartesian3.fromDegrees(points1[6], points1[7], points1[8])
-        self.app.innerGeometry.addIconBackground(p3, '东城区',3)
-        const p4 = Cesium.Cartesian3.fromDegrees(points1[9], points1[10], points1[11])
-        self.app.innerGeometry.addIconBackground(p4, '东城区',4)
-        const p5 = Cesium.Cartesian3.fromDegrees(points1[12], points1[13], points1[14])
-        self.app.innerGeometry.addIconBackground(p5, '东城区',5)
+        self.app.innerGeometry.addIconBackground(p3, '11',3)
 
-        const pointsText = Cesium.Cartesian3.fromDegrees(104.08712967931928,
-            30.63687154105514, 100)
-        self.app.innerGeometry.addIcon(pointsText, '东城区')
-
-        const pointsText1 = Cesium.Cartesian3.fromDegrees(104.08996739118568,
-            30.643222273024914, 100)
-        self.app.innerGeometry.addIcon(pointsText1, '西城区')
-
-        let center = {lon: 104.07842873842652, lat: 30.63258965135834,}
+        let center = {lon: -73.97041132537504, lat: 40.70616824536892,}
 
         let cities = [
-            {'lon': 104.07445200121597, 'lat': 30.623338996273173,},
-            {'lon': 104.08148794273148, 'lat': 30.623739056793006,},
+            {'lon': -73.96303919879395, 'lat': 40.71032473293702,},
+            {'lon': -73.96999337911545, 'lat': 40.71335210350552,},
         ]
         this.app.part.addFlyLine3D(center, cities)
 
-        this.app.addBloom()
 
-        // 主体大楼
-        let po = new Cesium.Cartesian3(-1337050.0939715588, 5327975.599743687, 3230367.8019681093)
-        let htr = [0, 0, 0]
-        const mo = this.app.load3DModel.loadGlb(po, htr)
-        this.app.viewer.entities.add(mo)
         // 原地踏步人
-        const poPer = Cesium.Cartesian3.fromDegrees(104.0884177825623, 30.62721695985099, 0)
+        const poPer = Cesium.Cartesian3.fromDegrees(-73.97041132537504, 40.70616824536892, 10)
         const movePeople = this.app.load3DModel.loadGltf(poPer)
         this.app.viewer.entities.add(movePeople)
         // 移动小车
-        let data = [104.088629853244, 30.627623370523818, -0.002239088567849463,]
+        let data = [-73.97041132537504, 40.70616824536892, -0.002239088567849463,]
         this.app.load3DModel.loadGlbPrimitives(data)
         // 飞机
-        const poAirPlane = [104.0884625472979, 30.629946234239107, 100]
+        const poAirPlane = [-73.97041132537504, 40.70616824536892, 100]
         this.app.load3DModel.loadGLB(poAirPlane)
 
-        this.playAction()
+        // this.playAction()
     }
 
     playAction() {
