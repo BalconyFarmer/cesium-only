@@ -17,15 +17,15 @@ export default class ChengDu {
         this.app.switchLayer('geoq智图黑')
         this.app.addTerrain()
 
-        const option = {
-            lon: -73.97878241014695, lat: 40.70785622096727, radius: 200
-        }
-        self.app.part.addRadarScan(option)
+        // const option = {
+        //     lon: -73.97878241014695, lat: 40.70785622096727, radius: 200
+        // }
+        // self.app.part.addRadarScan(option)
 
-        const option1 = {
-            lon: -73.98218114891942, lat: 40.70363723511191, radius: 200
-        }
-        self.app.part.addCircleScan(option1)
+        // const option1 = {
+        //     lon: -73.98218114891942, lat: 40.70363723511191, radius: 200
+        // }
+        // self.app.part.addCircleScan(option1)
 
         const postis = Cesium.Cartesian3.fromDegreesArrayHeights([-73.98096918694948, 40.71347121404583, 10,
 

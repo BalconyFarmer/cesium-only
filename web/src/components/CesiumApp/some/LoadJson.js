@@ -35,7 +35,7 @@ export default class LoadJson {
      */
     loadJsonYanMo () {
         const self = this
-        _c_add_geojson_area(yn)
+        _c_add_geojson_area(yn) // xsbnjson yn
 
         function _c_add_geojson_area(geojson) {
             let arr = []
@@ -44,9 +44,15 @@ export default class LoadJson {
                 arr.push(item[1])
             });
             console.log(arr);
+            // 矩形对角点 左上 右下 最后一位必须是0
+            let xiePoint = [-159.133489,72.649578,-48.21552,0,] // 美国
+            // let xiePoint = [70.436823,50.826368,130.729792,0] // 中国
+
+            // 左上 左下 右下 右上 (!!!!必须是正方形) JSON数据在正方形里
+            let points = [xiePoint[0], xiePoint[1], xiePoint[0], xiePoint[3], xiePoint[2], xiePoint[3], xiePoint[2], xiePoint[1]]
             let polygonWithHole = new Cesium.PolygonGeometry({
                 polygonHierarchy: new Cesium.PolygonHierarchy(
-                    Cesium.Cartesian3.fromDegreesArray([73.0, 53.0, 73.0, 0.0, 135.0, 0.0, 135.0, 53.0]),
+                    Cesium.Cartesian3.fromDegreesArray(points),
                     [new Cesium.PolygonHierarchy(Cesium.Cartesian3.fromDegreesArray(arr))]
                 )
             });
@@ -55,7 +61,7 @@ export default class LoadJson {
             instances.push(new Cesium.GeometryInstance({
                 geometry: geometry,
                 attributes: {
-                    color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.fromCssColorString("#1bf600"))
+                    color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.fromCssColorString("#081122"))
                 }
             }));
 
@@ -70,10 +76,10 @@ export default class LoadJson {
                 }));
             }
 
-            addRect(instances, -180.0, -90.0, 73.0, 90.0);
-            addRect(instances, 135.0, -90.0, 180.0, 90.0);
-            addRect(instances, 73.0, 53.0, 135.0, 90.0);
-            addRect(instances, 73.0, -90.0, 135.0, 0.0);
+            addRect(instances, -180.0, -90.0, points[0], 90.0);
+            addRect(instances, points[4], -90.0, 180.0, 90.0);
+            addRect(instances, points[0], points[1], points[4], 90.0);
+            addRect(instances, points[0], -90.0, points[4], 0.0);
             self.app.viewer.scene.primitives.add(new Cesium.Primitive({
                 geometryInstances: instances,
                 appearance: new Cesium.PerInstanceColorAppearance({
