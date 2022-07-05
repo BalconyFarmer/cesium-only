@@ -1,4 +1,5 @@
 import xsbnjson from './Json/西双版纳傣族自治州'
+import yn from './Json/yn.json'
 export default class LoadJson {
     constructor(app) {
         this.app = app
@@ -34,7 +35,7 @@ export default class LoadJson {
      */
     loadJsonYanMo () {
         const self = this
-        _c_add_geojson_area(xsbnjson)
+        _c_add_geojson_area(yn)
 
         function _c_add_geojson_area(geojson) {
             let arr = []
@@ -43,18 +44,18 @@ export default class LoadJson {
                 arr.push(item[1])
             });
             console.log(arr);
-            var polygonWithHole = new Cesium.PolygonGeometry({
+            let polygonWithHole = new Cesium.PolygonGeometry({
                 polygonHierarchy: new Cesium.PolygonHierarchy(
                     Cesium.Cartesian3.fromDegreesArray([73.0, 53.0, 73.0, 0.0, 135.0, 0.0, 135.0, 53.0]),
                     [new Cesium.PolygonHierarchy(Cesium.Cartesian3.fromDegreesArray(arr))]
                 )
             });
-            var geometry = Cesium.PolygonGeometry.createGeometry(polygonWithHole);
+            let geometry = Cesium.PolygonGeometry.createGeometry(polygonWithHole);
             let instances = [];
             instances.push(new Cesium.GeometryInstance({
                 geometry: geometry,
                 attributes: {
-                    color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.fromCssColorString("#081122"))
+                    color: Cesium.ColorGeometryInstanceAttribute.fromColor(Cesium.Color.fromCssColorString("#1bf600"))
                 }
             }));
 
