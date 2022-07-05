@@ -238,6 +238,10 @@ export default {
             handler(newValue) {
                 if (this.cApp) {
                     switch (this.modelData) {
+
+                        case "西双版纳JSON掩模":
+                            this.cApp.loadJson.loadJsonYanMo()
+                            break
                         case "西双版纳JSON":
                             this.cApp.addTimeAction()
                             break
@@ -332,6 +336,9 @@ export default {
             optionsLayersIndex: null,
             modelData: null,
             modelDataList: [{
+                value: '西双版纳JSON掩模',
+                label: '西双版纳JSON掩模'
+            }, {
                 value: '西双版纳JSON',
                 label: '西双版纳JSON'
             }, {

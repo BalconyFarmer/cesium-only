@@ -1,14 +1,15 @@
-
 /**
  * 成都展示项目
  */
 export default class ChengDu {
-    constructor (app) {
+    constructor(app) {
         this.app = app
         this.init()
     }
 
-    init () {
+
+    init() {
+
         this.app.cesium3DTileset.toYN()
 
         const self = this
@@ -17,61 +18,47 @@ export default class ChengDu {
         this.app.addTerrain()
 
         const option = {
-            lon: -73.97878241014695,
-            lat: 40.70785622096727,
-            radius: 200
+            lon: -73.97878241014695, lat: 40.70785622096727, radius: 200
         }
         self.app.part.addRadarScan(option)
 
         const option1 = {
-            lon: -73.98218114891942,
-            lat: 40.70363723511191,
-            radius: 200
+            lon: -73.98218114891942, lat: 40.70363723511191, radius: 200
         }
         self.app.part.addCircleScan(option1)
 
-        const postis = Cesium.Cartesian3.fromDegreesArrayHeights([
-            -73.98096918694948,40.71347121404583,10,
+        const postis = Cesium.Cartesian3.fromDegreesArrayHeights([-73.98096918694948, 40.71347121404583, 10,
 
-            -73.98064234035269,40.710810644175126,10,
+            -73.98064234035269, 40.710810644175126, 10,
 
-            -73.98376494950466,40.71060520020592,10,
+            -73.98376494950466, 40.71060520020592, 10,
 
-            -73.98369206871496,40.71324709275526,10,
+            -73.98369206871496, 40.71324709275526, 10,
 
-            -73.98096918694948,40.71347121404583,10,
-        ])
+            -73.98096918694948, 40.71347121404583, 10,])
         self.app.part.addFlowWall(postis)
 
-        const points = [
-            -73.98096918694948,40.71347121404583,
-            -0.00416811510864983,
+        const points = [-73.98096918694948, 40.71347121404583, -0.00416811510864983,
 
-            -73.98096918694948,40.71347121404583,
-            500,
-        ]
+            -73.98096918694948, 40.71347121404583, 500,]
         self.app.part.addFlowLine(points)
 
-        const points1 = [
-            -73.97642958554202,40.71495073374601,-0.001991019097634711,
-            -73.97911696114362,40.71575540376539,-0.0020569811427806534,
-            -73.97997043813011,40.714003701262484,-0.001932367920888469,
-        ]
+        const points1 = [-73.97642958554202, 40.71495073374601, -0.001991019097634711, -73.97911696114362, 40.71575540376539, -0.0020569811427806534, -73.97997043813011, 40.714003701262484, -0.001932367920888469,]
         self.app.part.addRoad(points1)
 
         const p1 = Cesium.Cartesian3.fromDegrees(points1[0], points1[1], points1[2])
-        self.app.innerGeometry.addIconBackground(p1, 'NEW',1)
+        self.app.innerGeometry.addIconBackground(p1, 'NEW', 1)
         const p2 = Cesium.Cartesian3.fromDegrees(points1[3], points1[4], points1[5])
-        self.app.innerGeometry.addIconBackground(p2, 'YORK',2)
+        self.app.innerGeometry.addIconBackground(p2, 'YORK', 2)
         const p3 = Cesium.Cartesian3.fromDegrees(points1[6], points1[7], points1[8])
-        self.app.innerGeometry.addIconBackground(p3, '11',3)
+        self.app.innerGeometry.addIconBackground(p3, '11', 3)
 
         let center = {lon: -73.97041132537504, lat: 40.70616824536892,}
 
-        let cities = [
-            {'lon': -73.96303919879395, 'lat': 40.71032473293702,},
-            {'lon': -73.96999337911545, 'lat': 40.71335210350552,},
-        ]
+        let cities = [{'lon': -73.96303919879395, 'lat': 40.71032473293702,}, {
+            'lon': -73.96999337911545,
+            'lat': 40.71335210350552,
+        },]
         this.app.part.addFlyLine3D(center, cities)
 
 
