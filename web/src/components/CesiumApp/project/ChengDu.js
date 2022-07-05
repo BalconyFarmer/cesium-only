@@ -13,19 +13,18 @@ export default class ChengDu {
         this.app.closeAll()
         this.app.switchLayer('geoq智图黑')
         // this.app.updateLyerLight(0.5, 0.5)
-        // this.app.cesium3DTileset.addTiles()
 
         const option = {
-            lon: 104.08518355581377,
-            lat: 30.632540812118847,
+            lon: -73.97878241014695,
+            lat: 40.70785622096727,
             radius: 200
         }
         self.app.part.addRadarScan(option)
 
         const option1 = {
-            lon: 104.08077683485338,
-            lat: 30.635968171376696,
-            radius: 300
+            lon: -73.98218114891942,
+            lat: 40.70363723511191,
+            radius: 200
         }
         self.app.part.addCircleScan(option1)
 
