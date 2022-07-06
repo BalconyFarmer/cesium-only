@@ -415,7 +415,7 @@ export default class CesiumApp {
                 break
             case "百度地图":
                 var options = {
-                    style: 'normal', // style: img、vec、normal、dark
+                    style: 'dark', // style: img、vec、normal、dark
                     crs: 'WGS84' // 使用84坐标系，默认为：BD09
                 }
                 this.viewer.imageryLayers.addImageryProvider(
