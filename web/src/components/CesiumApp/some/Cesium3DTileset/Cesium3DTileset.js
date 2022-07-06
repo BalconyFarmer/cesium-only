@@ -22,6 +22,8 @@ export default class Cesium3DTileset {
         const tileset = this.app.viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
                 url: Cesium.IonResource.fromAssetId(75343),
+                maximumNumberOfLoadedTiles: 10, // 最大加载瓦片个数
+                maximumMemoryUsage: 1 // 最大使用内存 单位M
             })
         );
 

@@ -16,6 +16,7 @@ export default class ChengDu {
         this.app.closeAll()
         this.app.switchLayer('geoq智图黑')
         this.app.addTerrain()
+        this.app.loadJson.loadJsonYanMo()
 
         // const option = {
         //     lon: -73.97878241014695, lat: 40.70785622096727, radius: 200
