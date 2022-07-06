@@ -1,5 +1,5 @@
 /**
- * 成都展示项目
+ * 纽约展示项目
  */
 export default class ChengDu {
     constructor(app) {

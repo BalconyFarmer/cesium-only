@@ -365,7 +365,7 @@ export default {
                 },],
             optionsLayers: [{
                 value: 'google实景图层',
-                label: 'google实景图层'
+                label: 'google实景图层(VPN)'
             }, {
                 value: 'ArcGis实景图层',
                 label: 'ArcGis实景图层'
