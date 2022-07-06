@@ -238,7 +238,9 @@ export default {
             handler(newValue) {
                 if (this.cApp) {
                     switch (this.modelData) {
-
+                        case "JSON闪光路":
+                            this.cApp.loadJson.loadJsonRoad()
+                            break
                         case "西双版纳JSON掩模":
                             this.cApp.loadJson.loadJsonYanMo()
                             break
@@ -335,28 +337,32 @@ export default {
             },],
             optionsLayersIndex: null,
             modelData: null,
-            modelDataList: [{
-                value: '西双版纳JSON掩模',
-                label: '西双版纳JSON掩模'
-            }, {
-                value: '西双版纳JSON',
-                label: '西双版纳JSON'
-            }, {
-                value: '云南JSON',
-                label: '云南JSON'
-            }, {
-                value: '纽约tiles',
-                label: '纽约tiles'
-            }, {
-                value: '倾斜摄影',
-                label: '倾斜摄影'
-            }, {
-                value: '华盛顿IMG',
-                label: '华盛顿IMG'
-            }, {
-                value: 'OSM建筑',
-                label: 'OSM建筑'
-            },],
+            modelDataList: [
+                {
+                    value: 'JSON闪光路',
+                    label: 'JSON闪光路'
+                }, {
+                    value: '西双版纳JSON掩模',
+                    label: '西双版纳JSON掩模'
+                }, {
+                    value: '西双版纳JSON',
+                    label: '西双版纳JSON'
+                }, {
+                    value: '云南JSON',
+                    label: '云南JSON'
+                }, {
+                    value: '纽约tiles',
+                    label: '纽约tiles'
+                }, {
+                    value: '倾斜摄影',
+                    label: '倾斜摄影'
+                }, {
+                    value: '华盛顿IMG',
+                    label: '华盛顿IMG'
+                }, {
+                    value: 'OSM建筑',
+                    label: 'OSM建筑'
+                },],
             optionsLayers: [{
                 value: 'google实景图层',
                 label: 'google实景图层'
@@ -373,9 +379,32 @@ export default {
                 value: 'BING',
                 label: 'BING卫星 + BING文字'
             }, {
-                value: '纯黑',
-                label: '纯黑'
-            },],
+                value: 'BING道路',
+                label: 'BING道路'
+            },
+                {
+                    value: '纯黑',
+                    label: '纯黑'
+                },
+
+
+                {
+                    value: '百度地图',
+                    label: '百度地图'
+                },                {
+                    value: '腾讯地图',
+                    label: '腾讯地图'
+                },                {
+                    value: '天地图',
+                    label: '天地图'
+                },                {
+                    value: '高德地图',
+                    label: '高德地图'
+                },                {
+                    value: '谷歌地图',
+                    label: '谷歌地图'
+                },
+            ],
             activeIndex: '1',
             activeIndex2: '1',
             entitysList: [],

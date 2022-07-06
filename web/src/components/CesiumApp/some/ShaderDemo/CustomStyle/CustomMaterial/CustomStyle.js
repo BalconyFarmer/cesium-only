@@ -34,7 +34,7 @@ export default class CustomStyle {
             name: 'PolylineTrail',
             polyline: {
                 positions: _p,
-                width: 5,
+                width: 1,
                 material: new Cesium.PolylineTrailLinkMaterialProperty3(Cesium.Color.YELLOW, 900)
             }
         })

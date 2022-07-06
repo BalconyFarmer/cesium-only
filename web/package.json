@@ -7,6 +7,7 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@dvgis/cesium-map": "^2.5.0",
     "@turf/turf": "^6.5.0",
     "ant-design-vue": "^1.7.8",
     "axios": "^0.27.2",

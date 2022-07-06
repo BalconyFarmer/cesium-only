@@ -21,7 +21,7 @@ import KMLPoints from "@/components/CesiumApp/some/Points/KMLPoints";
 import PointsCluster from "@/components/CesiumApp/some/Points/PointsCluster";
 import PrimitivesPoints from "@/components/CesiumApp/some/Points/PrimitivesPoints";
 import NormalPoints from "@/components/CesiumApp/some/Points/NormalPoints";
-
+require('@dvgis/cesium-map')
 export default class CesiumApp {
     constructor() {
         this.staticServerAdress = 'http://localhost:1111/3Dstatic/loadData'
@@ -406,7 +406,53 @@ export default class CesiumApp {
                     _a
                 );
                 break
+            case 'BING道路':
+                let BING_ROAD = new Cesium.IonImageryProvider({assetId: 4})
+                BING_ROAD.name = "BING"
+                const layer1 = this.viewer.imageryLayers.addImageryProvider(
+                    BING_ROAD
+                );
+                break
+            case "百度地图":
+                var options = {
+                    style: 'normal', // style: img、vec、normal、dark
+                    crs: 'WGS84' // 使用84坐标系，默认为：BD09
+                }
+                this.viewer.imageryLayers.addImageryProvider(
+                    new Cesium.BaiduImageryProvider(options)
+                )
+                break
+            case "腾讯地图":
+                var options = {
+                    style: 1 //style: img、1：经典
+                }
 
+                this.viewer.imageryLayers.addImageryProvider(
+                    new Cesium.TencentImageryProvider(options)
+                )
+                break
+            case "天地图":
+                var options = {
+                    style: 'vec', //style: vec、cva、img、cia、ter
+                    key: ''
+                }
+                this.viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider(options))
+                break
+            case "高德地图":
+                var options = {
+                    style: 'img', // style: img、elec、cva
+                    crs: 'WGS84' // 使用84坐标系，默认为：GCJ02
+                }
+                viewer.imageryLayers.addImageryProvider(new Cesium.AmapImageryProvider(options))
+                break
+            case "谷歌地图":
+                var options = {
+                    style: 'ter' //style: img、elec、ter
+                }
+                viewer.imageryLayers.addImageryProvider(
+                    new Cesium.GoogleImageryProvider(options)
+                )
+                break
         }
 
     }
