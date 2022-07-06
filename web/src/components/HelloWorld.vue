@@ -8,7 +8,7 @@
             width="30%"
         >
             <span @click="runChengdu">0.纽约</span>
-            <span>1.xx</span>
+            <span  @click="runShanghai">1.上海</span>
             <span>2.xx</span>
             <span>3.xx</span>
             <span slot="footer" class="dialog-footer">
@@ -432,6 +432,11 @@ export default {
     methods: {
         runChengdu() {
             this.cApp.runChengDu()
+            this.fakeBoard = true
+            this.dialogVisible = false
+        },
+        runShanghai() {
+            this.cApp.runShanghai()
             this.fakeBoard = true
             this.dialogVisible = false
         },

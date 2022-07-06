@@ -13,6 +13,7 @@ import Event from './some/Event'
 import ParticleSystems from './some/ParticleSystems'
 import CustomShaderTest from './some/ShaderDemo/CustomStyle/CustomMaterial/CustomShaderTest'
 import ChengDu from './project/ChengDu'
+import Shanghai from "@/components/CesiumApp/project/Shanghai";
 import InnerMaterial from './some/InnerMaterial/InnerMaterial'
 import Environment from './some/ShaderDemo/Environment'
 import Animation from './some/Animation'
@@ -232,6 +233,14 @@ export default class CesiumApp {
             this.chengduOBJ.playAction()
         } else {
             this.chengduOBJ = new ChengDu(this)
+        }
+    }
+
+    runShanghai() {
+        if (this.shanghaiOBJ) {
+            this.shanghaiOBJ.playAction()
+        } else {
+            this.shanghaiOBJ = new Shanghai(this)
         }
     }
 
