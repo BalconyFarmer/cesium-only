@@ -434,7 +434,7 @@ export default class CesiumApp {
             case "天地图":
                 var options = {
                     style: 'vec', //style: vec、cva、img、cia、ter
-                    key: ''
+                    key: '4a00a1dc5387b8ed8adba3374bd87e5e'
                 }
                 this.viewer.imageryLayers.addImageryProvider(new Cesium.TdtImageryProvider(options))
                 break
