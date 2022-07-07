@@ -700,6 +700,7 @@ export default {
                         let po = this.geoPositionCartesian2
                         let url = 'http://localhost:1111/3Dstatic' + this.currentGeoType.path
                         this.cApp.load3DModel.loadGlbByURL(po, url)
+
                 }
             }
             this.addGeoFlag = false

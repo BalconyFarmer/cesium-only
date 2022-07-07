@@ -12,6 +12,10 @@ export default class Shanghai {
         this.app.switchLayer('百度地图')
         this.app.loadJson.loadJsonRoad()
 
+        let po = new Cesium.Cartesian3  (-2851667.578771356, 4653872.950938622, 3288949.340711588)
+        let url = "http://localhost:1111/3Dstatic/uploadDefault/2022076/16570982069192171.glb"
+        this.app.load3DModel.loadGlbByURL(po, url)
+
         this.playAction()
     }
 
