@@ -9,15 +9,15 @@ export default class Shanghai {
 
 
     init() {
-        // this.app.switchLayer('百度地图')
-        // this.app.loadJson.loadJsonRoad()
+        this.app.switchLayer('百度地图')
+        this.app.loadJson.loadJsonRoad()
         // const tileset =  this.app.addOSMBuilding()
         //
-        // let po = new Cesium.Cartesian3  (-2851667.578771356, 4653872.950938622, 3288949.340711588)
-        // let url = "http://localhost:1111/3Dstatic/uploadDefault/2022076/16570982069192171.glb"
-        // this.app.load3DModel.loadGlbByURL(po, url)
-        // this.clipping3DTiles()
-        // this.playAction()
+        let po = new Cesium.Cartesian3(-2851667.578771356, 4653872.950938622, 3288949.340711588)
+        let url = "http://localhost:1111/3Dstatic/uploadDefault/2022076/16570982069192171.glb"
+        this.app.load3DModel.loadGlbByURL(po, url)
+        this.clipping3DTiles()
+        this.playAction()
 
         this.clippingPlan()
     }
@@ -61,104 +61,82 @@ export default class Shanghai {
      * 裁切地形
      */
     clippingPlan() {
-        let redPolygon = this.app.viewer.entities.add({
-            name: '裁剪用多边形',
-            polygon: {
-                hierarchy: Cesium.Cartesian3.fromDegreesArray(
-                    [
-                        121.49751980103026,31.240975601108374,
-                        121.5018863373306,31.240283288965596,
-                        121.50252895579945,31.23544684349948,
-                        121.49642755683749,31.236281531516873,
-                        121.49751980103026,31.240975601108374,
-                    ]
-                ),
-                material: Cesium.Color.RED
+
+        let tileset = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
+            url: Cesium.IonResource.fromAssetId(96188),
+        }))
+
+        //实现渐变效果
+        tileset.style = new Cesium.Cesium3DTileStyle({
+            color: {
+                conditions: [
+                    ['true', 'rgba(0, 127.5, 255 ,0.3)']
+                ]
             }
-        })
-        this.app.viewer.entities.add(redPolygon)
+        });
+        tileset.tileVisible.addEventListener(function (tile) {
+            var content = tile.content;
+            var featuresLength = content.featuresLength;
+            for (let i = 0; i < featuresLength; i += 2) {
+                let feature = content.getFeature(i)
+                let model = feature.content._model
 
-/*        let polygon = [
-            [
-                121.49751980103026, 31.240975601108374,
-            ],
-            [
-                121.5018863373306, 31.240283288965596,
+                if (model && model._sourcePrograms && model._rendererResources) {
+                    Object.keys(model._sourcePrograms).forEach(key => {
+                        let program = model._sourcePrograms[key]
+                        let fragmentShader = model._rendererResources.sourceShaders[program.fragmentShader];
+                        let v_position = "";
+                        if (fragmentShader.indexOf(" v_positionEC;") != -1) {
+                            v_position = "v_positionEC";
+                        } else if (fragmentShader.indexOf(" v_pos;") != -1) {
+                            v_position = "v_pos";
+                        }
+                        const color = `vec4(${feature.color.toString()})`;
 
-            ],
-            [
-                121.50252895579945, 31.23544684349948,
-
-            ],
-            [
-                121.49642755683749, 31.236281531516873,
-
-            ],
-            [
-                121.49751980103026, 31.240975601108374,
-
-            ]
-        ]
-
-        /!**
-         * 对点进行坐标转换
-         * @param point 点坐标 数组形式
-         * @param inverseTransform 转换举证
-         * @returns {*} ClippingPlane 裁切面
-         *!/
-        function getOriginCoordinateSystemPoint(point, inverseTransform) {
-            let val = Cesium.Cartesian3.fromDegrees(point[0], point[1])
-            return Cesium.Matrix4.multiplyByPoint(
-                inverseTransform, val, new Cesium.Cartesian3(0, 0, 0))
-        }
-
-        function createPlane(p1, p2, inverseTransform) {
-            // 将仅包含经纬度信息的p1,p2，转换为相应坐标系的cartesian3对象
-            let p1C3 = getOriginCoordinateSystemPoint(p1, inverseTransform)
-            let p2C3 = getOriginCoordinateSystemPoint(p2, inverseTransform)
-
-            // 定义一个垂直向上的向量up
-            let up = new Cesium.Cartesian3(0, 0, 10)
-            //  right 实际上就是由p1指向p2的向量 （这里是p2--》p1）
-            let right = Cesium.Cartesian3.subtract(p2C3, p1C3, new Cesium.Cartesian3())
-            // 计算normal， right叉乘up，得到平面法向量（垂直于两个向量），这个法向量指向right的右侧
-            let normal = Cesium.Cartesian3.cross(right, up, new Cesium.Cartesian3())
-            normal = Cesium.Cartesian3.normalize(normal, normal)
-
-            //由于已经获得了法向量和过平面的一点，因此可以直接构造Plane,并进一步构造ClippingPlane
-            let planeTmp = Cesium.Plane.fromPointNormal(p1C3, normal)
-            return Cesium.ClippingPlane.fromPlane(planeTmp)
-        }
-
-        // 3dTiles模型加载后的矩阵，可以f12打印查看：tileset.root.transform
-        let transform = Cesium.Matrix4.fromArray(
-            [-0.8874246461620654, -0.46095281470464317, 0, 0,
-                0.2602796082288922, -0.5010893346724129, 0.8253266045740758, 0,
-                -0.3804366214290463, 0.7324151700322881, 0.5646556435405804, 0,
-                -2429070.591483741, 4676437.67731705, 3581165.448379543, 1]);
-
-        //转换矩阵
-        let inverseTransform = Cesium.Matrix4.inverseTransformation(transform, new Cesium.Matrix4());
-        // clippingPlane集合
-        let clippingPlanes1 = [];
-        for (let i = 0; i < polygon.length - 1; i++) {
-            let plane = createPlane(polygon[i], polygon[i + 1], inverseTransform);
-            clippingPlanes1.push(plane);
-        }
-        // 创建裁剪平面
-        let clippingPlanes = new Cesium.ClippingPlaneCollection({
-            //一组ClippingPlane对象，用于选择性地禁用每个平面外部的渲染。
-            planes: clippingPlanes1,
-            //应用于裁剪对象的边缘的高光的宽度（以像素为单位）
-            edgeWidth: 1.0,
+                        model._rendererResources.sourceShaders[program.fragmentShader] =
+                            `
+            varying vec3 ${v_position};
+            void main(void){
+              vec4 position = czm_inverseModelView * vec4(${v_position},1); // 位置
+              gl_FragColor = ${color}; // 颜色
+              gl_FragColor *= vec4(vec3(position.z / 50.0), 1.0); // 渐变
+              // 动态光环
+              float time = fract(czm_frameNumber / 180.0);
+              time = abs(time - 0.5) * 2.0;
+              float glowRange = 180.0; // 光环的移动范围(高度)
+              float diff = step(0.005, abs( clamp(position.z / glowRange, 0.0, 1.0) - time));
+              gl_FragColor.rgb += gl_FragColor.rgb * (1.0 - diff);
+            }
+          `
+                    })
+                    model._shouldRegenerateShaders = true
+                }
+            }
         });
 
-        const tileset = this.app.viewer.scene.primitives.add(
-            new Cesium.Cesium3DTileset({
-                url: Cesium.IonResource.fromAssetId(96188),
-                clippingPlanes: clippingPlanes,
-            })
-        );*/
+        const width = 200
+        // let position = Cesium.Cartesian3.fromDegrees(121.49912730591835,31.24096160638086, 0);
+        let position = new Cesium.Cartesian3 (-2851497.870388521, 4654042.248114797, 3288857.538218938)
+        let entity = viewer.entities.add({
+            position: position,
+            box: {
+                dimensions: new Cesium.Cartesian3(width, width, 2800.0),
+                material: Cesium.Color.WHITE.withAlpha(0.0),
+                outline: false,
+                outlineColor: Cesium.Color.WHITE
+            }
+        });
+        tileset.clippingPlanes = new Cesium.ClippingPlaneCollection({
+            modelMatrix: entity.computeModelMatrix(Cesium.JulianDate.now()),
+            planes: [
+                new Cesium.Plane(new Cesium.Cartesian3(1.0, 0.0, 0.0), -width / 2),
+                new Cesium.Plane(new Cesium.Cartesian3(-1.0, 0.0, 0.0), -width / 2),
+                new Cesium.Plane(new Cesium.Cartesian3(0.0, 1.0, 0.0), -width / 2),
+                new Cesium.Plane(new Cesium.Cartesian3(0.0, -1.0, 0.0), -width / 2)
+            ],
+            edgeWidth: 1.0,
+            edgeColor: Cesium.Color.YELLOW
+        });
     }
 
     playAction() {
