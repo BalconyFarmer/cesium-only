@@ -53,7 +53,7 @@ export default class LoadJson {
      */
     loadJsonYanMo() {
         const self = this
-        _c_add_geojson_area(yn) // xsbnjson yn
+        _c_add_geojson_area(xsbnjson) // xsbnjson yn
 
         function _c_add_geojson_area(geojson) {
             let arr = []
@@ -63,8 +63,8 @@ export default class LoadJson {
             });
             console.log(arr);
             // 矩形对角点 左上 右下 最后一位必须是0
-            let xiePoint = [-159.133489, 72.649578, -48.21552, 0,] // 美国
-            // let xiePoint = [70.436823,50.826368,130.729792,0] // 中国
+            // let xiePoint = [-159.133489, 72.649578, -48.21552, 0,] // 美国
+            let xiePoint = [70.436823,50.826368,130.729792,0] // 中国
 
             // 左上 左下 右下 右上 (!!!!必须是正方形) JSON数据在正方形里
             let points = [xiePoint[0], xiePoint[1], xiePoint[0], xiePoint[3], xiePoint[2], xiePoint[3], xiePoint[2], xiePoint[1]]
