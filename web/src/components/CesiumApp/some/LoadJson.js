@@ -20,6 +20,22 @@ export default class LoadJson {
             // 还在geoJson数据 ()
             Cesium.GeoJsonDataSource.load(this.app.staticServerAdress + URL).then(function (dataSource) {
                 self.app.viewer.dataSources.add(dataSource).then(res => {
+                    const entities = dataSource.entities.values;
+                    const colorHash = {};
+                    for (let i = 0; i < entities.length; i++) {
+                        const entity = entities[i];
+                        const name = entity.name;
+                        let color = colorHash[name];
+                        if (!color) {
+                            color = Cesium.Color.fromRandom({
+                                alpha: 1.0,
+                            });
+                            colorHash[name] = color;
+                        }
+                        entity.polygon.material = color;
+                        entity.polygon.outline = false;
+                        entity.polygon.extrudedHeight = 10000
+                    }
                     const test = res
                     test.name = '测试'
                     self.traceLayer = dataSource
