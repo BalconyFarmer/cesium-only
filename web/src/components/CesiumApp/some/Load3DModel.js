@@ -8,6 +8,7 @@ export default class Load3DModel {
 
     //
     loadGlbByURL (po, URL) {
+
         console.log("当前加载模型地址:",URL)
         const result = {
             name: '工厂',
@@ -20,7 +21,7 @@ export default class Load3DModel {
             model: {
                 uri: URL,
                 // minimumPixelSize: 100, // 最小大小
-                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
+                heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
             }
         }
         this.app.viewer.entities.add(result)
