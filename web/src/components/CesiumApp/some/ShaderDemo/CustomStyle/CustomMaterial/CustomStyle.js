@@ -76,7 +76,7 @@ export default class CustomStyle {
             name: 'PolylineTrail',
             polyline: {
                 positions: _p,
-                width: 10,
+                width: 2,
                 material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.YELLOW, 9000)
             }
         })
@@ -139,7 +139,7 @@ export default class CustomStyle {
             cities = citiesP
         }
 
-        let material = new Cesium.PolylineTrailLinkMaterialProperty2(Cesium.Color.BLUE, 1000)
+        let material = new Cesium.PolylineTrailLinkMaterialProperty2(Cesium.Color.WHITE, 1000)
 
         for (let j = 0; j < cities.length; j++) {
             let points = parabolaEquation({pt1: center, pt2: cities[j], height: 500, num: 100})

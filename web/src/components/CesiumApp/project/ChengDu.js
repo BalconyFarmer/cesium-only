@@ -1,3 +1,5 @@
+import * as turf from '@turf/turf'
+
 /**
  * 纽约展示项目
  */
@@ -9,7 +11,6 @@ export default class ChengDu {
 
 
     init() {
-
         this.app.cesium3DTileset.toYN()
 
         const self = this
@@ -18,17 +19,18 @@ export default class ChengDu {
         this.app.addTerrain()
         this.app.loadJson.loadJsonYanMo()
 
-        // const option = {
-        //     lon: -73.97878241014695, lat: 40.70785622096727, radius: 200
-        // }
-        // self.app.part.addRadarScan(option)
+        const option = {
+            lon: -73.98466473164989, lat: 40.71362487810801, radius: 200
+        }
+        self.app.part.addRadarScan(option)
 
-        // const option1 = {
-        //     lon: -73.98218114891942, lat: 40.70363723511191, radius: 200
-        // }
-        // self.app.part.addCircleScan(option1)
+        const option1 = {
+            lon: -73.98218114891942, lat: 40.70363723511191, radius: 200
+        }
+        self.app.part.addCircleScan(option1)
 
-        const postis = Cesium.Cartesian3.fromDegreesArrayHeights([-73.98096918694948, 40.71347121404583, 10,
+        const postis = Cesium.Cartesian3.fromDegreesArrayHeights([
+            -73.98096918694948, 40.71347121404583, 10,
 
             -73.98064234035269, 40.710810644175126, 10,
 
@@ -39,10 +41,12 @@ export default class ChengDu {
             -73.98096918694948, 40.71347121404583, 10,])
         self.app.part.addFlowWall(postis)
 
-        const points = [-73.98096918694948, 40.71347121404583, -0.00416811510864983,
-
-            -73.98096918694948, 40.71347121404583, 500,]
-        self.app.part.addFlowLine(points)
+        // 垂直流动线
+        let _points = turf.randomPoint(20, {bbox: [-73.99622283378928,40.70228738303501, -73.93445523237683,40.72801511088451,]});
+        _points.features.forEach(item => {
+            const points = [item.geometry.coordinates[0], item.geometry.coordinates[1], 0, item.geometry.coordinates[0], item.geometry.coordinates[1], 500,]
+            self.app.part.addFlowLine(points)
+        })
 
         const points1 = [-73.97642958554202, 40.71495073374601, -0.001991019097634711, -73.97911696114362, 40.71575540376539, -0.0020569811427806534, -73.97997043813011, 40.714003701262484, -0.001932367920888469,]
         self.app.part.addRoad(points1)
@@ -54,12 +58,12 @@ export default class ChengDu {
         const p3 = Cesium.Cartesian3.fromDegrees(points1[6], points1[7], points1[8])
         self.app.innerGeometry.addIconBackground(p3, '11', 3)
 
+        // 3D曲线
         let center = {lon: -73.97041132537504, lat: 40.70616824536892,}
 
-        let cities = [{'lon': -73.96303919879395, 'lat': 40.71032473293702,}, {
-            'lon': -73.96999337911545,
-            'lat': 40.71335210350552,
-        },]
+        let cities = [
+            {'lon': -73.96303919879395, 'lat': 40.71032473293702,},
+            {'lon': -73.96999337911545, 'lat': 40.71335210350552,},]
         this.app.part.addFlyLine3D(center, cities)
 
 
