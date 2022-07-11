@@ -147,26 +147,25 @@ export default class CesiumApp {
     }
 
 
+    /**
+     * 动态更新灯光 == 摄像机方位
+     */
     addLight() {
-        // 只是添加了个方向
-        // 阴影效果必须开启方向光
-        // let flashlight = new Cesium.DirectionalLight({
-        //     direction: this.viewer.scene.camera.directionWC, // Updated every frame
-        //     color: Cesium.Color.YELLOW,
-        //     intensity: 1
-        // })
-
-        var flashlight = new Cesium.DirectionalLight({
-            direction: new Cesium.Cartesian3(
-                0.2454278300540191,
-                0.8842635425193919,
-                0.39729481195458805
-            ),
-            color: Cesium.Color.WHITE,
+        const flashlight = new Cesium.DirectionalLight({
+            direction: this.viewer.scene.camera.directionWC, // Updated every frame
             intensity: 1
         });
-
         this.viewer.scene.light = flashlight
+
+        const self = this
+        this.viewer.scene.preRender.addEventListener(function (scene, time) {
+            if (self.viewer.scene.light === flashlight) {
+                self.viewer.scene.light.direction = Cesium.Cartesian3.clone(
+                    self.viewer.scene.camera.directionWC,
+                    self.viewer.scene.light.direction
+                );
+            }
+        });
 
     }
 
@@ -428,7 +427,7 @@ export default class CesiumApp {
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 const _layer = this.viewer.imageryLayers.get(0);
-                _layer.brightness = 0.5
+                _layer.brightness = 0.2
                 break
             case 'geoq智图黑':
                 Imagery = new Cesium.ArcGisMapServerImageryProvider({

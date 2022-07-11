@@ -30,14 +30,10 @@ export default class Cesium3DTileset {
         tileset.style = new Cesium.Cesium3DTileStyle({
             color: {
                 conditions: [
-                    ['true', 'rgba(0, 127.5, 255 ,0.5)']
+                    ['true', 'rgba(0, 127.5, 255 ,0.2)']
                 ]
             }
         });
-
-
-
-
     }
 
 }

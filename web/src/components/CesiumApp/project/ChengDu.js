@@ -17,7 +17,9 @@ export default class ChengDu {
         this.app.closeAll()
         this.app.switchLayer('ArcGis实景图层')
         this.app.addTerrain()
-        this.app.loadJson.loadJsonYanMo()
+        this.app.addLight()
+        this.app.addBloom()
+
 
         const option = {
             lon: -73.98466473164989, lat: 40.71362487810801, radius: 200
