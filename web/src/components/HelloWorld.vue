@@ -7,21 +7,24 @@
             :visible.sync="dialogVisible"
             width="30%"
         >
-            <span @click="runChengdu">0.纽约</span>
-            <span  @click="runShanghai">1.上海</span>
-            <span>2.xx</span>
-            <span>3.xx</span>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-            </span>
+            <div class="dialogAll" style="color: black !important;">
+                <div @click="runChengdu" class="item" style="color: black !important;">
+                    <img src="../assets/projectImg/纽约.png">
+                    <span>0.纽约</span>
+                </div>
+                <div @click="runShanghai" class="item" style="color: black !important;">
+                    <img src="../assets/projectImg/上海.png">
+                    <span>1.上海</span>
+                </div>
+            </div>
+
         </el-dialog>
 
         <!--开发仪表盘-->
         <div v-if="!fakeBoard && showPanel" style="width: 100%; height: 100%">
             <div class="header">
 
-                <div style="color: white">
+                <div class="headerItem">
                     <div>基础底图</div>
                     <el-select size="mini" v-model="optionsLayersIndex" placeholder="基础底图">
                         <el-option
@@ -33,7 +36,7 @@
                     </el-select>
                 </div>
 
-                <div style="color: white">
+                <div class="headerItem">
                     <div>模型对象</div>
                     <el-select size="mini" v-model="modelData" placeholder="模型对象">
                         <el-option
@@ -45,7 +48,7 @@
                     </el-select>
                 </div>
 
-                <div style="color: white">
+                <div class="headerItem">
                     <div>地球模式</div>
                     <el-select size="mini" v-model="value" placeholder="请选择">
                         <el-option
@@ -391,16 +394,16 @@ export default {
                 {
                     value: '百度地图',
                     label: '百度地图'
-                },                {
+                }, {
                     value: '腾讯地图',
                     label: '腾讯地图'
-                },                {
+                }, {
                     value: '天地图',
                     label: '天地图'
-                },                {
+                }, {
                     value: '高德地图',
                     label: '高德地图'
-                },                {
+                }, {
                     value: '谷歌地图',
                     label: '谷歌地图'
                 },
@@ -649,6 +652,25 @@ FPS显示
     //-moz-user-select: none;
     //-khtml-user-select: none;
     //user-select: none;
+    .dialogAll {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .item {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+
+            img {
+                width: 100%;
+                height: 80%;
+            }
+        }
+    }
 
     .header {
         width: 100%;
@@ -661,6 +683,12 @@ FPS显示
         top: 0;
         z-index: 9999;
         background-color: #3C3F41;
+
+        .headerItem {
+            margin-left: 10px;
+            margin-top: 5px;
+            color: white;
+        }
 
         .topMenus {
             width: 80%;
