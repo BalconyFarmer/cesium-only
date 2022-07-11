@@ -11,12 +11,10 @@ export default class Shanghai {
     init() {
         this.app.switchLayer('百度地图')
         this.app.loadJson.loadJsonRoad()
-        // const tileset =  this.app.addOSMBuilding()
-        //
+
         let po = new Cesium.Cartesian3(-2851667.578771356, 4653872.950938622, 3288949.340711588)
         let url = "http://localhost:1111/3Dstatic/uploadDefault/2022076/16570982069192171.glb"
         this.app.load3DModel.loadGlbByURL(po, url)
-        this.clipping3DTiles()
         this.playAction()
 
         this.clippingPlan()
@@ -70,7 +68,7 @@ export default class Shanghai {
         tileset.style = new Cesium.Cesium3DTileStyle({
             color: {
                 conditions: [
-                    ['true', 'rgba(0, 127.5, 255 ,0.3)']
+                    ['true', 'rgba(0, 127.5, 255 ,0.4)']
                 ]
             }
         });

@@ -22,6 +22,7 @@ import KMLPoints from "@/components/CesiumApp/some/Points/KMLPoints";
 import PointsCluster from "@/components/CesiumApp/some/Points/PointsCluster";
 import PrimitivesPoints from "@/components/CesiumApp/some/Points/PrimitivesPoints";
 import NormalPoints from "@/components/CesiumApp/some/Points/NormalPoints";
+
 require('@dvgis/cesium-map')
 export default class CesiumApp {
     constructor() {
@@ -426,6 +427,8 @@ export default class CesiumApp {
                     enablePickFeatures: false,
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
+                const _layer = this.viewer.imageryLayers.get(0);
+                _layer.brightness = 0.5
                 break
             case 'geoq智图黑':
                 Imagery = new Cesium.ArcGisMapServerImageryProvider({

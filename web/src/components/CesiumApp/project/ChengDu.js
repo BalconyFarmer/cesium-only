@@ -14,7 +14,7 @@ export default class ChengDu {
 
         const self = this
         this.app.closeAll()
-        this.app.switchLayer('geoq智图黑')
+        this.app.switchLayer('ArcGis实景图层')
         this.app.addTerrain()
         this.app.loadJson.loadJsonYanMo()
 
