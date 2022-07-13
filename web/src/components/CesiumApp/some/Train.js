@@ -86,7 +86,7 @@ export default class Train {
     }
 
     add() {
-        let time = 40
+        let time = 10
         let czml1 = [
             {
                 "id": "document",
@@ -128,7 +128,7 @@ export default class Train {
                     "verticalOrigin": "CENTER"
                 },
                 "model": {
-                    gltf: 'http://localhost:8083/3Dstatic/czml/models/wagon_ns2.glb',
+                    gltf: 'http://localhost:8083/3Dstatic/czml/models/T1.glb',
                     "minimumPixelSize": 100,
                     "maximumScale": 50
                 },
@@ -172,8 +172,8 @@ export default class Train {
                     ]
                 },
                 "position": {
-                    "interpolationAlgorithm": "LAGRANGE",
-                    "interpolationDegree": 1,
+                    "interpolationAlgorithm": "LAGRANGE", //插值算法为LAGRANGE，还有HERMITE,GEODESIC
+                    "interpolationDegree": 2, ////1为线性插值，2为平方插值
                     "epoch": "2012-08-04T16:00:00Z",
                     "cartesian": [
                         0.0, -2379754.6637012, -4665332.88013588, 3628133.68924173,
@@ -332,14 +332,9 @@ export default class Train {
             }
         ]
 
-        // this.dataSourcePromise1 = new Cesium.CzmlDataSource()
-        // this.dataSourcePromise1.load(czml1)
-        // this.app.viewer.dataSources.add(this.dataSourcePromise1)
-
         for (let i = 0; i < 4; i++) {
             //时间延迟
             let _czml1 = JSON.parse(JSON.stringify(czml1));
-
             _czml1[1].position.cartesian.forEach((item, index) => {
                 let a = index % 4
                 if (a == 0) {
@@ -351,7 +346,15 @@ export default class Train {
             this.app.viewer.dataSources.add(this.dataSourcePromise2)
         }
 
+
+        const self = this
+        setTimeout(function (){
+            self.app.viewer.trackedEntity = self.dataSourcePromise2.entities.getById(
+                "Vehicle"
+            );
+        },1000)
+
+
     }
 
-    // gltf: 'http://localhost:8083/3Dstatic/czml/models/T1.glb',
 }
