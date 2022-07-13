@@ -22,6 +22,7 @@ import KMLPoints from "@/components/CesiumApp/some/Points/KMLPoints";
 import PointsCluster from "@/components/CesiumApp/some/Points/PointsCluster";
 import PrimitivesPoints from "@/components/CesiumApp/some/Points/PrimitivesPoints";
 import NormalPoints from "@/components/CesiumApp/some/Points/NormalPoints";
+import Train from "@/components/CesiumApp/some/Train";
 
 require('@dvgis/cesium-map')
 export default class CesiumApp {
@@ -94,6 +95,7 @@ export default class CesiumApp {
         this.pointsCluster = new PointsCluster(this)
         this.primitivePoints = new PrimitivesPoints(this)
         this.normalPoints = new NormalPoints(this)
+        this.train = new Train(this)
     }
 
 
