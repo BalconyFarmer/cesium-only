@@ -2,13 +2,19 @@
  * 火车运动
  */
 
+import a from "./Json/ExtractData.json"
+
 export default class Train {
     constructor(app) {
         this.app = app
         // this.init()
         this.add()
+        // this.test()
     }
 
+    /**
+     * 无用
+     */
     init() {
         const fuelDisplay = document.createElement("div");
         const czmlPath = "http://localhost:8083/3Dstatic/czml/";
@@ -47,7 +53,6 @@ export default class Train {
                     self.app.viewer.trackedEntity = vehicleEntity = dataSource.entities.getById(
                         "Vehicle"
                     );
-                    console.log(self.app.viewer.trackedEntity, "++++")
                 }
             });
         }
@@ -86,11 +91,12 @@ export default class Train {
     }
 
     add() {
-        let time = 10
+        let time = 2.3
         let czml1 = [
             {
                 "id": "document",
-                "version": "1.0"
+                "version": "1.0",
+
             },
             {
                 "id": "Vehicle",
@@ -124,13 +130,13 @@ export default class Train {
                         }
                     ],
                     "style": "FILL",
-                    "text": "Test Vehicle",
+                    // "text": "ok",
                     "verticalOrigin": "CENTER"
                 },
                 "model": {
-                    gltf: 'http://localhost:8083/3Dstatic/czml/models/T1.glb',
-                    "minimumPixelSize": 100,
-                    "maximumScale": 50
+                    gltf: 'http://localhost:8083/3Dstatic/czml/models/cheshen(1).glb',
+                    // "minimumPixelSize": 100,
+                    // "maximumScale": 50
                 },
                 "orientation": {
                     "velocityReference": "#position"
@@ -147,30 +153,30 @@ export default class Train {
                         ]
                     }
                 },
-                "path": {
-                    "material": {
-                        "solidColor": {
-                            "color": {
-                                "interval": "2012-08-04T16:00:00Z/2012-08-04T18:00:00Z",
-                                "rgba": [
-                                    255, 255, 0, 255
-                                ]
-                            }
-                        }
-                    },
-                    "width": [
-                        {
-                            "interval": "2012-08-04T16:00:00Z/2012-08-04T18:00:00Z",
-                            "number": 5.0
-                        }
-                    ],
-                    "show": [
-                        {
-                            "interval": "2012-08-04T16:00:00Z/2012-08-04T18:00:00Z",
-                            "boolean": true
-                        }
-                    ]
-                },
+                /*                "path": {
+                                    "material": {
+                                        "solidColor": {
+                                            "color": {
+                                                "interval": "2012-08-04T16:00:00Z/2012-08-04T18:00:00Z",
+                                                "rgba": [
+                                                    255, 255, 0, 255
+                                                ]
+                                            }
+                                        }
+                                    },
+                                    "width": [
+                                        {
+                                            "interval": "2012-08-04T16:00:00Z/2012-08-04T18:00:00Z",
+                                            "number": 5.0
+                                        }
+                                    ],
+                                    "show": [
+                                        {
+                                            "interval": "2012-08-04T16:00:00Z/2012-08-04T18:00:00Z",
+                                            "boolean": true
+                                        }
+                                    ]
+                                },*/
                 "position": {
                     "interpolationAlgorithm": "LAGRANGE", //插值算法为LAGRANGE，还有HERMITE,GEODESIC
                     "interpolationDegree": 2, ////1为线性插值，2为平方插值
@@ -332,15 +338,22 @@ export default class Train {
             }
         ]
 
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 30; i++) {
             //时间延迟
             let _czml1 = JSON.parse(JSON.stringify(czml1));
             _czml1[1].position.cartesian.forEach((item, index) => {
                 let a = index % 4
                 if (a == 0) {
-                    _czml1[1].position.cartesian[index] += time*i
+                    _czml1[1].position.cartesian[index] += time * i
                 }
             })
+            if (i == 0) {
+                _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/chewei(1).glb"
+            } else if (i == 29) {
+                _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/chetou(1).glb"
+            } else {
+                // _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/CAR/car3.glb"
+            }
             this.dataSourcePromise2 = new Cesium.CzmlDataSource()
             this.dataSourcePromise2.load(_czml1)
             this.app.viewer.dataSources.add(this.dataSourcePromise2)
@@ -348,13 +361,172 @@ export default class Train {
 
 
         const self = this
-        setTimeout(function (){
+        setTimeout(function () {
             self.app.viewer.trackedEntity = self.dataSourcePromise2.entities.getById(
                 "Vehicle"
             );
-        },1000)
+        }, 1000)
+
+        self.app.viewer.clock.onTick.addEventListener(function (clock) {
+            // This example uses time offsets from the start to identify which parts need loading.
+            const timeOffset = Cesium.JulianDate.secondsDifference(
+                clock.currentTime,
+                clock.startTime
+            );
+
+            // 重置时间
+            if (timeOffset > 1500) {
+                self.app.viewer.clock.currentTime = self.app.viewer.clock.startTime;
+                self.app.viewer.clock.shouldAnimate = true;
+            }
+
+            // if (self.app.viewer.trackedEntity) {
+            // const fuel = self.app.viewer.trackedEntity.properties.fuel_remaining.getValue(
+            //     clock.currentTime
+            // );
+            // console.log(self.app.viewer.trackedEntity,"fuelfuelfuelfuelfuel")
+            // }
+        });
+
+        // 加速——速度 * 2：
+        this.app.viewer.clockViewModel.multiplier *= 20;
+
+        // 减速——速度 / 2
+        // this.app.viewer.clockViewModel.multiplier /= 80;
+
+        // 开始/暂停
+        this.app.viewer.clock.shouldAnimate = true;
+
+        // 重置
+        // this.app.viewer.clock.currentTime = viewer.clock.startTime;
+
+    }
+
+    test() {
+        let arr = []
+        let timeINT = 0
+        a.features[0].geometry.coordinates.forEach((item, index) => {
+            var position = Cesium.Cartesian3.fromDegrees(item[0], item[1], item[2])
+            timeINT += 10
+            arr.push(timeINT)
+            arr.push(position.x)
+            arr.push(position.y)
+            arr.push(position.z)
+        })
+
+        let time = 20
+        let czml1 = [
+            {
+                "id": "document",
+                "version": "1.0",
+
+            },
+            {
+                "id": "Vehicle",
+                "availability": "2012-08-04T16:00:00Z/2012-08-04T17:04:54.9962195740191Z",
+                "label": {
+                    "fillColor": [
+                        {
+                            "interval": "2012-08-04T16:00:00Z/2012-08-04T18:00:00Z",
+                            "rgba": [
+                                255, 255, 0, 255
+                            ]
+                        }
+                    ],
+                    "font": "bold 10pt Segoe UI Semibold",
+                    "horizontalOrigin": "CENTER",
+                    "outlineColor": {
+                        "rgba": [
+                            0, 0, 0, 255
+                        ]
+                    },
+                    "pixelOffset": {
+                        "cartesian2": [
+                            0.0, 20.0
+                        ]
+                    },
+                    "scale": 1.0,
+                    "show": [
+                        {
+                            "interval": "2012-08-04T16:00:00Z/2012-08-04T18:00:00Z",
+                            "boolean": true
+                        }
+                    ],
+                    "style": "FILL",
+                    // "text": "ok",
+                    "verticalOrigin": "CENTER"
+                },
+                "model": {
+                    gltf: 'http://localhost:8083/3Dstatic/czml/models/cheshen(1).glb',
+                    // "minimumPixelSize": 100,
+                    // "maximumScale": 50
+                },
+                "orientation": {
+                    "velocityReference": "#position"
+                },
+                "viewFrom": {
+                    "cartesian": [-2080, -1715, 779]
+                },
+                "properties": {
+                    "fuel_remaining": {
+                        "epoch": "2012-08-04T16:00:00Z",
+                        "number": [
+                            0, 22.5,
+                            1500, 21.2
+                        ]
+                    }
+                },
+                "position": {
+                    "interpolationAlgorithm": "LAGRANGE", //插值算法为LAGRANGE，还有HERMITE,GEODESIC
+                    "interpolationDegree": 2, ////1为线性插值，2为平方插值
+                    "epoch": "2012-08-04T16:00:00Z",
+                    "cartesian": arr
+                }
+            }
+        ]
+        for (let i = 0; i < 30; i++) {
+            //时间延迟
+            let _czml1 = JSON.parse(JSON.stringify(czml1));
+            _czml1[1].position.cartesian.forEach((item, index) => {
+                let a = index % 4
+                if (a == 0) {
+                    _czml1[1].position.cartesian[index] += time * i
+                }
+            })
+            if (i == 0) {
+                _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/chewei(1).glb"
+            } else if (i == 29) {
+                _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/chetou(1).glb"
+            } else {
+                // _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/CAR/car3.glb"
+            }
+            this.dataSourcePromise2 = new Cesium.CzmlDataSource()
+            this.dataSourcePromise2.load(_czml1)
+            this.app.viewer.dataSources.add(this.dataSourcePromise2)
+        }
 
 
+        const self = this
+        setTimeout(function () {
+            self.app.viewer.trackedEntity = self.dataSourcePromise2.entities.getById(
+                "Vehicle"
+            );
+        }, 5000)
+
+        self.app.viewer.clock.onTick.addEventListener(function (clock) {
+            // This example uses time offsets from the start to identify which parts need loading.
+            const timeOffset = Cesium.JulianDate.secondsDifference(
+                clock.currentTime,
+                clock.startTime
+            );
+
+            // 重置时间
+            if (timeOffset > 1500) {
+                self.app.viewer.clock.currentTime = self.app.viewer.clock.startTime;
+                self.app.viewer.clock.shouldAnimate = true;
+            }
+
+        });
     }
 
 }
