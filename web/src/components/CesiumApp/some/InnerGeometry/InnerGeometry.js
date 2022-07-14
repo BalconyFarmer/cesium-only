@@ -146,12 +146,13 @@ export default class InnerGeometry {
             name: 'Red box with black outline',
             position: Cartesian3,
             box: {
-                dimensions: new Cesium.Cartesian3(400000.0, 300000.0, 500000.0),
+                dimensions: new Cesium.Cartesian3(1, 1, 1),
                 material: Cesium.Color.RED,
                 outline: true, //显示轮廓
                 outlineColor: Cesium.Color.BLACK
             }
         })
+
     }
 
     /**
@@ -325,20 +326,37 @@ export default class InnerGeometry {
         })
     }
 
-    glowingLine (Cartesian3) {
-        let glowingLine = this.app.viewer.entities.add({
-            name: '具有发光效果的线',
-            polyline: {
-                positions: Cesium.Cartesian3.fromDegreesArray(
-                    [-75, 37, -125, 37]
-                ),
-                width: 10,
-                material: new Cesium.PolylineGlowMaterialProperty({
-                    glowPower: 0.2,
-                    color: Cesium.Color.BLUE
-                })
-            }
-        })
+    glowingLine (Cartesian3List) {
+        if (Cartesian3List) {
+            let glowingLine = this.app.viewer.entities.add({
+                name: '具有发光效果的线',
+                polyline: {
+                    positions: Cesium.Cartesian3.fromDegreesArray(
+                        Cartesian3List
+                    ),
+                    width: 10,
+                    material: new Cesium.PolylineGlowMaterialProperty({
+                        glowPower: 0.2,
+                        color: Cesium.Color.BLUE
+                    })
+                }
+            })
+        } else {
+            let glowingLine = this.app.viewer.entities.add({
+                name: '具有发光效果的线',
+                polyline: {
+                    positions: Cesium.Cartesian3.fromDegreesArray(
+                        [-75, 37, -125, 37]
+                    ),
+                    width: 10,
+                    material: new Cesium.PolylineGlowMaterialProperty({
+                        glowPower: 0.2,
+                        color: Cesium.Color.BLUE
+                    })
+                }
+            })
+        }
+
 
     }
 

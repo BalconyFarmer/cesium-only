@@ -23,6 +23,7 @@ import PointsCluster from "@/components/CesiumApp/some/Points/PointsCluster";
 import PrimitivesPoints from "@/components/CesiumApp/some/Points/PrimitivesPoints";
 import NormalPoints from "@/components/CesiumApp/some/Points/NormalPoints";
 import Train from "@/components/CesiumApp/some/Train";
+import Clock from "@/components/CesiumApp/some/Clock";
 
 require('@dvgis/cesium-map')
 export default class CesiumApp {
@@ -96,6 +97,7 @@ export default class CesiumApp {
         this.primitivePoints = new PrimitivesPoints(this)
         this.normalPoints = new NormalPoints(this)
         this.train = new Train(this)
+        this.clock = new Clock(this)
     }
 
 

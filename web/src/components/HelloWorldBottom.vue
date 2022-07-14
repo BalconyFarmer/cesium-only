@@ -319,6 +319,19 @@
                     </div>
                 </div>
             </el-tab-pane>
+            <el-tab-pane label="Clock" name="five1">
+                <div class="env">
+                    <div>
+                        <span>moveTip</span>
+                        <el-switch
+                            @change="clockChange"
+                            v-model="clockFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
+                </div>
+            </el-tab-pane>
 
         </el-tabs>
     </div>
@@ -356,6 +369,7 @@ export default {
             flyFlag: false,
             flyFlag1: false,
             flyFlag2: false,
+            clockFlag: true
 
         }
     },
@@ -552,6 +566,13 @@ export default {
         },
         moveToolTipsChange() {
             this.cApp.startMoveTips()
+        },
+        clockChange() {
+            if (this.clockFlag) {
+                this.cApp.clock.stop()
+            } else {
+                this.cApp.clock.start()
+            }
         },
         fly() {
             // 飞机

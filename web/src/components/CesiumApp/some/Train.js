@@ -9,11 +9,11 @@ import {czmlStand} from "./Json/czml/czmlStand"
 export default class Train {
     constructor(app) {
         this.app = app
-        // this.add()
-        this.test()
+        // this.addDemoData()
+        this.testChinaData()
     }
 
-    add() {
+    addDemoData() {
         let time = 2.3
         let czml1 = czmlStand
 
@@ -33,6 +33,9 @@ export default class Train {
             } else {
                 // _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/CAR/car3.glb"
             }
+
+
+
             this.dataSourcePromise2 = new Cesium.CzmlDataSource()
             this.dataSourcePromise2.load(_czml1)
             this.app.viewer.dataSources.add(this.dataSourcePromise2)
@@ -67,26 +70,18 @@ export default class Train {
             // }
         });
 
-        // 加速——速度 * 2：
-        // this.app.viewer.clockViewModel.multiplier *= 20;
 
-        // 减速——速度 / 2
-        this.app.viewer.clock.multiplier /= 80;
-
-        // 开始/暂停
-        this.app.viewer.clock.shouldAnimate = true;
-
-        // 重置
-        // this.app.viewer.clock.currentTime = viewer.clock.startTime;
 
     }
 
-    test() {
+    testChinaData() {
         const self = this
         let arr = []
         let timeINT = 0
         const speed = 0.01
         const timeDelay = 4
+
+        let fake = []
 
         // 转换坐标 计算时间
         a.features[0].geometry.coordinates.forEach((item, index) => {
@@ -109,8 +104,14 @@ export default class Train {
                 arr.push(position.x)
                 arr.push(position.y)
                 arr.push(position.z)
+
+                fake.push(item[0])
+                fake.push(item[1])
             }
         })
+
+        this.app.innerGeometry.glowingLine(fake)
+
         let czml1 = czmlStand
         czml1[1].position.cartesian = arr
 
@@ -131,6 +132,7 @@ export default class Train {
             } else {
                 // _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/CAR/car3.glb"
             }
+
             this.dataSourcePromise2 = new Cesium.CzmlDataSource()
             this.dataSourcePromise2.load(_czml1)
             this.app.viewer.dataSources.add(this.dataSourcePromise2)
@@ -154,10 +156,11 @@ export default class Train {
                 clock.currentTime,
                 clock.startTime
             );
-            // if (timeOffset > 1500) {
-            //     self.app.viewer.clock.currentTime = self.app.viewer.clock.startTime;
-            //     self.app.viewer.clock.shouldAnimate = true;
-            // }
+/*            if (timeOffset > 500) {
+                // self.app.viewer.clock.currentTime = self.app.viewer.clock.startTime;
+                // self.app.viewer.clock.shouldAnimate = true;
+                self.app.viewer.clock.shouldAnimate = false;
+            }*/
         });
     }
 
