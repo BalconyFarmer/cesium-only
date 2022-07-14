@@ -334,7 +334,7 @@ export default class InnerGeometry {
                     positions: Cesium.Cartesian3.fromDegreesArray(
                         Cartesian3List
                     ),
-                    width: 10,
+                    width: 5,
                     material: new Cesium.PolylineGlowMaterialProperty({
                         glowPower: 0.2,
                         color: Cesium.Color.BLUE

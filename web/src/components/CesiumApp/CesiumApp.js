@@ -55,27 +55,26 @@ export default class CesiumApp {
         Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmZTg5MmNlOS0yZGZiLTRjNGMtOTZkMC0xNTdkOGY1YWNhN2MiLCJpZCI6OTg3NDQsImlhdCI6MTY1NTk3MjU0OH0.p3G2BpxU3AApFg8XTP_B7cFTsyF_g75rWQBqmi5k_IA";
 
         this.option = {
-            animation: false, // 如果设置为false,则不会创建'动画'小部件。
             contextOptions: {
                 webgl: {
                     alpha: true
                 }
             },
-            baseLayerPicker: false, // 如果设置为false,则不会创建BaseLayerPicker小部件。
-            fullscreenButton: false, // 如果设置为false,将不会创建FullscreenButton小部件。
-            vrButton: false, // 如果设置为true,将创建VRButton小部件。
-            // geocoder: false, // 搜索
-            homeButton: false, //
-            infoBox: false, //
-            sceneModePicker: false, //
-            selectionIndicator: false, //
-            timeline: false, //
-            navigationHelpButton: false, //
+            baseLayerPicker: true, // 如果设置为false,则不会创建BaseLayerPicker小部件。
+            fullscreenButton: true, // 如果设置为false,将不会创建FullscreenButton小部件。
+            vrButton: true, // 如果设置为true,将创建VRButton小部件。
+            geocoder: true, // 搜索
+            homeButton: true, //
+            infoBox: true, //
+            sceneModePicker: true, //
+            selectionIndicator: true, //
+            animation: true, // 如果设置为false,则不会创建'动画'小部件。
+            timeline: true, //
+            navigationHelpButton: true, //
             shouldAnimate: true, // 动画播放
-            // skyBox: false, // 关闭天空
-            // skyAtmosphere: false, // 关闭大气
+            skyBox: false, // 关闭天空
+            skyAtmosphere: false, // 关闭大气
             SceneModePicker: '2D',
-            terrainProvider: this.Cesium.createWorldTerrain()
         }
         this.viewer = new this.Cesium.Viewer('cesiumContainer', this.option)
         this.viewer.scene.globe.enableLighting = false // 初始化光照
@@ -89,15 +88,16 @@ export default class CesiumApp {
         this.viewer.scene.postProcessStages.fxaa.enabled = true// 去锯齿 是文字清晰
         this.animation = new Animation(this)
 
-        this.closeAll()
         this.switchLayer('高德卫星')
-        window.viewer = this.viewer
         this.points = new KMLPoints(this)
         this.pointsCluster = new PointsCluster(this)
         this.primitivePoints = new PrimitivesPoints(this)
         this.normalPoints = new NormalPoints(this)
         this.train = new Train(this)
         this.clock = new Clock(this)
+
+        window.viewer = this.viewer
+
     }
 
 

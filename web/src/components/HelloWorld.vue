@@ -554,6 +554,33 @@ export default {
 </script>
 
 <style lang="scss">
+.cesium-viewer-animationContainer {
+    position: absolute;
+    bottom: 151px;
+    left: 0;
+    padding: 0;
+    width: 169px;
+    height: 112px;    z-index: 9999999 !important;
+
+}
+.cesium-viewer-timelineContainer {
+    position: absolute;
+    bottom: 150px;
+    left: 0px;
+    right: 0px !important;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    z-index: 9999999 !important;
+    .cesium-timeline-bar {
+        height: 77.7em;
+    }
+}
+
+@import "../style/reset.scss";
+//引入方式
+@import "../style/ele.scss"; //引入方式
 
 .el-menu-demo {
     height: 90%;
@@ -576,7 +603,7 @@ FPS显示
     top: 6px;
     right: 152px;
     text-align: right;
-    z-index: 999999;
+    z-index: 99999;
 }
 
 .slider {
@@ -587,9 +614,6 @@ FPS显示
     height: 100%;
 }
 
-@import "../style/reset.scss";
-//引入方式
-@import "../style/ele.scss"; //引入方式
 .modeChange {
     position: fixed;
     right: 10px;
@@ -641,11 +665,6 @@ FPS显示
     color: #87939A;
 }
 
-.cesium-viewer-bottom {
-    display: none !important;
-    visibility: hidden !important;
-}
-
 .all {
     width: 100%;
     height: 1080px;
@@ -681,7 +700,7 @@ FPS显示
         position: absolute;
         left: 0;
         top: 0;
-        z-index: 9999;
+        z-index: 999;
         background-color: #3C3F41;
 
         .headerItem {
@@ -715,7 +734,7 @@ FPS显示
             position: absolute;
             right: 20px;
             top: 10px;
-            z-index: 99999;
+            z-index: 999;
             color: white;
             display: flex;
             flex-direction: row;
@@ -753,7 +772,7 @@ FPS显示
         position: absolute;
         right: 0px;
         top: 10%;
-        z-index: 999;
+        z-index: 9999;
         overflow-y: auto;
         color: white;
         background-color: rgba(43, 43, 43, .5);

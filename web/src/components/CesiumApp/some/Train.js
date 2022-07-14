@@ -35,7 +35,6 @@ export default class Train {
             }
 
 
-
             this.dataSourcePromise2 = new Cesium.CzmlDataSource()
             this.dataSourcePromise2.load(_czml1)
             this.app.viewer.dataSources.add(this.dataSourcePromise2)
@@ -69,7 +68,6 @@ export default class Train {
             // console.log(self.app.viewer.trackedEntity,"fuelfuelfuelfuelfuel")
             // }
         });
-
 
 
     }
@@ -133,6 +131,13 @@ export default class Train {
                 // _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/CAR/car3.glb"
             }
 
+            // 只显示一根线
+            // if (i == 0) {
+            //     _czml1[1].path.show.boolean = true
+            // } else {
+            //     _czml1[1].path.show.boolean = false
+            // }
+
             this.dataSourcePromise2 = new Cesium.CzmlDataSource()
             this.dataSourcePromise2.load(_czml1)
             this.app.viewer.dataSources.add(this.dataSourcePromise2)
@@ -156,12 +161,15 @@ export default class Train {
                 clock.currentTime,
                 clock.startTime
             );
-/*            if (timeOffset > 500) {
-                // self.app.viewer.clock.currentTime = self.app.viewer.clock.startTime;
-                // self.app.viewer.clock.shouldAnimate = true;
-                self.app.viewer.clock.shouldAnimate = false;
-            }*/
+            // console.log(clock, "11")
+            /*            if (timeOffset > 500) {
+                            // self.app.viewer.clock.currentTime = self.app.viewer.clock.startTime;
+                            // self.app.viewer.clock.shouldAnimate = true;
+                            self.app.viewer.clock.shouldAnimate = false;
+                        }*/
         });
+
+        // this.app.viewer.clock.multiplier = 0.1;
     }
 
 }
