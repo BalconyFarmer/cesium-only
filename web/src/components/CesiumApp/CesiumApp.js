@@ -68,8 +68,8 @@ export default class CesiumApp {
             infoBox: true, //
             sceneModePicker: true, //
             selectionIndicator: true, //
-            animation: true, // 如果设置为false,则不会创建'动画'小部件。
-            timeline: true, //
+            animation: true, // 创建'动画'小部件。
+            timeline: true, // 创建'时间轴'小部件。
             navigationHelpButton: true, //
             shouldAnimate: true, // 动画播放
             skyBox: false, // 关闭天空
@@ -95,11 +95,20 @@ export default class CesiumApp {
         this.normalPoints = new NormalPoints(this)
         this.train = new Train(this)
         this.clock = new Clock(this)
-
+        this.closeAimationToo()
         window.viewer = this.viewer
 
     }
 
+    closeAimationToo () {
+        // this.viewer.animation.multiplier = 0.1;
+        // debugger
+        // const see = this.viewer.animation.viewModel
+        // debugger
+
+        // this.viewer.animation.container.style.visibility = 'hidden' // 不显示动画控件
+        // this.viewer.timeline.container.style.visibility = 'hidden' // 不显示动画控件
+    }
 
     /**
      * 视场角

@@ -169,7 +169,6 @@ export default class Train {
                         }*/
         });
 
-        // this.app.viewer.clock.multiplier = 0.1;
     }
 
 }
