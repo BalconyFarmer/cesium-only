@@ -7,87 +7,8 @@ import a from "./Json/ExtractData.json"
 export default class Train {
     constructor(app) {
         this.app = app
-        // this.init()
-        this.add()
-        // this.test()
-    }
-
-    /**
-     * 无用
-     */
-    init() {
-        const fuelDisplay = document.createElement("div");
-        const czmlPath = "http://localhost:8083/3Dstatic/czml/";
-        let vehicleEntity;
-        const self = this
-
-        const dataSource = new Cesium.CzmlDataSource();
-        this.app.viewer.dataSources.add(dataSource);
-
-        const partsToLoad = [
-            {
-                url: "MultipartVehicle_part1.czml",
-                range: [0, 1500],
-                requested: false,
-                loaded: false,
-            },
-            {
-                url: "MultipartVehicle_part2.czml",
-                range: [1500, 3000],
-                requested: false,
-                loaded: false,
-            },
-            {
-                url: "MultipartVehicle_part3.czml",
-                range: [3000, 4500],
-                requested: false,
-                loaded: false,
-            },
-        ];
-
-        function processPart(part) {
-            part.requested = true;
-            dataSource.process(czmlPath + part.url).then(function () {
-                part.loaded = true;
-                if (!self.app.viewer.trackedEntity) {
-                    self.app.viewer.trackedEntity = vehicleEntity = dataSource.entities.getById(
-                        "Vehicle"
-                    );
-                }
-            });
-        }
-
-        processPart(partsToLoad[0]);
-
-        const preloadTimeInSeconds = 100;
-
-        self.app.viewer.clock.onTick.addEventListener(function (clock) {
-            // This example uses time offsets from the start to identify which parts need loading.
-            const timeOffset = Cesium.JulianDate.secondsDifference(
-                clock.currentTime,
-                clock.startTime
-            );
-            partsToLoad
-                .filter(function (part) {
-                    return (
-                        !part.requested &&
-                        timeOffset >= part.range[0] - preloadTimeInSeconds &&
-                        timeOffset <= part.range[1]
-                    );
-                })
-                .forEach(function (part) {
-                    processPart(part);
-                });
-
-            if (vehicleEntity) {
-                const fuel = vehicleEntity.properties.fuel_remaining.getValue(
-                    clock.currentTime
-                );
-                if (Cesium.defined(fuel)) {
-                    fuelDisplay.textContent = `Fuel: ${fuel.toFixed(2)} gal`;
-                }
-            }
-        });
+        // this.add()
+        this.test()
     }
 
     add() {
@@ -406,7 +327,7 @@ export default class Train {
         let arr = []
         let timeINT = 0
         a.features[0].geometry.coordinates.forEach((item, index) => {
-            var position = Cesium.Cartesian3.fromDegrees(item[0], item[1], item[2])
+            let position = Cesium.Cartesian3.fromDegrees(item[0], item[1], 0)
             timeINT += 10
             arr.push(timeINT)
             arr.push(position.x)
@@ -419,7 +340,6 @@ export default class Train {
             {
                 "id": "document",
                 "version": "1.0",
-
             },
             {
                 "id": "Vehicle",
