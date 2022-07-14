@@ -2,7 +2,6 @@
  * 火车运动
  */
 
-// import a from "./Json/ExtractData.json"
 import a from "./Json/ExtractData_all.json"
 import * as turf from '@turf/turf'
 
