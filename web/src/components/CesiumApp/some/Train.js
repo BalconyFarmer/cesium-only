@@ -329,6 +329,7 @@ export default class Train {
         const speed = 0.01
         const timeDelay = 4
 
+        // 转换坐标 计算时间
         a.features[0].geometry.coordinates.forEach((item, index) => {
             if (index == 0) {
                 let position = Cesium.Cartesian3.fromDegrees(item[0], item[1], 0)
@@ -350,7 +351,6 @@ export default class Train {
                 arr.push(position.y)
                 arr.push(position.z)
             }
-
         })
 
         let czml1 = [
@@ -421,6 +421,7 @@ export default class Train {
                 }
             }
         ]
+
         for (let i = 0; i < 30; i++) {
             //时间延迟
             let _czml1 = JSON.parse(JSON.stringify(czml1));
@@ -448,7 +449,7 @@ export default class Train {
             self.app.viewer.trackedEntity = self.dataSourcePromise2.entities.getById(
                 "Vehicle"
             );
-        }, 5000)
+        }, 1000)
 
         self.app.viewer.clock.onTick.addEventListener(function (clock) {
             // This example uses time offsets from the start to identify which parts need loading.
