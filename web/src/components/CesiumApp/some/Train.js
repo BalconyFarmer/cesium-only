@@ -2,7 +2,9 @@
  * 火车运动
  */
 
-import a from "./Json/ExtractData.json"
+// import a from "./Json/ExtractData.json"
+import a from "./Json/ExtractData_all.json"
+import * as turf from '@turf/turf'
 
 export default class Train {
     constructor(app) {
@@ -17,7 +19,6 @@ export default class Train {
             {
                 "id": "document",
                 "version": "1.0",
-
             },
             {
                 "id": "Vehicle",
@@ -326,16 +327,33 @@ export default class Train {
     test() {
         let arr = []
         let timeINT = 0
+        const speed = 0.01
+        const timeDelay = 4
+
         a.features[0].geometry.coordinates.forEach((item, index) => {
-            let position = Cesium.Cartesian3.fromDegrees(item[0], item[1], 0)
-            timeINT += 10
-            arr.push(timeINT)
-            arr.push(position.x)
-            arr.push(position.y)
-            arr.push(position.z)
+            if (index == 0) {
+                let position = Cesium.Cartesian3.fromDegrees(item[0], item[1], 0)
+                arr.push(timeINT)
+                arr.push(position.x)
+                arr.push(position.y)
+                arr.push(position.z)
+            } else {
+                let from = turf.point([a.features[0].geometry.coordinates[index-1][0], a.features[0].geometry.coordinates[index-1][1]]);
+                let to = turf.point([item[0], item[1]]);
+                let options = {units: 'miles'};
+                let distance = turf.distance(from, to, options);
+                let t = distance/speed
+                timeINT += t
+
+                let position = Cesium.Cartesian3.fromDegrees(item[0], item[1], 0)
+                arr.push(timeINT)
+                arr.push(position.x)
+                arr.push(position.y)
+                arr.push(position.z)
+            }
+
         })
 
-        let time = 20
         let czml1 = [
             {
                 "id": "document",
@@ -410,7 +428,7 @@ export default class Train {
             _czml1[1].position.cartesian.forEach((item, index) => {
                 let a = index % 4
                 if (a == 0) {
-                    _czml1[1].position.cartesian[index] += time * i
+                    _czml1[1].position.cartesian[index] += timeDelay * i
                 }
             })
             if (i == 0) {
@@ -441,10 +459,10 @@ export default class Train {
             );
 
             // 重置时间
-            if (timeOffset > 1500) {
-                self.app.viewer.clock.currentTime = self.app.viewer.clock.startTime;
-                self.app.viewer.clock.shouldAnimate = true;
-            }
+            // if (timeOffset > 1500) {
+            //     self.app.viewer.clock.currentTime = self.app.viewer.clock.startTime;
+            //     self.app.viewer.clock.shouldAnimate = true;
+            // }
 
         });
     }
