@@ -98,8 +98,25 @@ export default class CesiumApp {
         this.clock.closeAimationToolbar()
         window.viewer = this.viewer
 
+        this.test()
+
     }
 
+    test() {
+        // Example 1: Create primitive with a single instance
+        let rectangleInstance = new Cesium.GeometryInstance({
+            geometry : new Cesium.RectangleGeometry({
+                rectangle : Cesium.Rectangle.fromDegrees(-140.0, 30.0, -100.0, 40.0)
+            }),
+            id : 'rectangle',
+            attributes : {
+                color : new Cesium.ColorGeometryInstanceAttribute(0.0, 1.0, 1.0, 0.5)
+            }
+        });
+        this.viewer.scene.primitives.add(new Cesium.GroundPrimitive({
+            geometryInstances : rectangleInstance
+        }));
+    }
 
     /**
      * 视场角
