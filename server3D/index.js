@@ -22,6 +22,6 @@ module.exports = {initSequelize}
 const {router} = require('./router')
 app.use(router.routes()).use(router.allowedMethods())
 
-app.listen(8083, () => {
-    console.log('server is running at http://localhost:8083')
+app.listen(1111, () => {
+    console.log('server is running at http://localhost:1111')
 })

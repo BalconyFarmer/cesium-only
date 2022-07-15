@@ -124,11 +124,11 @@ export default class Train {
                 }
             })
             if (i == 0) {
-                _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/chewei(1).glb"
+                _czml1[1].model.gltf = "http://localhost:1111/3Dstatic/czml/models/chewei(1).glb"
             } else if (i == 29) {
-                _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/chetou(1).glb"
+                _czml1[1].model.gltf = "http://localhost:1111/3Dstatic/czml/models/chetou(1).glb"
             } else {
-                // _czml1[1].model.gltf = "http://localhost:8083/3Dstatic/czml/models/CAR/car3.glb"
+                // _czml1[1].model.gltf = "http://localhost:1111/3Dstatic/czml/models/CAR/car3.glb"
             }
 
             // 只显示一根线
