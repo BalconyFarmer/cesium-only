@@ -322,7 +322,7 @@
             <el-tab-pane label="Clock" name="five1">
                 <div class="env">
                     <div>
-                        <span>moveTip</span>
+                        <span>clock暂停</span>
                         <el-switch
                             @change="clockChange"
                             v-model="clockFlag"

@@ -16,6 +16,10 @@
                     <img src="../assets/projectImg/上海.png">
                     <span>1.上海</span>
                 </div>
+                <div @click="runTrain" class="item" style="color: black !important;">
+                    <img src="../assets/projectImg/上海.png">
+                    <span>2.火车</span>
+                </div>
             </div>
 
         </el-dialog>
@@ -444,6 +448,11 @@ export default {
             this.fakeBoard = true
             this.dialogVisible = false
         },
+        runTrain() {
+            this.fakeBoard = true
+            this.dialogVisible = false
+            this.cApp.train.testChinaData()
+        },
         openDialog() {
             this.dialogVisible = true
         },
@@ -559,7 +568,7 @@ export default {
 <style lang="scss">
 .cesium-viewer-animationContainer {
     position: absolute;
-    bottom: 151px;
+    bottom: 300px;
     left: 0;
     padding: 0;
     width: 169px;

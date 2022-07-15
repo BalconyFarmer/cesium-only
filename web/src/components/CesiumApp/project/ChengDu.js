@@ -14,7 +14,7 @@ export default class ChengDu {
         this.app.cesium3DTileset.toYN()
 
         const self = this
-        this.app.closeAll()
+        // this.app.closeAll()
         this.app.switchLayer('ArcGis实景图层')
         this.app.addTerrain()
         this.app.addLight()

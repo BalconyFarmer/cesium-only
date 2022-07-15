@@ -10,7 +10,7 @@ export default class Train {
     constructor(app) {
         this.app = app
         // this.addDemoData()
-        this.testChinaData()
+        // this.testChinaData()
     }
 
     addDemoData() {

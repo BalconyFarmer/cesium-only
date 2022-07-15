@@ -95,10 +95,10 @@ export default class CesiumApp {
         this.normalPoints = new NormalPoints(this)
         this.train = new Train(this)
         this.clock = new Clock(this)
+        this.clock.closeAimationToolbar()
         window.viewer = this.viewer
 
     }
-
 
 
     /**
