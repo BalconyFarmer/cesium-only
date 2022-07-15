@@ -65,9 +65,9 @@ export default class CesiumApp {
             vrButton: true, // 如果设置为true,将创建VRButton小部件。
             geocoder: true, // 搜索
             homeButton: true, //
-            infoBox: true, //
-            sceneModePicker: true, //
-            selectionIndicator: true, //
+            infoBox: false, // 点击信息提示框
+            sceneModePicker: false, //
+            selectionIndicator: false, //
             animation: true, // 创建'动画'小部件。
             timeline: true, // 创建'时间轴'小部件。
             navigationHelpButton: true, //
@@ -103,19 +103,40 @@ export default class CesiumApp {
     }
 
     test() {
-        // Example 1: Create primitive with a single instance
-        let rectangleInstance = new Cesium.GeometryInstance({
-            geometry : new Cesium.RectangleGeometry({
-                rectangle : Cesium.Rectangle.fromDegrees(-140.0, 30.0, -100.0, 40.0)
-            }),
-            id : 'rectangle',
-            attributes : {
-                color : new Cesium.ColorGeometryInstanceAttribute(0.0, 1.0, 1.0, 0.5)
+
+        let i = 0
+        this.viewer.entities.add({
+            position: new Cesium.Cartesian3(-1135626.9998005144, 5807062.201605306, 2372985.2095281864),
+            ellipse: {
+                height: 2, //浮空
+                semiMinorAxis: 120000.0,
+                semiMajorAxis: 120000.0,
+                material: new Cesium.ImageMaterialProperty({
+                    image: require("./some/img/banyuan.png"),
+                    transparent: !0,
+                    color: Cesium.Color.YELLOW.withAlpha(0.5)
+                }),
+                stRotation: new Cesium.CallbackProperty((function () {
+                    return i += .005
+                }), !1)
             }
         });
-        this.viewer.scene.primitives.add(new Cesium.GroundPrimitive({
-            geometryInstances : rectangleInstance
-        }));
+
+        this.viewer.entities.add({
+            position: new Cesium.Cartesian3(-1135626.9998005144, 5807062.201605306, 2372985.2095281864),
+            ellipse: {
+                height: 2, //浮空
+                semiMinorAxis: 143500.0,
+                semiMajorAxis: 143500.0,
+                material: new Cesium.ImageMaterialProperty({
+                    image: require("./some/img/kedu.png"),
+                    transparent: !0,
+                    color: Cesium.Color.YELLOW.withAlpha(0.5)
+                }),
+            }
+        });
+
+
     }
 
     /**
