@@ -42,7 +42,6 @@ export default class LoadJson {
                 })
 
             })
-            this.app.cameraFlyTo(101.315555, 24.613368, 182000.0)
 
         }
 

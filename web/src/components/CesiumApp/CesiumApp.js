@@ -97,13 +97,16 @@ export default class CesiumApp {
         this.clock = new Clock(this)
         this.clock.closeAimationToolbar()
         window.viewer = this.viewer
-
-        this.test()
-
     }
 
-    test() {
 
+    runXSBN() {
+        this.switchLayer('geoq智图黑')
+        this.addTimeAction()
+        this.rollCircle()
+    }
+
+    rollCircle() {
         let i = 0
         this.viewer.entities.add({
             position: new Cesium.Cartesian3(-1135626.9998005144, 5807062.201605306, 2372985.2095281864),
@@ -152,15 +155,14 @@ export default class CesiumApp {
      */
     addTimeAction() {
         this.customShaderTest = new CustomShaderTest(this) // 完全自定义着色器 小方块
-
         // 西双版纳坐标
         const aim = {
-            x: -1108281.835411032,
-            y: 5811468.900741933,
-            z: 2375378.146113624,
-            heading: 4.589028797595305,
-            pitch: -0.09566515321336477,
-            roll: 0.000004374750088409485,
+            x: -1156569.993204953,
+            y: 6373598.8524723165,
+            z: 1949937.7735630672,
+            heading: 0.11753507059828472,
+            pitch: -0.6750979430454072,
+            roll: 6.28312114071622,
             duration: 1
         }
         this.cameraFlyToCartesian3(aim)

@@ -20,6 +20,10 @@
                     <img src="../assets/projectImg/上海.png">
                     <span>2.火车</span>
                 </div>
+                <div @click="runXSBN" class="item" style="color: black !important;">
+                    <img src="../assets/projectImg/上海.png">
+                    <span>2.西双版纳</span>
+                </div>
             </div>
 
         </el-dialog>
@@ -453,6 +457,12 @@ export default {
             this.dialogVisible = false
             this.cApp.train.testChinaData()
         },
+        runXSBN() {
+            this.fakeBoard = true
+            this.dialogVisible = false
+            this.cApp.runXSBN()
+        },
+
         openDialog() {
             this.dialogVisible = true
         },
