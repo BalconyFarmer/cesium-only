@@ -95,20 +95,11 @@ export default class CesiumApp {
         this.normalPoints = new NormalPoints(this)
         this.train = new Train(this)
         this.clock = new Clock(this)
-        this.closeAimationToo()
         window.viewer = this.viewer
 
     }
 
-    closeAimationToo () {
-        // this.viewer.animation.multiplier = 0.1;
-        // debugger
-        // const see = this.viewer.animation.viewModel
-        // debugger
 
-        // this.viewer.animation.container.style.visibility = 'hidden' // 不显示动画控件
-        // this.viewer.timeline.container.style.visibility = 'hidden' // 不显示动画控件
-    }
 
     /**
      * 视场角

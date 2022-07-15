@@ -128,6 +128,7 @@
                         <el-menu-item index="addBloom">Bloom</el-menu-item>
                         <el-menu-item index="addOutline">Outline</el-menu-item>
                         <el-menu-item index="14">关闭冗余</el-menu-item>
+                        <el-menu-item index="动画组件">动画组件</el-menu-item>
                     </el-menu>
                 </div>
 
@@ -493,6 +494,8 @@ export default {
                 this.cApp.addBloom()
             } else if (key == 'addOutline') {
                 this.cApp.addOutline()
+            } else if (key == '动画组件') {
+                this.cApp.clock.closeAimationToolbar()
             }
         },
         changeGlobleLight() {
