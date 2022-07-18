@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+require('@dvgis/cesium-map')  //国内底图工具
 
 import CustomStyle from './some/ShaderDemo/CustomStyle/CustomMaterial/CustomStyle'
 import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
@@ -12,7 +13,7 @@ import InnerGeometry from './some/InnerGeometry/InnerGeometry'
 import Event from './some/Event'
 import ParticleSystems from './some/ParticleSystems'
 import CustomShaderTest from './some/ShaderDemo/CustomStyle/CustomMaterial/CustomShaderTest'
-import ChengDu from './project/ChengDu'
+import NewYork from './project/NewYork'
 import Shanghai from "@/components/CesiumApp/project/Shanghai";
 import InnerMaterial from './some/InnerMaterial/InnerMaterial'
 import Environment from './some/ShaderDemo/Environment'
@@ -25,7 +26,6 @@ import NormalPoints from "@/components/CesiumApp/some/Points/NormalPoints";
 import Train from "@/components/CesiumApp/some/Train";
 import Clock from "@/components/CesiumApp/some/Clock";
 
-require('@dvgis/cesium-map')
 export default class CesiumApp {
     constructor() {
         this.staticServerAdress = 'http://localhost:1111/3Dstatic/loadData'
@@ -276,7 +276,7 @@ export default class CesiumApp {
         if (this.chengduOBJ) {
             this.chengduOBJ.playAction()
         } else {
-            this.chengduOBJ = new ChengDu(this)
+            this.chengduOBJ = new NewYork(this)
         }
     }
 

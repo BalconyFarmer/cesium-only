@@ -3,7 +3,7 @@ import * as turf from '@turf/turf'
 /**
  * 纽约展示项目
  */
-export default class ChengDu {
+export default class NewYork {
     constructor(app) {
         this.app = app
         this.init()
@@ -14,12 +14,9 @@ export default class ChengDu {
         this.app.cesium3DTileset.toYN()
 
         const self = this
-        // this.app.closeAll()
         this.app.switchLayer('ArcGis实景图层')
-        this.app.addTerrain()
         this.app.addLight()
         this.app.addBloom()
-
 
         const option = {
             lon: -73.98466473164989, lat: 40.71362487810801, radius: 200

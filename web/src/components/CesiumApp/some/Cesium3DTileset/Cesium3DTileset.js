@@ -22,10 +22,15 @@ export default class Cesium3DTileset {
         const tileset = this.app.viewer.scene.primitives.add(
             new Cesium.Cesium3DTileset({
                 url: Cesium.IonResource.fromAssetId(75343),
-                maximumNumberOfLoadedTiles: 10, // 最大加载瓦片个数
-                maximumMemoryUsage: 1 // 最大使用内存 单位M
+                maximumNumberOfLoadedTiles: 1000, // 最大加载瓦片个数
+                maximumMemoryUsage: 100,// 最大使用内存 单位M 默认值： 512
+                maximumScreenSpaceError: 50, //最大的屏幕空间误差 默认值： 16
             })
         );
+
+        // const see = tileset
+        // console.log(see)
+        // debugger
 
         tileset.style = new Cesium.Cesium3DTileStyle({
             color: {

@@ -7,7 +7,6 @@ export default class Shanghai {
         this.init()
     }
 
-
     init() {
         this.app.switchLayer('百度地图')
         this.app.loadJson.loadJsonRoad()
@@ -17,42 +16,7 @@ export default class Shanghai {
         let url = "http://localhost:1111/3Dstatic/uploadDefault/2022076/16570982069192171.glb"
         this.app.load3DModel.loadGlbByURL(po, url)
         this.playAction()
-
         this.clippingPlan()
-    }
-
-    /**
-     * -裁剪模型
-     */
-    clipping3DTiles() {
-        let clippingPlanes = new Cesium.ClippingPlaneCollection({
-            planes: [
-                new Cesium.ClippingPlane(
-                    new Cesium.Cartesian3(0.0, 0.0, -1.0),
-                    0.0
-                ),
-            ],
-            edgeWidth: 1,
-        });
-
-        let position = Cesium.Cartesian3.fromDegrees(-123.0744619, 44.0503706, 100.0);
-        let heading = Cesium.Math.toRadians(135.0);
-        let pitch = 0.0;
-        let roll = 0.0;
-        let hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
-        let orientation = Cesium.Transforms.headingPitchRollQuaternion(position, hpr);
-        let entity = viewer.entities.add({
-            name: "caiqie",
-            position: position,
-            orientation: orientation,
-            model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.glb',
-                scale: 8,
-                minimumPixelSize: 100.0,
-                clippingPlanes: clippingPlanes     // 设置模型的裁切平面
-            }
-        });
-
     }
 
     /**
@@ -63,6 +27,9 @@ export default class Shanghai {
 
         let tileset = viewer.scene.primitives.add(new Cesium.Cesium3DTileset({
             url: Cesium.IonResource.fromAssetId(96188),
+            maximumNumberOfLoadedTiles: 1000, // 最大加载瓦片个数
+            maximumMemoryUsage: 100,// 最大使用内存 单位M 默认值： 512
+            maximumScreenSpaceError: 50, //最大的屏幕空间误差 默认值： 16
         }))
 
         //实现渐变效果
@@ -73,6 +40,7 @@ export default class Shanghai {
                 ]
             }
         });
+
         tileset.tileVisible.addEventListener(function (tile) {
             var content = tile.content;
             var featuresLength = content.featuresLength;
@@ -149,6 +117,40 @@ export default class Shanghai {
             duration: 1,
         }
         this.app.cameraFlyToCartesian3(aim)
+    }
+
+    /**
+     * -裁剪模型
+     */
+    clipping3DTiles() {
+        let clippingPlanes = new Cesium.ClippingPlaneCollection({
+            planes: [
+                new Cesium.ClippingPlane(
+                    new Cesium.Cartesian3(0.0, 0.0, -1.0),
+                    0.0
+                ),
+            ],
+            edgeWidth: 1,
+        });
+
+        let position = Cesium.Cartesian3.fromDegrees(-123.0744619, 44.0503706, 100.0);
+        let heading = Cesium.Math.toRadians(135.0);
+        let pitch = 0.0;
+        let roll = 0.0;
+        let hpr = new Cesium.HeadingPitchRoll(heading, pitch, roll);
+        let orientation = Cesium.Transforms.headingPitchRollQuaternion(position, hpr);
+        let entity = viewer.entities.add({
+            name: "caiqie",
+            position: position,
+            orientation: orientation,
+            model: {
+                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.glb',
+                scale: 8,
+                minimumPixelSize: 100.0,
+                clippingPlanes: clippingPlanes     // 设置模型的裁切平面
+            }
+        });
+
     }
 
 }
