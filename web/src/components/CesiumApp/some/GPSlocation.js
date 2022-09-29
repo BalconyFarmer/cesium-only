@@ -28,15 +28,17 @@
 export default class GPSlocation {
     constructor(app) {
         this.app = app
+        this.webPosition = {}
     }
 
     start() {
+        const self = this
+
         setInterval(function () {
             test()
         }, 500)
 
         function test() {
-            const self = this
 
             function getLocation() {
                 if (navigator.geolocation) {
@@ -64,10 +66,9 @@ export default class GPSlocation {
                 // const see = self.webPosition.speed
                 console.log(self.webPosition, "++++++++++++++++++++++++++++++")
                 // debugger
-                self.$forceUpdate()
                 let pp = Cesium.Cartesian3.fromDegrees(position.coords.longitude, position.coords.latitude, 0)
-                let entity = self.cApp.innerGeometry.addPoint(pp)
-                // self.cApp.viewer.zoomTo(entity);
+                let entity = self.app.innerGeometry.addPoint(pp)
+                // self.app.viewer.zoomTo(entity);
 
             }
 

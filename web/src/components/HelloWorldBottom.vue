@@ -317,6 +317,15 @@
                             inactive-color="#2B2B2B">
                         </el-switch>
                     </div>
+                    <div>
+                        <span>GPS</span>
+                        <el-switch
+                            @change="GpsChange"
+                            v-model="GpsFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B">
+                        </el-switch>
+                    </div>
                 </div>
             </el-tab-pane>
             <el-tab-pane label="Clock" name="five1">
@@ -369,7 +378,8 @@ export default {
             flyFlag: false,
             flyFlag1: false,
             flyFlag2: false,
-            clockFlag: true
+            clockFlag: true,
+            GpsFlag: false
 
         }
     },
@@ -595,6 +605,9 @@ export default {
             this.cApp.load3DModel.loadGlbPrimitives(data)
             this.cApp.viewer.zoomTo(this.cApp.viewer.entities)
 
+        },
+        GpsChange() {
+            this.cApp.GPSlocation.start()
         },
         handleClick(tab, event) {
             console.log(tab, event)
