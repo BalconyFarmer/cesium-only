@@ -1,5 +1,6 @@
 <template>
     <div class="all">
+
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
         <el-dialog
@@ -324,6 +325,7 @@ export default {
 
     data() {
         return {
+
             dialogVisible: false,
             fov: 1,
             changeShadowFlag: false,
@@ -527,9 +529,15 @@ export default {
             this.cApp.changeShadow()
         },
 
+
     },
     mounted() {
+
+
         const self = this
+
+
+
         this.$nextTick(() => {
             this.cApp = new CesiumApp()
             this.cApp.initMap()
@@ -582,9 +590,11 @@ export default {
     left: 0;
     padding: 0;
     width: 169px;
-    height: 112px;    z-index: 9999999 !important;
+    height: 112px;
+    z-index: 9999999 !important;
 
 }
+
 .cesium-viewer-timelineContainer {
     position: absolute;
     bottom: 150px;
@@ -595,6 +605,7 @@ export default {
     margin: 0;
     font-size: 14px;
     z-index: 9999999 !important;
+
     .cesium-timeline-bar {
         height: 77.7em;
     }

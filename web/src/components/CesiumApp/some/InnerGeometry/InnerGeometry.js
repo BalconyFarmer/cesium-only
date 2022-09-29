@@ -132,13 +132,14 @@ export default class InnerGeometry {
     }
 
     addPoint (Cartesian3) {
-        this.app.viewer.entities.add({
+        const entity = this.app.viewer.entities.add({
             position: Cartesian3,
             point: {
                 pixelSize: 50,
                 color: Cesium.Color.YELLOW
             }
         })
+        return entity
     }
 
     addBox (Cartesian3) {

@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+
 require('@dvgis/cesium-map')  //国内底图工具
 
 import CustomStyle from './some/ShaderDemo/CustomStyle/CustomMaterial/CustomStyle'
@@ -25,6 +26,7 @@ import PrimitivesPoints from "@/components/CesiumApp/some/Points/PrimitivesPoint
 import NormalPoints from "@/components/CesiumApp/some/Points/NormalPoints";
 import Train from "@/components/CesiumApp/some/Train";
 import Clock from "@/components/CesiumApp/some/Clock";
+import GPSlocation from "@/components/CesiumApp/some/GPSlocation";
 
 export default class CesiumApp {
     constructor() {
@@ -45,6 +47,7 @@ export default class CesiumApp {
         this.particleSystems = null
         this.customShaderTest = null
         this.animation = null
+        this.GPSlocation = null
     }
 
     /**
@@ -96,6 +99,7 @@ export default class CesiumApp {
         this.train = new Train(this)
         this.clock = new Clock(this)
         this.clock.closeAimationToolbar()
+        this.GPSlocation = new GPSlocation(this)
         window.viewer = this.viewer
     }
 
@@ -471,7 +475,7 @@ export default class CesiumApp {
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 const _layer = this.viewer.imageryLayers.get(0);
-                _layer.brightness = 0.2
+                // _layer.brightness = 0.2
                 break
             case 'geoq智图黑':
                 Imagery = new Cesium.ArcGisMapServerImageryProvider({
