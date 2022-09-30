@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+
 require('@dvgis/cesium-map')  //国内底图工具
 
 import CustomStyle from './some/ShaderDemo/CustomStyle/CustomMaterial/CustomStyle'
@@ -471,7 +472,7 @@ export default class CesiumApp {
                 })
                 this.viewer.imageryLayers.addImageryProvider(Imagery)
                 const _layer = this.viewer.imageryLayers.get(0);
-                _layer.brightness = 0.2
+                // _layer.brightness = 0.2
                 break
             case 'geoq智图黑':
                 Imagery = new Cesium.ArcGisMapServerImageryProvider({

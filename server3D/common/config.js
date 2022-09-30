@@ -3,11 +3,11 @@ const config = {
     // corsAdress: 'http://101.34.131.94:8082', // 跨域白名单:线上前端地址
     corsAdress: 'http://localhost:8080',
 
-    // sqlAdress: 'localhost', // 数据库地址
-    sqlAdress: '101.34.131.94',
-    USERNAME: "username1",
+    sqlAdress: 'localhost', // 数据库地址
+    // sqlAdress: '101.34.131.94',
+    USERNAME: "root",
     PASSWORD: "password",
-    DATABASE: 'LP_3DFiles',
+    DATABASE: 'db_behance',
 
 }
 
