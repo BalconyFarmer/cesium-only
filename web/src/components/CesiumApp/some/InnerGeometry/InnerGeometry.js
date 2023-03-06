@@ -73,19 +73,19 @@ export default class InnerGeometry {
         let img = null
         switch (type) {
             case 1:
-                img = 'http://localhost:1111/3Dstatic/loadData/billboard/linePoi.png'
+                img = 'http://localhost:1111/3Dstatic/loadData/billboard/1.png'
                 break
             case 2:
-                img = 'http://localhost:1111/3Dstatic/loadData/billboard/linePoi0.png'
+                img = 'http://localhost:1111/3Dstatic/loadData/billboard/2.png'
                 break
             case 3:
-                img = 'http://localhost:1111/3Dstatic/loadData/billboard/bp.png'
+                img = 'http://localhost:1111/3Dstatic/loadData/billboard/3.png'
                 break
             case 4:
-                img = 'http://localhost:1111/3Dstatic/loadData/billboard/bp2.png'
+                img = 'http://localhost:1111/3Dstatic/loadData/billboard/4.png'
                 break
             case 5:
-                img = 'http://localhost:1111/3Dstatic/loadData/billboard/warn.png'
+                img = 'http://localhost:1111/3Dstatic/loadData/billboard/5.png'
                 break
         }
         this.app.viewer.entities.add({
