@@ -147,7 +147,7 @@
                         src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
                 </div>
             </div>
-            <div class="leftTree">
+            <div class="leftTree glass">
                 <div class="leftTreeMenu">
                     <div @click="currentLeft = '图层'">图层</div>
                     <div @click="currentLeft = '实体'">实体</div>
@@ -159,7 +159,7 @@
                     <div v-for="item in layersData"> {{ item._imageryProvider.name }}</div>
                 </div>
             </div>
-            <div class="rightPart">
+            <div class="rightPart glass">
                 <div>
                     MATH
                 </div>
@@ -613,7 +613,6 @@ export default {
 
 @import "../style/reset.scss";
 //引入方式
-@import "../style/ele.scss"; //引入方式
 
 .el-menu-demo {
     height: 90%;

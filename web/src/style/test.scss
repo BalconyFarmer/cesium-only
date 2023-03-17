@@ -1,0 +1,50 @@
+
+// 使用函数
+//@import "test";
+//.container111 {
+//    border: 1px solid #aaa;
+//    @include get-border-radius;
+//    @include get-border-radius(10px, blue);
+//}
+
+$border-color: #aaa; //声明变量
+.container11 {
+    $border-width: 1px;
+    border: $border-width solid $border-color; //使用变量
+}
+
+//声明函数
+@mixin get-border-radius($border-radius,$color) {
+    -moz-border-radius: $border-radius;
+    -webkit-border-radius: $border-radius;
+    border-radius: $border-radius;
+    color: $color;
+}
+
+@mixin getFlex($a1,$a2,$a3) {
+    display: flex;
+    flex-direction: $a1;
+    justify-content: $a2;
+    align-items: $a3;
+}
+
+@mixin getFlexWrap() {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+@mixin getGlass() {
+    background: rgba(0, 0, 0, 0.2) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+}
+
+
+
+
+

@@ -1,0 +1,254 @@
+@import "test";
+//table
+.el-date-table th {
+    color: #ffffff !important;
+}
+
+.el-table {
+    background-color: rgba(209, 32, 32, 0.05) !important;
+}
+
+.el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf {
+    border: 0px solid rgba(0, 0, 0, 0) !important;
+}
+
+.el-table--border::after, .el-table--group::after, .el-table::before {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.common-table-container .el-table::before {
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 0px !important;
+}
+
+.el-table tr {
+    background-color: rgba(39, 66, 96, .5) !important;
+    color: white !important;
+}
+
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+    background: rgba(9, 38, 70, 0.9) !important;
+    color: white !important;
+}
+
+.el-table th.el-table__cell {
+    background-color: rgba(39, 66, 96, .5) !important;
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
+    background-color: rgba(0, 20, 39, .5) !important;
+}
+
+
+//button
+
+.el-button {
+    background-color: rgba(12, 42, 75, 0.5) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(12, 42, 75, 0) !important;
+    background-image: radial-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.1)) !important;
+}
+
+.el-button:hover {
+    background-color: rgba(139, 189, 255, 0.5) !important;
+    border: 1px solid rgba(12, 42, 75, 0) !important;
+}
+
+
+//input
+.el-input__wrapper {
+    background-color: rgba(170, 19, 19, 0) !important;
+    width: 100px !important;
+}
+
+.el-date-editor.el-input, .el-date-editor.el-input__wrapper {
+    width: 100px !important;
+}
+
+
+.el-popper.is-light {
+    border: rgba(1, 1, 1, 0) !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+///////////////////dialog
+.el-dialog {
+    background: rgba(0, 0, 0, 0.2) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+
+    .el-dialog__title {
+        color: white !important;
+    }
+
+    .el-dialog__body {
+        color: white !important;
+    }
+}
+
+
+//el-textarea
+.el-textarea {
+    --el-input-bg-color: rgba(9, 38, 70, 0.9) !important;
+}
+
+//el-picker
+.el-input__inner {
+    background: rgba(9, 38, 70, 0.5) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.el-picker-panel {
+    background: rgba(9, 38, 70, 0.5) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.el-picker-panel__footer {
+    background: rgba(9, 38, 70, 0.5) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.el-date-picker__header-label {
+    color: white !important
+}
+
+.el-picker-panel__icon-btn {
+    color: white !important
+}
+
+//el-calendar
+.el-calendar {
+    @include getGlass();
+
+    .el-calendar__title {
+        color: #ffffff !important;
+    }
+
+    .el-calendar-table thead th {
+        color: #ffffff !important
+    }
+
+    .el-calendar-table .el-calendar-day:hover {
+        @include getGlass();
+    }
+
+    .el-calendar-table td.is-selected {
+        @include getGlass();
+    }
+}
+
+// carousel
+.el-carousel {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.el-carousel__container {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+// tree
+.el-tree-node__content:hover, .el-upload-list__item:hover {
+    background: rgba(31, 111, 194, 0.5) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+}
+
+.el-tree-node:focus > .el-tree-node__content {
+    background: rgba(2, 85, 210, 0.5) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+}
+
+// time Picker
+.el-textarea__inner {
+    background: rgba(9, 38, 70, 0.5) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.el-range-editor .el-range-input {
+    line-height: 1 !important;
+    background: rgba(9, 38, 70, 0.5) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+//select
+.el-select {
+    width: 100% !important;
+}
+
+.el-input__inner {
+    width: 100% !important;
+}
+
+.el-select-dropdown__item {
+    color: #ffffff !important;
+}
+
+.el-select-dropdown {
+    @include getGlass();
+
+    .el-select-dropdown__item.hover, .el-select-dropdown__item:hover {
+        @include getGlass();
+    }
+}
+
+//////////
+.el-tabs {
+    line-height: 1 !important;
+    background: rgba(9, 38, 70, 0.5) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(8px) !important;
+    border-radius: 4px !important;
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.el-tabs__item {
+    color: #ffffff !important;
+    cursor: pointer;
+}
+
+.el-tabs__content {
+    height: 130px !important;
+}
+
+////
+.el-menu {
+    background-color: rgba(134, 183, 207, 0) !important;
+}
+
