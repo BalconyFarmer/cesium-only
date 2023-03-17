@@ -11,6 +11,9 @@ export default {
 </script>
 
 <style lang="scss">
+#app {
+    overflow-y: hidden;
+}
 @import './style/reset.scss';
 @import './style/elementPlusCustom.scss';
 @import "./style/test.scss";

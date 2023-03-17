@@ -34,7 +34,6 @@
             <div class="header">
 
                 <div class="headerItem">
-                    <div>基础底图</div>
                     <el-select size="mini" v-model="optionsLayersIndex" placeholder="基础底图">
                         <el-option
                             v-for="item in optionsLayers"
@@ -46,7 +45,6 @@
                 </div>
 
                 <div class="headerItem">
-                    <div>模型对象</div>
                     <el-select size="mini" v-model="modelData" placeholder="模型对象">
                         <el-option
                             v-for="item in modelDataList"
@@ -58,7 +56,6 @@
                 </div>
 
                 <div class="headerItem">
-                    <div>地球模式</div>
                     <el-select size="mini" v-model="value" placeholder="请选择">
                         <el-option
                             v-for="item in options"
@@ -739,6 +736,10 @@ FPS显示
             margin-left: 10px;
             margin-top: 5px;
             color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .topMenus {
