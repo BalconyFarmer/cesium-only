@@ -26,14 +26,15 @@ module.exports = {
                 CESIUM_BASE_URL: JSON.stringify('Cesium')
             })
         ],
-        // devServer: {
-        //     contentBase: "./dist", //本地服务器所加载的页面所在的目录
-        //     historyApiFallback: true, // 不跳转
-        //     inline: true, // 实时刷新
-        //     https: true, // 开启https
-        //     port: 9999, // 端口号
-        //     host: internalIp.v4.sync(),  // 项目地址
-        // }
-    }
-
+    },
+    publicPath: "/cesium-only/",
+    lintOnSave: false,
+    productionSourceMap: false,
+    devServer: {
+        port: 8082
+    },
+    transpileDependencies: [
+        "vue-echarts",
+        "resize-detector"
+    ],
 }

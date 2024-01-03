@@ -40,7 +40,7 @@ export default class Load3DModel {
                     new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(htr[0]), htr[1], htr[2])
                 ),
             model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/tt/SimLab_2022-06-27-17-15-58.gltf',
+                uri: apiRoot + '/3Dstatic/loadData/tt/SimLab_2022-06-27-17-15-58.gltf',
                 // minimumPixelSize: 100, // 最小大小
                 heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
             }
@@ -64,7 +64,7 @@ export default class Load3DModel {
             position: position,
             orientation: Cesium.Transforms.headingPitchRollQuaternion(position, _orientation), // 和飞行姿态相关
             model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.glb',
+                uri: apiRoot + '/3Dstatic/loadData/CesiumAir/Cesium_Air.glb',
                 // heightReference: Cesium.HeightReference.CLAMP_TO_GROUND
                 scale: 20.0,
             }
@@ -108,7 +108,7 @@ export default class Load3DModel {
 
         car = Cesium.Model.fromGltf(
             {
-                url: 'http://localhost:1111/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
+                url: apiRoot + '/3Dstatic/loadData/GroundVehicle/GroundVehicle.glb',
                 modelMatrix: modelMatrix,
                 scale: 1.0,
             }
@@ -141,7 +141,7 @@ export default class Load3DModel {
             position: poPer,
             orientation: Cesium.Transforms.headingPitchRollQuaternion(Cesium.Cartesian3.fromDegrees(102.65429606224855, 24.902824697751598, 1856.176763177826), new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(0), 0, 0)),
             model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',
+                uri: apiRoot + '/3Dstatic/loadData/CesiumMan/Cesium_Man.gltf',
                 // minimumPixelSize: 100,
                 // maximumScale: 100000,
                 scale: 10.0,

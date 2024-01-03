@@ -1,15 +1,9 @@
 import * as THREE from 'three'
-
-require('@dvgis/cesium-map')  //国内底图工具
-
 import CustomStyle from './some/ShaderDemo/CustomStyle/CustomMaterial/CustomStyle'
 import ObliquePhotography from './some/ObliquePhotography/ObliquePhotography'
 import Cesium3DTileset from './some/Cesium3DTileset/Cesium3DTileset'
 import LoadJson from './some/LoadJson'
 import Load3DModel from './some/Load3DModel'
-import {
-    initFlowMatetial
-} from './some/ShaderDemo/CustomStyle/CustomMaterial/flowLinesMaterial/_PolylineTrailLinkMaterialProperty'
 import InnerGeometry from './some/InnerGeometry/InnerGeometry'
 import Event from './some/Event'
 import ParticleSystems from './some/ParticleSystems'
@@ -19,7 +13,6 @@ import Shanghai from "@/components/CesiumApp/project/Shanghai";
 import InnerMaterial from './some/InnerMaterial/InnerMaterial'
 import Environment from './some/ShaderDemo/Environment'
 import Animation from './some/Animation'
-import Points from "./some/Points/KMLPoints";
 import KMLPoints from "@/components/CesiumApp/some/Points/KMLPoints";
 import PointsCluster from "@/components/CesiumApp/some/Points/PointsCluster";
 import PrimitivesPoints from "@/components/CesiumApp/some/Points/PrimitivesPoints";
@@ -28,9 +21,11 @@ import Train from "@/components/CesiumApp/some/Train";
 import Clock from "@/components/CesiumApp/some/Clock";
 import GPSlocation from "@/components/CesiumApp/some/GPSlocation";
 
+require('@dvgis/cesium-map')  //国内底图工具
+
 export default class CesiumApp {
     constructor() {
-        this.staticServerAdress = 'http://localhost:1111/3Dstatic/loadData'
+        this.staticServerAdress = apiRoot + '/3Dstatic/loadData'
         this.viewer = null
         this.option = null
         this.Cesium = Cesium

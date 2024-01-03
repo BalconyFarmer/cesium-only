@@ -532,7 +532,7 @@ export default {
         get3DFilesAll() {
             return axios({
                 method: 'post',
-                url: 'http://localhost:1111' + '/get3DFilesAll',
+                url: apiRoot + '' + '/get3DFilesAll',
                 data: '',
                 withCredentials: true
             })
@@ -540,7 +540,7 @@ export default {
         saveVideo(formData) {
             return axios({
                 method: 'post',
-                url: 'http://localhost:1111' + '/saveVideo',
+                url: apiRoot + '' + '/saveVideo',
                 data: formData,
                 withCredentials: true
             })
@@ -732,7 +732,7 @@ export default {
                         break
                     default:
                         let po = this.geoPositionCartesian2
-                        let url = 'http://localhost:1111/3Dstatic' + this.currentGeoType.path
+                        let url = apiRoot + '/3Dstatic' + this.currentGeoType.path
                         this.cApp.load3DModel.loadGlbByURL(po, url)
 
                 }

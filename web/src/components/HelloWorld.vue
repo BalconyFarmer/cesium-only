@@ -72,6 +72,7 @@
                         <div class="topMenusItem1">SunLight光照</div>
                         <div class="topMenusItem1">
                             <el-switch
+                                width="30"
                                 @change="changeGlobleLight"
                                 v-model="changeGlobleLightFlag"
                                 active-color="#13ce66"
@@ -84,6 +85,7 @@
                         <div class="topMenusItem1">光照系统</div>
                         <div class="topMenusItem1">
                             <el-switch
+                                width="30"
                                 @change="changeLight"
                                 v-model="changeLightFlag"
                                 active-color="#13ce66"
@@ -95,6 +97,7 @@
                         <div class="topMenusItem1">shadow</div>
                         <div class="topMenusItem1">
                             <el-switch
+                                width="30"
                                 @change="changeShadow"
                                 v-model="changeShadowFlag"
                                 active-color="#13ce66"
@@ -107,6 +110,7 @@
                         <div class="topMenusItem1">
                             <el-tooltip :content="'关闭地形'" placement="top">
                                 <el-switch
+                                    width="30"
                                     @change="terrainChange"
                                     v-model="terrainFlag"
                                     active-color="#13ce66"
@@ -118,15 +122,21 @@
                     <div class="topMenusItem">
                         <div class="topMenusItem1">整体亮度</div>
                         <div class="topMenusItem1">
-                            <el-slider :max="2" :step="0.1" v-model="brightness">
-                            </el-slider>
+                            <div style="width: 70%">
+                                <el-slider :max="2" :step="0.1" v-model="brightness">
+                                </el-slider>
+                            </div>
+
                         </div>
                     </div>
                     <div class="topMenusItem">
                         <div class="topMenusItem1">视角大小</div>
                         <div class="topMenusItem1">
-                            <el-slider :max="2" :step="0.1" v-model="fov">
-                            </el-slider>
+                            <div style="width: 70%">
+                                <el-slider :max="2" :step="0.1" v-model="fov">
+                                </el-slider>
+                            </div>
+
                         </div>
                     </div>
                     <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal"
@@ -146,8 +156,8 @@
             </div>
             <div class="leftTree glass">
                 <div class="leftTreeMenu">
-                    <div @click="currentLeft = '图层'">图层</div>
-                    <div @click="currentLeft = '实体'">实体</div>
+                    <el-button size="mini" @click="currentLeft = '图层'">图层</el-button>
+                    <el-button size="mini" @click="currentLeft = '实体'">实体</el-button>
                 </div>
 
                 <el-tree v-if="currentLeft == '实体'" :data="treeData" :props="defaultProps"
@@ -194,7 +204,7 @@
                         <el-input size="mini" v-model="rotationgPatams.Roll" placeholder="Roll"></el-input>
                     </div>
                     <div class="inpu">
-                        <el-button @click="rotateEntity">rotate</el-button>
+                        <el-button size="mini" @click="rotateEntity">rotate</el-button>
                     </div>
                     <div class="inpu">
                         <span>drag</span>
@@ -534,7 +544,6 @@ export default {
         const self = this
 
 
-
         this.$nextTick(() => {
             this.cApp = new CesiumApp()
             this.cApp.initMap()
@@ -613,11 +622,6 @@ export default {
 
 .el-menu-demo {
     height: 90%;
-}
-
-div {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 5px;
 }
 
 .menuitem {
@@ -755,10 +759,15 @@ FPS显示
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                align-items: center;
 
                 .topMenusItem1 {
                     width: 100%;
-                    height: 50%;
+                    height: 30%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
         }

@@ -13,6 +13,7 @@ export default {
 <style lang="scss">
 #app {
     overflow-y: hidden;
+    font-family: apple;
 }
 @import './style/reset.scss';
 @import './style/elementPlusCustom.scss';

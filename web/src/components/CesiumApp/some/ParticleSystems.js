@@ -21,7 +21,7 @@ export default class ParticleSystems {
         }
         let particleSystem = this.app.viewer.scene.primitives.add(new Cesium.ParticleSystem({
             emitter: new Cesium.CircleEmitter(1.1),    // 发射器类型
-            image: 'http://localhost:1111/3Dstatic/loadData/fire.png',
+            image: apiRoot + '/3Dstatic/loadData/fire.png',
             imageSize: new Cesium.Cartesian2(1, 1), // 图片大小
             emissionRate: 10.0, // 发射率
             gravity: 0.0, // 万有引力

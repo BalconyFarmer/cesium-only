@@ -1,5 +1,3 @@
-
-
 import {initFlowMatetial} from './flowLinesMaterial/_PolylineTrailLinkMaterialProperty'
 import {initFlowMatetial1} from './flowLinesMaterial/_PolylineTrailLinkMaterialProperty1'
 import {initFlowMatetial2} from './flowLinesMaterial/_PolylineTrailLinkMaterialProperty2'
@@ -20,7 +18,7 @@ export default class CustomStyle {
      * 发光道路
      */
     addRoad(points) {
-        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
+        const url = apiRoot + '/3Dstatic/loadData/flowNumber/jiantou.png'
         initFlowMatetial3(url) // 注册流动线材质
 
         let _p = null
@@ -44,7 +42,7 @@ export default class CustomStyle {
      * 加载流动墙效果
      */
     addFlowWall(positions) {
-        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
+        const url = apiRoot + '/3Dstatic/loadData/flowNumber/jiantou.png'
         initFlowMatetial1(url) // 注册流动线材质
 
         const flowWall = {
@@ -62,7 +60,7 @@ export default class CustomStyle {
      * 添加流动线条
      */
     addFlowLine(points) {
-        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
+        const url = apiRoot + '/3Dstatic/loadData/flowNumber/jiantou.png'
         initFlowMatetial(url) // 注册流动线材质
 
         let _p = null
@@ -76,7 +74,7 @@ export default class CustomStyle {
             name: 'PolylineTrail',
             polyline: {
                 positions: _p,
-                width: 2,
+                width: 200,
                 material: new Cesium.PolylineTrailLinkMaterialProperty(Cesium.Color.YELLOW, 9000)
             }
         })
@@ -86,7 +84,7 @@ export default class CustomStyle {
      * 添加flyline
      */
     addFlyLine3D(centerP, citiesP) {
-        const url = 'http://localhost:1111/3Dstatic/loadData/flowNumber/jiantou.png'
+        const url = apiRoot + '/3Dstatic/loadData/flowNumber/jiantou.png'
         initFlowMatetial2(url) // 注册流动线材质
 
         // 抛物线 相等

@@ -80,7 +80,7 @@ export default class InnerMaterial {
 
     addImgMaterial (Cartesian3) {
         const metarial = new Cesium.ImageMaterialProperty({
-            image: 'http://localhost:1111/3Dstatic/loadData/fire.png',
+            image: apiRoot + '/3Dstatic/loadData/fire.png',
             // color: Cesium.Color.BLUE,
             repeat: new Cesium.Cartesian2(4, 4)
         })

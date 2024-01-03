@@ -14,7 +14,7 @@ export default class KMLPoints {
             canvas: viewer.scene.canvas,
         };
         this.kmlDataSource = Cesium.KmlDataSource.load(
-            'http://localhost:1111/3Dstatic/loadData/kml/facilities.kml',
+            apiRoot + '/3Dstatic/loadData/kml/facilities.kml',
             options
         )
         const dataSourcePromise = viewer.dataSources.add(

@@ -144,7 +144,7 @@ export default class Shanghai {
             position: position,
             orientation: orientation,
             model: {
-                uri: 'http://localhost:1111/3Dstatic/loadData/CesiumAir/Cesium_Air.glb',
+                uri: apiRoot + '/3Dstatic/loadData/CesiumAir/Cesium_Air.glb',
                 scale: 8,
                 minimumPixelSize: 100.0,
                 clippingPlanes: clippingPlanes     // 设置模型的裁切平面
