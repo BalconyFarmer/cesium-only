@@ -19,6 +19,9 @@
             <el-tab-pane label="其他">
                 <DemoControls></DemoControls>
             </el-tab-pane>
+            <el-tab-pane label="环境">
+                <EnvironmentControls></EnvironmentControls>
+            </el-tab-pane>
         </el-tabs>
     </div>
 
@@ -31,9 +34,10 @@ import PointObjects from "@/components/tools/PointObjects";
 import LineObjects from "@/components/tools/LineObjects";
 import PlaneObjects from "@/components/tools/PlaneObjects";
 import DemoControls from "@/components/tools/DemoControls";
+import EnvironmentControls from "@/components/tools/EnvironmentControls";
 
 export default {
-    components: {DemoControls, PlaneObjects, LineObjects, PointObjects, ProjectList, Basic},
+    components: {EnvironmentControls, DemoControls, PlaneObjects, LineObjects, PointObjects, ProjectList, Basic},
     data() {
         return {
             tabPosition: 'left'

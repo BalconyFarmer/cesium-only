@@ -46,14 +46,7 @@
                     </div>
                 </div>
             </el-tab-pane>
-            <el-tab-pane label="环境对象" name="third">
-                <div class="env">
-                    <div class="normal addMaterial" @mousedown="mouseDown('addDarckNessEff')">Night</div>
-                    <div class="normal addMaterial" @mousedown="mouseDown('addRain')">Rain</div>
-                    <div class="normal addMaterial" @mousedown="mouseDown('addSnow')">Snow</div>
-                    <div class="normal addMaterial" @mousedown="mouseDown('addFrog')">Frog</div>
-                </div>
-            </el-tab-pane>
+
         </el-tabs>
     </div>
 </template>
@@ -202,18 +195,6 @@ export default {
                     case 'addMaterial':
                         this.cApp.innerMaterial.addMaterial(this.geoPositionCartesian2)
                         break
-                    case 'addDarckNessEff':
-                        this.cApp.environment.addDarckNessEff()
-                        break
-                    case 'addRain':
-                        this.cApp.environment.addRain()
-                        break
-                    case 'addSnow':
-                        this.cApp.environment.addSnow()
-                        break
-                    case 'addFrog':
-                        this.cApp.environment.addFrog()
-                        break
                     case 'addColor':
                         this.cApp.innerMaterial.addColor(this.geoPositionCartesian2)
                         break
@@ -240,15 +221,12 @@ export default {
             }
             this.addGeoFlag = false
         },
-        async updata3DList() {
-        }
     },
     async mounted() {
         const self = this
         this.cApp.eventCenter.addEventListener('geoPosition', function (data) {
             self.geoPositionCartesian2 = data.message.position
         })
-        await this.updata3DList()
     }
 }
 </script>
