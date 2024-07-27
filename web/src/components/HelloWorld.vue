@@ -6,22 +6,7 @@
             <a-index></a-index>
         </div>
 
-
         <div class="panel-container">
-            <div class="leftTree glass">
-                <div class="leftTreeMenu">
-                    <el-button size="mini" @click="currentLeft = '图层'">图层</el-button>
-                    <el-button size="mini" @click="currentLeft = '实体'">实体</el-button>
-                </div>
-                <el-tree v-if="currentLeft === '实体'" :data="treeData" :props="defaultProps"
-                         @node-click="handleNodeClick"></el-tree>
-                <div v-if="currentLeft === '图层'">
-                    <div v-for="item in layersData" :key="item._imageryProvider.name">{{
-                            item._imageryProvider.name
-                        }}
-                    </div>
-                </div>
-            </div>
             <div class="rightPart glass">
                 <div class="section">
                     <div class="title">选取位置:</div>
@@ -59,22 +44,19 @@
 <script>
 import CesiumApp from './CesiumApp/CesiumApp'
 import AIndex from "@/components/left-tools/aIndex";
+import LeftTree from "@/components/left-tools/LeftTree";
 
 export default {
     name: 'hoting',
     components: {
         AIndex,
+        LeftTree
     },
     data() {
         return {
             fakeBoard: false,
             showPanel: false,
-            currentLeft: "实体",
             treeData: [],
-            defaultProps: {
-                children: 'children',
-                label: 'label'
-            },
             clickPosition: [],
             clickPositionCartographic: null,
             clickPositionCartesian: null,
@@ -104,9 +86,7 @@ export default {
         dragChange() {
             this.cApp.event.dragFlag = this.switchValue;
         },
-        handleNodeClick(data) {
-            this.cApp.lookAtByName(data.label);
-        },
+
     },
     mounted() {
         this.$nextTick(() => {
@@ -127,15 +107,7 @@ export default {
             });
             this.showPanel = true;
         });
-        setInterval(() => {
-            this.treeData = [];
-            this.entitysList.forEach(item => {
-                this.treeData.push({label: item.name || '未定义'});
-            });
-            if (this.cApp) {
-                this.layersData = this.cApp.viewer.imageryLayers._layers;
-            }
-        }, 10000);
+
     }
 }
 </script>
@@ -148,62 +120,67 @@ export default {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
 
     #cesiumContainer {
         width: 100%;
-        height: calc(100% - 40px);
+        height: 100%;
     }
 
     .panel-container {
         display: flex;
-        width: 40%;
-        height: 80%;
+        width: 30%;
+        height: auto;
         position: absolute;
         top: 10%;
         right: 10px;
         z-index: 999;
-        background-color: rgba(43, 43, 43, .8);
+        background-color: rgba(43, 43, 43, .9);
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         overflow: hidden;
-    }
-
-    .leftTree {
-        width: 50%;
-        height: 100%;
-        background-color: rgba(43, 43, 43, .9);
-        color: white;
-        overflow-y: auto;
-        padding: 10px;
-
-        .leftTreeMenu {
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 10px;
-        }
+        flex-direction: column;
+        padding: 15px;
     }
 
     .rightPart {
-        width: 50%;
-        height: 100%;
-        background-color: rgba(43, 43, 43, .9);
+        width: 100%;
         color: white;
         overflow-y: auto;
-        padding: 10px;
 
         .section {
             margin-bottom: 20px;
-        }
 
-        .title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+            .title {
+                font-weight: bold;
+                margin-bottom: 5px;
+                font-size: 1.1em;
+                color: #fff;
+            }
 
-        .subtitle {
-            font-size: 0.9em;
-            margin-bottom: 5px;
-            color: #bbb;
+            .subtitle {
+                font-size: 0.9em;
+                margin-bottom: 5px;
+                color: #bbb;
+            }
+
+            input {
+                width: 100%;
+                margin-bottom: 10px;
+                padding: 5px;
+                border-radius: 4px;
+                border: 1px solid #555;
+                background-color: #2b2b2b;
+                color: white;
+            }
+
+            .el-button {
+                margin-bottom: 10px;
+            }
+
+            .el-input {
+                margin-bottom: 10px;
+            }
         }
     }
 
@@ -234,10 +211,11 @@ export default {
 
     .aindex {
         position: fixed;
-        left: 50px;
-        top: 50px;
+        left: 10px;
+        top: 10px;
         width: 20vw;
         height: 90vh;
     }
 }
 </style>
+

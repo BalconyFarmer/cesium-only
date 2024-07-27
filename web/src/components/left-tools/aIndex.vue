@@ -28,6 +28,9 @@
             <el-tab-pane label="3D对象">
                 <Hello3d></Hello3d>
             </el-tab-pane>
+            <el-tab-pane label="层数据">
+                <LeftTree></LeftTree>
+            </el-tab-pane>
         </el-tabs>
     </div>
 
@@ -42,10 +45,12 @@ import PlaneObjects from "@/components/left-tools/PlaneObjects";
 import DemoControls from "@/components/left-tools/DemoControls";
 import EnvironmentControls from "@/components/left-tools/EnvironmentControls";
 import MaterialObjects from "@/components/left-tools/MaterialObjects";
-import Hello3d from "@/components/left-tools/Hello3d";
+import Hello3d from "@/components/left-tools/D3Obj";
+import LeftTree from "@/components/left-tools/LeftTree";
 
 export default {
     components: {
+        LeftTree,
         Hello3d,
         MaterialObjects,
         EnvironmentControls, DemoControls, PlaneObjects, LineObjects, PointObjects, ProjectList, Basic
