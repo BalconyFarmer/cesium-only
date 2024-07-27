@@ -1,10 +1,12 @@
 <template>
     <div class="aindex-container">
-        <el-tabs :tab-position="tabPosition" >
+        <el-tabs :tab-position="tabPosition">
             <el-tab-pane label="基础">
                 <basic></basic>
             </el-tab-pane>
-            <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+            <el-tab-pane label="项目列表">
+                <ProjectList></ProjectList>
+            </el-tab-pane>
             <el-tab-pane label="角色管理">角色管理</el-tab-pane>
             <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
         </el-tabs>
@@ -14,9 +16,10 @@
 
 <script>
 import Basic from "@/components/tools/basic";
+import ProjectList from "@/components/tools/ProjectList";
 
 export default {
-    components: {Basic},
+    components: {ProjectList, Basic},
     data() {
         return {
             tabPosition: 'left'
@@ -24,7 +27,9 @@ export default {
     },
     computed: {},
     watch: {},
-    methods: {},
+    methods: {
+
+    },
     created() {
 
     },
