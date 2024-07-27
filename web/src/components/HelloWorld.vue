@@ -6,38 +6,17 @@
             <a-index></a-index>
         </div>
 
-        <div class="panel-container">
-            <div class="rightPart glass">
-                <div class="section">
-                    <div class="title">选取位置:</div>
-                    <div class="subtitle">log, lat, height</div>
-                    <input id="copyValID" :value="clickPosition" readonly type="text"/>
-                    <el-button size="mini" @click="handleClick1('copyValID')">Copy</el-button>
-                    <div class="subtitle">cartographic-log, cartographic-lat, cartographic-height</div>
-                    <input :value="clickPositionCartographic" readonly type="text"/>
-                    <div class="subtitle">Cartesian</div>
-                    <input :value="clickPositionCartesian" readonly type="text"/>
-                </div>
-                <div class="section">
-                    <div class="title">相机位置</div>
-                    <div class="subtitle">x, y, z, heading, pitch, roll</div>
-                    <input id="copyValID1" :value="cameraPosition" readonly type="text"/>
-                    <el-button size="mini" @click="handleClick1('copyValID1')">Copy</el-button>
-                </div>
-                <div class="section">
-                    <div class="title">实体信息</div>
-                    <div>name: {{ currentEntities ? currentEntities.name : '暂无数据' }}</div>
-                    <div>Cartesian3: {{ currentEntities ? currentEntities.position._value : '暂无数据' }}</div>
-                    <el-input v-model="rotationParams.Heading" placeholder="Heading" size="mini"></el-input>
-                    <el-input v-model="rotationParams.Pitch" placeholder="Pitch" size="mini"></el-input>
-                    <el-input v-model="rotationParams.Roll" placeholder="Roll" size="mini"></el-input>
-                    <el-button size="mini" @click="rotateEntity">rotate</el-button>
-                    <span>drag</span>
-                    <el-switch v-model="switchValue" active-color="#13ce66" inactive-color="#2B2B2B"
-                               @change="dragChange"></el-switch>
-                </div>
-            </div>
-        </div>
+        <Panel
+            :clickPosition="clickPosition"
+            :clickPositionCartographic="clickPositionCartographic"
+            :clickPositionCartesian="clickPositionCartesian"
+            :cameraPosition="cameraPosition"
+            :currentEntities="currentEntities"
+            :rotationParams="rotationParams"
+            :switchValue="switchValue"
+            @rotateEntity="rotateEntity"
+            @dragChange="dragChange"
+        />
     </div>
 </template>
 
@@ -45,17 +24,18 @@
 import CesiumApp from './CesiumApp/CesiumApp'
 import AIndex from "@/components/left-tools/aIndex";
 import LeftTree from "@/components/left-tools/LeftTree";
+import Panel from "@/components/left-tools/Panel";
 
 export default {
     name: 'hoting',
     components: {
         AIndex,
-        LeftTree
+        LeftTree,
+        Panel
     },
     data() {
         return {
             fakeBoard: false,
-            showPanel: false,
             treeData: [],
             clickPosition: [],
             clickPositionCartographic: null,
@@ -80,20 +60,19 @@ export default {
         mouseUp() {
             this.$refs.mychild.mouseUp();
         },
-        rotateEntity() {
-            this.cApp.rotateEntity(parseInt(this.rotationParams.Heading), parseInt(this.rotationParams.Pitch), parseInt(this.rotationParams.Roll), this.currentEntities);
+        rotateEntity(rotationParams) {
+            this.cApp.rotateEntity(parseInt(rotationParams.Heading), parseInt(rotationParams.Pitch), parseInt(rotationParams.Roll), this.currentEntities);
         },
-        dragChange() {
-            this.cApp.event.dragFlag = this.switchValue;
+        dragChange(switchValue) {
+            this.cApp.event.dragFlag = switchValue;
         },
-
     },
     mounted() {
         this.$nextTick(() => {
             this.cApp = new CesiumApp();
             this.cApp.initMap();
             window.cApp = this.cApp;
-            this.entitysList = this.cApp.getViewerEntitys();
+
             this.cApp.eventCenter.addEventListener('clickPosition', (data) => {
                 this.clickPosition = data.message.position;
                 this.clickPositionCartographic = data.message.positionCartographic;
@@ -105,9 +84,7 @@ export default {
             this.cApp.eventCenter.addEventListener('pickEntity', (data) => {
                 this.currentEntities = data.message.position;
             });
-            this.showPanel = true;
         });
-
     }
 }
 </script>
@@ -125,63 +102,6 @@ export default {
     #cesiumContainer {
         width: 100%;
         height: 100%;
-    }
-
-    .panel-container {
-        display: flex;
-        width: 30%;
-        height: auto;
-        position: absolute;
-        top: 10%;
-        right: 10px;
-        z-index: 999;
-        background-color: rgba(43, 43, 43, .9);
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        overflow: hidden;
-        flex-direction: column;
-        padding: 15px;
-    }
-
-    .rightPart {
-        width: 100%;
-        color: white;
-        overflow-y: auto;
-
-        .section {
-            margin-bottom: 20px;
-
-            .title {
-                font-weight: bold;
-                margin-bottom: 5px;
-                font-size: 1.1em;
-                color: #fff;
-            }
-
-            .subtitle {
-                font-size: 0.9em;
-                margin-bottom: 5px;
-                color: #bbb;
-            }
-
-            input {
-                width: 100%;
-                margin-bottom: 10px;
-                padding: 5px;
-                border-radius: 4px;
-                border: 1px solid #555;
-                background-color: #2b2b2b;
-                color: white;
-            }
-
-            .el-button {
-                margin-bottom: 10px;
-            }
-
-            .el-input {
-                margin-bottom: 10px;
-            }
-        }
     }
 
     .bottomCenter {
@@ -218,4 +138,3 @@ export default {
     }
 }
 </style>
-
