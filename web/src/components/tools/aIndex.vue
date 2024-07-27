@@ -10,6 +10,9 @@
             <el-tab-pane label="点状对象">
                 <PointObjects></PointObjects>
             </el-tab-pane>
+            <el-tab-pane label="线状对象">
+                <LineObjects></LineObjects>
+            </el-tab-pane>
         </el-tabs>
     </div>
 
@@ -19,9 +22,10 @@
 import Basic from "@/components/tools/basic";
 import ProjectList from "@/components/tools/ProjectList";
 import PointObjects from "@/components/tools/PointObjects";
+import LineObjects from "@/components/tools/LineObjects";
 
 export default {
-    components: {PointObjects, ProjectList, Basic},
+    components: {LineObjects, PointObjects, ProjectList, Basic},
     data() {
         return {
             tabPosition: 'left'

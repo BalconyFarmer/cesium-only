@@ -391,8 +391,8 @@ FPS显示
 
     .aindex {
         position: fixed;
-        left: 300px;
-        top: 100px;
+        left: 50px;
+        top: 50px;
         width: 20vw;
         height: 90vh;
     }
@@ -491,8 +491,8 @@ FPS显示
         width: 10%;
         height: 90%;
         position: absolute;
-        left: 0px;
-        top: 10%;
+        right: 230px;
+        top: 5%;
         z-index: 999;
         overflow-y: auto;
         background-color: rgba(43, 43, 43, .5);
