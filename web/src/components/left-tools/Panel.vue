@@ -34,16 +34,24 @@
 </template>
 
 <script>
+
 export default {
     name: 'Panel',
-    props: {
-        clickPosition: Array,
-        clickPositionCartographic: Object,
-        clickPositionCartesian: Object,
-        cameraPosition: Array,
-        currentEntities: Object,
-        rotationParams: Object,
-        switchValue: Boolean
+    data() {
+        return {
+            clickPosition: [],
+            clickPositionCartographic: null,
+            clickPositionCartesian: null,
+            cameraPosition: [],
+            switchValue: false,
+            currentEntities: null,
+            rotationParams: {
+                Heading: 0,
+                Pitch: 0,
+                Roll: 0
+            },
+            cApp: null
+        };
     },
     methods: {
         handleClick1(ID) {
@@ -52,11 +60,27 @@ export default {
             document.execCommand('copy');
         },
         rotateEntity() {
-            this.$emit('rotateEntity', this.rotationParams);
+            window.cApp.rotateEntity(parseInt(this.rotationParams.Heading), parseInt(this.rotationParams.Pitch), parseInt(this.rotationParams.Roll), this.currentEntities);
         },
         dragChange() {
-            this.$emit('dragChange', this.switchValue);
+            window.cApp.event.dragFlag = this.switchValue;
         }
+    },
+    mounted() {
+        setTimeout(() => {
+            window.cApp.eventCenter.addEventListener('clickPosition', (data) => {
+                this.clickPosition = data.message.position;
+                this.clickPositionCartographic = data.message.positionCartographic;
+                this.clickPositionCartesian = data.message.cartesian;
+            });
+            window.cApp.eventCenter.addEventListener('cameraPosition', (data) => {
+                this.cameraPosition = data.message.position;
+            });
+            window.cApp.eventCenter.addEventListener('pickEntity', (data) => {
+                this.currentEntities = data.message.position;
+            });
+        }, 1000)
+
     }
 }
 </script>

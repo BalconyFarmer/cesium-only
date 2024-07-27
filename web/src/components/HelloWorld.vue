@@ -6,66 +6,34 @@
             <a-index></a-index>
         </div>
 
-        <Panel
-            :clickPosition="clickPosition"
-            :clickPositionCartographic="clickPositionCartographic"
-            :clickPositionCartesian="clickPositionCartesian"
-            :cameraPosition="cameraPosition"
-            :currentEntities="currentEntities"
-            :rotationParams="rotationParams"
-            :switchValue="switchValue"
-            @rotateEntity="rotateEntity"
-            @dragChange="dragChange"
-        />
+        <Panel/>
     </div>
 </template>
 
 <script>
 import CesiumApp from './CesiumApp/CesiumApp'
 import AIndex from "@/components/left-tools/aIndex";
-import LeftTree from "@/components/left-tools/LeftTree";
 import Panel from "@/components/left-tools/Panel";
 
 export default {
     name: 'hoting',
     components: {
         AIndex,
-        LeftTree,
         Panel
     },
     data() {
         return {
-            fakeBoard: false,
-            treeData: [],
             clickPosition: [],
             clickPositionCartographic: null,
             clickPositionCartesian: null,
             cameraPosition: [],
-            switchValue: false,
-            currentEntities: null,
-            rotationParams: {
-                Heading: 0,
-                Pitch: 0,
-                Roll: 0
-            },
-            layersData: [],
+            currentEntities: null
         }
     },
     methods: {
-        handleClick1(ID) {
-            const copyVal = document.getElementById(ID);
-            copyVal.select();
-            document.execCommand('copy');
-        },
         mouseUp() {
             this.$refs.mychild.mouseUp();
-        },
-        rotateEntity(rotationParams) {
-            this.cApp.rotateEntity(parseInt(rotationParams.Heading), parseInt(rotationParams.Pitch), parseInt(rotationParams.Roll), this.currentEntities);
-        },
-        dragChange(switchValue) {
-            this.cApp.event.dragFlag = switchValue;
-        },
+        }
     },
     mounted() {
         this.$nextTick(() => {
@@ -102,31 +70,6 @@ export default {
     #cesiumContainer {
         width: 100%;
         height: 100%;
-    }
-
-    .bottomCenter {
-        width: 100%;
-        height: 150px;
-        position: absolute;
-        bottom: 0;
-        z-index: 999;
-    }
-
-    .modeChange {
-        position: fixed;
-        right: 10px;
-        bottom: 10px;
-        z-index: 99999;
-        display: flex;
-        align-items: center;
-        background-color: rgba(43, 43, 43, .8);
-        padding: 5px 10px;
-        border-radius: 5px;
-
-        span {
-            margin-right: 10px;
-            color: white;
-        }
     }
 
     .aindex {
