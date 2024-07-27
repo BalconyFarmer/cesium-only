@@ -1,16 +1,21 @@
 <template>
     <div class="leftTree glass">
-        <div class="leftTreeMenu">
-            <el-button size="mini" @click="currentLeft = '图层'">图层</el-button>
-            <el-button size="mini" @click="currentLeft = '实体'">实体</el-button>
-        </div>
-        <el-tree v-if="currentLeft === '实体'" :data="treeData" :props="defaultProps"
-                 @node-click="handleNodeClick"></el-tree>
-        <div v-if="currentLeft === '图层'">
-            <div v-for="item in layersData" :key="item._imageryProvider.name">
-                {{ item._imageryProvider.name }}
+
+        <div>
+            <div>图层</div>
+
+            <div v-for="item in layersData" :key="item.name">
+                {{ item.name }}
             </div>
         </div>
+
+        <div>
+            <div>实体</div>
+            <div v-for="item in treeData" :key="item.name">
+                {{ item.name }}
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -36,17 +41,34 @@ export default {
         },
     },
     mounted() {
-        this.entitysList = window.cApp.getViewerEntitys();
 
         setInterval(() => {
-            this.treeData = [];
-            this.entitysList.forEach(item => {
-                this.treeData.push({label: item.name || '未定义'});
-            });
-            if (window.cApp) {
-                this.layersData = window.cApp.viewer.imageryLayers._layers;
+            let viewer = window.cApp.viewer
+
+            const imageryLayers = viewer.scene.imageryLayers;
+            const imageryLayersList = [];
+            for (let i = 0; i < imageryLayers.length; i++) {
+                const layer = imageryLayers.get(i);
+                imageryLayersList.push({
+                    name: layer.imageryProvider.constructor.name,
+                    show: layer.show,
+                });
             }
-        }, 500);
+            this.layersData = imageryLayersList
+
+
+            // 获取所有实体
+            const entities = viewer.entities.values;
+            this.treeData = entities
+            // 打印所有实体的信息
+            entities.forEach(entity => {
+                console.log('Entity ID:', entity.id);
+                console.log('Entity Name:', entity.name);
+                console.log('Entity Position:', entity.position ? entity.position.getValue(Cesium.JulianDate.now()) : 'No position');
+            });
+        }, 1000)
+
+
     }
 }
 </script>
