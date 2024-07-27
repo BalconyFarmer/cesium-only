@@ -7,31 +7,6 @@
             <a-index></a-index>
         </div>
 
-        <el-dialog
-            :visible.sync="dialogVisible"
-            title="项目列表"
-            width="30%"
-        >
-            <div class="dialogAll" style="color: black !important;">
-                <div class="item" style="color: black !important;" @click="runChengdu">
-                    <img src="../assets/projectImg/纽约.png">
-                    <span>0.纽约</span>
-                </div>
-                <div class="item" style="color: black !important;" @click="runShanghai">
-                    <img src="../assets/projectImg/上海.png">
-                    <span>1.上海</span>
-                </div>
-                <div class="item" style="color: black !important;" @click="runTrain">
-                    <img src="../assets/projectImg/上海.png">
-                    <span>2.火车</span>
-                </div>
-                <div class="item" style="color: black !important;" @click="runXSBN">
-                    <img src="../assets/projectImg/上海.png">
-                    <span>2.西双版纳</span>
-                </div>
-            </div>
-
-        </el-dialog>
 
         <!--开发仪表盘-->
         <div v-if="!fakeBoard && showPanel" style="width: 100%; height: 100%">
@@ -134,43 +109,16 @@ export default {
         AIndex,
         HelloWorldBottom
     },
-    watch: {
-
-
-        brightness: {
-            handler(newValue) {
-                if (this.cApp) {
-                    this.cApp.updateBrightness(this.brightness)
-                }
-            },
-            deep: true,
-            immediate: false
-        },
-        fov: {
-            handler(newValue) {
-                if (this.cApp) {
-                    this.cApp.updataFov(this.fov)
-                }
-            },
-            deep: true,
-            immediate: false
-        },
-    },
+    watch: {},
 
     data() {
         return {
 
-            dialogVisible: false,
-            fov: 1,
             changeShadowFlag: false,
-            changeLightFlag: false,
-            changeGlobleLightFlag: false,
             fakeBoard: false,
             showPanel: false,
             addGeoFlag: false,
             currentGeoType: null,
-            brightness: 1,
-            terrainFlag: false,
             moveToolFlag: false,
 
 
@@ -217,7 +165,6 @@ export default {
                 },
             ],
             activeIndex: '1',
-            activeIndex2: '1',
             entitysList: [],
             treeData: [],
             defaultProps: {
@@ -241,30 +188,8 @@ export default {
         }
     },
     methods: {
-        runChengdu() {
-            this.cApp.runChengDu()
-            this.fakeBoard = true
-            this.dialogVisible = false
-        },
-        runShanghai() {
-            this.cApp.runShanghai()
-            this.fakeBoard = true
-            this.dialogVisible = false
-        },
-        runTrain() {
-            this.fakeBoard = true
-            this.dialogVisible = false
-            this.cApp.train.testChinaData()
-        },
-        runXSBN() {
-            this.fakeBoard = true
-            this.dialogVisible = false
-            this.cApp.runXSBN()
-        },
 
-        openDialog() {
-            this.dialogVisible = true
-        },
+
         handleClose() {
 
         },
@@ -281,13 +206,6 @@ export default {
             this.$refs.mychild.mouseUp()
         },
 
-        terrainChange() {
-            if (this.terrainFlag) {
-                this.cApp.addTerrain()
-            } else {
-                this.cApp.removeTerrain()
-            }
-        },
 
         rotateEntity() {
             const self = this
@@ -304,26 +222,6 @@ export default {
         handleNodeClick(data) {
             console.log(data)
             this.cApp.lookAtByName(data.label)
-        },
-        handleSelect(key) {
-            if (key == 14) {
-                this.cApp.closeAll()
-            } else if (key == 'addBloom') {
-                this.cApp.addBloom()
-            } else if (key == 'addOutline') {
-                this.cApp.addOutline()
-            } else if (key == '动画组件') {
-                this.cApp.clock.closeAimationToolbar()
-            }
-        },
-        changeGlobleLight() {
-            this.cApp.switchLight()
-        },
-        changeLight() {
-            this.cApp.addLight()
-        },
-        changeShadow() {
-            this.cApp.changeShadow()
         },
 
 

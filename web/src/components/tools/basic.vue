@@ -33,95 +33,119 @@
             </el-select>
         </div>
 
-
-        <!--
-                <div class="topMenus">
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">SunLight光照</div>
-                        <div class="topMenusItem1">
-                            <el-switch
-                                v-model="changeGlobleLightFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B"
-                                width="30"
-                                @change="changeGlobleLight">
-                            </el-switch>
-                        </div>
-                    </div>
-
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">光照系统</div>
-                        <div class="topMenusItem1">
-                            <el-switch
-                                v-model="changeLightFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B"
-                                width="30"
-                                @change="changeLight">
-                            </el-switch>
-                        </div>
-                    </div>
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">shadow</div>
-                        <div class="topMenusItem1">
-                            <el-switch
-                                v-model="changeShadowFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B"
-                                width="30"
-                                @change="changeShadow">
-                            </el-switch>
-                        </div>
-                    </div>
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">地形叠加</div>
-                        <div class="topMenusItem1">
-                            <el-tooltip :content="'关闭地形'" placement="top">
-                                <el-switch
-                                    v-model="terrainFlag"
-                                    active-color="#13ce66"
-                                    inactive-color="#2B2B2B"
-                                    width="30"
-                                    @change="terrainChange">
-                                </el-switch>
-                            </el-tooltip>
-                        </div>
-                    </div>
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">整体亮度</div>
-                        <div class="topMenusItem1">
-                            <div style="width: 70%">
-                                <el-slider v-model="brightness" :max="2" :step="0.1">
-                                </el-slider>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">视角大小</div>
-                        <div class="topMenusItem1">
-                            <div style="width: 70%">
-                                <el-slider v-model="fov" :max="2" :step="0.1">
-                                </el-slider>
-                            </div>
-
-                        </div>
-                    </div>
-                    <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal"
-                             @select="handleSelect">
-                        <el-menu-item index="addBloom">Bloom</el-menu-item>
-                        <el-menu-item index="addOutline">Outline</el-menu-item>
-                        <el-menu-item index="14">关闭冗余</el-menu-item>
-                        <el-menu-item index="动画组件">动画组件</el-menu-item>
-                    </el-menu>
+        <div class="topMenus">
+            <div class="topMenusItem">
+                <div class="topMenusItem1">SunLight光照</div>
+                <div class="topMenusItem1">
+                    <el-switch
+                        v-model="changeGlobleLightFlag"
+                        active-color="#13ce66"
+                        inactive-color="#2B2B2B"
+                        width="30"
+                        @change="changeGlobleLight">
+                    </el-switch>
                 </div>
-        -->
+            </div>
 
-        <!--        <div class="member" @click="openDialog">-->
-        <!--            <span>联鹏科技</span>-->
-        <!--            <el-avatar-->
-        <!--                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>-->
-        <!--        </div>-->
+            <div class="topMenusItem">
+                <div class="topMenusItem1">光照系统</div>
+                <div class="topMenusItem1">
+                    <el-switch
+                        v-model="changeLightFlag"
+                        active-color="#13ce66"
+                        inactive-color="#2B2B2B"
+                        width="30"
+                        @change="changeLight">
+                    </el-switch>
+                </div>
+            </div>
+            <div class="topMenusItem">
+                <div class="topMenusItem1">shadow</div>
+                <div class="topMenusItem1">
+                    <el-switch
+                        v-model="changeShadowFlag"
+                        active-color="#13ce66"
+                        inactive-color="#2B2B2B"
+                        width="30"
+                        @change="changeShadow">
+                    </el-switch>
+                </div>
+            </div>
+            <div class="topMenusItem">
+                <div class="topMenusItem1">地形叠加</div>
+                <div class="topMenusItem1">
+                    <el-tooltip :content="'关闭地形'" placement="top">
+                        <el-switch
+                            v-model="terrainFlag"
+                            active-color="#13ce66"
+                            inactive-color="#2B2B2B"
+                            width="30"
+                            @change="terrainChange">
+                        </el-switch>
+                    </el-tooltip>
+                </div>
+            </div>
+            <div class="topMenusItem">
+                <div class="topMenusItem1">整体亮度</div>
+                <div class="topMenusItem1">
+                    <div style="width: 70%">
+                        <el-slider v-model="brightness" :max="2" :step="0.1">
+                        </el-slider>
+                    </div>
+
+                </div>
+            </div>
+            <div class="topMenusItem">
+                <div class="topMenusItem1">视角大小</div>
+                <div class="topMenusItem1">
+                    <div style="width: 70%">
+                        <el-slider v-model="fov" :max="2" :step="0.1">
+                        </el-slider>
+                    </div>
+
+                </div>
+            </div>
+            <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal"
+                     @select="handleSelect">
+                <el-menu-item index="addBloom">Bloom</el-menu-item>
+                <el-menu-item index="addOutline">Outline</el-menu-item>
+                <el-menu-item index="14">关闭冗余</el-menu-item>
+                <el-menu-item index="动画组件">动画组件</el-menu-item>
+            </el-menu>
+        </div>
+
+        <div class="rowSC" @click="openDialog">
+            <span>项目列表</span> &nbsp&nbsp&nbsp
+            <el-avatar
+                src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+        </div>
+
+        <el-dialog
+            :visible.sync="dialogVisible"
+            append-to-body
+            title="项目列表"
+            width="30%"
+        >
+            <div class="finger" style="color: white !important;">
+                <div class="item" style="color: white !important;" @click="runChengdu">
+                    <span>0.纽约</span>
+                </div>
+                &nbsp&nbsp&nbsp
+                <div class="item" style="color: white !important;" @click="runShanghai">
+                    <span>1.上海</span>
+                </div>
+                &nbsp&nbsp&nbsp
+                <div class="item" style="color: white !important;" @click="runTrain">
+                    <span>2.火车</span>
+                </div>
+                &nbsp&nbsp&nbsp
+                <div class="item" style="color: white !important;" @click="runXSBN">
+                    <span>2.西双版纳</span>
+                </div>
+            </div>
+
+        </el-dialog>
+
     </div>
 
 </template>
@@ -132,6 +156,14 @@ export default {
     components: {},
     data() {
         return {
+            changeGlobleLightFlag: false,
+            changeLightFlag: false,
+            terrainFlag: false,
+            brightness: 1,
+            fov: 1,
+            activeIndex2: '1',
+
+            dialogVisible: false,
             cApp: null,
             optionsLayers: [
                 {
@@ -226,6 +258,24 @@ export default {
     },
     computed: {},
     watch: {
+        brightness: {
+            handler(newValue) {
+                if (this.cApp) {
+                    this.cApp.updateBrightness(this.brightness)
+                }
+            },
+            deep: true,
+            immediate: false
+        },
+        fov: {
+            handler(newValue) {
+                if (this.cApp) {
+                    this.cApp.updataFov(this.fov)
+                }
+            },
+            deep: true,
+            immediate: false
+        },
         value: {
             handler(newValue) {
                 if (this.cApp) {
@@ -283,7 +333,58 @@ export default {
             immediate: false
         },
     },
-    methods: {},
+    methods: {
+        terrainChange() {
+            if (this.terrainFlag) {
+                this.cApp.addTerrain()
+            } else {
+                this.cApp.removeTerrain()
+            }
+        },
+        changeLight() {
+            this.cApp.addLight()
+        },
+        changeShadow() {
+            this.cApp.changeShadow()
+        },
+        changeGlobleLight() {
+            this.cApp.switchLight()
+        },
+        openDialog() {
+            this.dialogVisible = true
+        },
+        runChengdu() {
+            this.cApp.runChengDu()
+            this.fakeBoard = true
+            this.dialogVisible = false
+        },
+        runShanghai() {
+            this.cApp.runShanghai()
+            this.fakeBoard = true
+            this.dialogVisible = false
+        },
+        runTrain() {
+            this.fakeBoard = true
+            this.dialogVisible = false
+            this.cApp.train.testChinaData()
+        },
+        runXSBN() {
+            this.fakeBoard = true
+            this.dialogVisible = false
+            this.cApp.runXSBN()
+        },
+        handleSelect(key) {
+            if (key == 14) {
+                this.cApp.closeAll()
+            } else if (key == 'addBloom') {
+                this.cApp.addBloom()
+            } else if (key == 'addOutline') {
+                this.cApp.addOutline()
+            } else if (key == '动画组件') {
+                this.cApp.clock.closeAimationToolbar()
+            }
+        },
+    },
     created() {
 
     },
