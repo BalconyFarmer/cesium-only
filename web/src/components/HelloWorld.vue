@@ -5,33 +5,39 @@
         <div class="aindex">
             <a-index></a-index>
         </div>
-
+        <div class="bottomCenter">
+            <HelloWorldBottom ref="mychild"></HelloWorldBottom>
+        </div>
         <div v-if="!fakeBoard && showPanel" class="panel-container">
             <div class="leftTree glass">
                 <div class="leftTreeMenu">
                     <el-button size="mini" @click="currentLeft = '图层'">图层</el-button>
                     <el-button size="mini" @click="currentLeft = '实体'">实体</el-button>
                 </div>
-                <el-tree v-if="currentLeft === '实体'" :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+                <el-tree v-if="currentLeft === '实体'" :data="treeData" :props="defaultProps"
+                         @node-click="handleNodeClick"></el-tree>
                 <div v-if="currentLeft === '图层'">
-                    <div v-for="item in layersData" :key="item._imageryProvider.name">{{ item._imageryProvider.name }}</div>
+                    <div v-for="item in layersData" :key="item._imageryProvider.name">{{
+                            item._imageryProvider.name
+                        }}
+                    </div>
                 </div>
             </div>
             <div class="rightPart glass">
                 <div class="getPosition">
                     <div class="title">选取位置:</div>
                     <div class="title">log, lat, height</div>
-                    <input id="copyValID" :value="clickPosition" type="text" readonly/>
+                    <input id="copyValID" :value="clickPosition" readonly type="text"/>
                     <el-button size="mini" @click="handleClick1('copyValID')">Copy</el-button>
                     <div class="title">cartographic-log, cartographic-lat, cartographic-height</div>
-                    <input :value="clickPositionCartographic" type="text" readonly/>
+                    <input :value="clickPositionCartographic" readonly type="text"/>
                     <div class="title">Cartesian</div>
-                    <input :value="clickPositionCartesian" type="text" readonly/>
+                    <input :value="clickPositionCartesian" readonly type="text"/>
                 </div>
                 <div class="getPosition">
                     <div class="title">相机位置</div>
                     <div class="title">x, y, z, heading, pitch, roll</div>
-                    <input id="copyValID1" :value="cameraPosition" type="text" readonly/>
+                    <input id="copyValID1" :value="cameraPosition" readonly type="text"/>
                     <el-button size="mini" @click="handleClick1('copyValID1')">Copy</el-button>
                 </div>
                 <div class="getPosition">
@@ -42,12 +48,11 @@
                     <el-input v-model="rotationParams.Roll" placeholder="Roll" size="mini"></el-input>
                     <el-button size="mini" @click="rotateEntity">rotate</el-button>
                     <span>drag</span>
-                    <el-switch v-model="switchValue" active-color="#13ce66" inactive-color="#2B2B2B" @change="dragChange"></el-switch>
+                    <el-switch v-model="switchValue" active-color="#13ce66" inactive-color="#2B2B2B"
+                               @change="dragChange"></el-switch>
                 </div>
             </div>
-            <div class="bottomCenter">
-                <HelloWorldBottom ref="mychild" :cApp="cApp"></HelloWorldBottom>
-            </div>
+
         </div>
 
         <div class="modeChange">
@@ -60,7 +65,7 @@
 <script>
 import CesiumApp from './CesiumApp/CesiumApp'
 import HelloWorldBottom from './HelloWorldBottom'
-import AIndex from "@/components/tools/aIndex";
+import AIndex from "@/components/left-tools/aIndex";
 
 export default {
     name: 'hoting',

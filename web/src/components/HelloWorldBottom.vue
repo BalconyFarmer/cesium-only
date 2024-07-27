@@ -177,9 +177,15 @@ export default {
     },
     async mounted() {
         const self = this
-        this.cApp.eventCenter.addEventListener('geoPosition', function (data) {
-            self.geoPositionCartesian2 = data.message.position
-        })
+
+        setTimeout(() => {
+            this.cApp = window.cApp;
+
+            this.cApp.eventCenter.addEventListener('geoPosition', function (data) {
+                self.geoPositionCartesian2 = data.message.position
+            })
+        }, 1000);
+
     }
 }
 </script>

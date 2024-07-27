@@ -28,13 +28,13 @@
 </template>
 
 <script>
-import Basic from "@/components/tools/basic";
-import ProjectList from "@/components/tools/ProjectList";
-import PointObjects from "@/components/tools/PointObjects";
-import LineObjects from "@/components/tools/LineObjects";
-import PlaneObjects from "@/components/tools/PlaneObjects";
-import DemoControls from "@/components/tools/DemoControls";
-import EnvironmentControls from "@/components/tools/EnvironmentControls";
+import Basic from "@/components/left-tools/basic";
+import ProjectList from "@/components/left-tools/ProjectList";
+import PointObjects from "@/components/left-tools/PointObjects";
+import LineObjects from "@/components/left-tools/LineObjects";
+import PlaneObjects from "@/components/left-tools/PlaneObjects";
+import DemoControls from "@/components/left-tools/DemoControls";
+import EnvironmentControls from "@/components/left-tools/EnvironmentControls";
 
 export default {
     components: {EnvironmentControls, DemoControls, PlaneObjects, LineObjects, PointObjects, ProjectList, Basic},
