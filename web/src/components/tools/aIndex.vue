@@ -16,6 +16,9 @@
             <el-tab-pane label="面状对象">
                 <PlaneObjects></PlaneObjects>
             </el-tab-pane>
+            <el-tab-pane label="其他">
+                <DemoControls></DemoControls>
+            </el-tab-pane>
         </el-tabs>
     </div>
 
@@ -27,9 +30,10 @@ import ProjectList from "@/components/tools/ProjectList";
 import PointObjects from "@/components/tools/PointObjects";
 import LineObjects from "@/components/tools/LineObjects";
 import PlaneObjects from "@/components/tools/PlaneObjects";
+import DemoControls from "@/components/tools/DemoControls";
 
 export default {
-    components: {PlaneObjects, LineObjects, PointObjects, ProjectList, Basic},
+    components: {DemoControls, PlaneObjects, LineObjects, PointObjects, ProjectList, Basic},
     data() {
         return {
             tabPosition: 'left'

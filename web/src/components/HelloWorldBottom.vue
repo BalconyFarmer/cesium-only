@@ -34,11 +34,16 @@
             <el-tab-pane label="材质对象" name="second">
                 <div class="material">
                     <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">0</div>
-                    <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">0</div>
+                    <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">0
+                    </div>
                     <div class="normal addColor" @mousedown="mouseDown('addColor')">0</div>
                     <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')">0</div>
-                    <div class="normal addCheckerboardMaterialProperty" @mousedown="mouseDown('addCheckerboardMaterialProperty')">0</div>
-                    <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">0</div>
+                    <div class="normal addCheckerboardMaterialProperty"
+                         @mousedown="mouseDown('addCheckerboardMaterialProperty')">0
+                    </div>
+                    <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">
+                        0
+                    </div>
                 </div>
             </el-tab-pane>
             <el-tab-pane label="环境对象" name="third">
@@ -47,68 +52,6 @@
                     <div class="normal addMaterial" @mousedown="mouseDown('addRain')">Rain</div>
                     <div class="normal addMaterial" @mousedown="mouseDown('addSnow')">Snow</div>
                     <div class="normal addMaterial" @mousedown="mouseDown('addFrog')">Frog</div>
-                </div>
-            </el-tab-pane>
-            <el-tab-pane label="其他" name="five">
-                <div class="env">
-                    <div>
-                        <span>moveTip</span>
-                        <el-switch
-                            v-model="moveToolFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="moveToolTipsChange">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>飞行飞机</span>
-                        <el-switch
-                            v-model="flyFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="fly">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>移动小人</span>
-                        <el-switch
-                            v-model="flyFlag1"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="fly1">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>移动小车</span>
-                        <el-switch
-                            v-model="flyFlag2"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="fly2">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>GPS</span>
-                        <el-switch
-                            v-model="GpsFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="GpsChange">
-                        </el-switch>
-                    </div>
-                </div>
-            </el-tab-pane>
-            <el-tab-pane label="Clock" name="five1">
-                <div class="env">
-                    <div>
-                        <span>clock暂停</span>
-                        <el-switch
-                            v-model="clockFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="clockChange">
-                        </el-switch>
-                    </div>
                 </div>
             </el-tab-pane>
         </el-tabs>
@@ -127,15 +70,9 @@ export default {
             addGeoFlag: false,
             currentGeoType: null,
             geoPositionCartesian2: null,
-            moveToolFlag: false,
             fileList: [],
             uploading: false,
-            D3FileList: [],
-            flyFlag: false,
-            flyFlag1: false,
-            flyFlag2: false,
-            clockFlag: true,
-            GpsFlag: false
+            D3FileList: []
         }
     },
     methods: {
@@ -174,35 +111,6 @@ export default {
             const newFileList = this.fileList.slice()
             newFileList.splice(index, 1)
             this.fileList = newFileList
-        },
-        moveToolTipsChange() {
-            this.cApp.startMoveTips()
-        },
-        clockChange() {
-            if (this.clockFlag) {
-                this.cApp.clock.stop()
-            } else {
-                this.cApp.clock.start()
-            }
-        },
-        fly() {
-            const poAirPlane = [104.0884625472979, 30.629946234239107, 100]
-            this.cApp.load3DModel.loadGLB(poAirPlane)
-            this.cApp.viewer.zoomTo(this.cApp.viewer.entities)
-        },
-        fly1() {
-            const poPer = Cesium.Cartesian3.fromDegrees(104.0884177825623, 30.62721695985099, 0)
-            const movePeople = this.cApp.load3DModel.loadGltf(poPer)
-            this.cApp.viewer.entities.add(movePeople)
-            this.cApp.viewer.zoomTo(this.cApp.viewer.entities)
-        },
-        fly2() {
-            let data = [104.088629853244, 30.627623370523818, -0.002239088567849463,]
-            this.cApp.load3DModel.loadGlbPrimitives(data)
-            this.cApp.viewer.zoomTo(this.cApp.viewer.entities)
-        },
-        GpsChange() {
-            this.cApp.GPSlocation.start()
         },
         handleClick(tab, event) {
             console.log(tab, event)
@@ -332,11 +240,12 @@ export default {
             }
             this.addGeoFlag = false
         },
-        async updata3DList() {}
+        async updata3DList() {
+        }
     },
     async mounted() {
         const self = this
-        this.cApp.eventCenter.addEventListener('geoPosition', function(data) {
+        this.cApp.eventCenter.addEventListener('geoPosition', function (data) {
             self.geoPositionCartesian2 = data.message.position
         })
         await this.updata3DList()

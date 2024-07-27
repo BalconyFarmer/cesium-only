@@ -41,6 +41,17 @@
             <div v-for="(label, key) in buttons" :key="key" class="top-menus-item">
                 <el-button size="mini" type="primary" @click="handleSelect(key)">{{ label }}</el-button>
             </div>
+            <div class="env">
+                <div>
+                    <span>clock暂停</span>
+                    <el-switch
+                        v-model="clockFlag"
+                        active-color="#13ce66"
+                        inactive-color="#2B2B2B"
+                        @change="clockChange">
+                    </el-switch>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -49,6 +60,8 @@
 export default {
     data() {
         return {
+            clockFlag: true,
+
             changeGlobleLightFlag: false,
             changeLightFlag: false,
             terrainFlag: false,
@@ -123,9 +136,17 @@ export default {
         },
         modelData(newValue) {
             if (this.cApp) this.loadModelData(this.modelData);
-        }
+        },
+
     },
     methods: {
+        clockChange() {
+            if (this.clockFlag) {
+                this.cApp.clock.stop()
+            } else {
+                this.cApp.clock.start()
+            }
+        },
         handleSwitchChange(key) {
             const methodMap = {
                 changeGlobleLightFlag: 'switchLight',
