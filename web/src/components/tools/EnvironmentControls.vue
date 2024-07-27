@@ -19,7 +19,7 @@ export default {
         handleEnvironmentEffect(effectType) {
             switch (effectType) {
                 case 'Night':
-                    this.cApp.environment.addDarknessEff();
+                    this.cApp.environment.addDarckNessEff();
                     break;
                 case 'Rain':
                     this.cApp.environment.addRain();
