@@ -203,16 +203,16 @@ export default {
                         this.cApp.innerMaterial.addMaterial(this.geoPositionCartesian2)
                         break
                     case 'addDarckNessEff':
-                        this.cApp.environment.addDarckNessEff(this.geoPositionCartesian2)
+                        this.cApp.environment.addDarckNessEff()
                         break
                     case 'addRain':
-                        this.cApp.environment.addRain(this.geoPositionCartesian2)
+                        this.cApp.environment.addRain()
                         break
                     case 'addSnow':
-                        this.cApp.environment.addSnow(this.geoPositionCartesian2)
+                        this.cApp.environment.addSnow()
                         break
                     case 'addFrog':
-                        this.cApp.environment.addFrog(this.geoPositionCartesian2)
+                        this.cApp.environment.addFrog()
                         break
                     case 'addColor':
                         this.cApp.innerMaterial.addColor(this.geoPositionCartesian2)
