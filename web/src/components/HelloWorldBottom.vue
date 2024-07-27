@@ -34,26 +34,18 @@
             <el-tab-pane label="材质对象" name="second">
                 <div class="material">
                     <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">0</div>
-                    <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">0
-                    </div>
+                    <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">0</div>
                     <div class="normal addColor" @mousedown="mouseDown('addColor')">0</div>
                     <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')">0</div>
-                    <div class="normal addCheckerboardMaterialProperty"
-                         @mousedown="mouseDown('addCheckerboardMaterialProperty')">0
-                    </div>
-                    <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">
-                        0
-                    </div>
+                    <div class="normal addCheckerboardMaterialProperty" @mousedown="mouseDown('addCheckerboardMaterialProperty')">0</div>
+                    <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">0</div>
                 </div>
             </el-tab-pane>
-
         </el-tabs>
     </div>
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
     name: 'HelloWorldBottom',
     props: ['cApp'],
@@ -62,49 +54,10 @@ export default {
             activeName: 'first',
             addGeoFlag: false,
             currentGeoType: null,
-            geoPositionCartesian2: null,
-            fileList: [],
-            uploading: false,
-            D3FileList: []
+            geoPositionCartesian2: null
         }
     },
     methods: {
-        handleClick11() {
-            let copyVal = document.getElementById("copyVal");
-            copyVal.select();
-            document.execCommand('copy')
-        },
-        saveVideo(formData) {
-            return axios({
-                method: 'post',
-                url: apiRoot + '' + '/saveVideo',
-                data: formData,
-                withCredentials: true
-            })
-        },
-        handleUpload() {
-            const formData = new FormData()
-            this.fileList.forEach(file => {
-                formData.append('files[]', file)
-            })
-            formData.append('videoIntroduce', '默认')
-            this.uploading = true
-            this.saveVideo(formData).then(response => {
-                this.$message.success(response.statusText)
-                this.uploading = false
-                this.fileList = []
-                this.updata3DList()
-            })
-        },
-        beforeUpload(file) {
-            this.fileList = [...this.fileList, file]
-        },
-        handleRemove(file) {
-            const index = this.fileList.indexOf(file)
-            const newFileList = this.fileList.slice()
-            newFileList.splice(index, 1)
-            this.fileList = newFileList
-        },
         handleClick(tab, event) {
             console.log(tab, event)
         },
@@ -245,21 +198,6 @@ export default {
         justify-content: flex-start;
         flex-wrap: wrap;
         overflow-x: auto;
-    }
-
-    .btnss {
-        width: 100px;
-        height: 50px;
-        border: 4px solid gray;
-    }
-
-    .dddList {
-        width: calc(100vw - 100px);
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        overflow-x: scroll;
-        border: 4px solid yellow;
     }
 
     .normal {
