@@ -31,7 +31,12 @@
             <el-tab-pane label="层数据">
                 <LeftTree></LeftTree>
             </el-tab-pane>
+            <el-tab-pane label="数据拾取">
+                <panel></panel>
+
+            </el-tab-pane>
         </el-tabs>
+
     </div>
 
 </template>
@@ -47,9 +52,11 @@ import EnvironmentControls from "@/components/left-tools/EnvironmentControls";
 import MaterialObjects from "@/components/left-tools/MaterialObjects";
 import Hello3d from "@/components/left-tools/D3Obj";
 import LeftTree from "@/components/left-tools/LeftTree";
+import Panel from "@/components/left-tools/Panel";
 
 export default {
     components: {
+        Panel,
         LeftTree,
         Hello3d,
         MaterialObjects,
@@ -70,6 +77,8 @@ export default {
 </script>
 <style lang="scss">
 .aindex-container {
+    position: relative;
+
     .el-tabs__content {
         height: 800px !important;
         z-index: 999999;

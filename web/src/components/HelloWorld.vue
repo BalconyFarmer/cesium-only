@@ -6,7 +6,6 @@
             <a-index></a-index>
         </div>
 
-        <Panel/>
     </div>
 </template>
 
