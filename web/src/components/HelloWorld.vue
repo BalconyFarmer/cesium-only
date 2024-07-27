@@ -8,39 +8,37 @@
         <div class="bottomCenter">
             <HelloWorldBottom ref="mychild"></HelloWorldBottom>
         </div>
-        <div v-if="!fakeBoard && showPanel" class="panel-container">
+
+        <div class="panel-container">
             <div class="leftTree glass">
                 <div class="leftTreeMenu">
                     <el-button size="mini" @click="currentLeft = '图层'">图层</el-button>
                     <el-button size="mini" @click="currentLeft = '实体'">实体</el-button>
                 </div>
-                <el-tree v-if="currentLeft === '实体'" :data="treeData" :props="defaultProps"
-                         @node-click="handleNodeClick"></el-tree>
+                <el-tree v-if="currentLeft === '实体'" :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
                 <div v-if="currentLeft === '图层'">
-                    <div v-for="item in layersData" :key="item._imageryProvider.name">{{
-                            item._imageryProvider.name
-                        }}
-                    </div>
+                    <div v-for="item in layersData" :key="item._imageryProvider.name">{{ item._imageryProvider.name }}</div>
                 </div>
             </div>
             <div class="rightPart glass">
-                <div class="getPosition">
+                <div class="section">
                     <div class="title">选取位置:</div>
-                    <div class="title">log, lat, height</div>
+                    <div class="subtitle">log, lat, height</div>
                     <input id="copyValID" :value="clickPosition" readonly type="text"/>
                     <el-button size="mini" @click="handleClick1('copyValID')">Copy</el-button>
-                    <div class="title">cartographic-log, cartographic-lat, cartographic-height</div>
+                    <div class="subtitle">cartographic-log, cartographic-lat, cartographic-height</div>
                     <input :value="clickPositionCartographic" readonly type="text"/>
-                    <div class="title">Cartesian</div>
+                    <div class="subtitle">Cartesian</div>
                     <input :value="clickPositionCartesian" readonly type="text"/>
                 </div>
-                <div class="getPosition">
+                <div class="section">
                     <div class="title">相机位置</div>
-                    <div class="title">x, y, z, heading, pitch, roll</div>
+                    <div class="subtitle">x, y, z, heading, pitch, roll</div>
                     <input id="copyValID1" :value="cameraPosition" readonly type="text"/>
                     <el-button size="mini" @click="handleClick1('copyValID1')">Copy</el-button>
                 </div>
-                <div class="getPosition">
+                <div class="section">
+                    <div class="title">实体信息</div>
                     <div>name: {{ currentEntities ? currentEntities.name : '暂无数据' }}</div>
                     <div>Cartesian3: {{ currentEntities ? currentEntities.position._value : '暂无数据' }}</div>
                     <el-input v-model="rotationParams.Heading" placeholder="Heading" size="mini"></el-input>
@@ -48,16 +46,9 @@
                     <el-input v-model="rotationParams.Roll" placeholder="Roll" size="mini"></el-input>
                     <el-button size="mini" @click="rotateEntity">rotate</el-button>
                     <span>drag</span>
-                    <el-switch v-model="switchValue" active-color="#13ce66" inactive-color="#2B2B2B"
-                               @change="dragChange"></el-switch>
+                    <el-switch v-model="switchValue" active-color="#13ce66" inactive-color="#2B2B2B" @change="dragChange"></el-switch>
                 </div>
             </div>
-
-        </div>
-
-        <div class="modeChange">
-            <span>开发模式</span>
-            <el-switch v-model="fakeBoard" active-color="#13ce66" inactive-color="#2B2B2B"></el-switch>
         </div>
     </div>
 </template>
@@ -165,43 +156,42 @@ export default {
     .panel-container {
         display: flex;
         width: 40%;
-        height: 40%;
+        height: 80%;
         position: absolute;
-        top: 0;
-        right: 9px;
+        top: 10%;
+        right: 10px;
         z-index: 999;
+        background-color: rgba(43, 43, 43, .8);
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
     }
 
     .leftTree {
-        width: 15%;
+        width: 50%;
         height: 100%;
-        background-color: rgba(43, 43, 43, .8);
-        color: white;
-        overflow-y: auto;
-
-        .leftTreeMenu {
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-        }
-
-        .layers-list {
-            padding: 10px;
-        }
-    }
-
-    .rightPart {
-        width: 20%;
-        height: 100%;
-        background-color: rgba(43, 43, 43, .8);
+        background-color: rgba(43, 43, 43, .9);
         color: white;
         overflow-y: auto;
         padding: 10px;
 
-        .getPosition {
-            border-bottom: 1px solid gray;
+        .leftTreeMenu {
+            display: flex;
+            justify-content: space-around;
             margin-bottom: 10px;
-            padding-bottom: 10px;
+        }
+    }
+
+    .rightPart {
+        width: 50%;
+        height: 100%;
+        background-color: rgba(43, 43, 43, .9);
+        color: white;
+        overflow-y: auto;
+        padding: 10px;
+
+        .section {
+            margin-bottom: 20px;
         }
 
         .title {

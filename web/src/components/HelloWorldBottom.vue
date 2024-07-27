@@ -1,6 +1,8 @@
 <template>
     <div class="all">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <div>currentGeoType {{ currentGeoType }}</div>
+        <div>geoPositionCartesian2 {{ geoPositionCartesian2 }}</div>
+        <el-tabs v-model="activeName">
             <el-tab-pane label="3D对象" name="first">
                 <div class="geo">
                     <div class="normal b" @mousedown="mouseDown('bilbord')">bilbord</div>
@@ -58,9 +60,6 @@ export default {
         }
     },
     methods: {
-        handleClick(tab, event) {
-            console.log(tab, event)
-        },
         mouseDown(ev) {
             this.currentGeoType = ev
             this.addGeoFlag = true
@@ -69,123 +68,126 @@ export default {
             if (this.addGeoFlag) {
                 switch (this.currentGeoType) {
                     case 'addIconBackground':
-                        this.cApp.innerGeometry.addIconBackground(this.geoPositionCartesian2, '默认', 2)
+                        window.cApp.innerGeometry.addIconBackground(this.geoPositionCartesian2, '默认', 2)
                         break
                     case '点':
-                        this.cApp.innerGeometry.addPoint(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.addPoint(this.geoPositionCartesian2)
                         break
                     case '圆柱体':
-                        this.cApp.innerGeometry.addGeometry(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.addGeometry(this.geoPositionCartesian2)
                         break
                     case 'bilbord':
                         let _z = this.geoPositionCartesian2.z
                         this.geoPositionCartesian2.z = _z + 10
-                        this.cApp.innerGeometry.addIcon(this.geoPositionCartesian2, '默认')
+                        window.cApp.innerGeometry.addIcon(this.geoPositionCartesian2, '默认')
                         break
                     case 'Box':
-                        this.cApp.innerGeometry.addBox(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.addBox(this.geoPositionCartesian2)
                         break
                     case 'addEllipse':
-                        this.cApp.innerGeometry.addEllipse(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.addEllipse(this.geoPositionCartesian2)
                         break
                     case 'addEllipseTuo':
-                        this.cApp.innerGeometry.addEllipseTuo(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.addEllipseTuo(this.geoPositionCartesian2)
                         break
                     case 'addEllipseTuoWW':
-                        this.cApp.innerGeometry.addEllipseTuoWW(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.addEllipseTuoWW(this.geoPositionCartesian2)
                         break
                     case 'redCorridor':
-                        this.cApp.innerGeometry.redCorridor(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.redCorridor(this.geoPositionCartesian2)
                         break
                     case 'redPolygon':
-                        this.cApp.innerGeometry.redPolygon(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.redPolygon(this.geoPositionCartesian2)
                         break
                     case 'greenPolygon':
-                        this.cApp.innerGeometry.greenPolygon(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.greenPolygon(this.geoPositionCartesian2)
                         break
                     case 'orangePolygon':
-                        this.cApp.innerGeometry.orangePolygon(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.orangePolygon(this.geoPositionCartesian2)
                         break
                     case 'bluePolygon':
-                        this.cApp.innerGeometry.bluePolygon(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.bluePolygon(this.geoPositionCartesian2)
                         break
                     case 'redLine':
-                        this.cApp.innerGeometry.redLine(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.redLine(this.geoPositionCartesian2)
                         break
                     case 'glowingLine':
-                        this.cApp.innerGeometry.glowingLine(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.glowingLine(this.geoPositionCartesian2)
                         break
                     case 'orangeOutlined':
-                        this.cApp.innerGeometry.orangeOutlined(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.orangeOutlined(this.geoPositionCartesian2)
                         break
                     case 'yellowLine':
-                        this.cApp.innerGeometry.yellowLine(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.yellowLine(this.geoPositionCartesian2)
                         break
                     case 'redRectangle':
-                        this.cApp.innerGeometry.redRectangle(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.redRectangle(this.geoPositionCartesian2)
                         break
                     case 'greenRectangle':
-                        this.cApp.innerGeometry.greenRectangle(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.greenRectangle(this.geoPositionCartesian2)
                         break
                     case 'blueEllipsoid':
-                        this.cApp.innerGeometry.blueEllipsoid(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.blueEllipsoid(this.geoPositionCartesian2)
                         break
                     case 'redSphere':
-                        this.cApp.innerGeometry.redSphere(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.redSphere(this.geoPositionCartesian2)
                         break
                     case 'outlineOnly':
-                        this.cApp.innerGeometry.outlineOnly(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.outlineOnly(this.geoPositionCartesian2)
                         break
                     case 'redWall':
-                        this.cApp.innerGeometry.redWall(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.redWall(this.geoPositionCartesian2)
                         break
                     case 'greenWall':
-                        this.cApp.innerGeometry.greenWall(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.greenWall(this.geoPositionCartesian2)
                         break
                     case 'blueWall':
-                        this.cApp.innerGeometry.blueWall(this.geoPositionCartesian2)
-                        break
-                    case 'addMaterial':
-                        this.cApp.innerMaterial.addMaterial(this.geoPositionCartesian2)
-                        break
-                    case 'addColor':
-                        this.cApp.innerMaterial.addColor(this.geoPositionCartesian2)
-                        break
-                    case 'addImgMaterial':
-                        this.cApp.innerMaterial.addImgMaterial(this.geoPositionCartesian2)
-                        break
-                    case 'addCheckerboardMaterialProperty':
-                        this.cApp.innerMaterial.addCheckerboardMaterialProperty(this.geoPositionCartesian2)
-                        break
-                    case 'addStripeMaterialProperty':
-                        this.cApp.innerMaterial.addStripeMaterialProperty(this.geoPositionCartesian2)
-                        break
-                    case 'addGridMaterialProperty':
-                        this.cApp.innerMaterial.addGridMaterialProperty(this.geoPositionCartesian2)
+                        window.cApp.innerGeometry.blueWall(this.geoPositionCartesian2)
                         break
                     case 'ParticalSys':
-                        this.cApp.particleSystems.init(this.geoPositionCartesian2)
+                        window.cApp.particleSystems.init(this.geoPositionCartesian2)
                         break
-                    default:
-                        let po = this.geoPositionCartesian2
-                        let url = apiRoot + '/3Dstatic' + this.currentGeoType.path
-                        this.cApp.load3DModel.loadGlbByURL(po, url)
+                    case 'addMaterial':
+                        window.cApp.innerMaterial.addMaterial(this.geoPositionCartesian2)
+                        break
+                    case 'addColor':
+                        window.cApp.innerMaterial.addColor(this.geoPositionCartesian2)
+                        break
+                    case 'addImgMaterial':
+                        window.cApp.innerMaterial.addImgMaterial(this.geoPositionCartesian2)
+                        break
+                    case 'addCheckerboardMaterialProperty':
+                        window.cApp.innerMaterial.addCheckerboardMaterialProperty(this.geoPositionCartesian2)
+                        break
+                    case 'addStripeMaterialProperty':
+                        window.cApp.innerMaterial.addStripeMaterialProperty(this.geoPositionCartesian2)
+                        break
+                    case 'addGridMaterialProperty':
+                        window.cApp.innerMaterial.addGridMaterialProperty(this.geoPositionCartesian2)
+                        break
                 }
             }
             this.addGeoFlag = false
         },
     },
-    async mounted() {
-        const self = this
+    mounted() {
+        const self = this;
 
+        // 延时设置以确保cApp已被初始化
         setTimeout(() => {
             this.cApp = window.cApp;
 
-            this.cApp.eventCenter.addEventListener('geoPosition', function (data) {
-                self.geoPositionCartesian2 = data.message.position
-            })
+            this.cApp.eventCenter.addEventListener('geoPosition', (data) => {
+                self.geoPositionCartesian2 = data.message.position;
+            });
         }, 1000);
 
+        // 添加全局 mouseup 事件监听器
+        window.addEventListener('mouseup', this.mouseUp);
+    },
+    beforeDestroy() {
+        // 移除全局 mouseup 事件监听器
+        window.removeEventListener('mouseup', this.mouseUp);
     }
 }
 </script>
@@ -209,8 +211,9 @@ export default {
     .normal {
         width: 50px;
         height: 50px;
-        border: 1px solid white;
         margin: 5px;
+        border: 1px solid yellow;
+        cursor: pointer;
     }
 
     .addEllipseTuoWW {
