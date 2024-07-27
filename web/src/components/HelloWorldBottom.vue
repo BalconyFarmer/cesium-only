@@ -6,64 +6,64 @@
                     <div>
                         <span>KML点聚合</span>
                         <el-switch
-                            @change="kmlChange"
                             v-model="kmlFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="kmlChange">
                         </el-switch>
                     </div>
                     <div>
                         <span>通用点聚合</span>
                         <el-switch
-                            @change="normalPointsClusterChange"
                             v-model="normalPointsClusterChangeFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="normalPointsClusterChange">
                         </el-switch>
                     </div>
                     <div>
                         <span>原生点</span>
                         <el-switch
-                            @change="primitiveChange"
                             v-model="primitiveFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="primitiveChange">
                         </el-switch>
                     </div>
                     <div>
                         <span>闪烁Point</span>
                         <el-switch
-                            @change="BlinkPointChange"
                             v-model="BlinkPointFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="BlinkPointChange">
                         </el-switch>
                     </div>
                     <div>
                         <span>闪烁Billboard</span>
                         <el-switch
-                            @change="BillboardFlagChange"
                             v-model="BillboardFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="BillboardFlagChange">
                         </el-switch>
                     </div>
                     <div>
                         <span>闪烁面</span>
                         <el-switch
-                            @change="blinkFaceChange"
                             v-model="blinkFaceFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="blinkFaceChange">
                         </el-switch>
                     </div>
                     <div>
                         <span>CanvasBillboard</span>
                         <el-switch
-                            @change="CanvasBillboardChange"
                             v-model="CanvasBillboardFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="CanvasBillboardChange">
                         </el-switch>
                     </div>
                 </div>
@@ -73,28 +73,28 @@
                     <div>
                         <span>流动线1</span>
                         <el-switch
-                            @change="lin1"
                             v-model="lin1Flag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="lin1">
                         </el-switch>
                     </div>
                     <div>
                         <span>流动线2</span>
                         <el-switch
-                            @change="lin2"
                             v-model="lin2Flag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="lin2">
                         </el-switch>
                     </div>
                     <div>
                         <span>3D流动线</span>
                         <el-switch
-                            @change="lin3"
                             v-model="lin3Flag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="lin3">
                         </el-switch>
                     </div>
                 </div>
@@ -105,28 +105,28 @@
                     <div>
                         <span>雷达1</span>
                         <el-switch
-                            @change="radioChange"
                             v-model="radioFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="radioChange">
                         </el-switch>
                     </div>
                     <div>
                         <span>雷达2</span>
                         <el-switch
-                            @change="radioChange1"
                             v-model="radioFlag1"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="radioChange1">
                         </el-switch>
                     </div>
                     <div>
                         <span>流动墙</span>
                         <el-switch
-                            @change="radioChange2"
                             v-model="radioFlag2"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="radioChange2">
                         </el-switch>
                     </div>
                 </div>
@@ -256,23 +256,23 @@
             <el-tab-pane label="预览模型" name="four">
                 <div class="env">
                     <div class="btnss">
-                        <a-upload class="b1" :file-list="fileList" :remove="handleRemove" :before-upload="beforeUpload">
+                        <a-upload :before-upload="beforeUpload" :file-list="fileList" :remove="handleRemove" class="b1">
                             <a-button>
                                 <a-icon type="upload"/>
                             </a-button>
                         </a-upload>
 
                         <a-button
-                            class="b2"
-                            type="primary"
                             :disabled="fileList.length === 0"
                             :loading="uploading"
+                            class="b2"
+                            type="primary"
                             @click="handleUpload"
                         >
                             {{ uploading ? 'Uploading' : '发布' }}
                         </a-button>
                     </div>
-                    <div class="normal addMaterial" v-for="item in D3FileList">
+                    <div v-for="item in D3FileList" class="normal addMaterial">
                         <div @mousedown="mouseDown(item)">
                             {{ item.name }}
                         </div>
@@ -284,46 +284,46 @@
                     <div>
                         <span>moveTip</span>
                         <el-switch
-                            @change="moveToolTipsChange"
                             v-model="moveToolFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="moveToolTipsChange">
                         </el-switch>
                     </div>
                     <div>
                         <span>飞行飞机</span>
                         <el-switch
-                            @change="fly"
                             v-model="flyFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="fly">
                         </el-switch>
                     </div>
                     <div>
                         <span>移动小人</span>
                         <el-switch
-                            @change="fly1"
                             v-model="flyFlag1"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="fly1">
                         </el-switch>
                     </div>
                     <div>
                         <span>移动小车</span>
                         <el-switch
-                            @change="fly2"
                             v-model="flyFlag2"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="fly2">
                         </el-switch>
                     </div>
                     <div>
                         <span>GPS</span>
                         <el-switch
-                            @change="GpsChange"
                             v-model="GpsFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="GpsChange">
                         </el-switch>
                     </div>
                 </div>
@@ -333,10 +333,10 @@
                     <div>
                         <span>clock暂停</span>
                         <el-switch
-                            @change="clockChange"
                             v-model="clockFlag"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="clockChange">
                         </el-switch>
                     </div>
                 </div>
@@ -528,14 +528,6 @@ export default {
             let copyVal = document.getElementById("copyVal");
             copyVal.select();
             document.execCommand('copy')
-        },
-        get3DFilesAll() {
-            return axios({
-                method: 'post',
-                url: apiRoot + '' + '/get3DFilesAll',
-                data: '',
-                withCredentials: true
-            })
         },
         saveVideo(formData) {
             return axios({
@@ -740,9 +732,7 @@ export default {
             this.addGeoFlag = false
         },
         async updata3DList() {
-            let re = await this.get3DFilesAll()
-            this.D3FileList = re.data
-            this.$forceUpdate()
+
         }
     },
     async mounted() {
@@ -757,7 +747,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 .all {
     width: 100%;
     height: 100%;

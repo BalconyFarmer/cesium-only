@@ -3,25 +3,29 @@
 
         <div id="cesiumContainer" @mouseup="mouseUp()"></div>
 
+        <div class="aindex">
+            <a-index></a-index>
+        </div>
+
         <el-dialog
-            title="项目列表"
             :visible.sync="dialogVisible"
+            title="项目列表"
             width="30%"
         >
             <div class="dialogAll" style="color: black !important;">
-                <div @click="runChengdu" class="item" style="color: black !important;">
+                <div class="item" style="color: black !important;" @click="runChengdu">
                     <img src="../assets/projectImg/纽约.png">
                     <span>0.纽约</span>
                 </div>
-                <div @click="runShanghai" class="item" style="color: black !important;">
+                <div class="item" style="color: black !important;" @click="runShanghai">
                     <img src="../assets/projectImg/上海.png">
                     <span>1.上海</span>
                 </div>
-                <div @click="runTrain" class="item" style="color: black !important;">
+                <div class="item" style="color: black !important;" @click="runTrain">
                     <img src="../assets/projectImg/上海.png">
                     <span>2.火车</span>
                 </div>
-                <div @click="runXSBN" class="item" style="color: black !important;">
+                <div class="item" style="color: black !important;" @click="runXSBN">
                     <img src="../assets/projectImg/上海.png">
                     <span>2.西双版纳</span>
                 </div>
@@ -31,129 +35,6 @@
 
         <!--开发仪表盘-->
         <div v-if="!fakeBoard && showPanel" style="width: 100%; height: 100%">
-            <div class="header">
-
-                <div class="headerItem">
-                    <el-select size="mini" v-model="optionsLayersIndex" placeholder="基础底图">
-                        <el-option
-                            v-for="item in optionsLayers"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                        </el-option>
-                    </el-select>
-                </div>
-
-                <div class="headerItem">
-                    <el-select size="mini" v-model="modelData" placeholder="模型对象">
-                        <el-option
-                            v-for="item in modelDataList"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                        </el-option>
-                    </el-select>
-                </div>
-
-                <div class="headerItem">
-                    <el-select size="mini" v-model="value" placeholder="请选择">
-                        <el-option
-                            v-for="item in options"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value">
-                        </el-option>
-                    </el-select>
-                </div>
-
-
-                <div class="topMenus">
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">SunLight光照</div>
-                        <div class="topMenusItem1">
-                            <el-switch
-                                width="30"
-                                @change="changeGlobleLight"
-                                v-model="changeGlobleLightFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B">
-                            </el-switch>
-                        </div>
-                    </div>
-
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">光照系统</div>
-                        <div class="topMenusItem1">
-                            <el-switch
-                                width="30"
-                                @change="changeLight"
-                                v-model="changeLightFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B">
-                            </el-switch>
-                        </div>
-                    </div>
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">shadow</div>
-                        <div class="topMenusItem1">
-                            <el-switch
-                                width="30"
-                                @change="changeShadow"
-                                v-model="changeShadowFlag"
-                                active-color="#13ce66"
-                                inactive-color="#2B2B2B">
-                            </el-switch>
-                        </div>
-                    </div>
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">地形叠加</div>
-                        <div class="topMenusItem1">
-                            <el-tooltip :content="'关闭地形'" placement="top">
-                                <el-switch
-                                    width="30"
-                                    @change="terrainChange"
-                                    v-model="terrainFlag"
-                                    active-color="#13ce66"
-                                    inactive-color="#2B2B2B">
-                                </el-switch>
-                            </el-tooltip>
-                        </div>
-                    </div>
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">整体亮度</div>
-                        <div class="topMenusItem1">
-                            <div style="width: 70%">
-                                <el-slider :max="2" :step="0.1" v-model="brightness">
-                                </el-slider>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="topMenusItem">
-                        <div class="topMenusItem1">视角大小</div>
-                        <div class="topMenusItem1">
-                            <div style="width: 70%">
-                                <el-slider :max="2" :step="0.1" v-model="fov">
-                                </el-slider>
-                            </div>
-
-                        </div>
-                    </div>
-                    <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal"
-                             @select="handleSelect">
-                        <el-menu-item index="addBloom">Bloom</el-menu-item>
-                        <el-menu-item index="addOutline">Outline</el-menu-item>
-                        <el-menu-item index="14">关闭冗余</el-menu-item>
-                        <el-menu-item index="动画组件">动画组件</el-menu-item>
-                    </el-menu>
-                </div>
-
-                <div @click="openDialog" class="member">
-                    <span>联鹏科技</span>
-                    <el-avatar
-                        src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
-                </div>
-            </div>
             <div class="leftTree glass">
                 <div class="leftTreeMenu">
                     <el-button size="mini" @click="currentLeft = '图层'">图层</el-button>
@@ -174,19 +55,19 @@
                 <div class="getPosition">
                     <div class="title">选取位置:</div>
                     <div class="title">log,lat,height</div>
-                    <input id="copyValID" type="text" :value="clickPosition"/>
+                    <input id="copyValID" :value="clickPosition" type="text"/>
                     <el-button size="mini" @click="handleClick1('copyValID')">Copy</el-button>
                     <div class="title">cartographic-log,cartographic-lat,cartographic-height</div>
-                    <input id="" type="text" :value="clickPositionCartographic"/>
+                    <input id="" :value="clickPositionCartographic" type="text"/>
                     <div class="title">Cartesian</div>
-                    <input id="" type="text" :value="clickPositionCartesian"/>
+                    <input id="" :value="clickPositionCartesian" type="text"/>
                 </div>
 
                 <br>
                 <div class="getPosition">
                     <div class="title">camera</div>
                     <div class="title">x,y,z,heading,pitch,roll</div>
-                    <input id="copyValID1" type="text" :value="cameraPosition"/>
+                    <input id="copyValID1" :value="cameraPosition" type="text"/>
                     <el-button size="mini" @click="handleClick1('copyValID1')">Copy</el-button>
                 </div>
                 <br>
@@ -195,13 +76,13 @@
                     <div>name: {{ currentEntities ? currentEntities.name : '暂无数据' }}</div>
                     <div>Cartesian3: {{ currentEntities ? currentEntities.position._value : '暂无数据' }}</div>
                     <div class="inpu">
-                        <el-input size="mini" v-model="rotationgPatams.Heading" placeholder="Heading"></el-input>
+                        <el-input v-model="rotationgPatams.Heading" placeholder="Heading" size="mini"></el-input>
                     </div>
                     <div class="inpu">
-                        <el-input size="mini" v-model="rotationgPatams.Pitch" placeholder="Pitch"></el-input>
+                        <el-input v-model="rotationgPatams.Pitch" placeholder="Pitch" size="mini"></el-input>
                     </div>
                     <div class="inpu">
-                        <el-input size="mini" v-model="rotationgPatams.Roll" placeholder="Roll"></el-input>
+                        <el-input v-model="rotationgPatams.Roll" placeholder="Roll" size="mini"></el-input>
                     </div>
                     <div class="inpu">
                         <el-button size="mini" @click="rotateEntity">rotate</el-button>
@@ -209,17 +90,17 @@
                     <div class="inpu">
                         <span>drag</span>
                         <el-switch
-                            @change="dragChange"
                             v-model="switchValue"
                             active-color="#13ce66"
-                            inactive-color="#2B2B2B">
+                            inactive-color="#2B2B2B"
+                            @change="dragChange">
                         </el-switch>
                     </div>
                 </div>
 
             </div>
             <div class="bottomCenter">
-                <HelloWorldBottom :cApp="this.cApp" ref="mychild"></HelloWorldBottom>
+                <HelloWorldBottom ref="mychild" :cApp="this.cApp"></HelloWorldBottom>
             </div>
         </div>
 
@@ -233,10 +114,10 @@
         <div class="modeChange">
             <span>开发模式</span>
             <el-switch
-                @change=""
                 v-model="fakeBoard"
                 active-color="#13ce66"
-                inactive-color="#2B2B2B">
+                inactive-color="#2B2B2B"
+                @change="">
             </el-switch>
         </div>
     </div>
@@ -244,76 +125,22 @@
 <script>
 
 import CesiumApp from './CesiumApp/CesiumApp'
-import {scriptLoader} from '../utils/index'
 import HelloWorldBottom from './HelloWorldBottom'
+import AIndex from "@/components/tools/aIndex";
 
 export default {
     name: 'hoting',
     components: {
+        AIndex,
         HelloWorldBottom
     },
     watch: {
 
-        modelData: {
-            handler(newValue) {
-                if (this.cApp) {
-                    switch (this.modelData) {
-                        case "JSON闪光路":
-                            this.cApp.loadJson.loadJsonRoad()
-                            break
-                        case "西双版纳JSON掩模":
-                            this.cApp.loadJson.loadJsonYanMo()
-                            break
-                        case "西双版纳JSON":
-                            this.cApp.addTimeAction()
-                            break
-                        case "成都tiles":
-                            this.cApp.runChengDu()
-                            this.fakeBoard = true
-                            break
-                        case "云南JSON":
-                            this.cApp.loadJson.loadJsonData("/geoJson/云南省.json")
-                            break
-                        case "纽约tiles":
-                            this.cApp.cesium3DTileset.toYN()
-                            break
-                        case "倾斜摄影":
-                            this.cApp.obliquePhotography.addOblique()
-                            break
-                        case "华盛顿IMG":
-                            this.cApp.huashengdunImg()
-                            break
-                        case "OSM建筑":
-                            this.cApp.addOSMBuilding()
-                            break
-                    }
-                }
-            },
-            deep: true,
-            immediate: false
-        },
+
         brightness: {
             handler(newValue) {
                 if (this.cApp) {
                     this.cApp.updateBrightness(this.brightness)
-                }
-            },
-            deep: true,
-            immediate: false
-        },
-        value: {
-            handler(newValue) {
-                if (this.cApp) {
-                    this.cApp.switchViewMode(this.value)
-                }
-            },
-            deep: true,
-            immediate: false
-        },
-        optionsLayersIndex: {
-            handler(newValue) {
-                if (this.cApp) {
-                    this.cApp.switchLayer(this.optionsLayersIndex)
                 }
             },
             deep: true,
@@ -345,45 +172,8 @@ export default {
             brightness: 1,
             terrainFlag: false,
             moveToolFlag: false,
-            value: '地球模式',
-            options: [{
-                value: '3D模式',
-                label: '3D模式'
-            }, {
-                value: '2.5D模式',
-                label: '2.5D模式'
-            }, {
-                value: '2D模式',
-                label: '2D模式'
-            },],
-            optionsLayersIndex: null,
-            modelData: null,
-            modelDataList: [
-                {
-                    value: 'JSON闪光路',
-                    label: 'JSON闪光路'
-                }, {
-                    value: '西双版纳JSON掩模',
-                    label: '西双版纳JSON掩模'
-                }, {
-                    value: '西双版纳JSON',
-                    label: '西双版纳JSON'
-                }, {
-                    value: '云南JSON',
-                    label: '云南JSON'
-                }, {
-                    value: '纽约tiles',
-                    label: '纽约tiles'
-                }, {
-                    value: '倾斜摄影',
-                    label: '倾斜摄影'
-                }, {
-                    value: '华盛顿IMG',
-                    label: '华盛顿IMG'
-                }, {
-                    value: 'OSM建筑',
-                    label: 'OSM建筑'
-                },],
+
+
             optionsLayers: [{
                 value: 'google实景图层',
                 label: 'google实景图层(VPN)'
@@ -547,6 +337,7 @@ export default {
         this.$nextTick(() => {
             this.cApp = new CesiumApp()
             this.cApp.initMap()
+            window.cApp = this.cApp
             this.entitysList = this.cApp.getViewerEntitys()
 
             this.cApp.eventCenter.addEventListener('clickPosition', function (data) {
@@ -699,6 +490,15 @@ FPS显示
 }
 
 .all {
+
+    .aindex {
+        position: fixed;
+        left: 300px;
+        top: 100px;
+        width: 20vw;
+        height: 90vh;
+    }
+
     width: 100%;
     height: 1080px;
     //-moz-user-select: none;
