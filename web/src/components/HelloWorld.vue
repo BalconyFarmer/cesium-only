@@ -7,7 +7,6 @@
             <a-index></a-index>
         </div>
 
-
         <!--开发仪表盘-->
         <div v-if="!fakeBoard && showPanel" style="width: 100%; height: 100%">
             <div class="leftTree glass">
@@ -16,16 +15,13 @@
                     <el-button size="mini" @click="currentLeft = '实体'">实体</el-button>
                 </div>
 
-                <el-tree v-if="currentLeft == '实体'" :data="treeData" :props="defaultProps"
-                         @node-click="handleNodeClick"></el-tree>
+                <el-tree v-if="currentLeft == '实体'" :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
                 <div v-if="currentLeft == '图层'">
-                    <div v-for="item in layersData"> {{ item._imageryProvider.name }}</div>
+                    <div v-for="item in layersData" :key="item._imageryProvider.name">{{ item._imageryProvider.name }}</div>
                 </div>
             </div>
             <div class="rightPart glass">
-                <div>
-                    MATH
-                </div>
+                <div>MATH</div>
                 <br>
                 <div class="getPosition">
                     <div class="title">选取位置:</div>
@@ -33,11 +29,10 @@
                     <input id="copyValID" :value="clickPosition" type="text"/>
                     <el-button size="mini" @click="handleClick1('copyValID')">Copy</el-button>
                     <div class="title">cartographic-log,cartographic-lat,cartographic-height</div>
-                    <input id="" :value="clickPositionCartographic" type="text"/>
+                    <input :value="clickPositionCartographic" type="text"/>
                     <div class="title">Cartesian</div>
-                    <input id="" :value="clickPositionCartesian" type="text"/>
+                    <input :value="clickPositionCartesian" type="text"/>
                 </div>
-
                 <br>
                 <div class="getPosition">
                     <div class="title">camera</div>
@@ -46,7 +41,6 @@
                     <el-button size="mini" @click="handleClick1('copyValID1')">Copy</el-button>
                 </div>
                 <br>
-
                 <div class="getPosition">
                     <div>name: {{ currentEntities ? currentEntities.name : '暂无数据' }}</div>
                     <div>Cartesian3: {{ currentEntities ? currentEntities.position._value : '暂无数据' }}</div>
@@ -72,7 +66,6 @@
                         </el-switch>
                     </div>
                 </div>
-
             </div>
             <div class="bottomCenter">
                 <HelloWorldBottom ref="mychild" :cApp="this.cApp"></HelloWorldBottom>
@@ -91,14 +84,13 @@
             <el-switch
                 v-model="fakeBoard"
                 active-color="#13ce66"
-                inactive-color="#2B2B2B"
-                @change="">
+                inactive-color="#2B2B2B">
             </el-switch>
         </div>
     </div>
 </template>
-<script>
 
+<script>
 import CesiumApp from './CesiumApp/CesiumApp'
 import HelloWorldBottom from './HelloWorldBottom'
 import AIndex from "@/components/tools/aIndex";
@@ -109,63 +101,11 @@ export default {
         AIndex,
         HelloWorldBottom
     },
-    watch: {},
-
     data() {
         return {
-
-            changeShadowFlag: false,
             fakeBoard: false,
             showPanel: false,
-            addGeoFlag: false,
-            currentGeoType: null,
-            moveToolFlag: false,
-
-
-            optionsLayers: [{
-                value: 'google实景图层',
-                label: 'google实景图层(VPN)'
-            }, {
-                value: 'ArcGis实景图层',
-                label: 'ArcGis实景图层'
-            }, {
-                value: 'geoq智图黑',
-                label: 'geoq智图黑'
-            }, {
-                value: '高德卫星',
-                label: '高德卫星 + 高德文字'
-            }, {
-                value: 'BING',
-                label: 'BING卫星 + BING文字'
-            }, {
-                value: 'BING道路',
-                label: 'BING道路'
-            },
-                {
-                    value: '纯黑',
-                    label: '纯黑'
-                },
-
-
-                {
-                    value: '百度地图',
-                    label: '百度地图'
-                }, {
-                    value: '腾讯地图',
-                    label: '腾讯地图'
-                }, {
-                    value: '天地图',
-                    label: '天地图'
-                }, {
-                    value: '高德地图',
-                    label: '高德地图'
-                }, {
-                    value: '谷歌地图',
-                    label: '谷歌地图'
-                },
-            ],
-            activeIndex: '1',
-            entitysList: [],
+            currentLeft: "实体",
             treeData: [],
             defaultProps: {
                 children: 'children',
@@ -182,62 +122,36 @@ export default {
                 Pitch: 0,
                 Roll: 0
             },
-            currentLeft: "实体",
             layersData: [],
-
         }
     },
     methods: {
-
-
-        handleClose() {
-
-        },
         handleClick1(ID) {
             let copyVal = document.getElementById(ID)
             copyVal.select()
             document.execCommand('copy')
         },
-        mouseDown(ev) {
-            this.currentGeoType = ev
-            this.addGeoFlag = true
-        },
-        mouseUp(ev) {
+        mouseUp() {
             this.$refs.mychild.mouseUp()
         },
-
-
         rotateEntity() {
             const self = this
             self.cApp.rotateEntity(parseInt(self.rotationgPatams.Heading), parseInt(self.rotationgPatams.Pitch), parseInt(self.rotationgPatams.Roll), self.currentEntities)
-
         },
         dragChange() {
-            if (this.switchValue) {
-                this.cApp.event.dragFlag = true
-            } else {
-                this.cApp.event.dragFlag = false
-            }
+            this.cApp.event.dragFlag = this.switchValue
         },
         handleNodeClick(data) {
-            console.log(data)
             this.cApp.lookAtByName(data.label)
         },
-
-
     },
     mounted() {
-
-
         const self = this
-
-
         this.$nextTick(() => {
             this.cApp = new CesiumApp()
             this.cApp.initMap()
             window.cApp = this.cApp
             this.entitysList = this.cApp.getViewerEntitys()
-
             this.cApp.eventCenter.addEventListener('clickPosition', function (data) {
                 self.clickPosition = data.message.position
                 self.clickPositionCartographic = data.message.positionCartogtaphic
@@ -249,32 +163,20 @@ export default {
             this.cApp.eventCenter.addEventListener('pickEntity', function (data) {
                 self.currentEntities = data.message.position
             })
-
             this.showPanel = true
         })
-
-        setInterval(function () {
+        setInterval(() => {
             self.treeData = []
             self.entitysList.forEach(item => {
-                if (item.name) {
-                    self.treeData.push({
-                        label: item.name
-                    })
-                } else {
-                    self.treeData.push({
-                        label: '未定义'
-                    })
-                }
-
+                self.treeData.push({
+                    label: item.name || '未定义'
+                })
             })
             if (self.cApp) {
                 self.layersData = self.cApp.viewer.imageryLayers._layers
             }
-
         }, 10000)
-
     }
-
 }
 </script>
 
@@ -287,7 +189,6 @@ export default {
     width: 169px;
     height: 112px;
     z-index: 9999999 !important;
-
 }
 
 .cesium-viewer-timelineContainer {
@@ -307,7 +208,6 @@ export default {
 }
 
 @import "../style/reset.scss";
-//引入方式
 
 .el-menu-demo {
     height: 90%;
@@ -317,9 +217,6 @@ export default {
     width: 100px !important;
 }
 
-/**
-FPS显示
- */
 .cesium-performanceDisplay-defaultContainer {
     position: absolute;
     top: 6px;
@@ -343,16 +240,17 @@ FPS显示
     z-index: 99999;
 }
 
+.fakeTop, .fakeL, .fakeR {
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 99999;
+}
+
 .fakeTop {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 10%;
-    background-image: url("./img/TOP.png");
-    z-index: 99999;
-    background-color: rgba(255, 255, 255, 0.1);
-
 }
 
 .fakeL {
@@ -361,9 +259,6 @@ FPS显示
     top: 10%;
     width: 20%;
     height: 90%;
-    background-image: url("./img/LEFT.png");
-    z-index: 99999;
-    background-size: 100% 100%;
 }
 
 .fakeR {
@@ -372,9 +267,6 @@ FPS显示
     top: 10%;
     width: 20%;
     height: 90%;
-    background-image: url("./img/RIGHT.png");
-    z-index: 99999;
-    background-size: 100% 100%;
 }
 
 #cesiumContainer {
@@ -388,6 +280,8 @@ FPS显示
 }
 
 .all {
+    width: 100%;
+    height: 1080px;
 
     .aindex {
         position: fixed;
@@ -397,11 +291,6 @@ FPS显示
         height: 90vh;
     }
 
-    width: 100%;
-    height: 1080px;
-    //-moz-user-select: none;
-    //-khtml-user-select: none;
-    //user-select: none;
     .dialogAll {
         width: 100%;
         height: 100%;
@@ -535,6 +424,4 @@ FPS显示
         z-index: 999;
     }
 }
-
 </style>
-
