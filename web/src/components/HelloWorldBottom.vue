@@ -1,73 +1,6 @@
 <template>
     <div class="all">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="点状对象" name="pan6">
-                <div class="env">
-                    <div>
-                        <span>KML点聚合</span>
-                        <el-switch
-                            v-model="kmlFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="kmlChange">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>通用点聚合</span>
-                        <el-switch
-                            v-model="normalPointsClusterChangeFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="normalPointsClusterChange">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>原生点</span>
-                        <el-switch
-                            v-model="primitiveFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="primitiveChange">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>闪烁Point</span>
-                        <el-switch
-                            v-model="BlinkPointFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="BlinkPointChange">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>闪烁Billboard</span>
-                        <el-switch
-                            v-model="BillboardFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="BillboardFlagChange">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>闪烁面</span>
-                        <el-switch
-                            v-model="blinkFaceFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="blinkFaceChange">
-                        </el-switch>
-                    </div>
-                    <div>
-                        <span>CanvasBillboard</span>
-                        <el-switch
-                            v-model="CanvasBillboardFlag"
-                            active-color="#13ce66"
-                            inactive-color="#2B2B2B"
-                            @change="CanvasBillboardChange">
-                        </el-switch>
-                    </div>
-                </div>
-            </el-tab-pane>
             <el-tab-pane label="线状对象" name="pan7">
                 <div class="env">
                     <div>
@@ -101,7 +34,6 @@
             </el-tab-pane>
             <el-tab-pane label="面状对象" name="pan8">
                 <div class="env">
-
                     <div>
                         <span>雷达1</span>
                         <el-switch
@@ -131,152 +63,52 @@
                     </div>
                 </div>
             </el-tab-pane>
-
             <el-tab-pane label="3D对象" name="first">
                 <div class="geo">
-                    <div class="normal b" @mousedown="mouseDown('bilbord')">
-                        bilbord
-                    </div>
-                    <div class="normal addIconBackground" @mousedown="mouseDown('addIconBackground')">
-                        bilbordBG
-                    </div>
-                    <div class="normal ParticalSys" @mousedown="mouseDown('ParticalSys')">
-                        TT
-                    </div>
-                    <div class="normal p" @mousedown="mouseDown('点')">
-                        TT
-                    </div>
-                    <div class="normal Box" @mousedown="mouseDown('Box')">
-                        TT
-                    </div>
-                    <div class="normal addEllipse" @mousedown="mouseDown('addEllipse')">
-                        TT
-                    </div>
-                    <div class="normal addEllipseTuo" @mousedown="mouseDown('addEllipseTuo')">
-                        TT
-                    </div>
-                    <div class="normal addEllipseTuoWW" @mousedown="mouseDown('addEllipseTuoWW')">
-                        TT
-                    </div>
-                    <div class="normal y" @mousedown="mouseDown('圆柱体')">
-                        TT
-                    </div>
-                    <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')">
-                        TT
-                    </div>
-                    <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')">
-                        TT
-                    </div>
-                    <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')">
-                        TT
-                    </div>
-                    <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')">
-                        TT
-                    </div>
-                    <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')">
-                        TT
-                    </div>
-                    <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')">
-                        TT
-                    </div>
-                    <div class="normal redSphere" @mousedown="mouseDown('redSphere')">
-                        TT
-                    </div>
-                    <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')">
-                        TT
-                    </div>
-                    <div class="normal redWall" @mousedown="mouseDown('redWall')">
-                        TT
-                    </div>
-                    <div class="normal greenWall" @mousedown="mouseDown('greenWall')">
-                        TT
-                    </div>
-                    <div class="normal blueWall" @mousedown="mouseDown('blueWall')">
-                        TT
-                    </div>
-                    <div class="normal redCorridor" @mousedown="mouseDown('redCorridor')">
-                        TT
-                    </div>
-                    <div class="normal redPolygon" @mousedown="mouseDown('redPolygon')">
-                        TT
-                    </div>
-                    <div class="normal greenPolygon" @mousedown="mouseDown('greenPolygon')">
-                        TT
-                    </div>
-                    <div class="normal orangePolygon" @mousedown="mouseDown('orangePolygon')">
-                        TT
-                    </div>
-                    <div class="normal bluePolygon" @mousedown="mouseDown('bluePolygon')">
-                        TT
-                    </div>
-                    <div class="normal redLine" @mousedown="mouseDown('redLine')">
-                        TT
-                    </div>
+                    <div class="normal b" @mousedown="mouseDown('bilbord')">bilbord</div>
+                    <div class="normal addIconBackground" @mousedown="mouseDown('addIconBackground')">bilbordBG</div>
+                    <div class="normal ParticalSys" @mousedown="mouseDown('ParticalSys')">TT</div>
+                    <div class="normal p" @mousedown="mouseDown('点')">TT</div>
+                    <div class="normal Box" @mousedown="mouseDown('Box')">TT</div>
+                    <div class="normal addEllipse" @mousedown="mouseDown('addEllipse')">TT</div>
+                    <div class="normal addEllipseTuo" @mousedown="mouseDown('addEllipseTuo')">TT</div>
+                    <div class="normal addEllipseTuoWW" @mousedown="mouseDown('addEllipseTuoWW')">TT</div>
+                    <div class="normal y" @mousedown="mouseDown('圆柱体')">TT</div>
+                    <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')">TT</div>
+                    <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')">TT</div>
+                    <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')">TT</div>
+                    <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')">TT</div>
+                    <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')">TT</div>
+                    <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')">TT</div>
+                    <div class="normal redSphere" @mousedown="mouseDown('redSphere')">TT</div>
+                    <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')">TT</div>
+                    <div class="normal redWall" @mousedown="mouseDown('redWall')">TT</div>
+                    <div class="normal greenWall" @mousedown="mouseDown('greenWall')">TT</div>
+                    <div class="normal blueWall" @mousedown="mouseDown('blueWall')">TT</div>
+                    <div class="normal redCorridor" @mousedown="mouseDown('redCorridor')">TT</div>
+                    <div class="normal redPolygon" @mousedown="mouseDown('redPolygon')">TT</div>
+                    <div class="normal greenPolygon" @mousedown="mouseDown('greenPolygon')">TT</div>
+                    <div class="normal orangePolygon" @mousedown="mouseDown('orangePolygon')">TT</div>
+                    <div class="normal bluePolygon" @mousedown="mouseDown('bluePolygon')">TT</div>
+                    <div class="normal redLine" @mousedown="mouseDown('redLine')">TT</div>
                 </div>
             </el-tab-pane>
             <el-tab-pane label="材质对象" name="second">
                 <div class="material">
-                    <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">
-                        0
-                    </div>
-                    <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">
-                        0
-                    </div>
-                    <div class="normal addColor" @mousedown="mouseDown('addColor')">
-                        0
-                    </div>
-                    <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')">
-                        0
-                    </div>
-                    <div class="normal addCheckerboardMaterialProperty"
-                         @mousedown="mouseDown('addCheckerboardMaterialProperty')">
-                        0
-                    </div>
-                    <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">
-                        0
-                    </div>
+                    <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">0</div>
+                    <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">0</div>
+                    <div class="normal addColor" @mousedown="mouseDown('addColor')">0</div>
+                    <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')">0</div>
+                    <div class="normal addCheckerboardMaterialProperty" @mousedown="mouseDown('addCheckerboardMaterialProperty')">0</div>
+                    <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">0</div>
                 </div>
             </el-tab-pane>
             <el-tab-pane label="环境对象" name="third">
                 <div class="env">
-                    <div class="normal addMaterial" @mousedown="mouseDown('addDarckNessEff')">
-                        Night
-                    </div>
-                    <div class="normal addMaterial" @mousedown="mouseDown('addRain')">
-                        Rain
-                    </div>
-                    <div class="normal addMaterial" @mousedown="mouseDown('addSnow')">
-                        Snow
-                    </div>
-                    <div class="normal addMaterial" @mousedown="mouseDown('addFrog')">
-                        Frog
-                    </div>
-                </div>
-            </el-tab-pane>
-            <el-tab-pane label="预览模型" name="four">
-                <div class="env">
-                    <div class="btnss">
-                        <a-upload :before-upload="beforeUpload" :file-list="fileList" :remove="handleRemove" class="b1">
-                            <a-button>
-                                <a-icon type="upload"/>
-                            </a-button>
-                        </a-upload>
-
-                        <a-button
-                            :disabled="fileList.length === 0"
-                            :loading="uploading"
-                            class="b2"
-                            type="primary"
-                            @click="handleUpload"
-                        >
-                            {{ uploading ? 'Uploading' : '发布' }}
-                        </a-button>
-                    </div>
-                    <div v-for="item in D3FileList" class="normal addMaterial">
-                        <div @mousedown="mouseDown(item)">
-                            {{ item.name }}
-                        </div>
-                    </div>
+                    <div class="normal addMaterial" @mousedown="mouseDown('addDarckNessEff')">Night</div>
+                    <div class="normal addMaterial" @mousedown="mouseDown('addRain')">Rain</div>
+                    <div class="normal addMaterial" @mousedown="mouseDown('addSnow')">Snow</div>
+                    <div class="normal addMaterial" @mousedown="mouseDown('addFrog')">Frog</div>
                 </div>
             </el-tab-pane>
             <el-tab-pane label="其他" name="five">
@@ -341,7 +173,6 @@
                     </div>
                 </div>
             </el-tab-pane>
-
         </el-tabs>
     </div>
 </template>
@@ -362,13 +193,6 @@ export default {
             fileList: [],
             uploading: false,
             D3FileList: [],
-            kmlFlag: false,
-            normalPointsClusterChangeFlag: false,
-            primitiveFlag: false,
-            BlinkPointFlag: false,
-            BillboardFlag: false,
-            blinkFaceFlag: false,
-            CanvasBillboardFlag: false,
             radioFlag: false,
             radioFlag1: false,
             radioFlag2: false,
@@ -380,7 +204,6 @@ export default {
             flyFlag2: false,
             clockFlag: true,
             GpsFlag: false
-
         }
     },
     methods: {
@@ -401,33 +224,25 @@ export default {
             this.cApp.part.addCircleScan(option1)
         },
         radioChange2() {
-
             const postis = Cesium.Cartesian3.fromDegreesArrayHeights([
                 104.08910823719758,
                 30.62842929898083, 10.0,
-
                 104.08814901806453,
                 30.62608460511913, 10.0,
-
                 104.08463898581485,
                 30.626111794674216, 10.0,
-
                 104.08476936742238,
                 30.628519360788516, 10.0,
-
                 104.08910823719758,
                 30.62842929898083, 10.0,
             ])
             this.cApp.part.addFlowWall(postis)
 
             // 以下代码注释掉会报错
-            // 以下代码注释掉会报错
-            // 以下代码注释掉会报错
             const points = [
                 104.09228987915748,
                 30.631370714909295,
                 -0.00416811510864983,
-
                 104.09228987915748,
                 30.631370714909295,
                 500,
@@ -459,7 +274,6 @@ export default {
                 104.09228987915748,
                 30.631370714909295,
                 -0.00416811510864983,
-
                 104.09228987915748,
                 30.631370714909295,
                 500,
@@ -468,61 +282,11 @@ export default {
         },
         lin3() {
             let center = {lon: 104.07842873842652, lat: 30.63258965135834,}
-
             let cities = [
                 {'lon': 104.07445200121597, 'lat': 30.623338996273173,},
                 {'lon': 104.08148794273148, 'lat': 30.623739056793006,},
             ]
             this.cApp.part.addFlyLine3D(center, cities)
-        },
-        kmlChange() {
-            if (this.kmlFlag) {
-                this.cApp.points.addKml()
-            } else {
-                this.cApp.points.removeKml()
-            }
-        },
-        normalPointsClusterChange() {
-            if (this.normalPointsClusterChangeFlag) {
-                this.cApp.pointsCluster.addIcon1()
-            } else {
-                this.cApp.pointsCluster.removePoint()
-            }
-        },
-        primitiveChange() {
-            if (this.primitiveFlag) {
-                this.cApp.primitivePoints.addManyPoint()
-            } else {
-                this.cApp.primitivePoints.removePoint()
-            }
-        },
-        BlinkPointChange() {
-            if (this.BlinkPointFlag) {
-                this.cApp.normalPoints.addBlinkPointR()
-            } else {
-                this.cApp.normalPoints.removeBlinkPoint()
-            }
-        },
-        BillboardFlagChange() {
-            if (this.BillboardFlag) {
-                this.cApp.normalPoints.addBlinkPoint()
-            } else {
-                this.cApp.normalPoints.removeBlinkPoint()
-            }
-        },
-        blinkFaceChange() {
-            if (this.blinkFaceFlag) {
-                this.cApp.normalPoints.addBlinkFace()
-            } else {
-                this.cApp.normalPoints.removeBlinkPoint()
-            }
-        },
-        CanvasBillboardChange() {
-            if (this.CanvasBillboardFlag) {
-                this.cApp.normalPoints.addBillCanvas()
-            } else {
-                this.cApp.normalPoints.removeBillCanvas()
-            }
         },
         handleClick11() {
             let copyVal = document.getElementById("copyVal");
@@ -537,17 +301,13 @@ export default {
                 withCredentials: true
             })
         },
-        // 上传服务器
         handleUpload() {
             const formData = new FormData()
             this.fileList.forEach(file => {
                 formData.append('files[]', file)
             })
-
             formData.append('videoIntroduce', '默认')
-
             this.uploading = true
-
             this.saveVideo(formData).then(response => {
                 this.$message.success(response.statusText)
                 this.uploading = false
@@ -555,11 +315,9 @@ export default {
                 this.updata3DList()
             })
         },
-        // 上传至页面
         beforeUpload(file) {
             this.fileList = [...this.fileList, file]
         },
-        // 删除待上传文件
         handleRemove(file) {
             const index = this.fileList.indexOf(file)
             const newFileList = this.fileList.slice()
@@ -577,26 +335,20 @@ export default {
             }
         },
         fly() {
-            // 飞机
             const poAirPlane = [104.0884625472979, 30.629946234239107, 100]
             this.cApp.load3DModel.loadGLB(poAirPlane)
             this.cApp.viewer.zoomTo(this.cApp.viewer.entities)
-
         },
         fly1() {
-            // 原地踏步人
             const poPer = Cesium.Cartesian3.fromDegrees(104.0884177825623, 30.62721695985099, 0)
             const movePeople = this.cApp.load3DModel.loadGltf(poPer)
             this.cApp.viewer.entities.add(movePeople)
             this.cApp.viewer.zoomTo(this.cApp.viewer.entities)
-
         },
         fly2() {
-            // 移动小车
             let data = [104.088629853244, 30.627623370523818, -0.002239088567849463,]
             this.cApp.load3DModel.loadGlbPrimitives(data)
             this.cApp.viewer.zoomTo(this.cApp.viewer.entities)
-
         },
         GpsChange() {
             this.cApp.GPSlocation.start()
@@ -609,7 +361,6 @@ export default {
             this.addGeoFlag = true
         },
         mouseUp() {
-
             if (this.addGeoFlag) {
                 switch (this.currentGeoType) {
                     case 'addIconBackground':
@@ -726,23 +477,18 @@ export default {
                         let po = this.geoPositionCartesian2
                         let url = apiRoot + '/3Dstatic' + this.currentGeoType.path
                         this.cApp.load3DModel.loadGlbByURL(po, url)
-
                 }
             }
             this.addGeoFlag = false
         },
-        async updata3DList() {
-
-        }
+        async updata3DList() {}
     },
     async mounted() {
         const self = this
-        this.cApp.eventCenter.addEventListener('geoPosition', function (data) {
+        this.cApp.eventCenter.addEventListener('geoPosition', function(data) {
             self.geoPositionCartesian2 = data.message.position
         })
         await this.updata3DList()
-
-
     }
 }
 </script>
@@ -753,7 +499,7 @@ export default {
     height: 100%;
     background-color: rgba(43, 43, 43, .5);
 
-    .env {
+    .env, .geo, .material {
         width: 100%;
         height: 30%;
         display: flex;
@@ -776,28 +522,6 @@ export default {
         justify-content: flex-start;
         overflow-x: scroll;
         border: 4px solid yellow;
-    }
-
-    .geo {
-        width: 100%;
-        height: 30%;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        overflow-x: auto;
-    }
-
-    .material {
-        width: 100%;
-        height: 30%;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        overflow-x: auto;
     }
 
     .normal {
@@ -966,8 +690,5 @@ export default {
         background-image: url("../assets/geometryIcons/redLine.png");
         background-size: 100% 100%;
     }
-
-
 }
-
 </style>

@@ -7,8 +7,9 @@
             <el-tab-pane label="项目列表">
                 <ProjectList></ProjectList>
             </el-tab-pane>
-            <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-            <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+            <el-tab-pane label="点状对象">
+                <PointObjects></PointObjects>
+            </el-tab-pane>
         </el-tabs>
     </div>
 
@@ -17,9 +18,10 @@
 <script>
 import Basic from "@/components/tools/basic";
 import ProjectList from "@/components/tools/ProjectList";
+import PointObjects from "@/components/tools/PointObjects";
 
 export default {
-    components: {ProjectList, Basic},
+    components: {PointObjects, ProjectList, Basic},
     data() {
         return {
             tabPosition: 'left'
@@ -27,12 +29,7 @@ export default {
     },
     computed: {},
     watch: {},
-    methods: {
-
-    },
-    created() {
-
-    },
+    methods: {},
     mounted() {
 
     },

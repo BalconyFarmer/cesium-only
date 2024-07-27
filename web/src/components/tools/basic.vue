@@ -6,79 +6,42 @@
                            :value="item.value"></el-option>
             </el-select>
         </div>
-
         <div class="item">
             <el-select v-model="modelData" placeholder="模型对象" size="mini">
                 <el-option v-for="item in modelDataList" :key="item.value" :label="item.label"
                            :value="item.value"></el-option>
             </el-select>
         </div>
-
         <div class="item">
             <el-select v-model="value" placeholder="请选择地图3D模式" size="mini">
                 <el-option v-for="item in options" :key="item.value" :label="item.label"
                            :value="item.value"></el-option>
             </el-select>
         </div>
-
         <div class="top-menus">
-            <div class="top-menus-item">
-                <div class="top-menus-item-label">SunLight光照</div>
+            <div v-for="(label, key) in switches" :key="key" class="top-menus-item">
+                <div class="top-menus-item-label">{{ label }}</div>
                 <div class="top-menus-item-switch">
-                    <el-switch v-model="changeGlobleLightFlag" active-color="#13ce66" inactive-color="#2B2B2B"
-                               width="30" @change="changeGlobleLight"></el-switch>
+                    <el-switch v-model="flags[key]" :active-color="activeColor" :inactive-color="inactiveColor"
+                               width="30" @change="handleSwitchChange(key)"></el-switch>
                 </div>
             </div>
-
-            <div class="top-menus-item">
-                <div class="top-menus-item-label">光照系统</div>
-                <div class="top-menus-item-switch">
-                    <el-switch v-model="changeLightFlag" active-color="#13ce66" inactive-color="#2B2B2B" width="30"
-                               @change="changeLight"></el-switch>
-                </div>
-            </div>
-
-            <div class="top-menus-item">
-                <div class="top-menus-item-label">shadow</div>
-                <div class="top-menus-item-switch">
-                    <el-switch v-model="changeShadowFlag" active-color="#13ce66" inactive-color="#2B2B2B" width="30"
-                               @change="changeShadow"></el-switch>
-                </div>
-            </div>
-
-            <div class="top-menus-item">
-                <div class="top-menus-item-label">地形叠加</div>
-                <div class="top-menus-item-switch">
-                    <el-tooltip :content="'关闭地形'" placement="top">
-                        <el-switch v-model="terrainFlag" active-color="#13ce66" inactive-color="#2B2B2B" width="30"
-                                   @change="terrainChange"></el-switch>
-                    </el-tooltip>
-                </div>
-            </div>
-
             <div class="top-menus-item">
                 <div class="top-menus-item-label">整体亮度</div>
                 <div class="top-menus-item-slider">
                     <el-slider v-model="brightness" :max="2" :step="0.1"></el-slider>
                 </div>
             </div>
-
             <div class="top-menus-item">
                 <div class="top-menus-item-label">视角大小</div>
                 <div class="top-menus-item-slider">
                     <el-slider v-model="fov" :max="2" :step="0.1"></el-slider>
                 </div>
             </div>
-
-            <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-                <el-menu-item index="addBloom">Bloom</el-menu-item>
-                <el-menu-item index="addOutline">Outline</el-menu-item>
-                <el-menu-item index="14">关闭冗余</el-menu-item>
-                <el-menu-item index="动画组件">动画组件</el-menu-item>
-            </el-menu>
+            <div v-for="(label, key) in buttons" :key="key" class="top-menus-item">
+                <el-button size="mini" type="primary" @click="handleSelect(key)">{{ label }}</el-button>
+            </div>
         </div>
-
-
     </div>
 </template>
 
@@ -91,9 +54,6 @@ export default {
             terrainFlag: false,
             brightness: 1,
             fov: 1,
-            activeIndex2: '1',
-            dialogVisible: false,
-            cApp: null,
             optionsLayers: [
                 {value: 'google实景图层', label: 'google实景图层(VPN)'},
                 {value: 'ArcGis实景图层', label: 'ArcGis实景图层'},
@@ -125,121 +85,89 @@ export default {
                 {value: '2.5D模式', label: '2.5D模式'},
                 {value: '2D模式', label: '2D模式'}
             ],
-            value: '地球模式'
+            value: '地球模式',
+            flags: {
+                changeGlobleLightFlag: false,
+                changeLightFlag: false,
+                changeShadowFlag: false,
+                terrainFlag: false
+            },
+            activeColor: '#13ce66',
+            inactiveColor: '#2B2B2B',
+            switches: {
+                changeGlobleLightFlag: 'SunLight光照',
+                changeLightFlag: '光照系统',
+                changeShadowFlag: 'shadow',
+                terrainFlag: '地形叠加'
+            },
+            buttons: {
+                addBloom: 'Bloom',
+                addOutline: 'Outline',
+                '14': '关闭冗余',
+                动画组件: '动画组件'
+            }
         };
     },
     watch: {
-        brightness: {
-            handler(newValue) {
-                if (this.cApp) {
-                    this.cApp.updateBrightness(this.brightness)
-                }
-            },
-            deep: true,
-            immediate: false
+        brightness(newValue) {
+            if (this.cApp) this.cApp.updateBrightness(this.brightness);
         },
-        fov: {
-            handler(newValue) {
-                if (this.cApp) {
-                    this.cApp.updataFov(this.fov)
-                }
-            },
-            deep: true,
-            immediate: false
+        fov(newValue) {
+            if (this.cApp) this.cApp.updataFov(this.fov);
         },
-        value: {
-            handler(newValue) {
-                if (this.cApp) {
-                    this.cApp.switchViewMode(this.value)
-                }
-            },
-            deep: false,
-            immediate: false
+        value(newValue) {
+            if (this.cApp) this.cApp.switchViewMode(this.value);
         },
-        optionsLayersIndex: {
-            handler(newValue) {
-                if (this.cApp) {
-                    this.cApp.switchLayer(this.optionsLayersIndex)
-                }
-            },
-            deep: false,
-            immediate: false
+        optionsLayersIndex(newValue) {
+            if (this.cApp) this.cApp.switchLayer(this.optionsLayersIndex);
         },
-        modelData: {
-            handler(newValue) {
-                if (this.cApp) {
-                    switch (this.modelData) {
-                        case "JSON闪光路":
-                            this.cApp.loadJson.loadJsonRoad()
-                            break
-                        case "西双版纳JSON掩模":
-                            this.cApp.loadJson.loadJsonYanMo()
-                            break
-                        case "西双版纳JSON":
-                            this.cApp.addTimeAction()
-                            break
-                        case "成都tiles":
-                            this.cApp.runChengDu()
-                            this.fakeBoard = true
-                            break
-                        case "云南JSON":
-                            this.cApp.loadJson.loadJsonData("/geoJson/云南省.json")
-                            break
-                        case "纽约tiles":
-                            this.cApp.cesium3DTileset.toYN()
-                            break
-                        case "倾斜摄影":
-                            this.cApp.obliquePhotography.addOblique()
-                            break
-                        case "华盛顿IMG":
-                            this.cApp.huashengdunImg()
-                            break
-                        case "OSM建筑":
-                            this.cApp.addOSMBuilding()
-                            break
-                    }
-                }
-            },
-            deep: false,
-            immediate: false
-        },
+        modelData(newValue) {
+            if (this.cApp) this.loadModelData(this.modelData);
+        }
     },
     methods: {
-        terrainChange() {
-            if (this.terrainFlag) {
-                this.cApp.addTerrain()
-            } else {
-                this.cApp.removeTerrain()
-            }
+        handleSwitchChange(key) {
+            const methodMap = {
+                changeGlobleLightFlag: 'switchLight',
+                changeLightFlag: 'addLight',
+                changeShadowFlag: 'changeShadow',
+                terrainFlag: 'toggleTerrain'
+            };
+            if (this.cApp) this.cApp[methodMap[key]]();
         },
-        changeLight() {
-            this.cApp.addLight()
-        },
-        changeShadow() {
-            this.cApp.changeShadow()
-        },
-        changeGlobleLight() {
-            this.cApp.switchLight()
-        },
-
         handleSelect(key) {
-            if (key == 14) {
-                this.cApp.closeAll()
-            } else if (key == 'addBloom') {
-                this.cApp.addBloom()
-            } else if (key == 'addOutline') {
-                this.cApp.addOutline()
-            } else if (key == '动画组件') {
-                this.cApp.clock.closeAimationToolbar()
-            }
+            const methodMap = {
+                addBloom: 'addBloom',
+                addOutline: 'addOutline',
+                '14': 'closeAll',
+                动画组件: 'clock.closeAimationToolbar'
+            };
+            if (this.cApp) this.cApp[methodMap[key]]();
         },
+        loadModelData(key) {
+            const methodMap = {
+                JSON闪光路: 'loadJson.loadJsonRoad',
+                西双版纳JSON掩模: 'loadJson.loadJsonYanMo',
+                西双版纳JSON: 'addTimeAction',
+                云南JSON: 'loadJson.loadJsonData',
+                纽约tiles: 'cesium3DTileset.toYN',
+                倾斜摄影: 'obliquePhotography.addOblique',
+                华盛顿IMG: 'huashengdunImg',
+                OSM建筑: 'addOSMBuilding'
+            };
+            if (this.cApp) this.cApp[methodMap[key]]();
+        },
+        toggleTerrain() {
+            if (this.flags.terrainFlag) this.cApp.addTerrain();
+            else this.cApp.removeTerrain();
+        }
     },
     mounted() {
         setTimeout(() => {
-            this.cApp = window.cApp
-        }, 1000)
-    },
-}
+            this.cApp = window.cApp;
+        }, 1000);
+    }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -253,39 +181,21 @@ export default {
     .top-menus {
         display: flex;
         flex-direction: column;
-
-        .top-menus-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-
-            .top-menus-item-label {
-                font-weight: bold;
-            }
-
-            .top-menus-item-switch,
-            .top-menus-item-slider {
-                flex: 1;
-                display: flex;
-                justify-content: flex-end;
-            }
-        }
     }
 
-    .row-sc {
+    .top-menus-item {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        cursor: pointer;
-        margin-top: 20px;
+        margin-bottom: 10px;
 
-        span {
-            font-size: 16px;
+        .top-menus-item-label {
             font-weight: bold;
         }
 
-        el-avatar {
-            margin-left: 10px;
+        .top-menus-item-switch, .top-menus-item-slider {
+            width: 200px;
+            justify-content: flex-end;
         }
     }
 }
