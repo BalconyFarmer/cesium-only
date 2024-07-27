@@ -22,6 +22,12 @@
             <el-tab-pane label="环境">
                 <EnvironmentControls></EnvironmentControls>
             </el-tab-pane>
+            <el-tab-pane label="材质对象">
+                <MaterialObjects></MaterialObjects>
+            </el-tab-pane>
+            <el-tab-pane label="3D对象">
+                <Hello3d></Hello3d>
+            </el-tab-pane>
         </el-tabs>
     </div>
 
@@ -35,9 +41,15 @@ import LineObjects from "@/components/left-tools/LineObjects";
 import PlaneObjects from "@/components/left-tools/PlaneObjects";
 import DemoControls from "@/components/left-tools/DemoControls";
 import EnvironmentControls from "@/components/left-tools/EnvironmentControls";
+import MaterialObjects from "@/components/left-tools/MaterialObjects";
+import Hello3d from "@/components/left-tools/Hello3d";
 
 export default {
-    components: {EnvironmentControls, DemoControls, PlaneObjects, LineObjects, PointObjects, ProjectList, Basic},
+    components: {
+        Hello3d,
+        MaterialObjects,
+        EnvironmentControls, DemoControls, PlaneObjects, LineObjects, PointObjects, ProjectList, Basic
+    },
     data() {
         return {
             tabPosition: 'left'

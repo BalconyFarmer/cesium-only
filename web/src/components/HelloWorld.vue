@@ -5,9 +5,7 @@
         <div class="aindex">
             <a-index></a-index>
         </div>
-        <div class="bottomCenter">
-            <HelloWorldBottom ref="mychild"></HelloWorldBottom>
-        </div>
+
 
         <div class="panel-container">
             <div class="leftTree glass">
@@ -15,9 +13,13 @@
                     <el-button size="mini" @click="currentLeft = '图层'">图层</el-button>
                     <el-button size="mini" @click="currentLeft = '实体'">实体</el-button>
                 </div>
-                <el-tree v-if="currentLeft === '实体'" :data="treeData" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+                <el-tree v-if="currentLeft === '实体'" :data="treeData" :props="defaultProps"
+                         @node-click="handleNodeClick"></el-tree>
                 <div v-if="currentLeft === '图层'">
-                    <div v-for="item in layersData" :key="item._imageryProvider.name">{{ item._imageryProvider.name }}</div>
+                    <div v-for="item in layersData" :key="item._imageryProvider.name">{{
+                            item._imageryProvider.name
+                        }}
+                    </div>
                 </div>
             </div>
             <div class="rightPart glass">
@@ -46,7 +48,8 @@
                     <el-input v-model="rotationParams.Roll" placeholder="Roll" size="mini"></el-input>
                     <el-button size="mini" @click="rotateEntity">rotate</el-button>
                     <span>drag</span>
-                    <el-switch v-model="switchValue" active-color="#13ce66" inactive-color="#2B2B2B" @change="dragChange"></el-switch>
+                    <el-switch v-model="switchValue" active-color="#13ce66" inactive-color="#2B2B2B"
+                               @change="dragChange"></el-switch>
                 </div>
             </div>
         </div>
@@ -55,14 +58,12 @@
 
 <script>
 import CesiumApp from './CesiumApp/CesiumApp'
-import HelloWorldBottom from './HelloWorldBottom'
 import AIndex from "@/components/left-tools/aIndex";
 
 export default {
     name: 'hoting',
     components: {
         AIndex,
-        HelloWorldBottom
     },
     data() {
         return {

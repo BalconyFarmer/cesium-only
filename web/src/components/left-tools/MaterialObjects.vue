@@ -1,48 +1,19 @@
 <template>
     <div class="all">
-        <div>currentGeoType {{ currentGeoType }}</div>
-        <div>geoPositionCartesian2 {{ geoPositionCartesian2 }}</div>
         <el-tabs v-model="activeName">
-            <el-tab-pane label="3D对象" name="first">
-                <div class="geo">
-                    <div class="normal b" @mousedown="mouseDown('bilbord')">bilbord</div>
-                    <div class="normal addIconBackground" @mousedown="mouseDown('addIconBackground')">bilbordBG</div>
-                    <div class="normal ParticalSys" @mousedown="mouseDown('ParticalSys')">TT</div>
-                    <div class="normal p" @mousedown="mouseDown('点')">TT</div>
-                    <div class="normal Box" @mousedown="mouseDown('Box')">TT</div>
-                    <div class="normal addEllipse" @mousedown="mouseDown('addEllipse')">TT</div>
-                    <div class="normal addEllipseTuo" @mousedown="mouseDown('addEllipseTuo')">TT</div>
-                    <div class="normal addEllipseTuoWW" @mousedown="mouseDown('addEllipseTuoWW')">TT</div>
-                    <div class="normal y" @mousedown="mouseDown('圆柱体')">TT</div>
-                    <div class="normal glowingLine" @mousedown="mouseDown('glowingLine')">TT</div>
-                    <div class="normal orangeOutlined" @mousedown="mouseDown('orangeOutlined')">TT</div>
-                    <div class="normal yellowLine" @mousedown="mouseDown('yellowLine')">TT</div>
-                    <div class="normal redRectangle" @mousedown="mouseDown('redRectangle')">TT</div>
-                    <div class="normal greenRectangle" @mousedown="mouseDown('greenRectangle')">TT</div>
-                    <div class="normal blueEllipsoid" @mousedown="mouseDown('blueEllipsoid')">TT</div>
-                    <div class="normal redSphere" @mousedown="mouseDown('redSphere')">TT</div>
-                    <div class="normal outlineOnly" @mousedown="mouseDown('outlineOnly')">TT</div>
-                    <div class="normal redWall" @mousedown="mouseDown('redWall')">TT</div>
-                    <div class="normal greenWall" @mousedown="mouseDown('greenWall')">TT</div>
-                    <div class="normal blueWall" @mousedown="mouseDown('blueWall')">TT</div>
-                    <div class="normal redCorridor" @mousedown="mouseDown('redCorridor')">TT</div>
-                    <div class="normal redPolygon" @mousedown="mouseDown('redPolygon')">TT</div>
-                    <div class="normal greenPolygon" @mousedown="mouseDown('greenPolygon')">TT</div>
-                    <div class="normal orangePolygon" @mousedown="mouseDown('orangePolygon')">TT</div>
-                    <div class="normal bluePolygon" @mousedown="mouseDown('bluePolygon')">TT</div>
-                    <div class="normal redLine" @mousedown="mouseDown('redLine')">TT</div>
+            <div class="material">
+                <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">0</div>
+                <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">0
                 </div>
-            </el-tab-pane>
-            <el-tab-pane label="材质对象" name="second">
-                <div class="material">
-                    <div class="normal addMaterialLightLine" @mousedown="mouseDown('addMaterial')">0</div>
-                    <div class="normal addGridMaterialProperty" @mousedown="mouseDown('addGridMaterialProperty')">0</div>
-                    <div class="normal addColor" @mousedown="mouseDown('addColor')">0</div>
-                    <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')">0</div>
-                    <div class="normal addCheckerboardMaterialProperty" @mousedown="mouseDown('addCheckerboardMaterialProperty')">0</div>
-                    <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">0</div>
+                <div class="normal addColor" @mousedown="mouseDown('addColor')">0</div>
+                <div class="normal addImgMaterial" @mousedown="mouseDown('addImgMaterial')">0</div>
+                <div class="normal addCheckerboardMaterialProperty"
+                     @mousedown="mouseDown('addCheckerboardMaterialProperty')">0
                 </div>
-            </el-tab-pane>
+                <div class="normal addStripeMaterialProperty" @mousedown="mouseDown('addStripeMaterialProperty')">
+                    0
+                </div>
+            </div>
         </el-tabs>
     </div>
 </template>
@@ -217,162 +188,162 @@ export default {
     }
 
     .addEllipseTuoWW {
-        background-image: url("../assets/geometryIcons/addEllipseTuoWW.png");
+        background-image: url("../../assets/geometryIcons/addEllipseTuoWW.png");
         background-size: 100% 100%;
     }
 
     .addEllipseTuo {
-        background-image: url("../assets/geometryIcons/addEllipseTuo.png");
+        background-image: url("../../assets/geometryIcons/addEllipseTuo.png");
         background-size: 100% 100%;
     }
 
     .addEllipse {
-        background-image: url("../assets/geometryIcons/addEllipse.png");
+        background-image: url("../../assets/geometryIcons/addEllipse.png");
         background-size: 100% 100%;
     }
 
     .Box {
-        background-image: url("../assets/geometryIcons/Box.png");
+        background-image: url("../../assets/geometryIcons/Box.png");
         background-size: 100% 100%;
     }
 
     .addGridMaterialProperty {
-        background-image: url("../assets/geometryIcons/material/addGridMaterialProperty.png");
+        background-image: url("../../assets/geometryIcons/material/addGridMaterialProperty.png");
         background-size: 100% 100%;
     }
 
     .addStripeMaterialProperty {
-        background-image: url("../assets/geometryIcons/material/addStripeMaterialProperty.png");
+        background-image: url("../../assets/geometryIcons/material/addStripeMaterialProperty.png");
         background-size: 100% 100%;
     }
 
     .addCheckerboardMaterialProperty {
-        background-image: url("../assets/geometryIcons/material/addCheckerboardMaterialProperty.png");
+        background-image: url("../../assets/geometryIcons/material/addCheckerboardMaterialProperty.png");
         background-size: 100% 100%;
     }
 
     .addImgMaterial {
-        background-image: url("../assets/geometryIcons/material/addImgMaterial.png");
+        background-image: url("../../assets/geometryIcons/material/addImgMaterial.png");
         background-size: 100% 100%;
     }
 
     .addColor {
-        background-image: url("../assets/geometryIcons/material/addColor.png");
+        background-image: url("../../assets/geometryIcons/material/addColor.png");
         background-size: 100% 100%;
     }
 
     .addMaterialLightLine {
-        background-image: url("../assets/geometryIcons/material/发光线条.png");
+        background-image: url("../../assets/geometryIcons/material/发光线条.png");
         background-size: 100% 100%;
     }
 
     .addMaterial {
-        background-image: url("../assets/geometryIcons/material.png");
+        background-image: url("../../assets/geometryIcons/material.png");
         background-size: 100% 100%;
     }
 
     .glowingLine {
-        background-image: url("../assets/geometryIcons/glowingLine.png");
+        background-image: url("../../assets/geometryIcons/glowingLine.png");
         background-size: 100% 100%;
     }
 
     .yellowLine {
-        background-image: url("../assets/geometryIcons/yellowLine.png");
+        background-image: url("../../assets/geometryIcons/yellowLine.png");
         background-size: 100% 100%;
     }
 
     .redRectangle {
-        background-image: url("../assets/geometryIcons/redRectangle.png");
+        background-image: url("../../assets/geometryIcons/redRectangle.png");
         background-size: 100% 100%;
     }
 
     .greenRectangle {
-        background-image: url("../assets/geometryIcons/greenRectangle.png");
+        background-image: url("../../assets/geometryIcons/greenRectangle.png");
         background-size: 100% 100%;
     }
 
     .blueEllipsoid {
-        background-image: url("../assets/geometryIcons/blueEllipsoid.png");
+        background-image: url("../../assets/geometryIcons/blueEllipsoid.png");
         background-size: 100% 100%;
     }
 
     .redSphere {
-        background-image: url("../assets/geometryIcons/redSphere.png");
+        background-image: url("../../assets/geometryIcons/redSphere.png");
         background-size: 100% 100%;
     }
 
     .outlineOnly {
-        background-image: url("../assets/geometryIcons/outlineOnly.png");
+        background-image: url("../../assets/geometryIcons/outlineOnly.png");
         background-size: 100% 100%;
     }
 
     .blueWall {
-        background-image: url("../assets/geometryIcons/blueWall.png");
+        background-image: url("../../assets/geometryIcons/blueWall.png");
         background-size: 100% 100%;
     }
 
     .greenWall {
-        background-image: url("../assets/geometryIcons/greenWall.png");
+        background-image: url("../../assets/geometryIcons/greenWall.png");
         background-size: 100% 100%;
     }
 
     .redWall {
-        background-image: url("../assets/geometryIcons/redWall.png");
+        background-image: url("../../assets/geometryIcons/redWall.png");
         background-size: 100% 100%;
     }
 
     .p {
-        background-image: url("../assets/geometryIcons/p.png");
+        background-image: url("../../assets/geometryIcons/p.png");
         background-size: 100% 100%;
     }
 
     .y {
-        background-image: url("../assets/geometryIcons/y.png");
+        background-image: url("../../assets/geometryIcons/y.png");
         background-size: 100% 100%;
     }
 
     .b {
-        background-image: url("../assets/geometryIcons/b.png");
+        background-image: url("../../assets/geometryIcons/b.png");
         background-size: 100% 100%;
     }
 
     .addIconBackground {
-        background-image: url("../assets/geometryIcons/addIconBackground.png");
+        background-image: url("../../assets/geometryIcons/addIconBackground.png");
         background-size: 100% 100%;
     }
 
     .ParticalSys {
-        background-image: url("../assets/geometryIcons/ParticalSys.png");
+        background-image: url("../../assets/geometryIcons/ParticalSys.png");
         background-size: 100% 100%;
     }
 
     .redCorridor {
-        background-image: url("../assets/geometryIcons/redCorridor.png");
+        background-image: url("../../assets/geometryIcons/redCorridor.png");
         background-size: 100% 100%;
     }
 
     .redPolygon {
-        background-image: url("../assets/geometryIcons/redPolygon.png");
+        background-image: url("../../assets/geometryIcons/redPolygon.png");
         background-size: 100% 100%;
     }
 
     .greenPolygon {
-        background-image: url("../assets/geometryIcons/greenPolygon.png");
+        background-image: url("../../assets/geometryIcons/greenPolygon.png");
         background-size: 100% 100%;
     }
 
     .orangePolygon {
-        background-image: url("../assets/geometryIcons/orangePolygon.png");
+        background-image: url("../../assets/geometryIcons/orangePolygon.png");
         background-size: 100% 100%;
     }
 
     .bluePolygon {
-        background-image: url("../assets/geometryIcons/bluePolygon.png");
+        background-image: url("../../assets/geometryIcons/bluePolygon.png");
         background-size: 100% 100%;
     }
 
     .redLine {
-        background-image: url("../assets/geometryIcons/redLine.png");
+        background-image: url("../../assets/geometryIcons/redLine.png");
         background-size: 100% 100%;
     }
 }
